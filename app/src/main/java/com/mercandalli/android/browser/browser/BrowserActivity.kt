@@ -9,6 +9,9 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.widget.ProgressBar
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.MainApplication
 import com.mercandalli.android.browser.theme.Theme
@@ -30,6 +33,7 @@ class BrowserActivity : AppCompatActivity() {
     }
 
     private var webView: BrowserWebView? = null
+    private var progress: ProgressBar? = null
     private val themeManager: ThemeManager = MainApplication.getAppComponent().provideThemeManager()
     private val themeListener = createThemeListener()
 
@@ -40,8 +44,26 @@ class BrowserActivity : AppCompatActivity() {
         webView = findViewById(R.id.activity_main_web_view)
         webView!!.loadUrl("http://www.google.com/")
 
+        progress = findViewById(R.id.activity_main_progress)
+
         findViewById<View>(R.id.activity_main_home).setOnClickListener {
             webView!!.loadUrl("http://www.google.com/")
+        }
+
+        webView!!.browserWebViewListener = object : BrowserWebView.BrowserWebViewListener {
+            override fun onProgressChanged() {
+                val progressPercent = webView!!.progress
+                if (progressPercent >= 100) {
+                    progress!!.visibility = GONE
+                    return
+                }
+                progress!!.visibility = VISIBLE
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    progress!!.setProgress(progressPercent, true)
+                } else {
+                    progress!!.progress = progressPercent
+                }
+            }
         }
 
         themeManager.registerThemeListener(themeListener)
@@ -49,6 +71,7 @@ class BrowserActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        webView!!.browserWebViewListener = null
         themeManager.unregisterThemeListener(themeListener)
         super.onDestroy()
     }

@@ -10,6 +10,8 @@ class BrowserWebView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : WebView(context, attrs, defStyleAttr) {
 
+    var browserWebViewListener: BrowserWebViewListener? = null
+
     init {
         if (!isInEditMode) {
             isFocusableInTouchMode = true
@@ -29,11 +31,18 @@ class BrowserWebView @JvmOverloads constructor(
                     Log.d("jm/debug", consoleMessage.message() + " @ " + consoleMessage.lineNumber())
                     return true
                 }
+
+                override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                    super.onProgressChanged(view, newProgress)
+
+                    if (browserWebViewListener != null) {
+                        browserWebViewListener!!.onProgressChanged()
+                    }
+                }
             }
             webViewClient = object : WebViewClient() {
 
                 override fun onPageFinished(view: WebView, url: String) {
-
                 }
 
                 override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
@@ -49,5 +58,9 @@ class BrowserWebView @JvmOverloads constructor(
             isScrollContainer = true
             isClickable = true
         }
+    }
+
+    interface BrowserWebViewListener {
+        fun onProgressChanged()
     }
 }
