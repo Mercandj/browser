@@ -31,7 +31,7 @@ class BrowserWebView @JvmOverloads constructor(
             settings.useWideViewPort = true
             settings.loadWithOverviewMode = true
             settings.setSupportZoom(true)
-            settings.builtInZoomControls = false
+            settings.builtInZoomControls = true
             settings.displayZoomControls = false
             settings.userAgentString = Constants.USER_AGENT
 
