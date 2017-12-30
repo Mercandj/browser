@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 import android.webkit.*
 
 class BrowserWebView @JvmOverloads constructor(
@@ -15,6 +16,12 @@ class BrowserWebView @JvmOverloads constructor(
     init {
         if (!isInEditMode) {
             isFocusableInTouchMode = true
+            isHorizontalScrollBarEnabled = true
+            isVerticalScrollBarEnabled = true
+            scrollBarStyle = View.SCROLLBARS_OUTSIDE_OVERLAY
+            isScrollbarFadingEnabled = true
+            isScrollContainer = true
+            isClickable = true
 
             val settings = settings
             settings.mediaPlaybackRequiresUserGesture = false
@@ -33,8 +40,6 @@ class BrowserWebView @JvmOverloads constructor(
                 }
 
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                    super.onProgressChanged(view, newProgress)
-
                     if (browserWebViewListener != null) {
                         browserWebViewListener!!.onProgressChanged()
                     }
@@ -43,6 +48,9 @@ class BrowserWebView @JvmOverloads constructor(
             webViewClient = object : WebViewClient() {
 
                 override fun onPageFinished(view: WebView, url: String) {
+                    if (browserWebViewListener != null) {
+                        browserWebViewListener!!.onPageFinished()
+                    }
                 }
 
                 override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
@@ -52,15 +60,11 @@ class BrowserWebView @JvmOverloads constructor(
                     }
                 }
             }
-
-            isHorizontalScrollBarEnabled = true
-            isVerticalScrollBarEnabled = true
-            isScrollContainer = true
-            isClickable = true
         }
     }
 
     interface BrowserWebViewListener {
         fun onProgressChanged()
+        fun onPageFinished()
     }
 }

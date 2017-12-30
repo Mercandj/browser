@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.KeyEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -17,7 +18,6 @@ import com.mercandalli.android.browser.main.Constants
 import com.mercandalli.android.browser.main.MainApplication
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
-
 
 class BrowserActivity : AppCompatActivity() {
 
@@ -73,12 +73,32 @@ class BrowserActivity : AppCompatActivity() {
         webView!!.restoreState(savedInstanceState)
     }
 
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (event.action == KeyEvent.ACTION_DOWN) {
+            when (keyCode) {
+                KeyEvent.KEYCODE_BACK -> {
+                    if (webView!!.canGoBack()) {
+                        webView!!.goBack()
+                    } else {
+                        finish()
+                    }
+                    return true
+                }
+            }
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
     private fun loadHomePage() {
         webView!!.loadUrl(Constants.HOME_PAGE)
     }
 
     private fun createBrowserWebViewListener(): BrowserWebView.BrowserWebViewListener {
         return object : BrowserWebView.BrowserWebViewListener {
+            override fun onPageFinished() {
+                progress!!.visibility = GONE
+            }
+
             override fun onProgressChanged() {
                 val progressPercent = webView!!.progress
                 if (progressPercent >= 100) {
