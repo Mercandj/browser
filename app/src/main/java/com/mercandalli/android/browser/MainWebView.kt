@@ -21,7 +21,7 @@ class MainWebView @JvmOverloads constructor(
             settings.javaScriptEnabled = true
             settings.useWideViewPort = true
             settings.loadWithOverviewMode = true
-            settings.setSupportZoom(false)
+            settings.setSupportZoom(true)
             settings.builtInZoomControls = false
             settings.displayZoomControls = false
 
@@ -46,10 +46,10 @@ class MainWebView @JvmOverloads constructor(
                 }
             }
 
-            isHorizontalScrollBarEnabled = false
-            isVerticalScrollBarEnabled = false
-            isScrollContainer = false
-            isClickable = false
+            isHorizontalScrollBarEnabled = true
+            isVerticalScrollBarEnabled = true
+            isScrollContainer = true
+            isClickable = true
         }
     }
 }
