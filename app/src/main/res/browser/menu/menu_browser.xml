@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_browser_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/menu_browser_clear_data"
+        android:title="Clear data" />
+
+    <item
+        android:id="@+id/menu_browser_settings"
+        android:title="Settings" />
+
+</menu>

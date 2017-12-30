@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.mercandalli.android.browser.browser.BrowserActivity">
+    tools:context=".browser.BrowserActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/activity_main_app_bar_layout"
@@ -28,7 +28,8 @@
                     android:id="@+id/activity_main_search"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/default_space_2"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginEnd="@dimen/default_space_5"
                     android:background="@android:color/transparent"
                     android:hint="Search"
                     android:imeOptions="actionSearch|flagNoExtractUi"
@@ -41,17 +42,17 @@
                     android:singleLine="true"
                     android:textColor="@color/color_text_title_1"
                     android:textColorHint="#888888"
-                    android:textSize="16sp" />
+                    android:textSize="17sp" />
 
-                <ImageView
-                    android:id="@+id/activity_main_home"
-                    android:layout_width="@dimen/default_space_3"
-                    android:layout_height="@dimen/default_space_3"
+                <com.mercandalli.android.browser.common.ForegroundImageView
+                    android:id="@+id/activity_main_more"
+                    android:layout_width="@dimen/default_space_4"
+                    android:layout_height="@dimen/default_space_4"
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginEnd="@dimen/default_space"
-                    android:background="?selectableItemBackground"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_home_white_24dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_more_vert_black_24dp"
                     android:tint="#666666" />
 
             </FrameLayout>
@@ -70,7 +71,7 @@
         android:id="@+id/activity_main_progress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="6dp"
         android:layout_gravity="bottom"
         android:max="100"
         android:progress="0" />

@@ -6,7 +6,6 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.webkit.*
-import com.mercandalli.android.browser.main.Constants
 
 class BrowserWebView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -35,7 +34,7 @@ class BrowserWebView @JvmOverloads constructor(
             settings.setSupportZoom(true)
             settings.builtInZoomControls = true
             settings.displayZoomControls = false
-            settings.userAgentString = Constants.USER_AGENT
+            //settings.userAgentString = Constants.USER_AGENT
 
             webChromeClient = object : WebChromeClient() {
                 override fun onConsoleMessage(consoleMessage: ConsoleMessage): Boolean {
@@ -67,18 +66,12 @@ class BrowserWebView @JvmOverloads constructor(
         }
     }
 
+    fun clearData() {
+        clearHistory()
+        clearCache(true)
+    }
+
     fun load(url: String) {
-        /*
-        if(url.contains("youtube")) {
-            loadDataWithBaseURL(
-                    "http://www.google.com/",
-                    BrowserUtils.getHtml(context),
-                    WEB_VIEW_MIME_TYPE,
-                    WEB_VIEW_ENCODING,
-                    "")
-            loadUrl(String.format("javascript:loadUrl(%s);", url))
-        }
-        */
         loadUrl(url)
     }
 

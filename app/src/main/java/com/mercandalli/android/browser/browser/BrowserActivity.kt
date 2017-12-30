@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.PopupMenu
+import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
 import android.view.View.GONE
@@ -16,6 +18,7 @@ import android.view.View.VISIBLE
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
 import com.mercandalli.android.browser.main.Constants
@@ -58,8 +61,8 @@ class BrowserActivity : AppCompatActivity() {
         webView = findViewById(R.id.activity_main_web_view)
         webView!!.browserWebViewListener = browserWebViewListener
         progress = findViewById(R.id.activity_main_progress)
-        home = findViewById(R.id.activity_main_home)
-        home!!.setOnClickListener { loadHomePage() }
+        home = findViewById(R.id.activity_main_more)
+        home!!.setOnClickListener { showOverflowPopupMenu(home!!) }
         input = findViewById(R.id.activity_main_search)
         input!!.setOnEditorActionListener(createOnEditorActionListener())
 
@@ -107,6 +110,7 @@ class BrowserActivity : AppCompatActivity() {
     }
 
     private fun loadHomePage() {
+        setProgressBarProgress(0)
         webView!!.load(Constants.HOME_PAGE)
     }
 
@@ -123,19 +127,25 @@ class BrowserActivity : AppCompatActivity() {
                     return
                 }
                 progress!!.visibility = VISIBLE
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    progress!!.setProgress(progressPercent, true)
-                } else {
-                    progress!!.progress = progressPercent
-                }
+                setProgressBarProgress(progressPercent)
             }
+        }
+    }
+
+    private fun setProgressBarProgress(progressPercent: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            progress!!.setProgress(progressPercent, true)
+        } else {
+            progress!!.progress = progressPercent
         }
     }
 
     private fun createOnEditorActionListener(): TextView.OnEditorActionListener {
         return TextView.OnEditorActionListener { v, _, _ ->
-            webView!!.load("https://www.google.fr/search?q=" + v!!.text.toString().replace(" ", "+"))
+            webView!!.load("https://www.google.fr/search?q=" + v!!.text.toString()
+                    .replace(" ", "+"))
             appBarLayout!!.setExpanded(false)
+            input!!.setText("")
             KeyboardUtils.hideSoftInput(input!!)
             true
         }
@@ -150,6 +160,30 @@ class BrowserActivity : AppCompatActivity() {
             override fun onThemeChanged() {
                 updateTheme()
             }
+        }
+    }
+
+    /**
+     * Show a popup menu which allows the user to perform action related to the video and the queue.
+     *
+     * @param view : The [View] on which the popup menu should be anchored.
+     */
+    private fun showOverflowPopupMenu(view: View) {
+        val popupMenu = PopupMenu(this, view, Gravity.END)
+        popupMenu.menuInflater.inflate(R.menu.menu_browser, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener(createOnMenuItemClickListener())
+        popupMenu.show()
+    }
+
+    private fun createOnMenuItemClickListener(): PopupMenu.OnMenuItemClickListener? {
+        return PopupMenu.OnMenuItemClickListener { item ->
+            when (item!!.itemId) {
+                R.id.menu_browser_home -> loadHomePage()
+                R.id.menu_browser_clear_data -> webView!!.clearData()
+                R.id.menu_browser_settings -> Toast.makeText(this@BrowserActivity,
+                        "Not yet", Toast.LENGTH_SHORT).show()
+            }
+            false
         }
     }
 
