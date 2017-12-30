@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.webkit.*
+import com.mercandalli.android.browser.main.Constants
 
 class BrowserWebView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -32,6 +33,7 @@ class BrowserWebView @JvmOverloads constructor(
             settings.setSupportZoom(true)
             settings.builtInZoomControls = false
             settings.displayZoomControls = false
+            settings.userAgentString = Constants.USER_AGENT
 
             webChromeClient = object : WebChromeClient() {
                 override fun onConsoleMessage(consoleMessage: ConsoleMessage): Boolean {
