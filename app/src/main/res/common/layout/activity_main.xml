@@ -45,10 +45,12 @@
 
                 <ImageView
                     android:id="@+id/activity_main_home"
-                    android:layout_width="@dimen/default_space_2"
-                    android:layout_height="@dimen/default_space_2"
+                    android:layout_width="@dimen/default_space_3"
+                    android:layout_height="@dimen/default_space_3"
                     android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="@dimen/default_space"
                     android:background="?selectableItemBackground"
+                    android:padding="4dp"
                     android:src="@drawable/ic_home_white_24dp"
                     android:tint="#666666" />
 
