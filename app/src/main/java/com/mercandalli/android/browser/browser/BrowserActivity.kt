@@ -7,10 +7,10 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.EditText
@@ -42,7 +42,7 @@ class BrowserActivity : AppCompatActivity() {
     private var webView: BrowserWebView? = null
     private var progress: ProgressBar? = null
     private var input: EditText? = null
-    private var fab: FloatingActionButton? = null
+    private var home: View? = null
     private val browserWebViewListener = createBrowserWebViewListener()
     private val themeManager = MainApplication.getAppComponent().provideThemeManager()
     private val themeListener = createThemeListener()
@@ -58,8 +58,8 @@ class BrowserActivity : AppCompatActivity() {
         webView = findViewById(R.id.activity_main_web_view)
         webView!!.browserWebViewListener = browserWebViewListener
         progress = findViewById(R.id.activity_main_progress)
-        fab = findViewById(R.id.activity_main_fab)
-        fab!!.setOnClickListener { loadHomePage() }
+        home = findViewById(R.id.activity_main_home)
+        home!!.setOnClickListener { loadHomePage() }
         input = findViewById(R.id.activity_main_search)
         input!!.setOnEditorActionListener(createOnEditorActionListener())
 
@@ -142,7 +142,7 @@ class BrowserActivity : AppCompatActivity() {
     }
 
     private fun createOnOffsetChangedListener(): AppBarLayout.OnOffsetChangedListener? {
-        return AppBarLayout.OnOffsetChangedListener { _, _ -> fab!!.hide() }
+        return AppBarLayout.OnOffsetChangedListener { _, _ -> }
     }
 
     private fun createThemeListener(): ThemeManager.ThemeListener {
