@@ -1,19 +1,18 @@
-package com.mercandalli.android.browser
+package com.mercandalli.android.browser.browser
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.webkit.*
 
-class MainWebView @JvmOverloads constructor(
+class BrowserWebView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : WebView(context, attrs, defStyleAttr) {
 
     init {
         if (!isInEditMode) {
-            setBackgroundColor(Color.BLACK)
+            isFocusableInTouchMode = true
 
             val settings = settings
             settings.mediaPlaybackRequiresUserGesture = false
@@ -25,7 +24,6 @@ class MainWebView @JvmOverloads constructor(
             settings.builtInZoomControls = false
             settings.displayZoomControls = false
 
-            settings.setRenderPriority(WebSettings.RenderPriority.HIGH)
             webChromeClient = object : WebChromeClient() {
                 override fun onConsoleMessage(consoleMessage: ConsoleMessage): Boolean {
                     Log.d("jm/debug", consoleMessage.message() + " @ " + consoleMessage.lineNumber())

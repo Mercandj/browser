@@ -3,17 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mercandalli.android.browser.MainActivity">
+    tools:context="com.mercandalli.android.browser.browser.BrowserActivity">
 
-    <com.mercandalli.android.browser.MainWebView
+    <com.mercandalli.android.browser.browser.BrowserWebView
         android:id="@+id/activity_main_web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <Button
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/activity_main_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="home"/>
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/default_space_2"
+        android:src="@drawable/ic_home_white_24dp" />
 
 </merge>
