@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     tools:context="com.mercandalli.android.browser.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <com.mercandalli.android.browser.MainWebView
+        android:id="@+id/activity_main_web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </merge>
