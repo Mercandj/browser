@@ -1,6 +1,6 @@
 rootProject.ext.releaseTubeSigningConfig = {
     storeFile file("../config/signing/browser.jks")
-    storePassword ""
-    keyAlias ""
-    keyPassword ""
+    storePassword "fakepassword2017HahaHaha"
+    keyAlias "browser"
+    keyPassword "fakepassword2017HahaHaha"
 }

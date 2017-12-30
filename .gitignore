@@ -38,4 +38,4 @@ obj/
 gradle.properties
 *.hprof
 
-.jks
+*.jks
