@@ -6,14 +6,18 @@ import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.TextView
 import com.mercandalli.android.browser.R
+import com.mercandalli.android.browser.keyboard.KeyboardUtils
 import com.mercandalli.android.browser.main.Constants
 import com.mercandalli.android.browser.main.MainApplication
 import com.mercandalli.android.browser.theme.Theme
@@ -34,23 +38,35 @@ class BrowserActivity : AppCompatActivity() {
         }
     }
 
+    private var appBarLayout: AppBarLayout? = null
     private var webView: BrowserWebView? = null
     private var progress: ProgressBar? = null
+    private var input: EditText? = null
+    private var fab: FloatingActionButton? = null
     private val browserWebViewListener = createBrowserWebViewListener()
     private val themeManager = MainApplication.getAppComponent().provideThemeManager()
     private val themeListener = createThemeListener()
+    private val onOffsetChangedListener = createOnOffsetChangedListener()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setSupportActionBar(findViewById(R.id.activity_main_toolbar))
+
+        appBarLayout = findViewById(R.id.activity_main_app_bar_layout)
         webView = findViewById(R.id.activity_main_web_view)
         webView!!.browserWebViewListener = browserWebViewListener
         progress = findViewById(R.id.activity_main_progress)
-        findViewById<View>(R.id.activity_main_home).setOnClickListener { loadHomePage() }
+        fab = findViewById(R.id.activity_main_fab)
+        fab!!.setOnClickListener { loadHomePage() }
+        input = findViewById(R.id.activity_main_search)
+        input!!.setOnEditorActionListener(createOnEditorActionListener())
 
         themeManager.registerThemeListener(themeListener)
         updateTheme()
+
+        appBarLayout!!.addOnOffsetChangedListener(onOffsetChangedListener)
 
         if (savedInstanceState == null) {
             loadHomePage()
@@ -59,6 +75,7 @@ class BrowserActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         webView!!.browserWebViewListener = null
+        appBarLayout!!.removeOnOffsetChangedListener(onOffsetChangedListener)
         themeManager.unregisterThemeListener(themeListener)
         super.onDestroy()
     }
@@ -90,7 +107,7 @@ class BrowserActivity : AppCompatActivity() {
     }
 
     private fun loadHomePage() {
-        webView!!.loadUrl(Constants.HOME_PAGE)
+        webView!!.load(Constants.HOME_PAGE)
     }
 
     private fun createBrowserWebViewListener(): BrowserWebView.BrowserWebViewListener {
@@ -113,6 +130,19 @@ class BrowserActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun createOnEditorActionListener(): TextView.OnEditorActionListener {
+        return TextView.OnEditorActionListener { v, _, _ ->
+            webView!!.load("https://www.google.fr/search?q=" + v!!.text.toString().replace(" ", "+"))
+            appBarLayout!!.setExpanded(false)
+            KeyboardUtils.hideSoftInput(input!!)
+            true
+        }
+    }
+
+    private fun createOnOffsetChangedListener(): AppBarLayout.OnOffsetChangedListener? {
+        return AppBarLayout.OnOffsetChangedListener { _, _ -> fab!!.hide() }
     }
 
     private fun createThemeListener(): ThemeManager.ThemeListener {

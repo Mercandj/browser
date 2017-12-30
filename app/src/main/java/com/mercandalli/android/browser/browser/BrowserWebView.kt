@@ -10,9 +10,11 @@ import com.mercandalli.android.browser.main.Constants
 
 class BrowserWebView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : WebView(context, attrs, defStyleAttr) {
+) : NestedScrollWebView(context, attrs, defStyleAttr) {
 
     var browserWebViewListener: BrowserWebViewListener? = null
+    private val WEB_VIEW_MIME_TYPE = "text/html"
+    private val WEB_VIEW_ENCODING = "UTF-8"
 
     init {
         if (!isInEditMode) {
@@ -63,6 +65,21 @@ class BrowserWebView @JvmOverloads constructor(
                 }
             }
         }
+    }
+
+    fun load(url: String) {
+        /*
+        if(url.contains("youtube")) {
+            loadDataWithBaseURL(
+                    "http://www.google.com/",
+                    BrowserUtils.getHtml(context),
+                    WEB_VIEW_MIME_TYPE,
+                    WEB_VIEW_ENCODING,
+                    "")
+            loadUrl(String.format("javascript:loadUrl(%s);", url))
+        }
+        */
+        loadUrl(url)
     }
 
     interface BrowserWebViewListener {
