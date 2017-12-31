@@ -176,7 +176,9 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     private fun createOnEditorActionListener(): TextView.OnEditorActionListener {
         return TextView.OnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH || event.keyCode == KeyEvent.KEYCODE_ENTER) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                    event.action == KeyEvent.ACTION_DOWN &&
+                            event.keyCode == KeyEvent.KEYCODE_ENTER) {
                 userAction!!.onSearchPerformed(v!!.text.toString())
                 return@OnEditorActionListener true
             }
