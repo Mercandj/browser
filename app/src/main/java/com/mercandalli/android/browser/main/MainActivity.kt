@@ -1,4 +1,4 @@
-package com.mercandalli.android.browser.browser
+package com.mercandalli.android.browser.main
 
 import android.app.Activity
 import android.content.Context
@@ -15,24 +15,24 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.mercandalli.android.browser.R
+import com.mercandalli.android.browser.browser.BrowserWebView
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
-import com.mercandalli.android.browser.main.Constants
-import com.mercandalli.android.browser.main.MainApplication
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 
-class BrowserActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     companion object {
 
         @JvmStatic
         fun start(context: Context) {
-            val intent = Intent(context, BrowserActivity::class.java)
+            val intent = Intent(context, MainActivity::class.java)
             if (context !is Activity) {
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                         Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -45,11 +45,12 @@ class BrowserActivity : AppCompatActivity() {
     private var webView: BrowserWebView? = null
     private var progress: ProgressBar? = null
     private var input: EditText? = null
-    private var home: View? = null
+    private var more: View? = null
     private val browserWebViewListener = createBrowserWebViewListener()
     private val themeManager = MainApplication.getAppComponent().provideThemeManager()
     private val themeListener = createThemeListener()
-    private val onOffsetChangedListener = createOnOffsetChangedListener()
+    private var component: MainActivityComponent? = null
+    private var userAction: MainActivityContract.UserAction? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,25 +62,30 @@ class BrowserActivity : AppCompatActivity() {
         webView = findViewById(R.id.activity_main_web_view)
         webView!!.browserWebViewListener = browserWebViewListener
         progress = findViewById(R.id.activity_main_progress)
-        home = findViewById(R.id.activity_main_more)
-        home!!.setOnClickListener { showOverflowPopupMenu(home!!) }
+        more = findViewById(R.id.activity_main_more)
+        more!!.setOnClickListener { showOverflowPopupMenu(more!!) }
         input = findViewById(R.id.activity_main_search)
         input!!.setOnEditorActionListener(createOnEditorActionListener())
 
         themeManager.registerThemeListener(themeListener)
         updateTheme()
 
-        appBarLayout!!.addOnOffsetChangedListener(onOffsetChangedListener)
-
         if (savedInstanceState == null) {
-            loadHomePage()
+            navigateHome()
         }
+
+        component = DaggerMainActivityComponent.builder()
+                .mainActivityModule(MainActivityModule(this))
+                .mainComponent(MainApplication.getAppComponent())
+                .build()
+        userAction = component!!.provideMainActivityUserAction()
     }
 
     override fun onDestroy() {
         webView!!.browserWebViewListener = null
-        appBarLayout!!.removeOnOffsetChangedListener(onOffsetChangedListener)
         themeManager.unregisterThemeListener(themeListener)
+        userAction = null
+        component = null
         super.onDestroy()
     }
 
@@ -94,45 +100,44 @@ class BrowserActivity : AppCompatActivity() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        if (event.action == KeyEvent.ACTION_DOWN) {
-            when (keyCode) {
-                KeyEvent.KEYCODE_BACK -> {
-                    if (webView!!.canGoBack()) {
-                        webView!!.goBack()
-                    } else {
-                        finish()
-                    }
-                    return true
-                }
-            }
+        if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
+            userAction!!.onBackPressed()
+            return true
         }
         return super.onKeyDown(keyCode, event)
     }
 
-    private fun loadHomePage() {
-        setProgressBarProgress(0)
-        webView!!.load(Constants.HOME_PAGE)
+    //region MainActivityContract.Screen
+    override fun showUrl(url: String) {
+        webView!!.load(url)
     }
 
-    private fun createBrowserWebViewListener(): BrowserWebView.BrowserWebViewListener {
-        return object : BrowserWebView.BrowserWebViewListener {
-            override fun onPageFinished() {
-                progress!!.visibility = GONE
-            }
-
-            override fun onProgressChanged() {
-                val progressPercent = webView!!.progress
-                if (progressPercent >= 100) {
-                    progress!!.visibility = GONE
-                    return
-                }
-                progress!!.visibility = VISIBLE
-                setProgressBarProgress(progressPercent)
-            }
+    override fun back() {
+        if (webView!!.canGoBack()) {
+            webView!!.goBack()
+        } else {
+            finish()
         }
     }
 
-    private fun setProgressBarProgress(progressPercent: Int) {
+    override fun navigateHome() {
+        webView!!.load("https://www.google.com/")
+    }
+
+    override fun navigateSettings() {
+        Toast.makeText(this, "Not yet", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun clearData() {
+        webView!!.clearData()
+    }
+
+    override fun showClearDataMessage() {
+        Toast.makeText(this, "Data cleared", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showLoader(progressPercent: Int) {
+        progress!!.visibility = VISIBLE
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             progress!!.setProgress(progressPercent, true)
         } else {
@@ -140,19 +145,43 @@ class BrowserActivity : AppCompatActivity() {
         }
     }
 
-    private fun createOnEditorActionListener(): TextView.OnEditorActionListener {
-        return TextView.OnEditorActionListener { v, _, _ ->
-            webView!!.load("https://www.google.fr/search?q=" + v!!.text.toString()
-                    .replace(" ", "+"))
-            appBarLayout!!.setExpanded(false)
-            input!!.setText("")
-            KeyboardUtils.hideSoftInput(input!!)
-            true
+    override fun hideLoader() {
+        progress!!.visibility = GONE
+    }
+
+    override fun hideKeyboard() {
+        KeyboardUtils.hideSoftInput(input!!)
+    }
+
+    override fun collapseToolbar() {
+        appBarLayout!!.setExpanded(false)
+    }
+
+    override fun resetSearchInput() {
+        input!!.setText("")
+    }
+    //endregion MainActivityContract.Screen
+
+    private fun createBrowserWebViewListener(): BrowserWebView.BrowserWebViewListener {
+        return object : BrowserWebView.BrowserWebViewListener {
+            override fun onPageFinished() {
+                userAction!!.onPageLoadProgressChanged(100)
+            }
+
+            override fun onProgressChanged() {
+                userAction!!.onPageLoadProgressChanged(webView!!.progress)
+            }
         }
     }
 
-    private fun createOnOffsetChangedListener(): AppBarLayout.OnOffsetChangedListener? {
-        return AppBarLayout.OnOffsetChangedListener { _, _ -> }
+    private fun createOnEditorActionListener(): TextView.OnEditorActionListener {
+        return TextView.OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || event.keyCode == KeyEvent.KEYCODE_ENTER) {
+                userAction!!.onSearchPerformed(v!!.text.toString())
+                return@OnEditorActionListener true
+            }
+            false
+        }
     }
 
     private fun createThemeListener(): ThemeManager.ThemeListener {
@@ -163,11 +192,6 @@ class BrowserActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Show a popup menu which allows the user to perform action related to the video and the queue.
-     *
-     * @param view : The [View] on which the popup menu should be anchored.
-     */
     private fun showOverflowPopupMenu(view: View) {
         val popupMenu = PopupMenu(this, view, Gravity.END)
         popupMenu.menuInflater.inflate(R.menu.menu_browser, popupMenu.menu)
@@ -178,10 +202,9 @@ class BrowserActivity : AppCompatActivity() {
     private fun createOnMenuItemClickListener(): PopupMenu.OnMenuItemClickListener? {
         return PopupMenu.OnMenuItemClickListener { item ->
             when (item!!.itemId) {
-                R.id.menu_browser_home -> loadHomePage()
-                R.id.menu_browser_clear_data -> webView!!.clearData()
-                R.id.menu_browser_settings -> Toast.makeText(this@BrowserActivity,
-                        "Not yet", Toast.LENGTH_SHORT).show()
+                R.id.menu_browser_home -> userAction!!.onHomeClicked()
+                R.id.menu_browser_clear_data -> userAction!!.onClearDataClicked()
+                R.id.menu_browser_settings -> userAction!!.onSettingsClicked()
             }
             false
         }

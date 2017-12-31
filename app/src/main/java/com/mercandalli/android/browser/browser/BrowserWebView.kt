@@ -12,8 +12,6 @@ class BrowserWebView @JvmOverloads constructor(
 ) : NestedScrollWebView(context, attrs, defStyleAttr) {
 
     var browserWebViewListener: BrowserWebViewListener? = null
-    private val WEB_VIEW_MIME_TYPE = "text/html"
-    private val WEB_VIEW_ENCODING = "UTF-8"
 
     init {
         if (!isInEditMode) {
@@ -34,7 +32,6 @@ class BrowserWebView @JvmOverloads constructor(
             settings.setSupportZoom(true)
             settings.builtInZoomControls = true
             settings.displayZoomControls = false
-            //settings.userAgentString = Constants.USER_AGENT
 
             webChromeClient = object : WebChromeClient() {
                 override fun onConsoleMessage(consoleMessage: ConsoleMessage): Boolean {
