@@ -171,6 +171,10 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
             override fun onProgressChanged() {
                 userAction!!.onPageLoadProgressChanged(webView!!.progress)
             }
+
+            override fun onPageTouched() {
+                userAction!!.onPageTouched()
+            }
         }
     }
 

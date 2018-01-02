@@ -1,9 +1,11 @@
 package com.mercandalli.android.browser.browser
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.webkit.*
 
@@ -63,9 +65,20 @@ class BrowserWebView @JvmOverloads constructor(
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (browserWebViewListener != null) {
+            browserWebViewListener!!.onPageTouched()
+        }
+        return super.onTouchEvent(event)
+    }
+
     fun clearData() {
         clearHistory()
         clearCache(true)
+        clearMatches()
+        clearCookies(context)
+        WebStorage.getInstance().deleteAllData()
     }
 
     fun load(url: String) {
@@ -75,5 +88,21 @@ class BrowserWebView @JvmOverloads constructor(
     interface BrowserWebViewListener {
         fun onProgressChanged()
         fun onPageFinished()
+        fun onPageTouched()
+    }
+
+    private fun clearCookies(context: Context) {
+        val cookieManager = CookieManager.getInstance()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            cookieManager.removeAllCookies(null)
+            cookieManager.flush()
+        } else {
+            val cookieSyncManager = CookieSyncManager.createInstance(context)
+            cookieSyncManager.startSync()
+            cookieManager.removeAllCookie()
+            cookieManager.removeSessionCookie()
+            cookieSyncManager.stopSync()
+            cookieSyncManager.sync()
+        }
     }
 }

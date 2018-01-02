@@ -12,7 +12,6 @@ import com.mercandalli.android.browser.R
 /**
  * An ImageView which supports a foreground drawable.
  *
- *
  * https://gist.github.com/JakeWharton/0a251d67649305d84e8a
  */
 class ForegroundImageView @JvmOverloads constructor(

@@ -17,6 +17,8 @@ internal class MainActivityContract {
 
         fun onPageLoadProgressChanged(progressPercent: Int)
 
+        fun onPageTouched()
+
         fun onBackPressed()
     }
 

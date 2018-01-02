@@ -1,5 +1,6 @@
 package com.mercandalli.android.browser.browser
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v4.view.MotionEventCompat
 import android.support.v4.view.NestedScrollingChild
@@ -29,6 +30,7 @@ open class NestedScrollWebView @JvmOverloads constructor(
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         var result = false
 

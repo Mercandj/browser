@@ -37,6 +37,10 @@ internal class MainActivityPresenter(
         }
     }
 
+    override fun onPageTouched() {
+        screen.hideKeyboard()
+    }
+
     override fun onBackPressed() {
         screen.back()
     }
