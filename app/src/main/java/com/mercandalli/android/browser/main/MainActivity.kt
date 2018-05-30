@@ -41,11 +41,11 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         }
     }
 
-    private var appBarLayout: AppBarLayout? = null
-    private var webView: BrowserWebView? = null
-    private var progress: ProgressBar? = null
-    private var input: EditText? = null
-    private var more: View? = null
+    private lateinit var appBarLayout: AppBarLayout
+    private lateinit var webView: BrowserWebView
+    private lateinit var progress: ProgressBar
+    private lateinit var input: EditText
+    private lateinit var more: View
     private val browserWebViewListener = createBrowserWebViewListener()
     private val themeManager = MainApplication.getAppComponent().provideThemeManager()
     private val themeListener = createThemeListener()
@@ -60,12 +60,12 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
         appBarLayout = findViewById(R.id.activity_main_app_bar_layout)
         webView = findViewById(R.id.activity_main_web_view)
-        webView!!.browserWebViewListener = browserWebViewListener
+        webView.browserWebViewListener = browserWebViewListener
         progress = findViewById(R.id.activity_main_progress)
         more = findViewById(R.id.activity_main_more)
-        more!!.setOnClickListener { showOverflowPopupMenu(more!!) }
+        more.setOnClickListener { showOverflowPopupMenu(more) }
         input = findViewById(R.id.activity_main_search)
-        input!!.setOnEditorActionListener(createOnEditorActionListener())
+        input.setOnEditorActionListener(createOnEditorActionListener())
 
         themeManager.registerThemeListener(themeListener)
         updateTheme()
@@ -91,12 +91,12 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        webView!!.saveState(outState)
+        webView.saveState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        webView!!.restoreState(savedInstanceState)
+        webView.restoreState(savedInstanceState)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
@@ -109,19 +109,19 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     //region MainActivityContract.Screen
     override fun showUrl(url: String) {
-        webView!!.load(url)
+        webView.load(url)
     }
 
     override fun back() {
-        if (webView!!.canGoBack()) {
-            webView!!.goBack()
+        if (webView.canGoBack()) {
+            webView.goBack()
         } else {
             finish()
         }
     }
 
     override fun navigateHome() {
-        webView!!.load("https://www.google.com/")
+        webView.load("https://www.google.com/")
     }
 
     override fun navigateSettings() {
@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
 
     override fun clearData() {
-        webView!!.clearData()
+        webView.clearData()
     }
 
     override fun showClearDataMessage() {
@@ -137,28 +137,28 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
 
     override fun showLoader(progressPercent: Int) {
-        progress!!.visibility = VISIBLE
+        progress.visibility = VISIBLE
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            progress!!.setProgress(progressPercent, true)
+            progress.setProgress(progressPercent, true)
         } else {
-            progress!!.progress = progressPercent
+            progress.progress = progressPercent
         }
     }
 
     override fun hideLoader() {
-        progress!!.visibility = GONE
+        progress.visibility = GONE
     }
 
     override fun hideKeyboard() {
-        KeyboardUtils.hideSoftInput(input!!)
+        KeyboardUtils.hideSoftInput(input)
     }
 
     override fun collapseToolbar() {
-        appBarLayout!!.setExpanded(false)
+        appBarLayout.setExpanded(false)
     }
 
     override fun resetSearchInput() {
-        input!!.setText("")
+        input.setText("")
     }
     //endregion MainActivityContract.Screen
 
@@ -169,7 +169,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
             }
 
             override fun onProgressChanged() {
-                userAction!!.onPageLoadProgressChanged(webView!!.progress)
+                userAction!!.onPageLoadProgressChanged(webView.progress)
             }
 
             override fun onPageTouched() {
@@ -182,7 +182,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         return TextView.OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                     event.action == KeyEvent.ACTION_DOWN &&
-                            event.keyCode == KeyEvent.KEYCODE_ENTER) {
+                    event.keyCode == KeyEvent.KEYCODE_ENTER) {
                 userAction!!.onSearchPerformed(v!!.text.toString())
                 return@OnEditorActionListener true
             }
