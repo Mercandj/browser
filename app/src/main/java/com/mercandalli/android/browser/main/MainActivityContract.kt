@@ -21,6 +21,8 @@ internal class MainActivityContract {
         fun onPageTouched()
 
         fun onBackPressed()
+
+        fun onToolbarCollapsed(collapsed: Boolean)
     }
 
     internal interface Screen {
@@ -46,5 +48,7 @@ internal class MainActivityContract {
         fun collapseToolbar()
 
         fun resetSearchInput()
+
+        fun setToolbarContentVisible(visible: Boolean)
     }
 }

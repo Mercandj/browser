@@ -47,4 +47,8 @@ internal class MainActivityPresenter(
     override fun onBackPressed() {
         screen.back()
     }
+
+    override fun onToolbarCollapsed(collapsed: Boolean) {
+        screen.setToolbarContentVisible(!collapsed)
+    }
 }

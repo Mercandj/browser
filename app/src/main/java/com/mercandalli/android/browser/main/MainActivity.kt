@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     private val themeManager = MainApplication.getAppComponent().provideThemeManager()
     private val themeListener = createThemeListener()
     private var component: MainActivityComponent? = null
-    private var userAction: MainActivityContract.UserAction? = null
+    private lateinit var userAction: MainActivityContract.UserAction
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,12 +66,16 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
                 .mainComponent(MainApplication.getAppComponent())
                 .build()
         userAction = component!!.provideMainActivityUserAction()
+
+        appBarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val collapsed = -verticalOffset == appBarLayout.height
+            userAction.onToolbarCollapsed(collapsed)
+        }
     }
 
     override fun onDestroy() {
         webView.browserWebViewListener = null
         themeManager.unregisterThemeListener(themeListener)
-        userAction = null
         component = null
         super.onDestroy()
     }
@@ -88,10 +92,16 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
-            userAction!!.onBackPressed()
+            userAction.onBackPressed()
             return true
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    override fun setToolbarContentVisible(visible: Boolean) {
+        val visibility = if (visible) View.VISIBLE else View.GONE
+        input.visibility = visibility
+        more.visibility = visibility
     }
 
     //region MainActivityContract.Screen
@@ -151,15 +161,15 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     private fun createBrowserWebViewListener() = object : BrowserWebView.BrowserWebViewListener {
         override fun onPageFinished() {
-            userAction!!.onPageLoadProgressChanged(100)
+            userAction.onPageLoadProgressChanged(100)
         }
 
         override fun onProgressChanged() {
-            userAction!!.onPageLoadProgressChanged(webView.progress)
+            userAction.onPageLoadProgressChanged(webView.progress)
         }
 
         override fun onPageTouched() {
-            userAction!!.onPageTouched()
+            userAction.onPageTouched()
         }
     }
 
@@ -167,7 +177,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                 event.action == KeyEvent.ACTION_DOWN &&
                 event.keyCode == KeyEvent.KEYCODE_ENTER) {
-            userAction!!.onSearchPerformed(v!!.text.toString())
+            userAction.onSearchPerformed(v!!.text.toString())
             return@OnEditorActionListener true
         }
         false
@@ -188,9 +198,9 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     private fun createOnMenuItemClickListener() = PopupMenu.OnMenuItemClickListener { item ->
         when (item!!.itemId) {
-            R.id.menu_browser_home -> userAction!!.onHomeClicked()
-            R.id.menu_browser_clear_data -> userAction!!.onClearDataClicked()
-            R.id.menu_browser_settings -> userAction!!.onSettingsClicked()
+            R.id.menu_browser_home -> userAction.onHomeClicked()
+            R.id.menu_browser_clear_data -> userAction.onClearDataClicked()
+            R.id.menu_browser_settings -> userAction.onSettingsClicked()
         }
         false
     }
