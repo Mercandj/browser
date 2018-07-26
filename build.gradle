@@ -38,12 +38,12 @@ task clean(type: Delete) {
 }
 
 ext {
-    appVersionCode = 1_00_02
-    appVersionName = "1.00.02"
+    appVersionCode = 1_00_03
+    appVersionName = "1.00.03"
 
-    compileSdkVersion = 27
-    buildToolsVersion = "27.0.1"
-    targetSdkVersion = 27
+    compileSdkVersion = 28
+    buildToolsVersion = "27.0.3"
+    targetSdkVersion = 28
     minSdkVersion = 17
 
     spoonEnable = false

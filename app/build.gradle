@@ -112,7 +112,7 @@ android {
             res.srcDirs = [
                     'src/main/res/browser',
                     'src/main/res/common',
-                    'src/main/res/home'
+                    'src/main/res/icon'
             ]
         }
 
