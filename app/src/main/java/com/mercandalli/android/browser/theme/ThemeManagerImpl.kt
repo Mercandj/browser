@@ -3,21 +3,13 @@ package com.mercandalli.android.browser.theme
 import android.content.SharedPreferences
 
 internal class ThemeManagerImpl(
-        private val sharedPreferences: SharedPreferences) : ThemeManager {
-
-    companion object {
-        @JvmStatic
-        val PREFERENCE_NAME = "ThemeManager"
-    }
+        private val sharedPreferences: SharedPreferences
+) : ThemeManager {
 
     private val lightTheme: Theme = LightTheme()
     private val darkTheme: Theme = DarkTheme()
-    private var currentThemeIndex = 0
+    private var currentThemeIndex = sharedPreferences.getInt("theme", 0)
     private var listeners = ArrayList<ThemeManager.ThemeListener>()
-
-    init {
-        currentThemeIndex = sharedPreferences.getInt("theme", 0)
-    }
 
     override val theme: Theme
         get() = if (currentThemeIndex == 0) lightTheme else darkTheme
@@ -43,5 +35,10 @@ internal class ThemeManagerImpl(
 
     override fun unregisterThemeListener(listener: ThemeManager.ThemeListener) {
         listeners.remove(listener)
+    }
+
+    companion object {
+        @JvmStatic
+        val PREFERENCE_NAME = "ThemeManager"
     }
 }

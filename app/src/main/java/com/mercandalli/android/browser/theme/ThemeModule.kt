@@ -12,10 +12,11 @@ class ThemeModule {
     @Singleton
     @Provides
     fun provideThemeManager(
-            mainApplication: MainApplication): ThemeManager {
+            mainApplication: MainApplication
+    ): ThemeManager {
         val sharedPreferences = mainApplication.getSharedPreferences(
-                ThemeManagerImpl.PREFERENCE_NAME, Context.MODE_PRIVATE)
-
+                ThemeManagerImpl.PREFERENCE_NAME, Context.MODE_PRIVATE
+        )
         return ThemeManagerImpl(sharedPreferences)
     }
 }

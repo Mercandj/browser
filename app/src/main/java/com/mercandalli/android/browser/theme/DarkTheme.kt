@@ -8,4 +8,5 @@ class DarkTheme : Theme(
         R.color.toolbar_background_dark,
         R.color.text_color_dark,
         R.color.text_dark_color_dark,
-        R.color.video_row_placeholder_dark)
+        R.color.video_row_placeholder_dark
+)

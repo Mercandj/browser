@@ -28,19 +28,6 @@ import com.mercandalli.android.browser.theme.ThemeManager
 
 class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
-    companion object {
-
-        @JvmStatic
-        fun start(context: Context) {
-            val intent = Intent(context, MainActivity::class.java)
-            if (context !is Activity) {
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                        Intent.FLAG_ACTIVITY_CLEAR_TOP
-            }
-            context.startActivity(intent)
-        }
-    }
-
     private lateinit var appBarLayout: AppBarLayout
     private lateinit var webView: BrowserWebView
     private lateinit var progress: ProgressBar
@@ -82,7 +69,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
 
     override fun onDestroy() {
-        webView!!.browserWebViewListener = null
+        webView.browserWebViewListener = null
         themeManager.unregisterThemeListener(themeListener)
         userAction = null
         component = null
@@ -162,39 +149,33 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
     //endregion MainActivityContract.Screen
 
-    private fun createBrowserWebViewListener(): BrowserWebView.BrowserWebViewListener {
-        return object : BrowserWebView.BrowserWebViewListener {
-            override fun onPageFinished() {
-                userAction!!.onPageLoadProgressChanged(100)
-            }
+    private fun createBrowserWebViewListener() = object : BrowserWebView.BrowserWebViewListener {
+        override fun onPageFinished() {
+            userAction!!.onPageLoadProgressChanged(100)
+        }
 
-            override fun onProgressChanged() {
-                userAction!!.onPageLoadProgressChanged(webView.progress)
-            }
+        override fun onProgressChanged() {
+            userAction!!.onPageLoadProgressChanged(webView.progress)
+        }
 
-            override fun onPageTouched() {
-                userAction!!.onPageTouched()
-            }
+        override fun onPageTouched() {
+            userAction!!.onPageTouched()
         }
     }
 
-    private fun createOnEditorActionListener(): TextView.OnEditorActionListener {
-        return TextView.OnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                    event.action == KeyEvent.ACTION_DOWN &&
-                    event.keyCode == KeyEvent.KEYCODE_ENTER) {
-                userAction!!.onSearchPerformed(v!!.text.toString())
-                return@OnEditorActionListener true
-            }
-            false
+    private fun createOnEditorActionListener() = TextView.OnEditorActionListener { v, actionId, event ->
+        if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                event.action == KeyEvent.ACTION_DOWN &&
+                event.keyCode == KeyEvent.KEYCODE_ENTER) {
+            userAction!!.onSearchPerformed(v!!.text.toString())
+            return@OnEditorActionListener true
         }
+        false
     }
 
-    private fun createThemeListener(): ThemeManager.ThemeListener {
-        return object : ThemeManager.ThemeListener {
-            override fun onThemeChanged() {
-                updateTheme()
-            }
+    private fun createThemeListener() = object : ThemeManager.ThemeListener {
+        override fun onThemeChanged() {
+            updateTheme()
         }
     }
 
@@ -205,15 +186,13 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         popupMenu.show()
     }
 
-    private fun createOnMenuItemClickListener(): PopupMenu.OnMenuItemClickListener? {
-        return PopupMenu.OnMenuItemClickListener { item ->
-            when (item!!.itemId) {
-                R.id.menu_browser_home -> userAction!!.onHomeClicked()
-                R.id.menu_browser_clear_data -> userAction!!.onClearDataClicked()
-                R.id.menu_browser_settings -> userAction!!.onSettingsClicked()
-            }
-            false
+    private fun createOnMenuItemClickListener() = PopupMenu.OnMenuItemClickListener { item ->
+        when (item!!.itemId) {
+            R.id.menu_browser_home -> userAction!!.onHomeClicked()
+            R.id.menu_browser_clear_data -> userAction!!.onClearDataClicked()
+            R.id.menu_browser_settings -> userAction!!.onSettingsClicked()
         }
+        false
     }
 
     private fun updateTheme() {
@@ -228,6 +207,19 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
             window.statusBarColor = ContextCompat.getColor(
                     this,
                     theme.statusBarBackgroundColorRes)
+        }
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun start(context: Context) {
+            val intent = Intent(context, MainActivity::class.java)
+            if (context !is Activity) {
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
+            context.startActivity(intent)
         }
     }
 }

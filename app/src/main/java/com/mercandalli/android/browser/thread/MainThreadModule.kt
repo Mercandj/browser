@@ -15,6 +15,7 @@ class MainThreadModule {
         val mainLooper = Looper.getMainLooper()
         return MainThreadPostImpl(
                 mainLooper.thread,
-                Handler(mainLooper))
+                Handler(mainLooper)
+        )
     }
 }

@@ -15,7 +15,8 @@ internal class MainThreadPostImpl(
         /**
          * An [Handler] used to be sure that the callbacks are on the main [Thread].
          */
-        private val mainThreadHandler: Handler) : MainThreadPost {
+        private val mainThreadHandler: Handler
+) : MainThreadPost {
 
     override val isOnMainThread: Boolean get() = Thread.currentThread() === mainThread
 

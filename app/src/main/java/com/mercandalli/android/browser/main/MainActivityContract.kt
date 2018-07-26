@@ -7,6 +7,7 @@ internal class MainActivityContract {
     internal annotation class Scope
 
     internal interface UserAction {
+
         fun onSearchPerformed(search: String)
 
         fun onHomeClicked()
@@ -23,6 +24,7 @@ internal class MainActivityContract {
     }
 
     internal interface Screen {
+
         fun showUrl(url: String)
 
         fun back()
@@ -45,5 +47,4 @@ internal class MainActivityContract {
 
         fun resetSearchInput()
     }
-
 }

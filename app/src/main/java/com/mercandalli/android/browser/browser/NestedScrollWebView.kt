@@ -14,12 +14,11 @@ open class NestedScrollWebView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : WebView(context, attrs, defStyleAttr), NestedScrollingChild {
 
-    private var lastMotionY: Int = 0
+    private var lastMotionY = 0
+    private var nestedYOffset = 0
 
     private val scrollOffset = IntArray(2)
     private val scrollConsumed = IntArray(2)
-
-    private var nestedYOffset: Int = 0
 
     private var childHelper: NestedScrollingChildHelper? = null
 
@@ -33,9 +32,7 @@ open class NestedScrollWebView @JvmOverloads constructor(
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         var result = false
-
         val trackedEvent = MotionEvent.obtain(event)
-
         val action = MotionEventCompat.getActionMasked(event)
 
         if (action == MotionEvent.ACTION_DOWN) {
@@ -43,7 +40,6 @@ open class NestedScrollWebView @JvmOverloads constructor(
         }
 
         val y = event.y.toInt()
-
         event.offsetLocation(0f, nestedYOffset.toFloat())
 
         when (action) {
