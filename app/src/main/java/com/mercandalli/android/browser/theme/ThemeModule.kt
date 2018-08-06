@@ -6,10 +6,10 @@ class ThemeModule(
         private val context: Context
 ) {
 
-    fun provideThemeManager(
-    ): ThemeManager {
+    fun provideThemeManager(): ThemeManager {
         val sharedPreferences = context.getSharedPreferences(
-                ThemeManagerImpl.PREFERENCE_NAME, Context.MODE_PRIVATE
+                ThemeManagerImpl.PREFERENCE_NAME,
+                Context.MODE_PRIVATE
         )
         return ThemeManagerImpl(sharedPreferences)
     }

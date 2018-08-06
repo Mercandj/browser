@@ -6,9 +6,7 @@ internal class MainActivityPresenter(
 
     override fun onSearchPerformed(search: String) {
         screen.showLoader(0)
-        val url =
-                if (search.startsWith("https://") || search.startsWith("http://")) search
-                else "https://www.google.fr/search?q=" + search.replace(" ", "+")
+        val url = searchToUrl(search)
         screen.showUrl(url)
         screen.resetSearchInput()
         screen.collapseToolbar()
@@ -51,4 +49,11 @@ internal class MainActivityPresenter(
     override fun onToolbarCollapsed(collapsed: Boolean) {
         screen.setToolbarContentVisible(!collapsed)
     }
+
+    private fun searchToUrl(search: String) =
+            if (search.startsWith("https://") || search.startsWith("http://")) {
+                search
+            } else {
+                "https://www.google.fr/search?q=" + search.replace(" ", "+")
+            }
 }
