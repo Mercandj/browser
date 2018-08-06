@@ -1,20 +1,14 @@
 package com.mercandalli.android.browser.theme
 
 import android.content.Context
-import com.mercandalli.android.browser.main.MainApplication
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
 
-@Module
-class ThemeModule {
+class ThemeModule(
+        private val context: Context
+) {
 
-    @Singleton
-    @Provides
     fun provideThemeManager(
-            mainApplication: MainApplication
     ): ThemeManager {
-        val sharedPreferences = mainApplication.getSharedPreferences(
+        val sharedPreferences = context.getSharedPreferences(
                 ThemeManagerImpl.PREFERENCE_NAME, Context.MODE_PRIVATE
         )
         return ThemeManagerImpl(sharedPreferences)

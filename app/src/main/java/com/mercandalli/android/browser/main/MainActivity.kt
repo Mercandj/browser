@@ -38,10 +38,9 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     private val more: View by bind(R.id.activity_main_more)
 
     private val browserWebViewListener = createBrowserWebViewListener()
-    private val themeManager = MainApplication.getAppComponent().provideThemeManager()
+    private val themeManager = ApplicationGraph.getThemeManager()
     private val themeListener = createThemeListener()
-    private var component: MainActivityComponent? = null
-    private lateinit var userAction: MainActivityContract.UserAction
+    private  val userAction: MainActivityContract.UserAction = createUserAction()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,12 +57,6 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
             navigateHome()
         }
 
-        component = DaggerMainActivityComponent.builder()
-                .mainActivityModule(MainActivityModule(this))
-                .mainComponent(MainApplication.getAppComponent())
-                .build()
-        userAction = component!!.provideMainActivityUserAction()
-
         appBarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
             val collapsed = -verticalOffset == appBarLayout.height
             userAction.onToolbarCollapsed(collapsed)
@@ -73,7 +66,6 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     override fun onDestroy() {
         webView.browserWebViewListener = null
         themeManager.unregisterThemeListener(themeListener)
-        component = null
         super.onDestroy()
     }
 
@@ -210,6 +202,10 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
                     theme.statusBarBackgroundColorRes)
         }
     }
+
+    private fun createUserAction() = MainActivityPresenter(
+            this
+    )
 
     private fun <T : View> Activity.bind(@IdRes res: Int): Lazy<T> {
         @Suppress("UNCHECKED_CAST")

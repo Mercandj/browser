@@ -2,10 +2,6 @@ package com.mercandalli.android.browser.main
 
 internal class MainActivityContract {
 
-    @javax.inject.Scope
-    @Retention(AnnotationRetention.RUNTIME)
-    internal annotation class Scope
-
     internal interface UserAction {
 
         fun onSearchPerformed(search: String)
