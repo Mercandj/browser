@@ -61,11 +61,22 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.mercandalli.android.browser.browser.BrowserWebView
-        android:id="@+id/activity_main_web_view"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.mercandalli.android.browser.browser.BrowserWebView
+            android:id="@+id/activity_main_web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="@drawable/shadow_bottom" />
+
+    </FrameLayout>
 
     <ProgressBar
         android:id="@+id/activity_main_progress"

@@ -6,10 +6,12 @@ import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.support.annotation.IdRes
 import android.support.design.widget.AppBarLayout
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.PopupMenu
+import android.support.v7.widget.Toolbar
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
@@ -28,11 +30,13 @@ import com.mercandalli.android.browser.theme.ThemeManager
 
 class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
-    private lateinit var appBarLayout: AppBarLayout
-    private lateinit var webView: BrowserWebView
-    private lateinit var progress: ProgressBar
-    private lateinit var input: EditText
-    private lateinit var more: View
+    private val toolbar: Toolbar by bind(R.id.activity_main_toolbar)
+    private val appBarLayout: AppBarLayout by bind(R.id.activity_main_app_bar_layout)
+    private val webView: BrowserWebView by bind(R.id.activity_main_web_view)
+    private val progress: ProgressBar by bind(R.id.activity_main_progress)
+    private val input: EditText by bind(R.id.activity_main_search)
+    private val more: View by bind(R.id.activity_main_more)
+
     private val browserWebViewListener = createBrowserWebViewListener()
     private val themeManager = MainApplication.getAppComponent().provideThemeManager()
     private val themeListener = createThemeListener()
@@ -42,16 +46,9 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        setSupportActionBar(findViewById(R.id.activity_main_toolbar))
-
-        appBarLayout = findViewById(R.id.activity_main_app_bar_layout)
-        webView = findViewById(R.id.activity_main_web_view)
-        webView.browserWebViewListener = browserWebViewListener
-        progress = findViewById(R.id.activity_main_progress)
-        more = findViewById(R.id.activity_main_more)
+        setSupportActionBar(toolbar)
         more.setOnClickListener { showOverflowPopupMenu(more) }
-        input = findViewById(R.id.activity_main_search)
+        webView.browserWebViewListener = browserWebViewListener
         input.setOnEditorActionListener(createOnEditorActionListener())
 
         themeManager.registerThemeListener(themeListener)
@@ -104,7 +101,6 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         more.visibility = visibility
     }
 
-    //region MainActivityContract.Screen
     override fun showUrl(url: String) {
         webView.load(url)
     }
@@ -157,7 +153,6 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     override fun resetSearchInput() {
         input.setText("")
     }
-    //endregion MainActivityContract.Screen
 
     private fun createBrowserWebViewListener() = object : BrowserWebView.BrowserWebViewListener {
         override fun onPageFinished() {
@@ -205,11 +200,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         false
     }
 
-    private fun updateTheme() {
-        updateTheme(themeManager.theme)
-    }
-
-    private fun updateTheme(theme: Theme) {
+    private fun updateTheme(theme: Theme = themeManager.getTheme()) {
         window.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(
                 this,
                 theme.windowBackgroundColorRes)))
@@ -218,6 +209,11 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
                     this,
                     theme.statusBarBackgroundColorRes)
         }
+    }
+
+    private fun <T : View> Activity.bind(@IdRes res: Int): Lazy<T> {
+        @Suppress("UNCHECKED_CAST")
+        return lazy(LazyThreadSafetyMode.NONE) { findViewById<T>(res) }
     }
 
     companion object {

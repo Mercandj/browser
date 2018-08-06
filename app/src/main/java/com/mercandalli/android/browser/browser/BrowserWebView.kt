@@ -21,7 +21,9 @@ class BrowserWebView @JvmOverloads constructor(
             isHorizontalScrollBarEnabled = true
             isVerticalScrollBarEnabled = true
             scrollBarStyle = View.SCROLLBARS_OUTSIDE_OVERLAY
-            isScrollbarFadingEnabled = true
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+                isScrollbarFadingEnabled = true
+            }
             isScrollContainer = true
             isClickable = true
 

@@ -11,8 +11,7 @@ internal class ThemeManagerImpl(
     private var currentThemeIndex = sharedPreferences.getInt("theme", 0)
     private var listeners = ArrayList<ThemeManager.ThemeListener>()
 
-    override val theme: Theme
-        get() = if (currentThemeIndex == 0) lightTheme else darkTheme
+    override fun getTheme() = if (currentThemeIndex == 0) lightTheme else darkTheme
 
     override fun setDarkEnable(enable: Boolean) {
         currentThemeIndex = if (enable) 1 else 0
@@ -22,9 +21,7 @@ internal class ThemeManagerImpl(
         }
     }
 
-    override fun isDarkEnable(): Boolean {
-        return currentThemeIndex != 0
-    }
+    override fun isDarkEnable() = currentThemeIndex != 0
 
     override fun registerThemeListener(listener: ThemeManager.ThemeListener) {
         if (listeners.contains(listener)) {
