@@ -58,6 +58,10 @@ internal class MainActivityContract {
         fun setWindowBackgroundColorRes(@ColorRes colorRes: Int)
 
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-        fun setStatusBarBackgroundColorRes(colorRes: Int)
+        fun setStatusBarBackgroundColorRes(@ColorRes colorRes: Int)
+
+        fun setToolbarBackgroundColorRes(@ColorRes colorRes: Int)
+
+        fun setInputTextColorRes(@ColorRes colorRes: Int)
     }
 }

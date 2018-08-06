@@ -25,17 +25,15 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.mercandalli.android.browser.R
-import com.mercandalli.android.browser.browser.BrowserWebView
+import com.mercandalli.android.browser.browser.BrowserView
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
 import com.mercandalli.android.browser.settings.SettingsActivity
-import com.mercandalli.android.browser.theme.Theme
-import com.mercandalli.android.browser.theme.ThemeManager
 
 class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     private val toolbar: Toolbar by bind(R.id.activity_main_toolbar)
     private val appBarLayout: AppBarLayout by bind(R.id.activity_main_app_bar_layout)
-    private val webView: BrowserWebView by bind(R.id.activity_main_web_view)
+    private val webView: BrowserView by bind(R.id.activity_main_web_view)
     private val progress: ProgressBar by bind(R.id.activity_main_progress)
     private val input: EditText by bind(R.id.activity_main_search)
     private val more: View by bind(R.id.activity_main_more)
@@ -156,7 +154,17 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         window.statusBarColor = color
     }
 
-    private fun createBrowserWebViewListener() = object : BrowserWebView.BrowserWebViewListener {
+    override fun setToolbarBackgroundColorRes(@ColorRes colorRes: Int) {
+        val color = ContextCompat.getColor(this, colorRes)
+        toolbar.setBackgroundColor(color)
+    }
+
+    override fun setInputTextColorRes(@ColorRes colorRes: Int) {
+        val color = ContextCompat.getColor(this, colorRes)
+        input.setTextColor(color)
+    }
+
+    private fun createBrowserWebViewListener() = object : BrowserView.BrowserWebViewListener {
         override fun onPageFinished() {
             userAction.onPageLoadProgressChanged(100)
         }

@@ -13,6 +13,7 @@
     <color name="text_secondary_color_light">#7e7e7e</color>
     <color name="text_dark_color_light">#000000</color>
     <color name="video_row_placeholder_light">#eaeaea</color>
+    <color name="card_background_light">@android:color/white</color>
 
     <color name="window_background_dark">#202020</color>
     <color name="status_bar_background_dark">@android:color/black</color>
@@ -21,6 +22,7 @@
     <color name="text_secondary_color_dark">#8A8A8A</color>
     <color name="text_dark_color_dark">#FFFFFF</color>
     <color name="video_row_placeholder_dark">#363636</color>
+    <color name="card_background_dark">#292929</color>
 
     <color name="color_text_title_1">#444444</color>
 </resources>

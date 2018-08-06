@@ -16,5 +16,7 @@ open class Theme(
         @ColorRes
         val textDarkColorRes: Int,
         @ColorRes
-        val videoRowPlaceholderColorRes: Int
+        val videoRowPlaceholderColorRes: Int,
+        @ColorRes
+        val cardBackgroundColorRes: Int
 )

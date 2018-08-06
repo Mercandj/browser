@@ -4,14 +4,25 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
+import android.util.Base64
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.webkit.*
+import com.mercandalli.android.browser.main.ApplicationGraph
 
-class BrowserWebView @JvmOverloads constructor(
+class BrowserView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : NestedScrollWebView(context, attrs, defStyleAttr) {
+) : NestedScrollWebView(context, attrs, defStyleAttr),
+        BrowserContract.Screen {
+
+    private val darkThemeEncoded by lazy {
+        val inputStream = context.assets.open("dark-theme-google.css")
+        val buffer = ByteArray(inputStream.available())
+        inputStream.read(buffer)
+        inputStream.close()
+        Base64.encodeToString(buffer, Base64.NO_WRAP)
+    }
 
     var browserWebViewListener: BrowserWebViewListener? = null
 
@@ -44,6 +55,10 @@ class BrowserWebView @JvmOverloads constructor(
                 }
 
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                    if (ApplicationGraph.getThemeManager().isDarkEnable() &&
+                            url != null && url.startsWith("https://www.google.")) {
+                        injectCSS()
+                    }
                     if (browserWebViewListener != null) {
                         browserWebViewListener!!.onProgressChanged()
                     }
@@ -106,5 +121,16 @@ class BrowserWebView @JvmOverloads constructor(
             cookieSyncManager.stopSync()
             cookieSyncManager.sync()
         }
+    }
+
+    private fun injectCSS() {
+        loadUrl("javascript:(function() {" +
+                "var parent = document.getElementsByTagName('head').item(0);" +
+                "var style = document.createElement('style');" +
+                "style.type = 'text/css';" +
+                // Tell the browser to BASE64-decode the string into your script !!!
+                "style.innerHTML = window.atob('" + darkThemeEncoded + "');" +
+                "parent.appendChild(style)" +
+                "})()")
     }
 }

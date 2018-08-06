@@ -75,8 +75,11 @@ internal class MainActivityPresenter(
     }
 
     private fun updateTheme(theme: Theme = themeManager.getTheme()) {
+        val textPrimaryColorRes = theme.textPrimaryColorRes
         val windowBackgroundColorRes = theme.windowBackgroundColorRes
+        screen.setInputTextColorRes(textPrimaryColorRes)
         screen.setWindowBackgroundColorRes(windowBackgroundColorRes)
+        screen.setToolbarBackgroundColorRes(windowBackgroundColorRes)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val statusBarBackgroundColorRes = theme.statusBarBackgroundColorRes
             screen.setStatusBarBackgroundColorRes(statusBarBackgroundColorRes)
