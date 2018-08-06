@@ -7,8 +7,12 @@ apply plugin: 'kotlin-android-extensions'
 // https://github.com/ben-manes/gradle-versions-plugin
 apply plugin: 'com.github.ben-manes.versions'
 
+// Fabric
+apply plugin: 'io.fabric'
+
 apply from: '../config/quality/quality.gradle'
 apply from: '../config/signing/signing.gradle'
+
 
 def makeVersionCodeForDensity = { densityName ->
     // Assign different version code for each output
@@ -112,7 +116,9 @@ android {
             res.srcDirs = [
                     'src/main/res/browser',
                     'src/main/res/common',
-                    'src/main/res/icon'
+                    'src/main/res/icon',
+                    'src/main/res/main',
+                    'src/main/res/settings'
             ]
         }
 
@@ -160,6 +166,11 @@ dependencies {
 
     // Google
     implementation 'com.google.code.gson:gson:2.8.2'
+
+    // Third party - Monitoring
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.4@aar') {
+        transitive = true
+    }
 
     // Third party - UI
     implementation 'com.github.bumptech.glide:glide:4.7.1'

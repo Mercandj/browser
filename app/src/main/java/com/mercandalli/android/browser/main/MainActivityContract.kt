@@ -1,8 +1,16 @@
 package com.mercandalli.android.browser.main
 
+import android.os.Build
+import android.support.annotation.ColorRes
+import android.support.annotation.RequiresApi
+
 internal class MainActivityContract {
 
     internal interface UserAction {
+
+        fun onCreate()
+
+        fun onDestroy()
 
         fun onSearchPerformed(search: String)
 
@@ -46,5 +54,10 @@ internal class MainActivityContract {
         fun resetSearchInput()
 
         fun setToolbarContentVisible(visible: Boolean)
+
+        fun setWindowBackgroundColorRes(@ColorRes colorRes: Int)
+
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        fun setStatusBarBackgroundColorRes(colorRes: Int)
     }
 }

@@ -10,7 +10,9 @@ open class Theme(
         @ColorRes
         val toolbarBackgroundColorRes: Int,
         @ColorRes
-        val textColorRes: Int,
+        val textPrimaryColorRes: Int,
+        @ColorRes
+        val textSecondaryColorRes: Int,
         @ColorRes
         val textDarkColorRes: Int,
         @ColorRes

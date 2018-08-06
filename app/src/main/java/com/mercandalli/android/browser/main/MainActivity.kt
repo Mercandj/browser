@@ -6,7 +6,9 @@ import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.support.annotation.ColorRes
 import android.support.annotation.IdRes
+import android.support.annotation.RequiresApi
 import android.support.design.widget.AppBarLayout
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -25,6 +27,7 @@ import android.widget.Toast
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.browser.BrowserWebView
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
+import com.mercandalli.android.browser.settings.SettingsActivity
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 
@@ -38,9 +41,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     private val more: View by bind(R.id.activity_main_more)
 
     private val browserWebViewListener = createBrowserWebViewListener()
-    private val themeManager = ApplicationGraph.getThemeManager()
-    private val themeListener = createThemeListener()
-    private  val userAction: MainActivityContract.UserAction = createUserAction()
+    private val userAction = createUserAction()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,9 +51,6 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         webView.browserWebViewListener = browserWebViewListener
         input.setOnEditorActionListener(createOnEditorActionListener())
 
-        themeManager.registerThemeListener(themeListener)
-        updateTheme()
-
         if (savedInstanceState == null) {
             navigateHome()
         }
@@ -61,11 +59,12 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
             val collapsed = -verticalOffset == appBarLayout.height
             userAction.onToolbarCollapsed(collapsed)
         }
+        userAction.onCreate()
     }
 
     override fun onDestroy() {
         webView.browserWebViewListener = null
-        themeManager.unregisterThemeListener(themeListener)
+        userAction.onDestroy()
         super.onDestroy()
     }
 
@@ -110,7 +109,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
 
     override fun navigateSettings() {
-        Toast.makeText(this, "Not yet", Toast.LENGTH_SHORT).show()
+        SettingsActivity.start(this)
     }
 
     override fun clearData() {
@@ -146,6 +145,17 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         input.setText("")
     }
 
+    override fun setWindowBackgroundColorRes(@ColorRes colorRes: Int) {
+        val color = ContextCompat.getColor(this, colorRes)
+        window.setBackgroundDrawable(ColorDrawable(color))
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    override fun setStatusBarBackgroundColorRes(@ColorRes colorRes: Int) {
+        val color = ContextCompat.getColor(this, colorRes)
+        window.statusBarColor = color
+    }
+
     private fun createBrowserWebViewListener() = object : BrowserWebView.BrowserWebViewListener {
         override fun onPageFinished() {
             userAction.onPageLoadProgressChanged(100)
@@ -170,12 +180,6 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         false
     }
 
-    private fun createThemeListener() = object : ThemeManager.ThemeListener {
-        override fun onThemeChanged() {
-            updateTheme()
-        }
-    }
-
     private fun showOverflowPopupMenu(view: View) {
         val popupMenu = PopupMenu(this, view, Gravity.END)
         popupMenu.menuInflater.inflate(R.menu.menu_browser, popupMenu.menu)
@@ -192,20 +196,13 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         false
     }
 
-    private fun updateTheme(theme: Theme = themeManager.getTheme()) {
-        window.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(
+    private fun createUserAction(): MainActivityContract.UserAction {
+        val themeManager = ApplicationGraph.getThemeManager()
+        return MainActivityPresenter(
                 this,
-                theme.windowBackgroundColorRes)))
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.statusBarColor = ContextCompat.getColor(
-                    this,
-                    theme.statusBarBackgroundColorRes)
-        }
+                themeManager
+        )
     }
-
-    private fun createUserAction() = MainActivityPresenter(
-            this
-    )
 
     private fun <T : View> Activity.bind(@IdRes res: Int): Lazy<T> {
         @Suppress("UNCHECKED_CAST")

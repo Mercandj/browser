@@ -9,14 +9,16 @@
     <color name="window_background_light">@android:color/white</color>
     <color name="status_bar_background_light">@color/color_primary_darker</color>
     <color name="toolbar_background_light">@android:color/white</color>
-    <color name="text_color_light">#8a000000</color> <!-- 54% -->
+    <color name="text_primary_color_light">#353535</color>
+    <color name="text_secondary_color_light">#7e7e7e</color>
     <color name="text_dark_color_light">#000000</color>
     <color name="video_row_placeholder_light">#eaeaea</color>
 
     <color name="window_background_dark">#202020</color>
     <color name="status_bar_background_dark">@android:color/black</color>
     <color name="toolbar_background_dark">@android:color/black</color>
-    <color name="text_color_dark">#b3FFFFFF</color> <!-- 70% -->
+    <color name="text_primary_color_dark">#C9C9C9</color>
+    <color name="text_secondary_color_dark">#8A8A8A</color>
     <color name="text_dark_color_dark">#FFFFFF</color>
     <color name="video_row_placeholder_dark">#363636</color>
 

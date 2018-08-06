@@ -12,15 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".main.MainActivity">
+        <activity
+            android:name=".main.MainActivity"
+            android:theme="@style/MainActivityTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="9e044dd857b2ddabd24e6e1dfce92efabe4ed0d9" />
+
     </application>
-    <!--android:roundIcon="@mipmap/ic_launcher_round"-->
 
 </manifest>

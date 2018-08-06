@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="activity_settings_title">Paramètres</string>
+
+    <string name="view_settings_theme_section_label">Thème</string>
+    <string name="view_settings_theme_label">Thème</string>
+    <string name="view_settings_theme_sublabel">Thème sombre</string>
+
+</resources>
