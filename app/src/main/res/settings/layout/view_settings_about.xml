@@ -1,126 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/view_settings_about_section"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/default_space"
-    android:layout_marginEnd="@dimen/settings_horizontal_margins"
-    android:layout_marginStart="@dimen/settings_horizontal_margins"
-    android:layout_marginTop="6dp">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/view_settings_about_section_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:paddingBottom="4dp"
+        android:paddingEnd="@dimen/default_space_2"
+        android:paddingStart="@dimen/default_space_2"
+        android:paddingTop="12dp"
+        android:text="@string/view_settings_about_section_label"
+        android:textColor="@color/text_secondary_color_light"
+        android:textSize="@dimen/text_size_l" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/view_settings_about_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_space"
+        android:layout_marginEnd="@dimen/settings_horizontal_margins"
+        android:layout_marginStart="@dimen/settings_horizontal_margins"
+        android:layout_marginTop="6dp">
 
         <LinearLayout
-            android:id="@+id/view_settings_app_version_name_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:selectableItemBackground"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/default_space_1_5"
-            android:paddingTop="@dimen/default_space_1_5">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/view_settings_app_version_name_label"
+            <LinearLayout
+                android:id="@+id/view_settings_app_version_name_row"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingEnd="@dimen/default_space_2"
-                android:paddingStart="@dimen/default_space_2"
-                android:text="@string/view_settings_app_version_name_label"
-                android:textColor="@color/text_primary_color_light"
-                android:textSize="@dimen/text_size_xl" />
+                android:background="?android:selectableItemBackground"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/default_space_1_5"
+                android:paddingTop="@dimen/default_space_1_5">
 
-            <TextView
-                android:id="@+id/view_settings_app_version_name"
+                <TextView
+                    android:id="@+id/view_settings_app_version_name_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="@dimen/default_space_2"
+                    android:paddingStart="@dimen/default_space_2"
+                    android:text="@string/view_settings_app_version_name_label"
+                    android:textColor="@color/text_primary_color_light"
+                    android:textSize="@dimen/text_size_xl" />
+
+                <TextView
+                    android:id="@+id/view_settings_app_version_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:paddingEnd="@dimen/default_space_2"
+                    android:paddingStart="@dimen/default_space_2"
+                    android:textColor="@color/text_secondary_color_light"
+                    tools:text="1.00.00" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.5dp"
+                android:layout_marginEnd="@dimen/default_space_2"
+                android:layout_marginStart="@dimen/default_space_2"
+                android:background="#33000000" />
+
+            <LinearLayout
+                android:id="@+id/view_settings_app_version_code_row"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:paddingEnd="@dimen/default_space_2"
-                android:paddingStart="@dimen/default_space_2"
-                android:textColor="@color/text_secondary_color_light"
-                tools:text="1.00.00" />
+                android:background="?android:selectableItemBackground"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/default_space_1_5"
+                android:paddingTop="@dimen/default_space_1_5">
+
+                <TextView
+                    android:id="@+id/view_settings_app_version_code_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="@dimen/default_space_2"
+                    android:paddingStart="@dimen/default_space_2"
+                    android:text="@string/view_settings_app_version_code_label"
+                    android:textColor="@color/text_primary_color_light"
+                    android:textSize="@dimen/text_size_xl" />
+
+                <TextView
+                    android:id="@+id/view_settings_app_version_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:paddingEnd="@dimen/default_space_2"
+                    android:paddingStart="@dimen/default_space_2"
+                    android:textColor="@color/text_secondary_color_light"
+                    tools:text="1.00.00" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.5dp"
+                android:layout_marginEnd="@dimen/default_space_2"
+                android:layout_marginStart="@dimen/default_space_2"
+                android:background="#33000000" />
+
+            <LinearLayout
+                android:id="@+id/view_settings_app_long_version_code_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/default_space_1_5"
+                android:paddingTop="@dimen/default_space_1_5">
+
+                <TextView
+                    android:id="@+id/view_settings_app_long_version_code_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="@dimen/default_space_2"
+                    android:paddingStart="@dimen/default_space_2"
+                    android:text="@string/view_settings_app_long_version_code_label"
+                    android:textColor="@color/text_primary_color_light"
+                    android:textSize="@dimen/text_size_xl" />
+
+                <TextView
+                    android:id="@+id/view_settings_app_long_version_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:paddingEnd="@dimen/default_space_2"
+                    android:paddingStart="@dimen/default_space_2"
+                    android:textColor="@color/text_secondary_color_light"
+                    tools:text="1.00.00" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0.5dp"
-            android:layout_marginEnd="@dimen/default_space_2"
-            android:layout_marginStart="@dimen/default_space_2"
-            android:background="#33000000" />
-
-        <LinearLayout
-            android:id="@+id/view_settings_app_version_code_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?android:selectableItemBackground"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/default_space_1_5"
-            android:paddingTop="@dimen/default_space_1_5">
-
-            <TextView
-                android:id="@+id/view_settings_app_version_code_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingEnd="@dimen/default_space_2"
-                android:paddingStart="@dimen/default_space_2"
-                android:text="@string/view_settings_app_version_code_label"
-                android:textColor="@color/text_primary_color_light"
-                android:textSize="@dimen/text_size_xl" />
-
-            <TextView
-                android:id="@+id/view_settings_app_version_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:paddingEnd="@dimen/default_space_2"
-                android:paddingStart="@dimen/default_space_2"
-                android:textColor="@color/text_secondary_color_light"
-                tools:text="1.00.00" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0.5dp"
-            android:layout_marginEnd="@dimen/default_space_2"
-            android:layout_marginStart="@dimen/default_space_2"
-            android:background="#33000000" />
-
-        <LinearLayout
-            android:id="@+id/view_settings_app_long_version_code_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?android:selectableItemBackground"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/default_space_1_5"
-            android:paddingTop="@dimen/default_space_1_5">
-
-            <TextView
-                android:id="@+id/view_settings_app_long_version_code_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingEnd="@dimen/default_space_2"
-                android:paddingStart="@dimen/default_space_2"
-                android:text="@string/view_settings_app_long_version_code_label"
-                android:textColor="@color/text_primary_color_light"
-                android:textSize="@dimen/text_size_xl" />
-
-            <TextView
-                android:id="@+id/view_settings_app_long_version_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:paddingEnd="@dimen/default_space_2"
-                android:paddingStart="@dimen/default_space_2"
-                android:textColor="@color/text_secondary_color_light"
-                tools:text="1.00.00" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

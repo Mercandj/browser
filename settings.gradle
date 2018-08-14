@@ -1,1 +1,1 @@
-include ':app', ':mwm_publishing'
+include ':app'

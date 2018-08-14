@@ -49,11 +49,9 @@ class SettingsPresenter(
         screen.setSectionColor(theme.cardBackgroundColorRes)
     }
 
-    private fun createThemeListener(): ThemeManager.ThemeListener {
-        return object : ThemeManager.ThemeListener {
-            override fun onThemeChanged() {
-                updateTheme()
-            }
+    private fun createThemeListener() = object : ThemeManager.ThemeListener {
+        override fun onThemeChanged() {
+            updateTheme()
         }
     }
 }

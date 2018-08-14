@@ -6,6 +6,8 @@ open class Theme(
         @ColorRes
         val windowBackgroundColorRes: Int,
         @ColorRes
+        val windowSettingsBackgroundColorRes: Int,
+        @ColorRes
         val statusBarBackgroundColorRes: Int,
         @ColorRes
         val toolbarBackgroundColorRes: Int,

@@ -7,6 +7,7 @@
     <string name="view_settings_theme_label">Thème</string>
     <string name="view_settings_theme_sublabel">Thème sombre</string>
 
+    <string name="view_settings_about_section_label">A propos</string>
     <string name="view_settings_app_version_name_label">Version name</string>
     <string name="view_settings_app_version_code_label">Version code</string>
     <string name="view_settings_app_long_version_code_label">Long version code</string>

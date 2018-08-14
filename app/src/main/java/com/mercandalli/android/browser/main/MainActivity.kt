@@ -28,7 +28,6 @@ import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.browser.BrowserView
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
 import com.mercandalli.android.browser.settings.SettingsActivity
-import com.mwm.android.publishing.StoreActivity
 
 class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
@@ -93,6 +92,10 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     override fun showUrl(url: String) {
         webView.load(url)
+    }
+
+    override fun reload() {
+        webView.reload()
     }
 
     override fun back() {
@@ -165,10 +168,6 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         input.setTextColor(color)
     }
 
-    override fun navigateToStore() {
-        StoreActivity.start(this)
-    }
-
     private fun createBrowserWebViewListener() = object : BrowserView.BrowserWebViewListener {
         override fun onPageFinished() {
             userAction.onPageLoadProgressChanged(100)
@@ -211,15 +210,13 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     private fun createUserAction(): MainActivityContract.UserAction {
         val themeManager = ApplicationGraph.getThemeManager()
-        val toastManager = ApplicationGraph.getToastManager()
         return MainActivityPresenter(
                 this,
-                themeManager,
-                toastManager
+                themeManager
         )
     }
 
-    private fun <T : View> Activity.bind(@IdRes res: Int): Lazy<T> {
+    private fun <T : View> bind(@IdRes res: Int): Lazy<T> {
         @Suppress("UNCHECKED_CAST")
         return lazy(LazyThreadSafetyMode.NONE) { findViewById<T>(res) }
     }

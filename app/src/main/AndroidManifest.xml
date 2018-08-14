@@ -27,7 +27,8 @@
 
         <activity
             android:name=".settings.SettingsActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:theme="@style/SettingsActivityTheme" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

@@ -6,6 +6,7 @@
     tools:parentTag="android.widget.FrameLayout">
 
     <FrameLayout
+        android:id="@+id/activity_settings_toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height">
 
@@ -13,8 +14,22 @@
             android:id="@+id/activity_settings_back"
             android:layout_width="@dimen/toolbar_height"
             android:layout_height="@dimen/toolbar_height"
-            android:padding="@dimen/default_space_1_5"
-            android:src="@drawable/ic_arrow_back_black_24dp" />
+            android:layout_gravity="start"
+            android:background="?android:selectableItemBackground"
+            android:padding="20dp"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            tools:tint="@color/text_dark_color_light" />
+
+        <TextView
+            android:id="@+id/activity_settings_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginStart="@dimen/toolbar_height"
+            android:gravity="center_vertical"
+            android:text="Settings"
+            android:textSize="@dimen/text_size_xl"
+            tools:textColor="@color/text_dark_color_light" />
 
     </FrameLayout>
 

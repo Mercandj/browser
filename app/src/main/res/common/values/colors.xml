@@ -7,6 +7,7 @@
     <color name="color_accent_dark">#065d68</color>
 
     <color name="window_background_light">@android:color/white</color>
+    <color name="window_settings_background_light">#F9F9F9</color>
     <color name="status_bar_background_light">@color/color_primary_darker</color>
     <color name="toolbar_background_light">@android:color/white</color>
     <color name="text_primary_color_light">#353535</color>
@@ -16,6 +17,7 @@
     <color name="card_background_light">@android:color/white</color>
 
     <color name="window_background_dark">#202020</color>
+    <color name="window_settings_background_dark">#202020</color>
     <color name="status_bar_background_dark">@android:color/black</color>
     <color name="toolbar_background_dark">@android:color/black</color>
     <color name="text_primary_color_dark">#C9C9C9</color>

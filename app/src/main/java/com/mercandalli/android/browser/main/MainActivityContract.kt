@@ -33,6 +33,8 @@ internal class MainActivityContract {
 
         fun showUrl(url: String)
 
+        fun reload()
+
         fun back()
 
         fun navigateHome()
@@ -63,7 +65,5 @@ internal class MainActivityContract {
         fun setToolbarBackgroundColorRes(@ColorRes colorRes: Int)
 
         fun setInputTextColorRes(@ColorRes colorRes: Int)
-
-        fun navigateToStore()
     }
 }

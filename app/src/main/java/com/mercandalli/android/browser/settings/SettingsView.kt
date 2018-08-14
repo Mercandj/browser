@@ -27,8 +27,13 @@ class SettingsView @JvmOverloads constructor(
     private val themeSubLabel: TextView = view.findViewById(R.id.view_settings_theme_sublabel)
     private val themeCheckBox: CheckBox = view.findViewById(R.id.view_settings_theme)
 
+    private val aboutSection: CardView = view.findViewById(R.id.view_settings_about_section)
+    private val aboutSectionLabel: TextView = view.findViewById(R.id.view_settings_about_section_label)
+    private val versionNameLabel: TextView = view.findViewById(R.id.view_settings_app_version_name_label)
     private val versionName: TextView = view.findViewById(R.id.view_settings_app_version_name)
+    private val versionCodeLabel: TextView = view.findViewById(R.id.view_settings_app_version_code_label)
     private val versionCode: TextView = view.findViewById(R.id.view_settings_app_version_code)
+    private val longVersionCodeLabel: TextView = view.findViewById(R.id.view_settings_app_long_version_code_label)
     private val longVersionCode: TextView = view.findViewById(R.id.view_settings_app_long_version_code)
 
     private val userAction = createUserAction()
@@ -61,18 +66,26 @@ class SettingsView @JvmOverloads constructor(
     override fun setSectionColor(@ColorRes sectionColorRes: Int) {
         val sectionColor = ContextCompat.getColor(context, sectionColorRes)
         themeSection.setCardBackgroundColor(sectionColor)
+        aboutSection.setCardBackgroundColor(sectionColor)
     }
 
     override fun setTextPrimaryColorRes(@ColorRes textPrimaryColorRes: Int) {
         val textColor = ContextCompat.getColor(context, textPrimaryColorRes)
         themeLabel.setTextColor(textColor)
         themeCheckBox.setTextColor(textColor)
+        versionNameLabel.setTextColor(textColor)
+        versionCodeLabel.setTextColor(textColor)
+        longVersionCodeLabel.setTextColor(textColor)
     }
 
     override fun setTextSecondaryColorRes(@ColorRes textSecondaryColorRes: Int) {
         val textColor = ContextCompat.getColor(context, textSecondaryColorRes)
         themeSectionLabel.setTextColor(textColor)
+        aboutSectionLabel.setTextColor(textColor)
         themeSubLabel.setTextColor(textColor)
+        versionName.setTextColor(textColor)
+        versionCode.setTextColor(textColor)
+        longVersionCode.setTextColor(textColor)
     }
 
     override fun setVersionName(versionName: String) {
