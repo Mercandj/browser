@@ -27,6 +27,10 @@ class SettingsView @JvmOverloads constructor(
     private val themeSubLabel: TextView = view.findViewById(R.id.view_settings_theme_sublabel)
     private val themeCheckBox: CheckBox = view.findViewById(R.id.view_settings_theme)
 
+    private val versionName: TextView = view.findViewById(R.id.view_settings_app_version_name)
+    private val versionCode: TextView = view.findViewById(R.id.view_settings_app_version_code)
+    private val longVersionCode: TextView = view.findViewById(R.id.view_settings_app_long_version_code)
+
     private val userAction = createUserAction()
 
     init {
@@ -71,6 +75,18 @@ class SettingsView @JvmOverloads constructor(
         themeSubLabel.setTextColor(textColor)
     }
 
+    override fun setVersionName(versionName: String) {
+        this.versionName.text = versionName
+    }
+
+    override fun setVersionCode(versionCode: Int) {
+        this.versionCode.text = versionCode.toString()
+    }
+
+    override fun setLongVersionCode(longVersionCode: Long) {
+        this.longVersionCode.text = longVersionCode.toString()
+    }
+
     private fun createUserAction(): SettingsContract.UserAction = if (isInEditMode) {
         object : SettingsContract.UserAction {
             override fun onAttached() {}
@@ -79,9 +95,11 @@ class SettingsView @JvmOverloads constructor(
         }
     } else {
         val themeManager = ApplicationGraph.getThemeManager()
+        val versionManager = ApplicationGraph.getVersionManager()
         SettingsPresenter(
                 this,
-                themeManager
+                themeManager,
+                versionManager
         )
     }
 }

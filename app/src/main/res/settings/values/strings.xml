@@ -7,4 +7,8 @@
     <string name="view_settings_theme_label">Theme</string>
     <string name="view_settings_theme_sublabel">Dark theme</string>
 
+    <string name="view_settings_app_version_name_label">Version name</string>
+    <string name="view_settings_app_version_code_label">Version code</string>
+    <string name="view_settings_app_long_version_code_label">Long version code</string>
+
 </resources>

@@ -5,8 +5,28 @@
     android:layout_height="match_parent"
     tools:parentTag="android.widget.FrameLayout">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height">
+
+        <ImageView
+            android:id="@+id/activity_settings_back"
+            android:layout_width="@dimen/toolbar_height"
+            android:layout_height="@dimen/toolbar_height"
+            android:padding="@dimen/default_space_1_5"
+            android:src="@drawable/ic_arrow_back_black_24dp" />
+
+    </FrameLayout>
+
     <com.mercandalli.android.browser.settings.SettingsView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/toolbar_height" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_marginTop="@dimen/toolbar_height"
+        android:background="@drawable/shadow_bottom" />
 
 </merge>

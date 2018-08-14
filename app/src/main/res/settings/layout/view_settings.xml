@@ -9,9 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingTop="@dimen/default_space_half"
         android:paddingBottom="@dimen/default_space_half">
 
         <include layout="@layout/view_settings_theme" />
+
+        <include layout="@layout/view_settings_about" />
 
     </LinearLayout>
 

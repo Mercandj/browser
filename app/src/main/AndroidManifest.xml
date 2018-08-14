@@ -27,8 +27,7 @@
 
         <activity
             android:name=".settings.SettingsActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
+            android:launchMode="singleTop" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

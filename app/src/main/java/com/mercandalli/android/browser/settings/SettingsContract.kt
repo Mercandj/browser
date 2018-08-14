@@ -13,6 +13,12 @@ interface SettingsContract {
         fun setTextPrimaryColorRes(@ColorRes textPrimaryColorRes: Int)
 
         fun setTextSecondaryColorRes(@ColorRes textSecondaryColorRes: Int)
+
+        fun setVersionName(versionName: String)
+
+        fun setVersionCode(versionCode: Int)
+
+        fun setLongVersionCode(longVersionCode: Long)
     }
 
     interface UserAction {
