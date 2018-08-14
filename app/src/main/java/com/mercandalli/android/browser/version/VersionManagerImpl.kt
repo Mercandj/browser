@@ -2,6 +2,7 @@ package com.mercandalli.android.browser.version
 
 import android.content.pm.PackageInfo
 import android.support.annotation.RequiresApi
+import com.mercandalli.android.browser.BuildConfig
 
 class VersionManagerImpl(
         private val delegate: Delegate
@@ -9,16 +10,24 @@ class VersionManagerImpl(
 
     private lateinit var packageInfo: PackageInfo
 
-    override fun getVersionName(): String {
+    override fun getBuildConfigVersionName(): String {
+        return BuildConfig.VERSION_NAME
+    }
+
+    override fun getBuildConfigVersionCode(): Int {
+        return BuildConfig.VERSION_CODE
+    }
+
+    override fun getPackageManagerVersionName(): String {
         return getPackageInfo().versionName
     }
 
-    override fun getVersionCode(): Int {
+    override fun getPackageManagerVersionCode(): Int {
         return getPackageInfo().versionCode
     }
 
     @RequiresApi(28)
-    override fun getLongVersionCode(): Long {
+    override fun getPackageManagerLongVersionCode(): Long {
         return getPackageInfo().longVersionCode
     }
 

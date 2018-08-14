@@ -79,12 +79,12 @@ class SettingsView @JvmOverloads constructor(
         this.versionName.text = versionName
     }
 
-    override fun setVersionCode(versionCode: Int) {
-        this.versionCode.text = versionCode.toString()
+    override fun setVersionCode(versionCode: String) {
+        this.versionCode.text = versionCode
     }
 
-    override fun setLongVersionCode(longVersionCode: Long) {
-        this.longVersionCode.text = longVersionCode.toString()
+    override fun setLongVersionCode(longVersionCode: String) {
+        this.longVersionCode.text = longVersionCode
     }
 
     private fun createUserAction(): SettingsContract.UserAction = if (isInEditMode) {

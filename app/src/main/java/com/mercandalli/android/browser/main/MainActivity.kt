@@ -28,6 +28,7 @@ import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.browser.BrowserView
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
 import com.mercandalli.android.browser.settings.SettingsActivity
+import com.mwm.android.publishing.StoreActivity
 
 class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
@@ -164,6 +165,10 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         input.setTextColor(color)
     }
 
+    override fun navigateToStore() {
+        StoreActivity.start(this)
+    }
+
     private fun createBrowserWebViewListener() = object : BrowserView.BrowserWebViewListener {
         override fun onPageFinished() {
             userAction.onPageLoadProgressChanged(100)
@@ -206,9 +211,11 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     private fun createUserAction(): MainActivityContract.UserAction {
         val themeManager = ApplicationGraph.getThemeManager()
+        val toastManager = ApplicationGraph.getToastManager()
         return MainActivityPresenter(
                 this,
-                themeManager
+                themeManager,
+                toastManager
         )
     }
 

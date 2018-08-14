@@ -63,5 +63,7 @@ internal class MainActivityContract {
         fun setToolbarBackgroundColorRes(@ColorRes colorRes: Int)
 
         fun setInputTextColorRes(@ColorRes colorRes: Int)
+
+        fun navigateToStore()
     }
 }

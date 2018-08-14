@@ -4,13 +4,17 @@ import android.support.annotation.RequiresApi
 
 interface VersionManager {
 
-    fun getVersionName(): String
+    fun getBuildConfigVersionName(): String
+
+    fun getBuildConfigVersionCode(): Int
+
+    fun getPackageManagerVersionName(): String
 
     @Deprecated("Use {@link #getLongVersionCode()} instead")
-    fun getVersionCode(): Int
+    fun getPackageManagerVersionCode(): Int
 
     @RequiresApi(28)
-    fun getLongVersionCode(): Long
+    fun getPackageManagerLongVersionCode(): Long
 
     fun getFirstInstallTime(): Long
 }

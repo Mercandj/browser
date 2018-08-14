@@ -16,9 +16,9 @@ interface SettingsContract {
 
         fun setVersionName(versionName: String)
 
-        fun setVersionCode(versionCode: Int)
+        fun setVersionCode(versionCode: String)
 
-        fun setLongVersionCode(longVersionCode: Long)
+        fun setLongVersionCode(longVersionCode: String)
     }
 
     interface UserAction {

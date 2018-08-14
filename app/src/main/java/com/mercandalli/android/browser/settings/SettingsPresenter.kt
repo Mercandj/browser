@@ -28,16 +28,18 @@ class SettingsPresenter(
     }
 
     private fun setVersions() {
-        val versionName = versionManager.getVersionName()
-        val versionCode = versionManager.getVersionCode()
-        val longVersionCode = if (Build.VERSION.SDK_INT >= 28) {
-            versionManager.getLongVersionCode()
+        val buildConfigVersionName = versionManager.getBuildConfigVersionName()
+        val buildConfigVersionCode = versionManager.getBuildConfigVersionCode()
+        val packageManagerVersionName = versionManager.getPackageManagerVersionName()
+        val packageManagerVersionCode = versionManager.getPackageManagerVersionCode()
+        val packageManagerLongVersionCode = if (Build.VERSION.SDK_INT >= 28) {
+            versionManager.getPackageManagerLongVersionCode()
         } else {
             -1
         }
-        screen.setVersionName(versionName)
-        screen.setVersionCode(versionCode)
-        screen.setLongVersionCode(longVersionCode)
+        screen.setVersionName("BuildConfig: $buildConfigVersionName\nPackageManager: $packageManagerVersionName")
+        screen.setVersionCode("BuildConfig: $buildConfigVersionCode\nPackageManager: $packageManagerVersionCode")
+        screen.setLongVersionCode(packageManagerLongVersionCode.toString())
     }
 
     private fun updateTheme(theme: Theme = themeManager.getTheme()) {

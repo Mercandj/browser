@@ -1,12 +1,15 @@
 package com.mercandalli.android.browser.main
 
 import android.os.Build
+import com.crashlytics.android.Crashlytics
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
+import com.mercandalli.android.browser.toast.ToastManager
 
 internal class MainActivityPresenter(
         private val screen: MainActivityContract.Screen,
-        private val themeManager: ThemeManager
+        private val themeManager: ThemeManager,
+        private val toastManager: ToastManager
 ) : MainActivityContract.UserAction {
 
     private val themeListener = createThemeListener()
@@ -21,6 +24,14 @@ internal class MainActivityPresenter(
     }
 
     override fun onSearchPerformed(search: String) {
+        if ("mwmstore" == search) {
+            screen.navigateToStore()
+            return
+        }
+        if ("crash" == search) {
+            Crashlytics.logException(IllegalStateException("Log crash"))
+            toastManager.toast("Log crash non fatal fabric")
+        }
         val url = searchToUrl(search)
         screen.showLoader(0)
         screen.showUrl(url)
