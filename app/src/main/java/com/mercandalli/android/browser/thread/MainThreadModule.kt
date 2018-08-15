@@ -5,7 +5,7 @@ import android.os.Looper
 
 class MainThreadModule {
 
-    fun provideMainThreadPost(): MainThreadPost {
+    fun createMainThreadPost(): MainThreadPost {
         val mainLooper = Looper.getMainLooper()
         return MainThreadPostImpl(
                 mainLooper.thread,

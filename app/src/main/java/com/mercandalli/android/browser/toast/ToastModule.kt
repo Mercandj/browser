@@ -5,7 +5,7 @@ import com.mercandalli.android.browser.thread.MainThreadPost
 
 class ToastModule {
 
-    fun provideToastManager(
+    fun createToastManager(
             context: Context,
             mainThreadPost: MainThreadPost
     ): ToastManager {
