@@ -1,7 +1,7 @@
 package com.mercandalli.android.browser.version
 
 import android.content.pm.PackageInfo
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import com.mercandalli.android.browser.BuildConfig
 
 class VersionManagerImpl(

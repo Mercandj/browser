@@ -1,8 +1,8 @@
 package com.mercandalli.android.browser.main
 
 import android.os.Build
-import android.support.annotation.ColorRes
-import android.support.annotation.RequiresApi
+import androidx.annotation.ColorRes
+import androidx.annotation.RequiresApi
 
 internal class MainActivityContract {
 

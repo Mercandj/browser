@@ -1,9 +1,9 @@
 package com.mercandalli.android.browser.settings
 
 import android.content.Context
-import android.support.annotation.ColorRes
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.CardView
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
+import androidx.cardview.widget.CardView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -21,13 +21,13 @@ class SettingsView @JvmOverloads constructor(
     private val view = LayoutInflater.from(context).inflate(R.layout.view_settings, this)
 
     private val themeRow: View = view.findViewById(R.id.view_settings_theme_row)
-    private val themeSection: CardView = view.findViewById(R.id.view_settings_theme_section)
+    private val themeSection: androidx.cardview.widget.CardView = view.findViewById(R.id.view_settings_theme_section)
     private val themeSectionLabel: TextView = view.findViewById(R.id.view_settings_theme_section_label)
     private val themeLabel: TextView = view.findViewById(R.id.view_settings_theme_label)
     private val themeSubLabel: TextView = view.findViewById(R.id.view_settings_theme_sublabel)
     private val themeCheckBox: CheckBox = view.findViewById(R.id.view_settings_theme)
 
-    private val aboutSection: CardView = view.findViewById(R.id.view_settings_about_section)
+    private val aboutSection: androidx.cardview.widget.CardView = view.findViewById(R.id.view_settings_about_section)
     private val aboutSectionLabel: TextView = view.findViewById(R.id.view_settings_about_section_label)
     private val versionNameLabel: TextView = view.findViewById(R.id.view_settings_app_version_name_label)
     private val versionName: TextView = view.findViewById(R.id.view_settings_app_version_name)

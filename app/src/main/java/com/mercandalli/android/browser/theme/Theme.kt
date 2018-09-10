@@ -1,6 +1,6 @@
 package com.mercandalli.android.browser.theme
 
-import android.support.annotation.ColorRes
+import androidx.annotation.ColorRes
 
 open class Theme(
         @ColorRes

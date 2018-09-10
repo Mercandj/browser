@@ -4,8 +4,8 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
+import androidx.appcompat.widget.AppCompatImageView
 import android.util.AttributeSet
 import com.mercandalli.android.browser.R
 
@@ -15,7 +15,8 @@ import com.mercandalli.android.browser.R
  * https://gist.github.com/JakeWharton/0a251d67649305d84e8a
  */
 class ForegroundImageView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null) : AppCompatImageView(context, attrs) {
+        context: Context, attrs: AttributeSet? = null
+) : AppCompatImageView(context, attrs) {
 
     private var innerForeground: Drawable? = null
 

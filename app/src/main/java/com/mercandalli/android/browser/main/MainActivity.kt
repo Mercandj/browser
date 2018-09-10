@@ -6,14 +6,14 @@ import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.ColorRes
-import android.support.annotation.IdRes
-import android.support.annotation.RequiresApi
-import android.support.design.widget.AppBarLayout
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.PopupMenu
-import android.support.v7.widget.Toolbar
+import androidx.annotation.ColorRes
+import androidx.annotation.IdRes
+import androidx.annotation.RequiresApi
+import com.google.android.material.appbar.AppBarLayout
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
+import androidx.appcompat.widget.Toolbar
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
@@ -53,10 +53,10 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
             navigateHome()
         }
 
-        appBarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+        appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val collapsed = -verticalOffset == appBarLayout.height
             userAction.onToolbarCollapsed(collapsed)
-        }
+        })
         userAction.onCreate()
     }
 

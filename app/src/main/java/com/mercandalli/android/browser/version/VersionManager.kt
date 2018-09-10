@@ -1,6 +1,6 @@
 package com.mercandalli.android.browser.version
 
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 
 interface VersionManager {
 
