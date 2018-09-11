@@ -7,6 +7,9 @@ import android.webkit.WebView
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.mercandalli.android.browser.BuildConfig
+import com.mercandalli.android.libs.monetization.Monetization
+import com.mercandalli.android.libs.monetization.MonetizationGraph
+import com.mercandalli.android.libs.monetization.log.MonetizationLog
 import io.fabric.sdk.android.Fabric
 
 /**
@@ -20,12 +23,33 @@ class MainApplication : Application() {
         // Setup fabric
         setupCrashlytics()
 
-        ApplicationGraph.init(this)
+        setupMonetizationGraph()
+        setupApplicationGraph()
 
         // Debuggable WebView
         if (BuildConfig.DEBUG) {
             enableDebuggableWebView()
         }
+    }
+
+    private fun setupApplicationGraph() {
+        ApplicationGraph.init(this)
+    }
+
+    private fun setupMonetizationGraph() {
+        val monetizationLog = object : MonetizationLog {
+            override fun d(tag: String, message: String) {
+
+            }
+        }
+        MonetizationGraph.init(
+                this,
+                Monetization.create(
+                        "",
+                        ""
+                ),
+                monetizationLog
+        )
     }
 
     private fun setupCrashlytics() {

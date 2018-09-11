@@ -10,30 +10,18 @@ class VersionManagerImpl(
 
     private lateinit var packageInfo: PackageInfo
 
-    override fun getBuildConfigVersionName(): String {
-        return BuildConfig.VERSION_NAME
-    }
+    override fun getBuildConfigVersionName() = BuildConfig.VERSION_NAME
 
-    override fun getBuildConfigVersionCode(): Int {
-        return BuildConfig.VERSION_CODE
-    }
+    override fun getBuildConfigVersionCode() = BuildConfig.VERSION_CODE
 
-    override fun getPackageManagerVersionName(): String {
-        return getPackageInfo().versionName
-    }
+    override fun getPackageManagerVersionName() = getPackageInfo().versionName!!
 
-    override fun getPackageManagerVersionCode(): Int {
-        return getPackageInfo().versionCode
-    }
+    override fun getPackageManagerVersionCode() = getPackageInfo().versionCode
 
     @RequiresApi(28)
-    override fun getPackageManagerLongVersionCode(): Long {
-        return getPackageInfo().longVersionCode
-    }
+    override fun getPackageManagerLongVersionCode() = getPackageInfo().longVersionCode
 
-    override fun getFirstInstallTime(): Long {
-        return getPackageInfo().firstInstallTime
-    }
+    override fun getFirstInstallTime() = getPackageInfo().firstInstallTime
 
     private fun getPackageInfo(): PackageInfo {
         if (!::packageInfo.isInitialized) {

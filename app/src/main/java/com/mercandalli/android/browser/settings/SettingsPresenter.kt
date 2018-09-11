@@ -4,11 +4,13 @@ import android.os.Build
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 import com.mercandalli.android.browser.version.VersionManager
+import com.mercandalli.android.libs.monetization.in_app.InAppManager
 
 class SettingsPresenter(
         private val screen: SettingsContract.Screen,
         private val themeManager: ThemeManager,
-        private val versionManager: VersionManager
+        private val versionManager: VersionManager,
+        private val inAppManager: InAppManager
 ) : SettingsContract.UserAction {
 
     private val themeListener = createThemeListener()

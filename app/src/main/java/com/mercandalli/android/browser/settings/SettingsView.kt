@@ -12,6 +12,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
+import com.mercandalli.android.libs.monetization.MonetizationGraph
 
 class SettingsView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -109,10 +110,12 @@ class SettingsView @JvmOverloads constructor(
     } else {
         val themeManager = ApplicationGraph.getThemeManager()
         val versionManager = ApplicationGraph.getVersionManager()
+        val inAppManager = MonetizationGraph.getInAppManager()
         SettingsPresenter(
                 this,
                 themeManager,
-                versionManager
+                versionManager,
+                inAppManager
         )
     }
 }
