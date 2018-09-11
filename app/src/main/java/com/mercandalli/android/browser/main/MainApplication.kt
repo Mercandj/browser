@@ -7,7 +7,7 @@ import android.webkit.WebView
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.mercandalli.android.browser.BuildConfig
-import com.mercandalli.android.libs.monetization.Monetization
+import com.mercandalli.android.browser.ad_blocker.AdBlocker
 import com.mercandalli.android.libs.monetization.MonetizationGraph
 import com.mercandalli.android.libs.monetization.log.MonetizationLog
 import io.fabric.sdk.android.Fabric
@@ -25,6 +25,7 @@ class MainApplication : Application() {
 
         setupMonetizationGraph()
         setupApplicationGraph()
+        AdBlocker.init(this)
 
         // Debuggable WebView
         if (BuildConfig.DEBUG) {
@@ -44,12 +45,9 @@ class MainApplication : Application() {
         }
         MonetizationGraph.init(
                 this,
-                Monetization.create(
-                        "",
-                        ""
-                ),
                 monetizationLog
         )
+        MonetizationGraph.getInAppManager().initialize()
     }
 
     private fun setupCrashlytics() {
@@ -65,5 +63,9 @@ class MainApplication : Application() {
                 WebView.setWebContentsDebuggingEnabled(true)
             }
         }
+    }
+
+    companion object {
+        const val SKU_SUBSCRIPTION_ADS_BLOCKER = "googleplay.com.mercandalli.android.browser.subscription.1"
     }
 }

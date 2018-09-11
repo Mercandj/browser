@@ -1,6 +1,9 @@
 package com.mercandalli.android.browser.settings
 
 import android.os.Build
+import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.SkuDetails
+import com.mercandalli.android.browser.main.MainApplication
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 import com.mercandalli.android.browser.version.VersionManager
@@ -14,19 +17,31 @@ class SettingsPresenter(
 ) : SettingsContract.UserAction {
 
     private val themeListener = createThemeListener()
+    private val inAppManagerListener = createInAppManagerListener()
 
     override fun onAttached() {
         themeManager.registerThemeListener(themeListener)
+        inAppManager.registerListener(inAppManagerListener)
         updateTheme()
         setVersions()
+        syncAdBlockerRows()
     }
 
     override fun onDetached() {
+        inAppManager.unregisterListener(inAppManagerListener)
         themeManager.unregisterThemeListener(themeListener)
     }
 
     override fun onDarkThemeCheckBoxCheckedChanged(isChecked: Boolean) {
         themeManager.setDarkEnable(isChecked)
+    }
+
+    override fun onUnlockAdsBlocker(activityContainer: InAppManager.ActivityContainer) {
+        inAppManager.purchase(
+                activityContainer,
+                MainApplication.SKU_SUBSCRIPTION_ADS_BLOCKER,
+                BillingClient.SkuType.SUBS
+        )
     }
 
     private fun setVersions() {
@@ -51,9 +66,29 @@ class SettingsPresenter(
         screen.setSectionColor(theme.cardBackgroundColorRes)
     }
 
+    private fun syncAdBlockerRows(isPurchased: Boolean = inAppManager.isPurchased(MainApplication.SKU_SUBSCRIPTION_ADS_BLOCKER)) {
+        if (isPurchased) {
+            screen.hideAdBlockerUnlockRow()
+            screen.showAdBlockerRow()
+        } else {
+            screen.showAdBlockerUnlockRow()
+            screen.hideAdBlockerRow()
+        }
+    }
+
     private fun createThemeListener() = object : ThemeManager.ThemeListener {
         override fun onThemeChanged() {
             updateTheme()
+        }
+    }
+
+    private fun createInAppManagerListener() = object : InAppManager.Listener {
+        override fun onSkuDetailsChanged(skuDetails: SkuDetails) {
+
+        }
+
+        override fun onPurchasedChanged() {
+            syncAdBlockerRows()
         }
     }
 }

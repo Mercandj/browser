@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
+import com.mercandalli.android.libs.monetization.in_app.InAppManager
 
 class SettingsActivity : AppCompatActivity(),
         SettingsActivityContract.Screen {
@@ -22,6 +23,7 @@ class SettingsActivity : AppCompatActivity(),
     private val toolbar: View by bind(R.id.activity_settings_toolbar)
     private val back: ImageView by bind(R.id.activity_settings_back)
     private val title: TextView by bind(R.id.activity_settings_title)
+    private val settingsView: SettingsView by bind(R.id.activity_settings_settings_view)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,9 @@ class SettingsActivity : AppCompatActivity(),
         back.setOnClickListener {
             userAction.onToolbarBackClicked()
         }
+        settingsView.setActivityContainer(object : InAppManager.ActivityContainer {
+            override fun get() = this@SettingsActivity
+        })
         userAction.onCreate()
     }
 

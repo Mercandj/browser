@@ -10,6 +10,10 @@ import android.view.MotionEvent
 import android.view.View
 import android.webkit.*
 import com.mercandalli.android.browser.main.ApplicationGraph
+import com.mercandalli.android.browser.ad_blocker.AdBlocker
+import com.mercandalli.android.browser.main.MainApplication
+import com.mercandalli.android.libs.monetization.MonetizationGraph
+
 
 class BrowserView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -66,6 +70,8 @@ class BrowserView @JvmOverloads constructor(
             }
             webViewClient = object : WebViewClient() {
 
+                private val loadedUrls = HashMap<String, Boolean>()
+
                 override fun onPageFinished(view: WebView, url: String) {
                     if (browserWebViewListener != null) {
                         browserWebViewListener!!.onPageFinished()
@@ -76,6 +82,49 @@ class BrowserView @JvmOverloads constructor(
                     // The Error Page doesn't work inside API 17 et 18
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
                         return
+                    }
+                }
+
+                @SuppressWarnings("deprecation")
+                override fun shouldInterceptRequest(view: WebView, url: String): WebResourceResponse? {
+                    if (!MonetizationGraph.getInAppManager().isPurchased(MainApplication.SKU_SUBSCRIPTION_ADS_BLOCKER)) {
+                        return super.shouldInterceptRequest(view, url)
+                    }
+                    val ad: Boolean
+                    if (!loadedUrls.containsKey(url)) {
+                        ad = AdBlocker.isAd(url)
+                        loadedUrls[url] = ad
+                    } else {
+                        ad = loadedUrls[url]!!
+                    }
+                    return if (ad) {
+                        AdBlocker.createEmptyResource()
+                    } else {
+                        super.shouldInterceptRequest(view, url)
+                    }
+                }
+
+                @SuppressWarnings("deprecation")
+                override fun shouldInterceptRequest(view: WebView, request: WebResourceRequest): WebResourceResponse? {
+                    if (!MonetizationGraph.getInAppManager().isPurchased(MainApplication.SKU_SUBSCRIPTION_ADS_BLOCKER)) {
+                        return super.shouldInterceptRequest(view, request)
+                    }
+                    val url: String = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        request.url.toString()
+                    } else {
+                        return AdBlocker.createEmptyResource()
+                    }
+                    val ad: Boolean
+                    if (!loadedUrls.containsKey(url)) {
+                        ad = AdBlocker.isAd(url)
+                        loadedUrls[url] = ad
+                    } else {
+                        ad = loadedUrls[url]!!
+                    }
+                    return if (ad) {
+                        AdBlocker.createEmptyResource()
+                    } else {
+                        super.shouldInterceptRequest(view, request)
                     }
                 }
             }

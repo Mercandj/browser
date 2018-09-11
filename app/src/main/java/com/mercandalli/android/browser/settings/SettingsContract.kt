@@ -1,6 +1,7 @@
 package com.mercandalli.android.browser.settings
 
 import androidx.annotation.ColorRes
+import com.mercandalli.android.libs.monetization.in_app.InAppManager
 
 interface SettingsContract {
 
@@ -19,6 +20,14 @@ interface SettingsContract {
         fun setVersionCode(versionCode: String)
 
         fun setLongVersionCode(longVersionCode: String)
+
+        fun showAdBlockerUnlockRow()
+
+        fun hideAdBlockerUnlockRow()
+
+        fun showAdBlockerRow()
+
+        fun hideAdBlockerRow()
     }
 
     interface UserAction {
@@ -28,5 +37,7 @@ interface SettingsContract {
         fun onDetached()
 
         fun onDarkThemeCheckBoxCheckedChanged(isChecked: Boolean)
+
+        fun onUnlockAdsBlocker(activityContainer: InAppManager.ActivityContainer)
     }
 }

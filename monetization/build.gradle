@@ -33,5 +33,5 @@ dependencies {
     // Android - Support
     implementation "androidx.annotation:annotation:1.0.0-rc02"
 
-    implementation 'com.android.billingclient:billing:1.1'
+    api 'com.android.billingclient:billing:1.1'
 }

@@ -12,6 +12,8 @@
         android:paddingTop="@dimen/default_space"
         android:paddingBottom="@dimen/default_space_half">
 
+        <include layout="@layout/view_settings_ad_blocker" />
+
         <include layout="@layout/view_settings_theme" />
 
         <include layout="@layout/view_settings_about" />

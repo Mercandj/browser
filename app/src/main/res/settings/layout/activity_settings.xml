@@ -34,6 +34,7 @@
     </FrameLayout>
 
     <com.mercandalli.android.browser.settings.SettingsView
+        android:id="@+id/activity_settings_settings_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/toolbar_height" />

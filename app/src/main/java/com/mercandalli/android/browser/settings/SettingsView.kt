@@ -3,16 +3,17 @@ package com.mercandalli.android.browser.settings
 import android.content.Context
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
-import androidx.cardview.widget.CardView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.CheckBox
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.libs.monetization.MonetizationGraph
+import com.mercandalli.android.libs.monetization.in_app.InAppManager
 
 class SettingsView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -21,14 +22,22 @@ class SettingsView @JvmOverloads constructor(
 
     private val view = LayoutInflater.from(context).inflate(R.layout.view_settings, this)
 
+    private val adBlockerRow: View = view.findViewById(R.id.view_settings_ad_blocker_row)
+    private val adBlockerUnlockRow: View = view.findViewById(R.id.view_settings_ad_blocker_unlock_row)
+    private val adBlockerSection: CardView = view.findViewById(R.id.view_settings_ad_blocker_section)
+    private val adBlockerSectionLabel: TextView = view.findViewById(R.id.view_settings_ad_blocker_section_label)
+    private val adBlockerLabel: TextView = view.findViewById(R.id.view_settings_ad_blocker_label)
+    private val adBlockerSubLabel: TextView = view.findViewById(R.id.view_settings_ad_blocker_sublabel)
+    private val adBlockerCheckBox: CheckBox = view.findViewById(R.id.view_settings_ad_blocker)
+
     private val themeRow: View = view.findViewById(R.id.view_settings_theme_row)
-    private val themeSection: androidx.cardview.widget.CardView = view.findViewById(R.id.view_settings_theme_section)
+    private val themeSection: CardView = view.findViewById(R.id.view_settings_theme_section)
     private val themeSectionLabel: TextView = view.findViewById(R.id.view_settings_theme_section_label)
     private val themeLabel: TextView = view.findViewById(R.id.view_settings_theme_label)
     private val themeSubLabel: TextView = view.findViewById(R.id.view_settings_theme_sublabel)
     private val themeCheckBox: CheckBox = view.findViewById(R.id.view_settings_theme)
 
-    private val aboutSection: androidx.cardview.widget.CardView = view.findViewById(R.id.view_settings_about_section)
+    private val aboutSection: CardView = view.findViewById(R.id.view_settings_about_section)
     private val aboutSectionLabel: TextView = view.findViewById(R.id.view_settings_about_section_label)
     private val versionNameLabel: TextView = view.findViewById(R.id.view_settings_app_version_name_label)
     private val versionName: TextView = view.findViewById(R.id.view_settings_app_version_name)
@@ -39,6 +48,8 @@ class SettingsView @JvmOverloads constructor(
 
     private val userAction = createUserAction()
 
+    private var activityContainer: InAppManager.ActivityContainer? = null
+
     init {
         themeCheckBox.setOnCheckedChangeListener { _, isChecked ->
             userAction.onDarkThemeCheckBoxCheckedChanged(isChecked)
@@ -47,6 +58,9 @@ class SettingsView @JvmOverloads constructor(
             val isChecked = !themeCheckBox.isChecked
             themeCheckBox.isChecked = isChecked
             userAction.onDarkThemeCheckBoxCheckedChanged(isChecked)
+        }
+        adBlockerUnlockRow.setOnClickListener {
+            userAction.onUnlockAdsBlocker(activityContainer!!)
         }
     }
 
@@ -66,12 +80,15 @@ class SettingsView @JvmOverloads constructor(
 
     override fun setSectionColor(@ColorRes sectionColorRes: Int) {
         val sectionColor = ContextCompat.getColor(context, sectionColorRes)
+        adBlockerSection.setCardBackgroundColor(sectionColor)
         themeSection.setCardBackgroundColor(sectionColor)
         aboutSection.setCardBackgroundColor(sectionColor)
     }
 
     override fun setTextPrimaryColorRes(@ColorRes textPrimaryColorRes: Int) {
         val textColor = ContextCompat.getColor(context, textPrimaryColorRes)
+        themeLabel.setTextColor(textColor)
+        adBlockerCheckBox.setTextColor(textColor)
         themeLabel.setTextColor(textColor)
         themeCheckBox.setTextColor(textColor)
         versionNameLabel.setTextColor(textColor)
@@ -81,8 +98,10 @@ class SettingsView @JvmOverloads constructor(
 
     override fun setTextSecondaryColorRes(@ColorRes textSecondaryColorRes: Int) {
         val textColor = ContextCompat.getColor(context, textSecondaryColorRes)
+        adBlockerSectionLabel.setTextColor(textColor)
         themeSectionLabel.setTextColor(textColor)
         aboutSectionLabel.setTextColor(textColor)
+        adBlockerSubLabel.setTextColor(textColor)
         themeSubLabel.setTextColor(textColor)
         versionName.setTextColor(textColor)
         versionCode.setTextColor(textColor)
@@ -101,11 +120,32 @@ class SettingsView @JvmOverloads constructor(
         this.longVersionCode.text = longVersionCode
     }
 
+    override fun showAdBlockerUnlockRow() {
+        adBlockerUnlockRow.visibility = VISIBLE
+    }
+
+    override fun hideAdBlockerUnlockRow() {
+        adBlockerUnlockRow.visibility = GONE
+    }
+
+    override fun showAdBlockerRow() {
+        adBlockerRow.visibility = VISIBLE
+    }
+
+    override fun hideAdBlockerRow() {
+        adBlockerRow.visibility = GONE
+    }
+
+    fun setActivityContainer(activityContainer: InAppManager.ActivityContainer) {
+        this.activityContainer = activityContainer
+    }
+
     private fun createUserAction(): SettingsContract.UserAction = if (isInEditMode) {
         object : SettingsContract.UserAction {
             override fun onAttached() {}
             override fun onDetached() {}
             override fun onDarkThemeCheckBoxCheckedChanged(isChecked: Boolean) {}
+            override fun onUnlockAdsBlocker(activityContainer: InAppManager.ActivityContainer) {}
         }
     } else {
         val themeManager = ApplicationGraph.getThemeManager()

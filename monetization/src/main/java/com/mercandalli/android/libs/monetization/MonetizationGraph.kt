@@ -7,7 +7,6 @@ import com.mercandalli.android.libs.monetization.log.MonetizationLog
 
 class MonetizationGraph(
         private val context: Context,
-        private val monetization: Monetization,
         private val monetizationLog: MonetizationLog
 ) {
 
@@ -28,13 +27,11 @@ class MonetizationGraph(
         @JvmStatic
         fun init(
                 context: Context,
-                monetization: Monetization,
                 monetizationLog: MonetizationLog
         ) {
             if (graph == null) {
                 graph = MonetizationGraph(
                         context.applicationContext,
-                        monetization,
                         monetizationLog
                 )
             }
@@ -42,8 +39,5 @@ class MonetizationGraph(
 
         @JvmStatic
         fun getInAppManager(): InAppManager = graph!!.inAppManagerInternal
-
-        @JvmStatic
-        internal fun getMonetization(): Monetization = graph!!.monetization
     }
 }

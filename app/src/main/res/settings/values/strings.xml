@@ -3,6 +3,12 @@
 
     <string name="activity_settings_title">Settings</string>
 
+    <string name="view_settings_ad_blocker_section_label">Ad blocker</string>
+    <string name="view_settings_ad_blocker_unlock_label">Ad blocker</string>
+    <string name="view_settings_ad_blocker_unlock_sublabel">Try the ad blocker for free</string>
+    <string name="view_settings_ad_blocker_label">Ad blocker</string>
+    <string name="view_settings_ad_blocker_sublabel">Enable ad blocker</string>
+
     <string name="view_settings_theme_section_label">Theme</string>
     <string name="view_settings_theme_label">Theme</string>
     <string name="view_settings_theme_sublabel">Dark theme</string>
