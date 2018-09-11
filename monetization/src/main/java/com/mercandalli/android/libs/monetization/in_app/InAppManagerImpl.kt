@@ -63,7 +63,6 @@ internal class InAppManagerImpl(
                     skuDetailsResponseListener
             )
 
-
             val inAppPurchasesResult = playBillingManager.queryPurchases(BillingClient.SkuType.INAPP)
             inAppPurchasesResult.purchasesList
 

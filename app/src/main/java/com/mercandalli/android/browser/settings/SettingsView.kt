@@ -59,6 +59,11 @@ class SettingsView @JvmOverloads constructor(
             themeCheckBox.isChecked = isChecked
             userAction.onDarkThemeCheckBoxCheckedChanged(isChecked)
         }
+        adBlockerRow.setOnClickListener {
+            val isChecked = !adBlockerCheckBox.isChecked
+            adBlockerCheckBox.isChecked = isChecked
+            userAction.onAdBlockerCheckBoxCheckedChanged(isChecked)
+        }
         adBlockerUnlockRow.setOnClickListener {
             userAction.onUnlockAdsBlocker(activityContainer!!)
         }
@@ -87,6 +92,7 @@ class SettingsView @JvmOverloads constructor(
 
     override fun setTextPrimaryColorRes(@ColorRes textPrimaryColorRes: Int) {
         val textColor = ContextCompat.getColor(context, textPrimaryColorRes)
+        adBlockerLabel.setTextColor(textColor)
         themeLabel.setTextColor(textColor)
         adBlockerCheckBox.setTextColor(textColor)
         themeLabel.setTextColor(textColor)
@@ -136,6 +142,10 @@ class SettingsView @JvmOverloads constructor(
         adBlockerRow.visibility = GONE
     }
 
+    override fun setAdBlockerEnabled(enabled: Boolean) {
+        adBlockerCheckBox.isChecked = enabled
+    }
+
     fun setActivityContainer(activityContainer: InAppManager.ActivityContainer) {
         this.activityContainer = activityContainer
     }
@@ -145,17 +155,20 @@ class SettingsView @JvmOverloads constructor(
             override fun onAttached() {}
             override fun onDetached() {}
             override fun onDarkThemeCheckBoxCheckedChanged(isChecked: Boolean) {}
+            override fun onAdBlockerCheckBoxCheckedChanged(isChecked: Boolean) {}
             override fun onUnlockAdsBlocker(activityContainer: InAppManager.ActivityContainer) {}
         }
     } else {
         val themeManager = ApplicationGraph.getThemeManager()
         val versionManager = ApplicationGraph.getVersionManager()
         val inAppManager = MonetizationGraph.getInAppManager()
+        val adBlockerManager = ApplicationGraph.getAdBlockerManager()
         SettingsPresenter(
                 this,
                 themeManager,
                 versionManager,
-                inAppManager
+                inAppManager,
+                adBlockerManager
         )
     }
 }

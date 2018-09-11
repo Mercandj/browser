@@ -28,6 +28,8 @@ interface SettingsContract {
         fun showAdBlockerRow()
 
         fun hideAdBlockerRow()
+
+        fun setAdBlockerEnabled(enabled: Boolean)
     }
 
     interface UserAction {
@@ -37,6 +39,8 @@ interface SettingsContract {
         fun onDetached()
 
         fun onDarkThemeCheckBoxCheckedChanged(isChecked: Boolean)
+
+        fun onAdBlockerCheckBoxCheckedChanged(isChecked: Boolean)
 
         fun onUnlockAdsBlocker(activityContainer: InAppManager.ActivityContainer)
     }

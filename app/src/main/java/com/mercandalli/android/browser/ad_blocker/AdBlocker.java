@@ -71,7 +71,7 @@ public class AdBlocker {
     }
 
     public static WebResourceResponse createEmptyResource() {
-        return new WebResourceResponse("text/plain", "utf-8", new ByteArrayInputStream("".getBytes()));
+        return new WebResourceResponse("text/plain",
+                "utf-8", new ByteArrayInputStream("".getBytes()));
     }
-
 }

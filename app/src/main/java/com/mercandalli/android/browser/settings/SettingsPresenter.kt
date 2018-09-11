@@ -3,6 +3,7 @@ package com.mercandalli.android.browser.settings
 import android.os.Build
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.SkuDetails
+import com.mercandalli.android.browser.ad_blocker.AdBlockerManager
 import com.mercandalli.android.browser.main.MainApplication
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
@@ -13,7 +14,8 @@ class SettingsPresenter(
         private val screen: SettingsContract.Screen,
         private val themeManager: ThemeManager,
         private val versionManager: VersionManager,
-        private val inAppManager: InAppManager
+        private val inAppManager: InAppManager,
+        private val adBlockerManager: AdBlockerManager
 ) : SettingsContract.UserAction {
 
     private val themeListener = createThemeListener()
@@ -34,6 +36,11 @@ class SettingsPresenter(
 
     override fun onDarkThemeCheckBoxCheckedChanged(isChecked: Boolean) {
         themeManager.setDarkEnable(isChecked)
+    }
+
+    override fun onAdBlockerCheckBoxCheckedChanged(isChecked: Boolean) {
+        adBlockerManager.setEnabled(isChecked)
+        syncAdBlockerRows()
     }
 
     override fun onUnlockAdsBlocker(activityContainer: InAppManager.ActivityContainer) {
@@ -66,7 +73,10 @@ class SettingsPresenter(
         screen.setSectionColor(theme.cardBackgroundColorRes)
     }
 
-    private fun syncAdBlockerRows(isPurchased: Boolean = inAppManager.isPurchased(MainApplication.SKU_SUBSCRIPTION_ADS_BLOCKER)) {
+    private fun syncAdBlockerRows(
+            isPurchased: Boolean = inAppManager.isPurchased(MainApplication.SKU_SUBSCRIPTION_ADS_BLOCKER),
+            isEnabled: Boolean = adBlockerManager.isEnabled()
+    ) {
         if (isPurchased) {
             screen.hideAdBlockerUnlockRow()
             screen.showAdBlockerRow()
@@ -74,6 +84,7 @@ class SettingsPresenter(
             screen.showAdBlockerUnlockRow()
             screen.hideAdBlockerRow()
         }
+        screen.setAdBlockerEnabled(isEnabled)
     }
 
     private fun createThemeListener() = object : ThemeManager.ThemeListener {

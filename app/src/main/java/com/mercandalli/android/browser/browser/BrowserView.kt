@@ -87,7 +87,7 @@ class BrowserView @JvmOverloads constructor(
 
                 @SuppressWarnings("deprecation")
                 override fun shouldInterceptRequest(view: WebView, url: String): WebResourceResponse? {
-                    if (!MonetizationGraph.getInAppManager().isPurchased(MainApplication.SKU_SUBSCRIPTION_ADS_BLOCKER)) {
+                    if (!ApplicationGraph.getAdBlockerManager().isEnabled()) {
                         return super.shouldInterceptRequest(view, url)
                     }
                     val ad: Boolean
@@ -106,7 +106,7 @@ class BrowserView @JvmOverloads constructor(
 
                 @SuppressWarnings("deprecation")
                 override fun shouldInterceptRequest(view: WebView, request: WebResourceRequest): WebResourceResponse? {
-                    if (!MonetizationGraph.getInAppManager().isPurchased(MainApplication.SKU_SUBSCRIPTION_ADS_BLOCKER)) {
+                    if (!ApplicationGraph.getAdBlockerManager().isEnabled()) {
                         return super.shouldInterceptRequest(view, request)
                     }
                     val url: String = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
