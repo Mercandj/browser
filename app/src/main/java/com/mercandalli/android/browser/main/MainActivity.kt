@@ -24,6 +24,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.browser.BrowserView
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
@@ -37,9 +38,11 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     private val progress: ProgressBar by bind(R.id.activity_main_progress)
     private val input: EditText by bind(R.id.activity_main_search)
     private val more: View by bind(R.id.activity_main_more)
+    private val fab: FloatingActionButton by bind(R.id.activity_main_fab)
 
     private val browserWebViewListener = createBrowserWebViewListener()
     private val userAction = createUserAction()
+    private var lastVerticalOffset = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +59,16 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val collapsed = -verticalOffset == appBarLayout.height
             userAction.onToolbarCollapsed(collapsed)
+            if (collapsed) {
+                fab.hide()
+            } else if (verticalOffset == 0 && lastVerticalOffset != verticalOffset) {
+                fab.show()
+            }
+            lastVerticalOffset = verticalOffset
         })
+        fab.setOnClickListener {
+            userAction.onFabClicked()
+        }
         userAction.onCreate()
     }
 
@@ -166,6 +178,14 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     override fun setInputTextColorRes(@ColorRes colorRes: Int) {
         val color = ContextCompat.getColor(this, colorRes)
         input.setTextColor(color)
+    }
+
+    override fun showFab() {
+        fab.show()
+    }
+
+    override fun hideFab() {
+        fab.hide()
     }
 
     private fun createBrowserWebViewListener() = object : BrowserView.BrowserWebViewListener {

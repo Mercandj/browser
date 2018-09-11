@@ -16,6 +16,7 @@ internal class MainActivityPresenter(
     override fun onCreate() {
         themeManager.registerThemeListener(themeListener)
         updateTheme()
+        screen.hideFab()
     }
 
     override fun onDestroy() {
@@ -29,6 +30,7 @@ internal class MainActivityPresenter(
         screen.resetSearchInput()
         screen.collapseToolbar()
         screen.hideKeyboard()
+        screen.showFab()
     }
 
     override fun onHomeClicked() {
@@ -66,6 +68,14 @@ internal class MainActivityPresenter(
 
     override fun onToolbarCollapsed(collapsed: Boolean) {
         screen.setToolbarContentVisible(!collapsed)
+    }
+
+    override fun onFabClicked() {
+        screen.clearData()
+        screen.showClearDataMessage()
+        screen.hideLoader()
+        screen.navigateHome()
+        screen.hideFab()
     }
 
     private fun searchToUrl(search: String): String {

@@ -37,8 +37,8 @@
                     android:lines="1"
                     android:maxLines="1"
                     android:minLines="1"
-                    android:paddingEnd="0dp"
                     android:paddingStart="2dp"
+                    android:paddingEnd="0dp"
                     android:singleLine="true"
                     android:textColor="@color/color_text_title_1"
                     android:textColorHint="#888888"
@@ -77,6 +77,15 @@
             android:background="@drawable/shadow_bottom" />
 
     </FrameLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/activity_main_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/default_space_2"
+        android:src="@drawable/ic_delete_white_24dp"
+        app:fabSize="normal" />
 
     <ProgressBar
         android:id="@+id/activity_main_progress"

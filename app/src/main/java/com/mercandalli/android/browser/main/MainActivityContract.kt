@@ -27,6 +27,8 @@ internal class MainActivityContract {
         fun onBackPressed()
 
         fun onToolbarCollapsed(collapsed: Boolean)
+
+        fun onFabClicked()
     }
 
     internal interface Screen {
@@ -65,5 +67,9 @@ internal class MainActivityContract {
         fun setToolbarBackgroundColorRes(@ColorRes colorRes: Int)
 
         fun setInputTextColorRes(@ColorRes colorRes: Int)
+
+        fun showFab()
+
+        fun hideFab()
     }
 }
