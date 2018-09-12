@@ -11,6 +11,8 @@ class ThemeModule(
                 ThemeManagerImpl.PREFERENCE_NAME,
                 Context.MODE_PRIVATE
         )
-        return ThemeManagerImpl(sharedPreferences)
+        return ThemeManagerImpl(
+                sharedPreferences
+        )
     }
 }

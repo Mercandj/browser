@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/on_boarding_view_bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/on_boarding_button_horizontal_margins"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="16dp"
+                android:drawablePadding="14dp"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+                android:text="G - Browser"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/on_boarding_ic_launcher" />
+
+        </LinearLayout>
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_on_boarding_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp" />
+
+        <FrameLayout
+            android:id="@+id/view_on_boarding_store"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/view_on_boarding_store_buy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/on_boarding_button_horizontal_margins"
+                android:layout_marginEnd="@dimen/on_boarding_button_horizontal_margins"
+                android:layout_marginBottom="36dp"
+                android:background="@drawable/on_boarding_default_rounded_btn"
+                android:gravity="center"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="@string/on_boarding_store_buy"
+                android:textColor="@color/on_boarding_button_text_color"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/view_on_boarding_store_skip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="6dp"
+                android:background="?android:selectableItemBackground"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:text="@string/on_boarding_store_skip"
+                android:textSize="16sp" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/view_on_boarding_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/on_boarding_button_horizontal_margins"
+            android:layout_marginEnd="@dimen/on_boarding_button_horizontal_margins"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/on_boarding_default_rounded_btn"
+            android:gravity="center"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:text="@string/on_boarding_next"
+            android:textColor="@color/on_boarding_button_text_color"
+            android:textSize="18sp"
+            tools:visibility="gone" />
+
+    </LinearLayout>
+
+</merge>

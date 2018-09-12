@@ -1,2 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mercandalli.android.libs.monetization" />
+    package="com.mercandalli.android.libs.monetization" >
+
+
+
+
+    <application>
+
+        <activity android:name=".on_boarding.OnBoardingActivity"
+            android:theme="@style/OnBoardingTheme" />
+
+        <activity android:name=".store.StoreActivity" />
+
+    </application>
+
+</manifest>

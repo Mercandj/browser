@@ -5,6 +5,7 @@ import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.SkuDetails
 import com.mercandalli.android.browser.ad_blocker.AdBlockerManager
 import com.mercandalli.android.browser.main.MainApplication
+import com.mercandalli.android.browser.product.ProductManager
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 import com.mercandalli.android.browser.version.VersionManager
@@ -15,7 +16,8 @@ class SettingsPresenter(
         private val themeManager: ThemeManager,
         private val versionManager: VersionManager,
         private val inAppManager: InAppManager,
-        private val adBlockerManager: AdBlockerManager
+        private val adBlockerManager: AdBlockerManager,
+        private val productManager: ProductManager
 ) : SettingsContract.UserAction {
 
     private val themeListener = createThemeListener()
@@ -46,7 +48,7 @@ class SettingsPresenter(
     override fun onUnlockAdsBlocker(activityContainer: InAppManager.ActivityContainer) {
         inAppManager.purchase(
                 activityContainer,
-                MainApplication.SKU_SUBSCRIPTION_ADS_BLOCKER,
+                MainApplication.SKU_SUBSCRIPTION_FULL_VERSION,
                 BillingClient.SkuType.SUBS
         )
     }
@@ -74,17 +76,29 @@ class SettingsPresenter(
     }
 
     private fun syncAdBlockerRows(
-            isPurchased: Boolean = inAppManager.isPurchased(MainApplication.SKU_SUBSCRIPTION_ADS_BLOCKER),
+            isAdBlockAvailable: Boolean = adBlockerManager.isFeatureAvailable(),
+            isSubscribeToFullVersion: Boolean = productManager.isSubscribeToFullVersion(),
             isEnabled: Boolean = adBlockerManager.isEnabled()
     ) {
-        if (isPurchased) {
+        if (isSubscribeToFullVersion) {
+            screen.showAdBlockSection()
+            screen.showAdBlockSectionLabel()
             screen.hideAdBlockerUnlockRow()
             screen.showAdBlockerRow()
-        } else {
-            screen.showAdBlockerUnlockRow()
-            screen.hideAdBlockerRow()
+            screen.setAdBlockerEnabled(isEnabled)
+            return
         }
-        screen.setAdBlockerEnabled(isEnabled)
+        if (!isAdBlockAvailable) {
+            screen.hideAdBlockerUnlockRow()
+            screen.hideAdBlockerRow()
+            screen.hideAdBlockSection()
+            screen.hideAdBlockSectionLabel()
+            return
+        }
+        screen.showAdBlockSection()
+        screen.showAdBlockSectionLabel()
+        screen.showAdBlockerUnlockRow()
+        screen.hideAdBlockerRow()
     }
 
     private fun createThemeListener() = object : ThemeManager.ThemeListener {

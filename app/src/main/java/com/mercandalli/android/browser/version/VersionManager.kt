@@ -4,6 +4,8 @@ import androidx.annotation.RequiresApi
 
 interface VersionManager {
 
+    fun getVersionName(): String
+
     fun getBuildConfigVersionName(): String
 
     fun getBuildConfigVersionCode(): Int

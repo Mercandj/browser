@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="on_boarding_btn_radius">10dp</dimen>
+    <dimen name="on_boarding_card_radius">10dp</dimen>
+    <dimen name="on_boarding_button_horizontal_margins">34dp</dimen>
+</resources>

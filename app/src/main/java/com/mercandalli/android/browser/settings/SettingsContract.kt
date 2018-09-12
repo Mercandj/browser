@@ -29,6 +29,14 @@ interface SettingsContract {
 
         fun hideAdBlockerRow()
 
+        fun showAdBlockSection()
+
+        fun hideAdBlockSection()
+
+        fun showAdBlockSectionLabel()
+
+        fun hideAdBlockSectionLabel()
+
         fun setAdBlockerEnabled(enabled: Boolean)
     }
 

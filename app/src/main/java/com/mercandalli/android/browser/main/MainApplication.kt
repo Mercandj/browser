@@ -3,11 +3,14 @@ package com.mercandalli.android.browser.main
 import android.app.Application
 import android.content.pm.ApplicationInfo
 import android.os.Build
+import android.util.Log
 import android.webkit.WebView
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.mercandalli.android.browser.BuildConfig
 import com.mercandalli.android.browser.ad_blocker.AdBlocker
+import com.mercandalli.android.browser.remote_config.RemoteConfig
+import com.mercandalli.android.libs.monetization.Monetization
 import com.mercandalli.android.libs.monetization.MonetizationGraph
 import com.mercandalli.android.libs.monetization.log.MonetizationLog
 import io.fabric.sdk.android.Fabric
@@ -40,12 +43,21 @@ class MainApplication : Application() {
     private fun setupMonetizationGraph() {
         val monetizationLog = object : MonetizationLog {
             override fun d(tag: String, message: String) {
-
+                Log.d(tag, message)
+            }
+        }
+        val activityAction = object : MonetizationGraph.ActivityAction {
+            override fun startFirstActivity() {
+                MainActivity.start(this@MainApplication)
             }
         }
         MonetizationGraph.init(
                 this,
-                monetizationLog
+                Monetization.create(
+                        SKU_SUBSCRIPTION_FULL_VERSION
+                ),
+                monetizationLog,
+                activityAction
         )
         MonetizationGraph.getInAppManager().initialize()
     }
@@ -66,6 +78,21 @@ class MainApplication : Application() {
     }
 
     companion object {
-        const val SKU_SUBSCRIPTION_ADS_BLOCKER = "googleplay.com.mercandalli.android.browser.subscription.1"
+        const val SKU_SUBSCRIPTION_FULL_VERSION = "googleplay.com.mercandalli.android.browser.subscription.1"
+
+        @JvmStatic
+        fun onOnBoardingStarted() {
+            val remoteConfig = ApplicationGraph.getRemoteConfig()
+            updateOnBoardingStorePageAvailable(remoteConfig)
+            remoteConfig.registerListener(object : RemoteConfig.RemoteConfigListener {
+                override fun onInitialized() {
+                    updateOnBoardingStorePageAvailable(remoteConfig)
+                }
+            })
+        }
+
+        private fun updateOnBoardingStorePageAvailable(remoteConfig: RemoteConfig) {
+            MonetizationGraph.setOnBoardingStorePageAvailable(remoteConfig.isOnBoardingStoreAvailable)
+        }
     }
 }

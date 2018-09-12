@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "966913976495",
+    "firebase_url": "https://browser-e3b83.firebaseio.com",
+    "project_id": "browser-e3b83",
+    "storage_bucket": "browser-e3b83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966913976495:android:7f07c0d7905eb43b",
+        "android_client_info": {
+          "package_name": "com.mercandalli.android.browser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966913976495-sfk9eeao7js481r57ijv0adfp4pcc0ve.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy9zFmaVwBHij08mOuoKLBuI8e461EswA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

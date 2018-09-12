@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="OnBoardingThumbnail">
+        <attr name="ratio_width" format="float" />
+        <attr name="ratio_height" format="float" />
+        <attr name="ratio_width_reference" format="boolean" />
+    </declare-styleable>
+</resources>

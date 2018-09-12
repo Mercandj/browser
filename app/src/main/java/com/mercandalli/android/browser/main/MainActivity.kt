@@ -28,6 +28,7 @@ import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.browser.BrowserView
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
 import com.mercandalli.android.browser.settings.SettingsActivity
+import com.mercandalli.android.libs.monetization.MonetizationGraph
 
 class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
@@ -44,9 +45,16 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     private val browserWebViewListener = createBrowserWebViewListener()
     private val userAction = createUserAction()
+    private var forceDestroy = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (MonetizationGraph.startOnBoardingIfNeeded(this)) {
+            forceDestroy = true
+            finish()
+            MainApplication.onOnBoardingStarted()
+            return
+        }
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         more.setOnClickListener { showOverflowPopupMenu(more) }
@@ -67,13 +75,19 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
 
     override fun onDestroy() {
+        super.onDestroy()
+        if (forceDestroy) {
+            return
+        }
         webView.browserWebViewListener = null
         userAction.onDestroy()
-        super.onDestroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
+        if (forceDestroy) {
+            return
+        }
         webView.saveState(outState)
     }
 

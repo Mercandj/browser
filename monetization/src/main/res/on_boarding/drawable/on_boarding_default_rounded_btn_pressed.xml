@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/on_boarding_button_accent_dark" />
+    <corners android:radius="@dimen/on_boarding_btn_radius" />
+</shape>

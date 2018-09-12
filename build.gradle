@@ -6,6 +6,7 @@ apply plugin: 'com.github.ben-manes.versions'
 
 buildscript {
     ext.kotlin_version = '1.2.61'
+    ext.kotlin_coroutines_version = '0.25.3'
     repositories {
         google()
         jcenter()
@@ -14,6 +15,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.0-alpha09'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.0.1'
 
         // Test - take screenshot, output tests...
         // https://github.com/square/spoon
@@ -43,8 +45,8 @@ task clean(type: Delete) {
 }
 
 ext {
-    appVersionCode = 1_00_11
-    appVersionName = "1.00.11"
+    appVersionCode = 1_00_12
+    appVersionName = "1.00.12"
 
     compileSdkVersion = 28
     buildToolsVersion = "28.0.2"

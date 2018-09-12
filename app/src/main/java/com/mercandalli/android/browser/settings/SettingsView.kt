@@ -1,7 +1,6 @@
 package com.mercandalli.android.browser.settings
 
 import android.content.Context
-import android.os.Build
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import android.util.AttributeSet
@@ -10,7 +9,6 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.ScrollView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
@@ -148,6 +146,22 @@ class SettingsView @JvmOverloads constructor(
         adBlockerCheckBox.isChecked = enabled
     }
 
+    override fun showAdBlockSection() {
+        adBlockerSection.visibility = VISIBLE
+    }
+
+    override fun hideAdBlockSection() {
+        adBlockerSection.visibility = GONE
+    }
+
+    override fun showAdBlockSectionLabel() {
+        adBlockerSectionLabel.visibility = VISIBLE
+    }
+
+    override fun hideAdBlockSectionLabel() {
+        adBlockerSectionLabel.visibility = GONE
+    }
+
     fun setActivityContainer(activityContainer: InAppManager.ActivityContainer) {
         this.activityContainer = activityContainer
     }
@@ -165,12 +179,14 @@ class SettingsView @JvmOverloads constructor(
         val versionManager = ApplicationGraph.getVersionManager()
         val inAppManager = MonetizationGraph.getInAppManager()
         val adBlockerManager = ApplicationGraph.getAdBlockerManager()
+        val productManager = ApplicationGraph.getProductManager()
         SettingsPresenter(
                 this,
                 themeManager,
                 versionManager,
                 inAppManager,
-                adBlockerManager
+                adBlockerManager,
+                productManager
         )
     }
 }

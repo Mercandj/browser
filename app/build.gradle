@@ -146,12 +146,20 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":monetization")
 
     // Language
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
 
     // Android - Support
     implementation "androidx.annotation:annotation:1.0.0-rc02"
@@ -162,6 +170,8 @@ dependencies {
 
     // Google
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.firebase:firebase-core:16.0.3'
+    implementation "com.google.firebase:firebase-config:16.0.0"
 
     // Third party - Monitoring
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.4@aar') {
@@ -191,7 +201,7 @@ dependencies {
     }
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.21.0'
+    testImplementation 'org.mockito:mockito-core:2.22.0'
 }
 
 // Spoon
@@ -232,3 +242,5 @@ if (rootProject.ext.spoonEnable) {
         adbTimeout = 30
     }
 }
+
+apply plugin: 'com.google.gms.google-services'

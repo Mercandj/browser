@@ -10,6 +10,8 @@ class VersionManagerImpl(
 
     private lateinit var packageInfo: PackageInfo
 
+    override fun getVersionName() = getBuildConfigVersionName()
+
     override fun getBuildConfigVersionName() = BuildConfig.VERSION_NAME
 
     override fun getBuildConfigVersionCode() = BuildConfig.VERSION_CODE

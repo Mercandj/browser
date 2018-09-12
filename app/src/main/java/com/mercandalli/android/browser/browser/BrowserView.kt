@@ -11,8 +11,6 @@ import android.view.View
 import android.webkit.*
 import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.browser.ad_blocker.AdBlocker
-import com.mercandalli.android.browser.main.MainApplication
-import com.mercandalli.android.libs.monetization.MonetizationGraph
 
 class BrowserView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

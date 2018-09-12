@@ -22,6 +22,16 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            // Split resources.
+            // https://medium.com/google-developer-experts/android-project-structure-alternative-way-29ce766682f0#.sjnhetuhb
+            res.srcDirs = [
+                    'src/main/res/on_boarding',
+                    'src/main/res/store'
+            ]
+        }
+    }
 }
 
 dependencies {
@@ -32,6 +42,12 @@ dependencies {
 
     // Android - Support
     implementation "androidx.annotation:annotation:1.0.0-rc02"
+    implementation "androidx.appcompat:appcompat:1.0.0-rc02"
+    implementation "androidx.cardview:cardview:1.0.0-rc02"
 
     api 'com.android.billingclient:billing:1.1'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.json:json:20180813'
+    testImplementation 'org.mockito:mockito-core:2.22.0'
 }
