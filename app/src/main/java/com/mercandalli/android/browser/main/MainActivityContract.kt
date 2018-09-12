@@ -8,7 +8,7 @@ internal class MainActivityContract {
 
     internal interface UserAction {
 
-        fun onCreate()
+        fun onCreate(firstActivityLaunch: Boolean)
 
         fun onDestroy()
 
@@ -24,11 +24,9 @@ internal class MainActivityContract {
 
         fun onPageTouched()
 
-        fun onBackPressed()
+        fun onBackPressed(emptyViewVisible: Boolean)
 
-        fun onToolbarCollapsed(collapsed: Boolean)
-
-        fun onFabClicked()
+        fun onFabClicked(expand: Boolean)
     }
 
     internal interface Screen {
@@ -38,6 +36,8 @@ internal class MainActivityContract {
         fun reload()
 
         fun back()
+
+        fun quit()
 
         fun navigateHome()
 
@@ -51,13 +51,11 @@ internal class MainActivityContract {
 
         fun hideLoader()
 
+        fun showKeyboard()
+
         fun hideKeyboard()
 
-        fun collapseToolbar()
-
         fun resetSearchInput()
-
-        fun setToolbarContentVisible(visible: Boolean)
 
         fun setWindowBackgroundColorRes(@ColorRes colorRes: Int)
 
@@ -68,8 +66,22 @@ internal class MainActivityContract {
 
         fun setInputTextColorRes(@ColorRes colorRes: Int)
 
-        fun showFab()
+        fun showFabClear()
+
+        fun showFabExpand()
 
         fun hideFab()
+
+        fun showWebView()
+
+        fun hideWebView()
+
+        fun showEmptyView()
+
+        fun hideEmptyView()
+
+        fun showToolbar()
+
+        fun hideToolbar()
     }
 }

@@ -14,11 +14,9 @@ import com.mercandalli.android.browser.ad_blocker.AdBlocker
 import com.mercandalli.android.browser.main.MainApplication
 import com.mercandalli.android.libs.monetization.MonetizationGraph
 
-
 class BrowserView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : NestedScrollWebView(context, attrs, defStyleAttr),
-        BrowserContract.Screen {
+) : WebView(context, attrs, defStyleAttr) {
 
     private val darkThemeEncoded by lazy {
         val inputStream = context.assets.open("dark-theme-google.css")

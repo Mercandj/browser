@@ -1,6 +1,7 @@
 package com.mercandalli.android.browser.settings
 
 import android.content.Context
+import android.os.Build
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import android.util.AttributeSet
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph

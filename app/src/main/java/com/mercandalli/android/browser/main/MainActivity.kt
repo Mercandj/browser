@@ -9,7 +9,6 @@ import android.os.Bundle
 import androidx.annotation.ColorRes
 import androidx.annotation.IdRes
 import androidx.annotation.RequiresApi
-import com.google.android.material.appbar.AppBarLayout
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
@@ -33,16 +32,18 @@ import com.mercandalli.android.browser.settings.SettingsActivity
 class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     private val toolbar: Toolbar by bind(R.id.activity_main_toolbar)
-    private val appBarLayout: AppBarLayout by bind(R.id.activity_main_app_bar_layout)
+    private val toolbarShadow: View by bind(R.id.activity_main_toolbar_shadow)
     private val webView: BrowserView by bind(R.id.activity_main_web_view)
+    private val emptyView: View by bind(R.id.activity_main_empty_view)
+    private val emptyTextView: TextView by bind(R.id.activity_main_empty_view_text)
     private val progress: ProgressBar by bind(R.id.activity_main_progress)
     private val input: EditText by bind(R.id.activity_main_search)
     private val more: View by bind(R.id.activity_main_more)
-    private val fab: FloatingActionButton by bind(R.id.activity_main_fab)
+    private val fabClear: FloatingActionButton by bind(R.id.activity_main_fab_clear)
+    private val fabFullScreen: FloatingActionButton by bind(R.id.activity_main_fab_fullscreen)
 
     private val browserWebViewListener = createBrowserWebViewListener()
     private val userAction = createUserAction()
-    private var lastVerticalOffset = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,20 +57,13 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
             navigateHome()
         }
 
-        appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            val collapsed = -verticalOffset == appBarLayout.height
-            userAction.onToolbarCollapsed(collapsed)
-            if (collapsed) {
-                fab.hide()
-            } else if (verticalOffset == 0 && lastVerticalOffset != verticalOffset) {
-                fab.show()
-            }
-            lastVerticalOffset = verticalOffset
-        })
-        fab.setOnClickListener {
-            userAction.onFabClicked()
+        fabClear.setOnClickListener {
+            userAction.onFabClicked(false)
         }
-        userAction.onCreate()
+        fabFullScreen.setOnClickListener {
+            userAction.onFabClicked(true)
+        }
+        userAction.onCreate(savedInstanceState == null)
     }
 
     override fun onDestroy() {
@@ -90,16 +84,10 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
-            userAction.onBackPressed()
+            userAction.onBackPressed(emptyView.visibility == View.VISIBLE)
             return true
         }
         return super.onKeyDown(keyCode, event)
-    }
-
-    override fun setToolbarContentVisible(visible: Boolean) {
-        val visibility = if (visible) View.VISIBLE else View.GONE
-        input.visibility = visibility
-        more.visibility = visibility
     }
 
     override fun showUrl(url: String) {
@@ -116,6 +104,10 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         } else {
             finish()
         }
+    }
+
+    override fun quit() {
+        finish()
     }
 
     override fun navigateHome() {
@@ -147,12 +139,16 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         progress.visibility = GONE
     }
 
-    override fun hideKeyboard() {
-        KeyboardUtils.hideSoftInput(input)
+    override fun showKeyboard() {
+        input.postDelayed({
+            input.isFocusableInTouchMode = true
+            input.requestFocus()
+            KeyboardUtils.showSoftInput(input)
+        }, 200)
     }
 
-    override fun collapseToolbar() {
-        appBarLayout.setExpanded(false)
+    override fun hideKeyboard() {
+        KeyboardUtils.hideSoftInput(input)
     }
 
     override fun resetSearchInput() {
@@ -178,14 +174,52 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     override fun setInputTextColorRes(@ColorRes colorRes: Int) {
         val color = ContextCompat.getColor(this, colorRes)
         input.setTextColor(color)
+        emptyTextView.setTextColor(color)
     }
 
-    override fun showFab() {
-        fab.show()
+    override fun showFabClear() {
+        if (!fabClear.isShown) {
+            fabClear.show()
+        }
+        fabFullScreen.hide()
+    }
+
+    override fun showFabExpand() {
+        if (!fabFullScreen.isShown) {
+            fabFullScreen.show()
+        }
+        fabClear.hide()
     }
 
     override fun hideFab() {
-        fab.hide()
+        fabClear.hide()
+        fabFullScreen.hide()
+    }
+
+    override fun showWebView() {
+        webView.visibility = View.VISIBLE
+    }
+
+    override fun hideWebView() {
+        webView.visibility = View.GONE
+    }
+
+    override fun showEmptyView() {
+        emptyView.visibility = View.VISIBLE
+    }
+
+    override fun hideEmptyView() {
+        emptyView.visibility = View.GONE
+    }
+
+    override fun showToolbar() {
+        toolbar.visibility = View.VISIBLE
+        toolbarShadow.visibility = View.VISIBLE
+    }
+
+    override fun hideToolbar() {
+        toolbar.visibility = View.GONE
+        toolbarShadow.visibility = View.GONE
     }
 
     private fun createBrowserWebViewListener() = object : BrowserView.BrowserWebViewListener {

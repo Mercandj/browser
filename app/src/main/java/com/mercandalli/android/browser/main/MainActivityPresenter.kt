@@ -1,10 +1,8 @@
 package com.mercandalli.android.browser.main
 
 import android.os.Build
-import com.crashlytics.android.Crashlytics
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
-import com.mercandalli.android.browser.toast.ToastManager
 
 internal class MainActivityPresenter(
         private val screen: MainActivityContract.Screen,
@@ -13,10 +11,16 @@ internal class MainActivityPresenter(
 
     private val themeListener = createThemeListener()
 
-    override fun onCreate() {
+    override fun onCreate(firstActivityLaunch: Boolean) {
         themeManager.registerThemeListener(themeListener)
         updateTheme()
-        screen.hideFab()
+        if (firstActivityLaunch) {
+            screen.hideFab()
+            screen.hideWebView()
+            screen.showEmptyView()
+            screen.showKeyboard()
+            screen.showToolbar()
+        }
     }
 
     override fun onDestroy() {
@@ -28,9 +32,11 @@ internal class MainActivityPresenter(
         screen.showLoader(0)
         screen.showUrl(url)
         screen.resetSearchInput()
-        screen.collapseToolbar()
         screen.hideKeyboard()
-        screen.showFab()
+        screen.showFabExpand()
+        screen.showWebView()
+        screen.hideEmptyView()
+        screen.hideToolbar()
     }
 
     override fun onHomeClicked() {
@@ -43,6 +49,9 @@ internal class MainActivityPresenter(
         screen.showClearDataMessage()
         screen.hideLoader()
         screen.navigateHome()
+        screen.hideWebView()
+        screen.showEmptyView()
+        screen.showToolbar()
     }
 
     override fun onSettingsClicked() {
@@ -62,20 +71,28 @@ internal class MainActivityPresenter(
         screen.hideKeyboard()
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressed(emptyViewVisible: Boolean) {
+        if (emptyViewVisible) {
+            screen.quit()
+            return
+        }
         screen.back()
     }
 
-    override fun onToolbarCollapsed(collapsed: Boolean) {
-        screen.setToolbarContentVisible(!collapsed)
-    }
-
-    override fun onFabClicked() {
+    override fun onFabClicked(expand: Boolean) {
+        screen.showToolbar()
+        if (expand) {
+            screen.showFabClear()
+            return
+        }
         screen.clearData()
         screen.showClearDataMessage()
         screen.hideLoader()
         screen.navigateHome()
         screen.hideFab()
+        screen.hideWebView()
+        screen.showEmptyView()
+        screen.showKeyboard()
     }
 
     private fun searchToUrl(search: String): String {
@@ -87,14 +104,11 @@ internal class MainActivityPresenter(
     }
 
     private fun updateTheme(theme: Theme = themeManager.getTheme()) {
-        val textPrimaryColorRes = theme.textPrimaryColorRes
-        val windowBackgroundColorRes = theme.windowBackgroundColorRes
-        screen.setInputTextColorRes(textPrimaryColorRes)
-        screen.setWindowBackgroundColorRes(windowBackgroundColorRes)
-        screen.setToolbarBackgroundColorRes(windowBackgroundColorRes)
+        screen.setInputTextColorRes(theme.textPrimaryColorRes)
+        screen.setWindowBackgroundColorRes(theme.windowBackgroundColorRes)
+        screen.setToolbarBackgroundColorRes(theme.toolbarBackgroundColorRes)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val statusBarBackgroundColorRes = theme.statusBarBackgroundColorRes
-            screen.setStatusBarBackgroundColorRes(statusBarBackgroundColorRes)
+            screen.setStatusBarBackgroundColorRes(theme.statusBarBackgroundColorRes)
         }
     }
 

@@ -71,7 +71,7 @@ internal class InAppManagerImpl(
         }
     }
 
-    override fun isPurchased(sku: String) = inAppRepository.isPurchased(sku)
+    override fun isPurchased(sku: String) = true//inAppRepository.isPurchased(sku)
 
     override fun registerListener(listener: InAppManager.Listener) {
         if (listeners.contains(listener)) {

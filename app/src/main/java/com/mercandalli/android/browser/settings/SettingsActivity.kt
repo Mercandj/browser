@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import androidx.annotation.ColorRes
 import androidx.annotation.IdRes
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.libs.monetization.in_app.InAppManager
@@ -60,6 +62,12 @@ class SettingsActivity : AppCompatActivity(),
     override fun setToolbarBackgroundColorRes(@ColorRes colorRes: Int) {
         val color = ContextCompat.getColor(this, colorRes)
         toolbar.setBackgroundColor(color)
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    override fun setStatusBarBackgroundColorRes(@ColorRes colorRes: Int) {
+        val color = ContextCompat.getColor(this, colorRes)
+        window.statusBarColor = color
     }
 
     private fun createUserAction(): SettingsActivityContract.UserAction {

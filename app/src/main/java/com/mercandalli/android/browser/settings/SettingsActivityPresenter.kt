@@ -1,5 +1,6 @@
 package com.mercandalli.android.browser.settings
 
+import android.os.Build
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 
@@ -30,6 +31,9 @@ class SettingsActivityPresenter(
         screen.setWindowBackgroundColorRes(windowBackgroundColorRes)
         screen.setTextDarkColorRes(textDarkColorRes)
         screen.setToolbarBackgroundColorRes(toolbarBackgroundColorRes)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            screen.setStatusBarBackgroundColorRes(theme.statusBarBackgroundColorRes)
+        }
     }
 
     private fun createThemeListener() = object : ThemeManager.ThemeListener {

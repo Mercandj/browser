@@ -11,6 +11,5 @@ class LightTheme : Theme(
         R.color.text_primary_color_light,
         R.color.text_secondary_color_light,
         R.color.text_dark_color_light,
-        R.color.video_row_placeholder_light,
         R.color.card_background_light
 )
