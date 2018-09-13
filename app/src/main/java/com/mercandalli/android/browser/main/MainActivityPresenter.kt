@@ -1,25 +1,27 @@
 package com.mercandalli.android.browser.main
 
 import android.os.Build
+import android.os.Bundle
+import com.mercandalli.android.browser.search_engine.SearchEngineManager
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 
 internal class MainActivityPresenter(
         private val screen: MainActivityContract.Screen,
-        private val themeManager: ThemeManager
+        private val themeManager: ThemeManager,
+        private val searchEngineManager: SearchEngineManager
 ) : MainActivityContract.UserAction {
 
     private val themeListener = createThemeListener()
+    private var webViewVisible = false
 
-    override fun onCreate(firstActivityLaunch: Boolean) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         themeManager.registerThemeListener(themeListener)
         updateTheme()
+        val firstActivityLaunch = savedInstanceState == null
         if (firstActivityLaunch) {
-            screen.hideFab()
-            screen.hideWebView()
-            screen.showEmptyView()
             screen.showKeyboard()
-            screen.showToolbar()
+            setWebViewVisible(webViewVisible)
         }
     }
 
@@ -27,35 +29,33 @@ internal class MainActivityPresenter(
         themeManager.unregisterThemeListener(themeListener)
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean("webViewVisible", webViewVisible)
+    }
+
+    override fun onRestoreInstanceState(outState: Bundle) {
+        webViewVisible = outState.getBoolean("webViewVisible")
+        setWebViewVisible(webViewVisible)
+    }
+
     override fun onSearchPerformed(search: String) {
         val url = searchToUrl(search)
-        screen.showLoader(0)
         screen.showUrl(url)
         screen.resetSearchInput()
-        screen.hideKeyboard()
-        screen.showFabExpand()
-        screen.showWebView()
-        screen.hideEmptyView()
-        screen.hideToolbar()
+        setWebViewVisible(true)
     }
 
     override fun onHomeClicked() {
-        screen.hideLoader()
-        screen.navigateHome()
+        setWebViewVisible(false)
     }
 
     override fun onClearDataClicked() {
         screen.clearData()
         screen.showClearDataMessage()
-        screen.hideLoader()
-        screen.navigateHome()
-        screen.hideWebView()
-        screen.showEmptyView()
-        screen.showToolbar()
+        setWebViewVisible(false)
     }
 
     override fun onSettingsClicked() {
-        screen.hideLoader()
         screen.navigateSettings()
     }
 
@@ -79,27 +79,32 @@ internal class MainActivityPresenter(
         screen.back()
     }
 
-    override fun onFabClicked(expand: Boolean) {
-        screen.showToolbar()
-        if (expand) {
-            screen.showFabClear()
-            return
-        }
+    override fun onFabClicked() {
         screen.clearData()
         screen.showClearDataMessage()
-        screen.hideLoader()
-        screen.navigateHome()
-        screen.hideFab()
-        screen.hideWebView()
-        screen.showEmptyView()
-        screen.showKeyboard()
+        setWebViewVisible(false)
     }
 
     private fun searchToUrl(search: String): String {
-        return if (search.startsWith("https://") || search.startsWith("http://")) {
-            search
+        return searchEngineManager.createSearchUrl(search)
+    }
+
+    private fun setWebViewVisible(visible: Boolean) {
+        webViewVisible = visible
+        if (visible) {
+            screen.showFab()
+            screen.hideToolbar()
+            screen.showWebView()
+            screen.hideEmptyView()
+            screen.showLoader(0)
+            screen.hideKeyboard()
         } else {
-            "https://www.google.fr/search?q=" + search.replace(" ", "+")
+            screen.hideFab()
+            screen.showToolbar()
+            screen.hideWebView()
+            screen.showEmptyView()
+            screen.hideLoader()
+            screen.showKeyboard()
         }
     }
 
@@ -109,6 +114,9 @@ internal class MainActivityPresenter(
         screen.setToolbarBackgroundColorRes(theme.toolbarBackgroundColorRes)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             screen.setStatusBarBackgroundColorRes(theme.statusBarBackgroundColorRes)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            screen.setStatusBarDark(theme.statusBarDark)
         }
     }
 

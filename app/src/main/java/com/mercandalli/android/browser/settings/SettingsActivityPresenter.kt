@@ -34,6 +34,9 @@ class SettingsActivityPresenter(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             screen.setStatusBarBackgroundColorRes(theme.statusBarBackgroundColorRes)
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            screen.setStatusBarDark(theme.statusBarDark)
+        }
     }
 
     private fun createThemeListener() = object : ThemeManager.ThemeListener {

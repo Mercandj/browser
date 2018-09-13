@@ -18,6 +18,9 @@ interface SettingsActivityContract {
 
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         fun setStatusBarBackgroundColorRes(@ColorRes colorRes: Int)
+
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        fun setStatusBarDark(statusBarDark: Boolean)
     }
 
     interface UserAction {

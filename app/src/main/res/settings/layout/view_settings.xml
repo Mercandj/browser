@@ -14,6 +14,8 @@
 
         <include layout="@layout/view_settings_theme" />
 
+        <include layout="@layout/view_settings_search_engine" />
+
         <include layout="@layout/view_settings_ad_blocker" />
 
         <include layout="@layout/view_settings_about" />

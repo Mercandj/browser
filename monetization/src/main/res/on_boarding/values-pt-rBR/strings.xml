@@ -1,0 +1,12 @@
+<resources>
+    <string name="on_boarding_title">G - Browser</string>
+    <string name="on_boarding_page_1_title">Navegação privada</string>
+    <string name="on_boarding_page_1_description">• Apague seu histórico\n• Transmissão de vídeo\n• Streaming de música</string>
+    <string name="on_boarding_page_2_title">Tema escuro</string>
+    <string name="on_boarding_page_2_description">Página negra do Google</string>
+    <string name="on_boarding_page_3_title">Versão completa</string>
+    <string name="on_boarding_page_3_description">• Bloqueador de anúncios\n• Set Search engine</string>
+    <string name="on_boarding_next">PRÓXIMO</string>
+    <string name="on_boarding_store_buy">COMECE O TESTE GRÁTIS</string>
+    <string name="on_boarding_store_skip">Use versão limitada</string>
+</resources>

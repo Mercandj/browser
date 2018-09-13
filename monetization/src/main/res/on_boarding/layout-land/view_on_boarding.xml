@@ -11,18 +11,31 @@
         android:background="@color/on_boarding_view_bg"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_marginTop="22dp"
-            android:drawableEnd="@drawable/on_boarding_ic_launcher"
-            android:drawablePadding="14dp"
-            android:paddingStart="3dp"
-            android:paddingEnd="3dp"
-            android:text="Tube"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:drawableEnd="@drawable/on_boarding_ic_launcher"
+                android:drawablePadding="14dp"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+                android:text="@string/on_boarding_title"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+            <com.mercandalli.android.libs.monetization.on_boarding.OnBoardingPageIndicatorView
+                android:id="@+id/view_on_boarding_indicator"
+                android:layout_width="160dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center" />
+
+        </FrameLayout>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_on_boarding_view_pager"

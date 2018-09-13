@@ -48,7 +48,7 @@ android {
         versionCode rootProject.ext.appVersionCode
         versionName rootProject.ext.appVersionName + "." + new Date().format('yyyyMMdd')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        resConfigs "en", "fr"
+        resConfigs "en", "fr", "pt-rBR"
     }
 
     dexOptions {

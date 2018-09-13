@@ -1,6 +1,7 @@
 package com.mercandalli.android.browser.main
 
 import android.os.Build
+import android.os.Bundle
 import androidx.annotation.ColorRes
 import androidx.annotation.RequiresApi
 
@@ -8,9 +9,13 @@ internal class MainActivityContract {
 
     internal interface UserAction {
 
-        fun onCreate(firstActivityLaunch: Boolean)
+        fun onCreate(savedInstanceState: Bundle?)
 
         fun onDestroy()
+
+        fun onSaveInstanceState(outState: Bundle)
+
+        fun onRestoreInstanceState(outState: Bundle)
 
         fun onSearchPerformed(search: String)
 
@@ -26,7 +31,7 @@ internal class MainActivityContract {
 
         fun onBackPressed(emptyViewVisible: Boolean)
 
-        fun onFabClicked(expand: Boolean)
+        fun onFabClicked()
     }
 
     internal interface Screen {
@@ -62,13 +67,14 @@ internal class MainActivityContract {
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         fun setStatusBarBackgroundColorRes(@ColorRes colorRes: Int)
 
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        fun setStatusBarDark(statusBarDark: Boolean)
+
         fun setToolbarBackgroundColorRes(@ColorRes colorRes: Int)
 
         fun setInputTextColorRes(@ColorRes colorRes: Int)
 
-        fun showFabClear()
-
-        fun showFabExpand()
+        fun showFab()
 
         fun hideFab()
 

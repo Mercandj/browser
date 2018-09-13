@@ -3,6 +3,18 @@
 
     <string name="activity_settings_title">Paramètres</string>
 
+    <string name="view_settings_ad_blocker_section_label">Ad blocker</string>
+    <string name="view_settings_ad_blocker_unlock_label">Ad blocker</string>
+    <string name="view_settings_ad_blocker_unlock_sublabel">Try the ad blocker for free</string>
+    <string name="view_settings_ad_blocker_label">Ad blocker</string>
+    <string name="view_settings_ad_blocker_sublabel">Enable ad blocker</string>
+
+    <string name="view_settings_search_engine_section_label">Moteur de recherche</string>
+    <string name="view_settings_search_engine_unlock_label">Search engine</string>
+    <string name="view_settings_search_engine_unlock_sublabel">Try other search engine for free</string>
+    <string name="view_settings_search_engine_label">Search engine</string>
+    <string name="view_settings_search_engine_sublabel">Set search engine. Current search engine is %1$s</string>
+
     <string name="view_settings_theme_section_label">Thème</string>
     <string name="view_settings_theme_label">Thème</string>
     <string name="view_settings_theme_sublabel">Thème sombre</string>

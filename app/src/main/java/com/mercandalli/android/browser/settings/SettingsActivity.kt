@@ -70,6 +70,15 @@ class SettingsActivity : AppCompatActivity(),
         window.statusBarColor = color
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    override fun setStatusBarDark(statusBarDark: Boolean) {
+        val flags = window.decorView.systemUiVisibility
+        window.decorView.systemUiVisibility = if (statusBarDark)
+            flags and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+        else
+            flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+    }
+
     private fun createUserAction(): SettingsActivityContract.UserAction {
         val themeManager = ApplicationGraph.getThemeManager()
         return SettingsActivityPresenter(

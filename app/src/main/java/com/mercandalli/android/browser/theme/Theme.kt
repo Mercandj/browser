@@ -9,6 +9,7 @@ open class Theme(
         val windowSettingsBackgroundColorRes: Int,
         @ColorRes
         val statusBarBackgroundColorRes: Int,
+        val statusBarDark: Boolean,
         @ColorRes
         val toolbarBackgroundColorRes: Int,
         @ColorRes

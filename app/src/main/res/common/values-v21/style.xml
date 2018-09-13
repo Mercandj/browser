@@ -3,7 +3,7 @@
 
     <style name="AppThemeCompat" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:statusBarColor">@color/status_bar_background_light</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowTranslucentNavigation">false</item>
     </style>
 

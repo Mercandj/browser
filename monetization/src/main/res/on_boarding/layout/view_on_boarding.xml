@@ -25,7 +25,7 @@
                 android:drawablePadding="14dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:text="G - Browser"
+                android:text="@string/on_boarding_title"
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
@@ -37,7 +37,6 @@
 
         </LinearLayout>
 
-
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_on_boarding_view_pager"
             android:layout_width="match_parent"
@@ -46,6 +45,13 @@
             android:clipToPadding="false"
             android:paddingStart="32dp"
             android:paddingEnd="32dp" />
+
+        <com.mercandalli.android.libs.monetization.on_boarding.OnBoardingPageIndicatorView
+            android:id="@+id/view_on_boarding_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp" />
 
         <FrameLayout
             android:id="@+id/view_on_boarding_store"

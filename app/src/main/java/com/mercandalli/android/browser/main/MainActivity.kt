@@ -12,7 +12,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
-import androidx.appcompat.widget.Toolbar
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
@@ -32,7 +31,7 @@ import com.mercandalli.android.libs.monetization.MonetizationGraph
 
 class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
-    private val toolbar: Toolbar by bind(R.id.activity_main_toolbar)
+    private val toolbar: View by bind(R.id.activity_main_toolbar)
     private val toolbarShadow: View by bind(R.id.activity_main_toolbar_shadow)
     private val webView: BrowserView by bind(R.id.activity_main_web_view)
     private val emptyView: View by bind(R.id.activity_main_empty_view)
@@ -40,8 +39,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     private val progress: ProgressBar by bind(R.id.activity_main_progress)
     private val input: EditText by bind(R.id.activity_main_search)
     private val more: View by bind(R.id.activity_main_more)
-    private val fabClear: FloatingActionButton by bind(R.id.activity_main_fab_clear)
-    private val fabFullScreen: FloatingActionButton by bind(R.id.activity_main_fab_fullscreen)
+    private val fab: FloatingActionButton by bind(R.id.activity_main_fab_clear)
 
     private val browserWebViewListener = createBrowserWebViewListener()
     private val userAction = createUserAction()
@@ -56,7 +54,6 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
             return
         }
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
         more.setOnClickListener { showOverflowPopupMenu(more) }
         webView.browserWebViewListener = browserWebViewListener
         input.setOnEditorActionListener(createOnEditorActionListener())
@@ -65,13 +62,10 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
             navigateHome()
         }
 
-        fabClear.setOnClickListener {
-            userAction.onFabClicked(false)
+        fab.setOnClickListener {
+            userAction.onFabClicked()
         }
-        fabFullScreen.setOnClickListener {
-            userAction.onFabClicked(true)
-        }
-        userAction.onCreate(savedInstanceState == null)
+        userAction.onCreate(savedInstanceState)
     }
 
     override fun onDestroy() {
@@ -83,16 +77,18 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         userAction.onDestroy()
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (forceDestroy) {
             return
         }
+        userAction.onSaveInstanceState(outState)
         webView.saveState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
+        userAction.onRestoreInstanceState(savedInstanceState)
         webView.restoreState(savedInstanceState)
     }
 
@@ -180,6 +176,15 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         window.statusBarColor = color
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    override fun setStatusBarDark(statusBarDark: Boolean) {
+        val flags = window.decorView.systemUiVisibility
+        window.decorView.systemUiVisibility = if (statusBarDark)
+            flags and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+        else
+            flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+    }
+
     override fun setToolbarBackgroundColorRes(@ColorRes colorRes: Int) {
         val color = ContextCompat.getColor(this, colorRes)
         toolbar.setBackgroundColor(color)
@@ -191,23 +196,14 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         emptyTextView.setTextColor(color)
     }
 
-    override fun showFabClear() {
-        if (!fabClear.isShown) {
-            fabClear.show()
+    override fun showFab() {
+        if (!fab.isShown) {
+            fab.show()
         }
-        fabFullScreen.hide()
-    }
-
-    override fun showFabExpand() {
-        if (!fabFullScreen.isShown) {
-            fabFullScreen.show()
-        }
-        fabClear.hide()
     }
 
     override fun hideFab() {
-        fabClear.hide()
-        fabFullScreen.hide()
+        fab.hide()
     }
 
     override fun showWebView() {
@@ -278,9 +274,11 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     private fun createUserAction(): MainActivityContract.UserAction {
         val themeManager = ApplicationGraph.getThemeManager()
+        val searchEngineManager = ApplicationGraph.getSearchEngineManager()
         return MainActivityPresenter(
                 this,
-                themeManager
+                themeManager,
+                searchEngineManager
         )
     }
 

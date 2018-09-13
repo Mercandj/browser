@@ -6,6 +6,8 @@ import com.android.billingclient.api.SkuDetails
 import com.mercandalli.android.browser.ad_blocker.AdBlockerManager
 import com.mercandalli.android.browser.main.MainApplication
 import com.mercandalli.android.browser.product.ProductManager
+import com.mercandalli.android.browser.search_engine.SearchEngine
+import com.mercandalli.android.browser.search_engine.SearchEngineManager
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 import com.mercandalli.android.browser.version.VersionManager
@@ -17,7 +19,8 @@ class SettingsPresenter(
         private val versionManager: VersionManager,
         private val inAppManager: InAppManager,
         private val adBlockerManager: AdBlockerManager,
-        private val productManager: ProductManager
+        private val productManager: ProductManager,
+        private val searchEngineManager: SearchEngineManager
 ) : SettingsContract.UserAction {
 
     private val themeListener = createThemeListener()
@@ -28,7 +31,7 @@ class SettingsPresenter(
         inAppManager.registerListener(inAppManagerListener)
         updateTheme()
         setVersions()
-        syncAdBlockerRows()
+        syncRows()
     }
 
     override fun onDetached() {
@@ -42,10 +45,30 @@ class SettingsPresenter(
 
     override fun onAdBlockerCheckBoxCheckedChanged(isChecked: Boolean) {
         adBlockerManager.setEnabled(isChecked)
-        syncAdBlockerRows()
+        syncRows()
     }
 
-    override fun onUnlockAdsBlocker(activityContainer: InAppManager.ActivityContainer) {
+    override fun onAdBlockerUnlockRowClicked(activityContainer: InAppManager.ActivityContainer) {
+        inAppManager.purchase(
+                activityContainer,
+                MainApplication.SKU_SUBSCRIPTION_FULL_VERSION,
+                BillingClient.SkuType.SUBS
+        )
+    }
+
+    override fun onSearchEngineRowClicked() {
+        screen.showSearchEngineSelection(searchEngineManager.getSearchEngines())
+
+        val searchEngineKey = searchEngineManager.getSearchEngineKey()
+        when (searchEngineKey) {
+            SearchEngine.SEARCH_ENGINE_GOOGLE -> searchEngineManager.setSearchEngineKey(SearchEngine.SEARCH_ENGINE_YOUTUBE)
+            SearchEngine.SEARCH_ENGINE_YOUTUBE -> searchEngineManager.setSearchEngineKey(SearchEngine.SEARCH_ENGINE_DUCK_DUCK_GO)
+            SearchEngine.SEARCH_ENGINE_DUCK_DUCK_GO -> searchEngineManager.setSearchEngineKey(SearchEngine.SEARCH_ENGINE_GOOGLE)
+        }
+        syncRows()
+    }
+
+    override fun onSearchEngineUnlockRowClicked(activityContainer: InAppManager.ActivityContainer) {
         inAppManager.purchase(
                 activityContainer,
                 MainApplication.SKU_SUBSCRIPTION_FULL_VERSION,
@@ -75,8 +98,9 @@ class SettingsPresenter(
         screen.setSectionColor(theme.cardBackgroundColorRes)
     }
 
-    private fun syncAdBlockerRows(
+    private fun syncRows(
             isAdBlockAvailable: Boolean = adBlockerManager.isFeatureAvailable(),
+            isSearchEngineAvailable: Boolean = searchEngineManager.isFeatureAvailable(),
             isSubscribeToFullVersion: Boolean = productManager.isSubscribeToFullVersion(),
             isEnabled: Boolean = adBlockerManager.isEnabled()
     ) {
@@ -85,20 +109,30 @@ class SettingsPresenter(
             screen.showAdBlockSectionLabel()
             screen.hideAdBlockerUnlockRow()
             screen.showAdBlockerRow()
+            screen.hideSearchEngineUnlockRow()
+            screen.showSearchEngineRow()
             screen.setAdBlockerEnabled(isEnabled)
+            screen.displaySearchEngine(searchEngineManager.getSearchEngine().name)
             return
         }
-        if (!isAdBlockAvailable) {
-            screen.hideAdBlockerUnlockRow()
+        if (isSearchEngineAvailable) {
+            screen.showSearchEngineSection()
+            screen.showSearchEngineSectionLabel()
+            screen.showSearchEngineUnlockRow()
+            screen.hideSearchEngineRow()
+        } else {
+            screen.hideSearchEngineSection()
+            screen.hideSearchEngineSectionLabel()
+        }
+        if (isAdBlockAvailable) {
+            screen.showAdBlockSection()
+            screen.showAdBlockSectionLabel()
+            screen.showAdBlockerUnlockRow()
             screen.hideAdBlockerRow()
+        } else {
             screen.hideAdBlockSection()
             screen.hideAdBlockSectionLabel()
-            return
         }
-        screen.showAdBlockSection()
-        screen.showAdBlockSectionLabel()
-        screen.showAdBlockerUnlockRow()
-        screen.hideAdBlockerRow()
     }
 
     private fun createThemeListener() = object : ThemeManager.ThemeListener {
@@ -113,7 +147,7 @@ class SettingsPresenter(
         }
 
         override fun onPurchasedChanged() {
-            syncAdBlockerRows()
+            syncRows()
         }
     }
 }

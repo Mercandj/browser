@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
+import com.mercandalli.android.browser.search_engine.SearchEngine
 import com.mercandalli.android.libs.monetization.MonetizationGraph
 import com.mercandalli.android.libs.monetization.in_app.InAppManager
 
@@ -29,6 +30,17 @@ class SettingsView @JvmOverloads constructor(
     private val adBlockerLabel: TextView = view.findViewById(R.id.view_settings_ad_blocker_label)
     private val adBlockerSubLabel: TextView = view.findViewById(R.id.view_settings_ad_blocker_sublabel)
     private val adBlockerCheckBox: CheckBox = view.findViewById(R.id.view_settings_ad_blocker)
+    private val adBlockerUnlockLabel: TextView = view.findViewById(R.id.view_settings_ad_blocker_unlock_label)
+    private val adBlockerUnlockSubLabel: TextView = view.findViewById(R.id.view_settings_ad_blocker_unlock_sublabel)
+
+    private val searchEngineRow: View = view.findViewById(R.id.view_settings_search_engine_row)
+    private val searchEngineUnlockRow: View = view.findViewById(R.id.view_settings_search_engine_unlock_row)
+    private val searchEngineSection: CardView = view.findViewById(R.id.view_settings_search_engine_section)
+    private val searchEngineSectionLabel: TextView = view.findViewById(R.id.view_settings_search_engine_section_label)
+    private val searchEngineLabel: TextView = view.findViewById(R.id.view_settings_search_engine_label)
+    private val searchEngineSubLabel: TextView = view.findViewById(R.id.view_settings_search_engine_sublabel)
+    private val searchEngineUnlockLabel: TextView = view.findViewById(R.id.view_settings_search_engine_unlock_label)
+    private val searchEngineUnlockSubLabel: TextView = view.findViewById(R.id.view_settings_search_engine_unlock_sublabel)
 
     private val themeRow: View = view.findViewById(R.id.view_settings_theme_row)
     private val themeSection: CardView = view.findViewById(R.id.view_settings_theme_section)
@@ -65,7 +77,13 @@ class SettingsView @JvmOverloads constructor(
             userAction.onAdBlockerCheckBoxCheckedChanged(isChecked)
         }
         adBlockerUnlockRow.setOnClickListener {
-            userAction.onUnlockAdsBlocker(activityContainer!!)
+            userAction.onAdBlockerUnlockRowClicked(activityContainer!!)
+        }
+        searchEngineRow.setOnClickListener {
+            userAction.onSearchEngineRowClicked()
+        }
+        searchEngineUnlockRow.setOnClickListener {
+            userAction.onSearchEngineUnlockRowClicked(activityContainer!!)
         }
     }
 
@@ -86,6 +104,7 @@ class SettingsView @JvmOverloads constructor(
     override fun setSectionColor(@ColorRes sectionColorRes: Int) {
         val sectionColor = ContextCompat.getColor(context, sectionColorRes)
         adBlockerSection.setCardBackgroundColor(sectionColor)
+        searchEngineSection.setCardBackgroundColor(sectionColor)
         themeSection.setCardBackgroundColor(sectionColor)
         aboutSection.setCardBackgroundColor(sectionColor)
     }
@@ -93,6 +112,9 @@ class SettingsView @JvmOverloads constructor(
     override fun setTextPrimaryColorRes(@ColorRes textPrimaryColorRes: Int) {
         val textColor = ContextCompat.getColor(context, textPrimaryColorRes)
         adBlockerLabel.setTextColor(textColor)
+        adBlockerUnlockLabel.setTextColor(textColor)
+        searchEngineLabel.setTextColor(textColor)
+        searchEngineUnlockLabel.setTextColor(textColor)
         themeLabel.setTextColor(textColor)
         adBlockerCheckBox.setTextColor(textColor)
         themeLabel.setTextColor(textColor)
@@ -105,9 +127,13 @@ class SettingsView @JvmOverloads constructor(
     override fun setTextSecondaryColorRes(@ColorRes textSecondaryColorRes: Int) {
         val textColor = ContextCompat.getColor(context, textSecondaryColorRes)
         adBlockerSectionLabel.setTextColor(textColor)
+        searchEngineSectionLabel.setTextColor(textColor)
         themeSectionLabel.setTextColor(textColor)
         aboutSectionLabel.setTextColor(textColor)
         adBlockerSubLabel.setTextColor(textColor)
+        adBlockerUnlockSubLabel.setTextColor(textColor)
+        searchEngineSubLabel.setTextColor(textColor)
+        searchEngineUnlockSubLabel.setTextColor(textColor)
         themeSubLabel.setTextColor(textColor)
         versionName.setTextColor(textColor)
         versionCode.setTextColor(textColor)
@@ -142,6 +168,22 @@ class SettingsView @JvmOverloads constructor(
         adBlockerRow.visibility = GONE
     }
 
+    override fun showSearchEngineUnlockRow() {
+        searchEngineUnlockRow.visibility = VISIBLE
+    }
+
+    override fun hideSearchEngineUnlockRow() {
+        searchEngineUnlockRow.visibility = GONE
+    }
+
+    override fun showSearchEngineRow() {
+        searchEngineRow.visibility = VISIBLE
+    }
+
+    override fun hideSearchEngineRow() {
+        searchEngineRow.visibility = GONE
+    }
+
     override fun setAdBlockerEnabled(enabled: Boolean) {
         adBlockerCheckBox.isChecked = enabled
     }
@@ -162,6 +204,30 @@ class SettingsView @JvmOverloads constructor(
         adBlockerSectionLabel.visibility = GONE
     }
 
+    override fun showSearchEngineSection() {
+        searchEngineSection.visibility = VISIBLE
+    }
+
+    override fun hideSearchEngineSection() {
+        searchEngineSection.visibility = GONE
+    }
+
+    override fun showSearchEngineSectionLabel() {
+        searchEngineSectionLabel.visibility = VISIBLE
+    }
+
+    override fun hideSearchEngineSectionLabel() {
+        searchEngineSectionLabel.visibility = GONE
+    }
+
+    override fun showSearchEngineSelection(searchEngines: List<SearchEngine>) {
+        // TODO
+    }
+
+    override fun displaySearchEngine(searchEngineName: String) {
+        searchEngineSubLabel.text = context.resources.getString(R.string.view_settings_search_engine_sublabel, searchEngineName)
+    }
+
     fun setActivityContainer(activityContainer: InAppManager.ActivityContainer) {
         this.activityContainer = activityContainer
     }
@@ -172,7 +238,9 @@ class SettingsView @JvmOverloads constructor(
             override fun onDetached() {}
             override fun onDarkThemeCheckBoxCheckedChanged(isChecked: Boolean) {}
             override fun onAdBlockerCheckBoxCheckedChanged(isChecked: Boolean) {}
-            override fun onUnlockAdsBlocker(activityContainer: InAppManager.ActivityContainer) {}
+            override fun onAdBlockerUnlockRowClicked(activityContainer: InAppManager.ActivityContainer) {}
+            override fun onSearchEngineRowClicked() {}
+            override fun onSearchEngineUnlockRowClicked(activityContainer: InAppManager.ActivityContainer) {}
         }
     } else {
         val themeManager = ApplicationGraph.getThemeManager()
@@ -180,13 +248,15 @@ class SettingsView @JvmOverloads constructor(
         val inAppManager = MonetizationGraph.getInAppManager()
         val adBlockerManager = ApplicationGraph.getAdBlockerManager()
         val productManager = ApplicationGraph.getProductManager()
+        val searchEngineManager = ApplicationGraph.getSearchEngineManager()
         SettingsPresenter(
                 this,
                 themeManager,
                 versionManager,
                 inAppManager,
                 adBlockerManager,
-                productManager
+                productManager,
+                searchEngineManager
         )
     }
 }

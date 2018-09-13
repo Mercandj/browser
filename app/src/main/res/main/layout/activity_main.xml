@@ -4,60 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context=".main.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
+        <FrameLayout
             android:id="@+id/activity_main_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbar_height"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:title="@string/app_name">
+            android:layout_height="@dimen/toolbar_height">
 
-            <FrameLayout
+            <EditText
+                android:id="@+id/activity_main_search"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/default_space_4">
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginEnd="@dimen/default_space_5"
+                android:background="@android:color/transparent"
+                android:hint="Search"
+                android:imeOptions="actionSearch|flagNoExtractUi"
+                android:inputType="textNoSuggestions"
+                android:lines="1"
+                android:maxLines="1"
+                android:minLines="1"
+                android:paddingStart="@dimen/default_space_1_5"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:textColor="@color/color_text_title_1"
+                android:textColorHint="#888888"
+                android:textSize="17sp" />
 
-                <EditText
-                    android:id="@+id/activity_main_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/default_space_4"
-                    android:layout_gravity="start|center_vertical"
-                    android:layout_marginEnd="@dimen/default_space_5"
-                    android:background="@android:color/transparent"
-                    android:hint="Search"
-                    android:imeOptions="actionSearch|flagNoExtractUi"
-                    android:inputType="text"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:minLines="1"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="0dp"
-                    android:singleLine="true"
-                    android:textColor="@color/color_text_title_1"
-                    android:textColorHint="#888888"
-                    android:textSize="17sp" />
+            <com.mercandalli.android.browser.common.ForegroundImageView
+                android:id="@+id/activity_main_more"
+                android:layout_width="@dimen/default_space_4"
+                android:layout_height="@dimen/default_space_4"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="@dimen/default_space"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:padding="7dp"
+                android:src="@drawable/ic_more_vert_black_24dp"
+                android:tint="#666666" />
 
-                <com.mercandalli.android.browser.common.ForegroundImageView
-                    android:id="@+id/activity_main_more"
-                    android:layout_width="@dimen/default_space_4"
-                    android:layout_height="@dimen/default_space_4"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginEnd="@dimen/default_space"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="7dp"
-                    android:src="@drawable/ic_more_vert_black_24dp"
-                    android:tint="#666666" />
-
-            </FrameLayout>
-
-        </androidx.appcompat.widget.Toolbar>
+        </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -117,17 +107,6 @@
         android:layout_margin="@dimen/default_space_2"
         android:scaleType="center"
         android:src="@drawable/ic_delete_white_24dp"
-        app:fabCustomSize="52dp"
-        app:maxImageSize="24dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/activity_main_fab_fullscreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/default_space_2"
-        android:scaleType="center"
-        android:src="@drawable/ic_fullscreen_exit_white_24dp"
         app:fabCustomSize="52dp"
         app:maxImageSize="24dp" />
 

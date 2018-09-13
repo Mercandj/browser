@@ -1,6 +1,7 @@
 package com.mercandalli.android.browser.settings
 
 import androidx.annotation.ColorRes
+import com.mercandalli.android.browser.search_engine.SearchEngine
 import com.mercandalli.android.libs.monetization.in_app.InAppManager
 
 interface SettingsContract {
@@ -29,6 +30,14 @@ interface SettingsContract {
 
         fun hideAdBlockerRow()
 
+        fun showSearchEngineUnlockRow()
+
+        fun hideSearchEngineUnlockRow()
+
+        fun showSearchEngineRow()
+
+        fun hideSearchEngineRow()
+
         fun showAdBlockSection()
 
         fun hideAdBlockSection()
@@ -37,7 +46,19 @@ interface SettingsContract {
 
         fun hideAdBlockSectionLabel()
 
+        fun showSearchEngineSection()
+
+        fun hideSearchEngineSection()
+
+        fun showSearchEngineSectionLabel()
+
+        fun hideSearchEngineSectionLabel()
+
         fun setAdBlockerEnabled(enabled: Boolean)
+
+        fun showSearchEngineSelection(searchEngines: List<SearchEngine>)
+
+        fun displaySearchEngine(searchEngineName: String)
     }
 
     interface UserAction {
@@ -50,6 +71,10 @@ interface SettingsContract {
 
         fun onAdBlockerCheckBoxCheckedChanged(isChecked: Boolean)
 
-        fun onUnlockAdsBlocker(activityContainer: InAppManager.ActivityContainer)
+        fun onAdBlockerUnlockRowClicked(activityContainer: InAppManager.ActivityContainer)
+
+        fun onSearchEngineRowClicked()
+
+        fun onSearchEngineUnlockRowClicked(activityContainer: InAppManager.ActivityContainer)
     }
 }

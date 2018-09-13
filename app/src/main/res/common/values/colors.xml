@@ -8,7 +8,7 @@
 
     <color name="window_background_light">#F6F6F6</color>
     <color name="window_settings_background_light">#F9F9F9</color>
-    <color name="status_bar_background_light">@color/color_primary_darker</color>
+    <color name="status_bar_background_light">@android:color/white</color>
     <color name="toolbar_background_light">@android:color/white</color>
     <color name="text_primary_color_light">#303030</color>
     <color name="text_secondary_color_light">#808080</color>

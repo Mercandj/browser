@@ -37,6 +37,7 @@ class OnBoardingView @JvmOverloads constructor(
     private val storeBuy: View = view.findViewById(R.id.view_on_boarding_store_buy)
     private val storeSkip: View = view.findViewById(R.id.view_on_boarding_store_skip)
     private val next: View = view.findViewById(R.id.view_on_boarding_next)
+    private val indicatorOnBoarding: OnBoardingPageIndicator = view.findViewById<OnBoardingPageIndicatorView>(R.id.view_on_boarding_indicator)
     private val onPageChangeListener = createOnPageChangeListener()
     private val pages = SparseArray<OnBoardingPageView>()
     private val adapter = createPagerAdapter()
@@ -57,6 +58,7 @@ class OnBoardingView @JvmOverloads constructor(
         storeSkip.setOnClickListener {
             userAction.onStoreSkipClicked()
         }
+        indicatorOnBoarding.setViewPager(viewPager)
     }
 
     override fun onAttachedToWindow() {
