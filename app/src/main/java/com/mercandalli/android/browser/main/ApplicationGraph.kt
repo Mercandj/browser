@@ -3,6 +3,8 @@ package com.mercandalli.android.browser.main
 import android.annotation.SuppressLint
 import android.content.Context
 import com.mercandalli.android.browser.ad_blocker.AdBlockerModule
+import com.mercandalli.android.browser.dialog.DialogModule
+import com.mercandalli.android.browser.hash.HashModule
 import com.mercandalli.android.browser.product.ProductModule
 import com.mercandalli.android.browser.remote_config.RemoteConfigModule
 import com.mercandalli.android.browser.search_engine.SearchEngineModule
@@ -17,7 +19,9 @@ class ApplicationGraph(
 ) {
 
     private val adBlockerManagerInternal by lazy { AdBlockerModule(context).createAdBlockerManager() }
-    private val productManagerInternal by lazy { ProductModule().createProductManager() }
+    private val dialogManagerInternal by lazy { DialogModule(context).createDialogManager() }
+    private val hashManagerInternal by lazy { HashModule(context).createHashManager() }
+    private val productManagerInternal by lazy { ProductModule(context).createProductManager() }
     private val mainThreadPostInternal by lazy { MainThreadModule().createMainThreadPost() }
     private val remoteConfigInternal by lazy { RemoteConfigModule().createRemoteConfig(mainThreadPostInternal) }
     private val searchEngineManagerInternal by lazy { SearchEngineModule().createSearchEngineManager() }
@@ -41,6 +45,12 @@ class ApplicationGraph(
 
         @JvmStatic
         fun getAdBlockerManager() = graph!!.adBlockerManagerInternal
+
+        @JvmStatic
+        fun getDialogManager() = graph!!.dialogManagerInternal
+
+        @JvmStatic
+        fun getHashManager() = graph!!.hashManagerInternal
 
         @JvmStatic
         fun getProductManager() = graph!!.productManagerInternal

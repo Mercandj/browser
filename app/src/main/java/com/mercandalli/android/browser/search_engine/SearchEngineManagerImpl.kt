@@ -1,6 +1,5 @@
 package com.mercandalli.android.browser.search_engine
 
-import android.content.SharedPreferences
 import com.mercandalli.android.browser.product.ProductManager
 import com.mercandalli.android.browser.search_engine.SearchEngine.Companion.SEARCH_ENGINE_DUCK_DUCK_GO
 import com.mercandalli.android.browser.search_engine.SearchEngine.Companion.SEARCH_ENGINE_GOOGLE

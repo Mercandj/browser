@@ -5,7 +5,7 @@
 apply plugin: 'com.github.ben-manes.versions'
 
 buildscript {
-    ext.kotlin_version = '1.2.61'
+    ext.kotlin_version = '1.2.70'
     ext.kotlin_coroutines_version = '0.25.3'
     repositories {
         google()

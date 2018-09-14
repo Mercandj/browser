@@ -13,6 +13,8 @@ internal class MainActivityContract {
 
         fun onDestroy()
 
+        fun onResume()
+
         fun onSaveInstanceState(outState: Bundle)
 
         fun onRestoreInstanceState(outState: Bundle)

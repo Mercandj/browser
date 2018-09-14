@@ -77,6 +77,11 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         userAction.onDestroy()
     }
 
+    override fun onResume() {
+        super.onResume()
+        userAction.onResume()
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (forceDestroy) {

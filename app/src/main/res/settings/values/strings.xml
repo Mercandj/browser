@@ -25,4 +25,14 @@
     <string name="view_settings_app_version_code_label">Version code</string>
     <string name="view_settings_app_long_version_code_label">Long version code</string>
 
+    <string name="view_settings_developer_mode_enabled">Developer mode enabled</string>
+    <string name="view_settings_developer_mode_disabled">Developer mode disabled</string>
+    <string name="view_settings_developer_activation_message_title">Enable developer mode</string>
+    <string name="view_settings_developer_activation_message">Confirmation to enable this hidden mode. Are you sure you are developer of this app? If you are not, please cancel abort. We are not responsible if you click Yes. This mode is designed for internal testing (that explain hidden activation). This mode may not be compliant with 3rd-party apps because features are in development.</string>
+    <string name="view_settings_developer_activation_message_positive">YES, I\'m developer of this app and I accept all responsibilities</string>
+    <string name="view_settings_developer_activation_message_negative">NO, I\'m NOT developer of this app</string>
+    <string name="view_settings_developer_activation_password">Password</string>
+    <string name="view_settings_developer_activation_ok">OK</string>
+    <string name="view_settings_developer_activation_cancel">Cancel</string>
+
 </resources>

@@ -29,6 +29,12 @@ internal class MainActivityPresenter(
         themeManager.unregisterThemeListener(themeListener)
     }
 
+    override fun onResume() {
+        if (!webViewVisible) {
+            screen.showKeyboard()
+        }
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putBoolean("webViewVisible", webViewVisible)
     }

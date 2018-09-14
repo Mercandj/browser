@@ -1,5 +1,6 @@
 package com.mercandalli.android.browser.settings
 
+import android.app.Activity
 import android.content.Context
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
@@ -9,7 +10,9 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.annotation.StringRes
 import androidx.cardview.widget.CardView
+import com.google.android.material.snackbar.Snackbar
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.browser.search_engine.SearchEngine
@@ -51,6 +54,7 @@ class SettingsView @JvmOverloads constructor(
 
     private val aboutSection: CardView = view.findViewById(R.id.view_settings_about_section)
     private val aboutSectionLabel: TextView = view.findViewById(R.id.view_settings_about_section_label)
+    private val versionNameRow: View = view.findViewById(R.id.view_settings_app_version_name_row)
     private val versionNameLabel: TextView = view.findViewById(R.id.view_settings_app_version_name_label)
     private val versionName: TextView = view.findViewById(R.id.view_settings_app_version_name)
     private val versionCodeLabel: TextView = view.findViewById(R.id.view_settings_app_version_code_label)
@@ -84,6 +88,9 @@ class SettingsView @JvmOverloads constructor(
         }
         searchEngineUnlockRow.setOnClickListener {
             userAction.onSearchEngineUnlockRowClicked(activityContainer!!)
+        }
+        versionNameRow.setOnClickListener {
+            userAction.onVersionNameRowClicked()
         }
     }
 
@@ -228,6 +235,14 @@ class SettingsView @JvmOverloads constructor(
         searchEngineSubLabel.text = context.resources.getString(R.string.view_settings_search_engine_sublabel, searchEngineName)
     }
 
+    override fun showSnackbar(@StringRes text: Int, duration: Int) {
+        Snackbar.make((context as Activity).window.decorView.findViewById(android.R.id.content), text, duration).show()
+    }
+
+    override fun showSnackbar(text: String, duration: Int) {
+        Snackbar.make((context as Activity).window.decorView.findViewById(android.R.id.content), text, duration).show()
+    }
+
     fun setActivityContainer(activityContainer: InAppManager.ActivityContainer) {
         this.activityContainer = activityContainer
     }
@@ -241,6 +256,7 @@ class SettingsView @JvmOverloads constructor(
             override fun onAdBlockerUnlockRowClicked(activityContainer: InAppManager.ActivityContainer) {}
             override fun onSearchEngineRowClicked() {}
             override fun onSearchEngineUnlockRowClicked(activityContainer: InAppManager.ActivityContainer) {}
+            override fun onVersionNameRowClicked() {}
         }
     } else {
         val themeManager = ApplicationGraph.getThemeManager()
@@ -249,6 +265,11 @@ class SettingsView @JvmOverloads constructor(
         val adBlockerManager = ApplicationGraph.getAdBlockerManager()
         val productManager = ApplicationGraph.getProductManager()
         val searchEngineManager = ApplicationGraph.getSearchEngineManager()
+        val dialogManager = ApplicationGraph.getDialogManager()
+        val hashManager = ApplicationGraph.getHashManager()
+        val addOn = object : SettingsPresenter.AddOn {
+            override fun getCurrentTimeMillis() = System.currentTimeMillis()
+        }
         SettingsPresenter(
                 this,
                 themeManager,
@@ -256,7 +277,10 @@ class SettingsView @JvmOverloads constructor(
                 inAppManager,
                 adBlockerManager,
                 productManager,
-                searchEngineManager
+                searchEngineManager,
+                dialogManager,
+                hashManager,
+                addOn
         )
     }
 }

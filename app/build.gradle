@@ -116,6 +116,7 @@ android {
             res.srcDirs = [
                     'src/main/res/browser',
                     'src/main/res/common',
+                    'src/main/res/dialog',
                     'src/main/res/icon',
                     'src/main/res/main',
                     'src/main/res/settings'
@@ -169,7 +170,6 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.0.0-rc02"
 
     // Google
-    implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.google.firebase:firebase-core:16.0.3'
     implementation "com.google.firebase:firebase-config:16.0.0"
 

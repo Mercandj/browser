@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -36,14 +36,13 @@
                 android:textColorHint="#888888"
                 android:textSize="17sp" />
 
-            <com.mercandalli.android.browser.common.ForegroundImageView
+            <ImageView
                 android:id="@+id/activity_main_more"
-                android:layout_width="@dimen/default_space_4"
-                android:layout_height="@dimen/default_space_4"
+                android:layout_width="48dp"
+                android:layout_height="@dimen/toolbar_height"
                 android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="@dimen/default_space"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:padding="7dp"
+                android:background="?android:selectableItemBackground"
+                android:padding="12dp"
                 android:src="@drawable/ic_more_vert_black_24dp"
                 android:tint="#666666" />
 
@@ -119,4 +118,4 @@
         android:max="100"
         android:progress="0" />
 
-</FrameLayout>
+</merge>
