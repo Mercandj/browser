@@ -5,11 +5,13 @@ import android.content.Context
 import com.mercandalli.android.browser.ad_blocker.AdBlockerModule
 import com.mercandalli.android.browser.dialog.DialogModule
 import com.mercandalli.android.browser.hash.HashModule
+import com.mercandalli.android.browser.network.NetworkModule
 import com.mercandalli.android.browser.product.ProductModule
 import com.mercandalli.android.browser.remote_config.RemoteConfigModule
 import com.mercandalli.android.browser.search_engine.SearchEngineModule
+import com.mercandalli.android.browser.suggestion.SuggestionModule
 import com.mercandalli.android.browser.theme.ThemeModule
-import com.mercandalli.android.browser.thread.MainThreadModule
+import com.mercandalli.android.browser.main_thread.MainThreadModule
 import com.mercandalli.android.browser.toast.ToastModule
 import com.mercandalli.android.browser.update.UpdateModule
 import com.mercandalli.android.browser.version.VersionModule
@@ -21,10 +23,12 @@ class ApplicationGraph(
     private val adBlockerManagerInternal by lazy { AdBlockerModule(context).createAdBlockerManager() }
     private val dialogManagerInternal by lazy { DialogModule(context).createDialogManager() }
     private val hashManagerInternal by lazy { HashModule(context).createHashManager() }
-    private val productManagerInternal by lazy { ProductModule(context).createProductManager() }
     private val mainThreadPostInternal by lazy { MainThreadModule().createMainThreadPost() }
+    private val okHttpClientLazyInternal by lazy { NetworkModule().createOkHttpClientLazy() }
+    private val productManagerInternal by lazy { ProductModule(context).createProductManager() }
     private val remoteConfigInternal by lazy { RemoteConfigModule().createRemoteConfig(mainThreadPostInternal) }
     private val searchEngineManagerInternal by lazy { SearchEngineModule().createSearchEngineManager() }
+    private val suggestionManagerInternal by lazy { SuggestionModule().createSuggestionManager() }
     private val themeManagerInternal by lazy { ThemeModule(context).createThemeManager() }
     private val toastManagerInternal by lazy { ToastModule().createToastManager(context, mainThreadPostInternal) }
     private val updateManagerInternal by lazy { UpdateModule().createUpdateManager(context, versionManagerInternal) }
@@ -53,6 +57,12 @@ class ApplicationGraph(
         fun getHashManager() = graph!!.hashManagerInternal
 
         @JvmStatic
+        fun getMainThreadPost() = graph!!.mainThreadPostInternal
+
+        @JvmStatic
+        fun getOkHttpClientLazy() = graph!!.okHttpClientLazyInternal
+
+        @JvmStatic
         fun getProductManager() = graph!!.productManagerInternal
 
         @JvmStatic
@@ -60,6 +70,9 @@ class ApplicationGraph(
 
         @JvmStatic
         fun getSearchEngineManager() = graph!!.searchEngineManagerInternal
+
+        @JvmStatic
+        fun getSuggestionManager() = graph!!.suggestionManagerInternal
 
         @JvmStatic
         fun getThemeManager() = graph!!.themeManagerInternal

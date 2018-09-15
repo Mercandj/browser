@@ -2,7 +2,7 @@ package com.mercandalli.android.browser.toast
 
 import android.content.Context
 import android.widget.Toast
-import com.mercandalli.android.browser.thread.MainThreadPost
+import com.mercandalli.android.browser.main_thread.MainThreadPost
 
 class ToastManagerImpl(
         private val context: Context,

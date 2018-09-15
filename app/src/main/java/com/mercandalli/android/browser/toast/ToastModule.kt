@@ -1,7 +1,7 @@
 package com.mercandalli.android.browser.toast
 
 import android.content.Context
-import com.mercandalli.android.browser.thread.MainThreadPost
+import com.mercandalli.android.browser.main_thread.MainThreadPost
 
 class ToastModule {
 

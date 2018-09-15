@@ -183,6 +183,9 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.hannesdorfmann:adapterdelegates3:3.0.1'
 
+    // Third party - Network
+    implementation "com.squareup.okhttp3:okhttp:3.11.0"
+
     // Testing-only dependencies
     androidTestImplementation "androidx.annotation:annotation:1.0.0-rc02"
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'

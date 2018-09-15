@@ -6,6 +6,8 @@ import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.annotation.ColorRes
 import androidx.annotation.IdRes
 import androidx.annotation.RequiresApi
@@ -20,12 +22,15 @@ import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.annotation.StringRes
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.browser.BrowserView
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
 import com.mercandalli.android.browser.settings.SettingsActivity
+import com.mercandalli.android.browser.suggestion.SuggestionAdapter
 import com.mercandalli.android.libs.monetization.MonetizationGraph
 
 class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
@@ -36,6 +41,9 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     private val progress: ProgressBar by bind(R.id.activity_main_progress)
     private val input: EditText by bind(R.id.activity_main_search)
     private val more: View by bind(R.id.activity_main_more)
+    private val suggestions: RecyclerView by bind(R.id.activity_main_recycler_view)
+    private val suggestionsShadow: View by bind(R.id.activity_main_recycler_view_shadow)
+    private val suggestionsAdapter = createSuggestionAdapter()
     private val fabClear: FloatingActionButton by bind(R.id.activity_main_fab_clear)
 
     private val emptyView: View by bind(R.id.activity_main_empty_view)
@@ -59,6 +67,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         more.setOnClickListener { showOverflowPopupMenu(more) }
         webView.browserWebViewListener = browserWebViewListener
         input.setOnEditorActionListener(createOnEditorActionListener())
+        input.addTextChangedListener(createTextWatcher())
         emptyViewVideoCheckBox.setOnCheckedChangeListener { _, isChecked ->
             userAction.onVideoCheckedChanged(isChecked)
         }
@@ -68,6 +77,8 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         fabClear.setOnClickListener {
             userAction.onFabClearClicked()
         }
+        suggestions.layoutManager = LinearLayoutManager(this)
+        suggestions.adapter = suggestionsAdapter
         userAction.onCreate(savedInstanceState)
     }
 
@@ -172,6 +183,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     override fun setWindowBackgroundColorRes(@ColorRes colorRes: Int) {
         val color = ContextCompat.getColor(this, colorRes)
         window.setBackgroundDrawable(ColorDrawable(color))
+        suggestions.setBackgroundColor(color)
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -246,6 +258,17 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         toolbarShadow.visibility = View.GONE
     }
 
+    override fun showSuggestions(suggestions: List<String>) {
+        this.suggestions.visibility = View.VISIBLE
+        suggestionsShadow.visibility = View.VISIBLE
+        suggestionsAdapter.populate(suggestions)
+    }
+
+    override fun hideSuggestions() {
+        suggestions.visibility = View.GONE
+        suggestionsShadow.visibility = View.GONE
+    }
+
     private fun showSnackbar(@StringRes text: Int, duration: Int) {
         Snackbar.make(findViewById(R.id.activity_main_bottom_bar), text, duration).show()
     }
@@ -290,13 +313,35 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         false
     }
 
+    private fun createTextWatcher() = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            userAction.onSearchInputChanged(input.text.toString())
+        }
+    }
+
+    private fun createSuggestionAdapter() = SuggestionAdapter(object : SuggestionAdapter.SuggestionClickListener {
+        override fun onSuggestionClicked(suggestion: String) {
+            userAction.onSuggestionClicked(suggestion)
+        }
+    })
+
     private fun createUserAction(): MainActivityContract.UserAction {
         val themeManager = ApplicationGraph.getThemeManager()
         val searchEngineManager = ApplicationGraph.getSearchEngineManager()
+        val suggestionManager = ApplicationGraph.getSuggestionManager()
         return MainActivityPresenter(
                 this,
                 themeManager,
-                searchEngineManager
+                searchEngineManager,
+                suggestionManager
         )
     }
 

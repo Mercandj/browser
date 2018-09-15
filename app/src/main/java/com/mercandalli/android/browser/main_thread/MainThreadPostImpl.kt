@@ -1,4 +1,4 @@
-package com.mercandalli.android.browser.thread
+package com.mercandalli.android.browser.main_thread
 
 import android.os.Handler
 

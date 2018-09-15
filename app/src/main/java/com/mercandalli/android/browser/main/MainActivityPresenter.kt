@@ -3,21 +3,27 @@ package com.mercandalli.android.browser.main
 import android.os.Build
 import android.os.Bundle
 import com.mercandalli.android.browser.search_engine.SearchEngineManager
+import com.mercandalli.android.browser.suggestion.SuggestionManager
+import com.mercandalli.android.browser.suggestion.Suggestions
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 
 internal class MainActivityPresenter(
         private val screen: MainActivityContract.Screen,
         private val themeManager: ThemeManager,
-        private val searchEngineManager: SearchEngineManager
+        private val searchEngineManager: SearchEngineManager,
+        private val suggestionManager: SuggestionManager
 ) : MainActivityContract.UserAction {
 
     private val themeListener = createThemeListener()
+    private val suggestionListener = createSuggestionListener()
     private var webViewVisible = false
     private var videoRadioButtonChecked = false
+    private var search: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         themeManager.registerThemeListener(themeListener)
+        suggestionManager.registerSuggestionListener(suggestionListener)
         updateTheme()
         val firstActivityLaunch = savedInstanceState == null
         if (firstActivityLaunch) {
@@ -28,6 +34,7 @@ internal class MainActivityPresenter(
 
     override fun onDestroy() {
         themeManager.unregisterThemeListener(themeListener)
+        suggestionManager.unregisterSuggestionListener(suggestionListener)
     }
 
     override fun onResume() {
@@ -43,6 +50,15 @@ internal class MainActivityPresenter(
     override fun onRestoreInstanceState(outState: Bundle) {
         webViewVisible = outState.getBoolean("webViewVisible")
         setWebViewVisible(webViewVisible)
+    }
+
+    override fun onSearchInputChanged(search: String) {
+        this.search = search
+        if (search == "") {
+            screen.hideSuggestions()
+        } else {
+            suggestionManager.getSuggestion(search)
+        }
     }
 
     override fun onSearchPerformed(search: String) {
@@ -102,6 +118,14 @@ internal class MainActivityPresenter(
         screen.quit()
     }
 
+    override fun onSuggestionClicked(suggestion: String) {
+        val search = suggestion.replace("<b>", "").replace("</b>", "")
+        val url = searchToUrl(search)
+        screen.showUrl(url)
+        screen.resetSearchInput()
+        setWebViewVisible(true)
+    }
+
     private fun searchToUrl(search: String): String {
         return if (videoRadioButtonChecked) {
             searchEngineManager.createSearchVideoUrl(search)
@@ -119,6 +143,7 @@ internal class MainActivityPresenter(
             screen.hideEmptyView()
             screen.showLoader(0)
             screen.hideKeyboard()
+            screen.hideSuggestions()
         } else {
             screen.hideFab()
             screen.showToolbar()
@@ -126,6 +151,9 @@ internal class MainActivityPresenter(
             screen.showEmptyView()
             screen.hideLoader()
             screen.showKeyboard()
+            if (search == "") {
+                screen.hideSuggestions()
+            }
         }
     }
 
@@ -146,6 +174,15 @@ internal class MainActivityPresenter(
         override fun onThemeChanged() {
             updateTheme()
             screen.reload()
+        }
+    }
+
+    private fun createSuggestionListener() = object : SuggestionManager.SuggestionListener {
+        override fun onSuggestionEnded(suggestions: Suggestions) {
+            if (suggestions.searchInput != search) {
+                return
+            }
+            screen.showSuggestions(suggestions.suggestions)
         }
     }
 }

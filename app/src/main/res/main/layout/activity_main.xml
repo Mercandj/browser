@@ -86,6 +86,20 @@
 
                 </LinearLayout>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/activity_main_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="70dp" />
+
+                <View
+                    android:id="@+id/activity_main_recycler_view_shadow"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="64dp"
+                    android:background="@drawable/shadow_bottom" />
+
             </FrameLayout>
 
             <View

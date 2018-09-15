@@ -3,7 +3,7 @@ package com.mercandalli.android.browser.remote_config;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.mercandalli.android.browser.BuildConfig;
-import com.mercandalli.android.browser.thread.MainThreadPost;
+import com.mercandalli.android.browser.main_thread.MainThreadPost;
 import com.mercandalli.android.browser.update.UpdateManager;
 
 import java.util.ArrayList;

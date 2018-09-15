@@ -1,7 +1,7 @@
 package com.mercandalli.android.browser.remote_config
 
 import com.mercandalli.android.browser.main.ApplicationGraph
-import com.mercandalli.android.browser.thread.MainThreadPost
+import com.mercandalli.android.browser.main_thread.MainThreadPost
 import java.util.*
 
 /**

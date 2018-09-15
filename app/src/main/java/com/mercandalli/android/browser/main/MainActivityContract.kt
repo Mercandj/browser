@@ -19,6 +19,8 @@ internal class MainActivityContract {
 
         fun onRestoreInstanceState(outState: Bundle)
 
+        fun onSearchInputChanged(search: String)
+
         fun onSearchPerformed(search: String)
 
         fun onHomeClicked()
@@ -38,6 +40,8 @@ internal class MainActivityContract {
         fun onVideoCheckedChanged(checked: Boolean)
 
         fun onQuitClicked()
+
+        fun onSuggestionClicked(suggestion: String)
     }
 
     internal interface Screen {
@@ -95,5 +99,9 @@ internal class MainActivityContract {
         fun showToolbar()
 
         fun hideToolbar()
+
+        fun showSuggestions(suggestions: List<String>)
+
+        fun hideSuggestions()
     }
 }
