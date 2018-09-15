@@ -5,8 +5,7 @@ interface SearchEngineManager {
     fun isFeatureAvailable(): Boolean
 
     fun createSearchUrl(
-            searchInput: String,
-            @SearchEngine.Companion.SearchEngineKey searchEngineKey: String = getSearchEngineKey()
+            searchInput: String
     ): String
 
     @SearchEngine.Companion.SearchEngineKey
@@ -17,4 +16,17 @@ interface SearchEngineManager {
     fun setSearchEngineKey(@SearchEngine.Companion.SearchEngineKey searchEngineKey: String)
 
     fun getSearchEngines(): List<SearchEngine>
+
+    fun createSearchVideoUrl(
+            searchInput: String
+    ): String
+
+    @SearchEngineVideo.Companion.SearchEngineVideoKey
+    fun getSearchEngineVideoKey(): String
+
+    fun getSearchEngineVideo(): SearchEngineVideo
+
+    fun setSearchEngineVideoKey(@SearchEngineVideo.Companion.SearchEngineVideoKey searchEngineVideoKey: String)
+
+    fun getSearchEngineVideos(): List<SearchEngineVideo>
 }

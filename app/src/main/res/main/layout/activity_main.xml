@@ -23,7 +23,7 @@
                 android:layout_gravity="start|center_vertical"
                 android:layout_marginEnd="@dimen/default_space_5"
                 android:background="@android:color/transparent"
-                android:hint="Search"
+                android:hint="@string/activity_main_input_hint"
                 android:imeOptions="actionSearch|flagNoExtractUi"
                 android:inputType="textNoSuggestions"
                 android:lines="1"
@@ -67,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="160dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
                     <ImageView
@@ -82,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Automatic private browsing.\nBorwse. Erase. Repeat" />
+                        android:text="@string/activity_main_empty_view_title" />
 
                 </LinearLayout>
 
@@ -108,6 +108,14 @@
         android:src="@drawable/ic_delete_white_24dp"
         app:fabCustomSize="52dp"
         app:maxImageSize="24dp" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/activity_main_video_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/default_space_2"
+        android:text="Video" />
 
     <ProgressBar
         android:id="@+id/activity_main_progress"

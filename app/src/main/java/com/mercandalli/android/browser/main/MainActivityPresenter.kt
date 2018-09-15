@@ -2,6 +2,7 @@ package com.mercandalli.android.browser.main
 
 import android.os.Build
 import android.os.Bundle
+import com.mercandalli.android.browser.search_engine.SearchEngine
 import com.mercandalli.android.browser.search_engine.SearchEngineManager
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
@@ -14,6 +15,7 @@ internal class MainActivityPresenter(
 
     private val themeListener = createThemeListener()
     private var webViewVisible = false
+    private var videoRadioButtonChecked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         themeManager.registerThemeListener(themeListener)
@@ -85,14 +87,22 @@ internal class MainActivityPresenter(
         screen.back()
     }
 
-    override fun onFabClicked() {
+    override fun onFabClearClicked() {
         screen.clearData()
         screen.showClearDataMessage()
         setWebViewVisible(false)
     }
 
+    override fun onVideoCheckedChanged(checked: Boolean) {
+        videoRadioButtonChecked = checked
+    }
+
     private fun searchToUrl(search: String): String {
-        return searchEngineManager.createSearchUrl(search)
+        return if (videoRadioButtonChecked) {
+            searchEngineManager.createSearchVideoUrl(search)
+        } else {
+            searchEngineManager.createSearchUrl(search)
+        }
     }
 
     private fun setWebViewVisible(visible: Boolean) {

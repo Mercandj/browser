@@ -33,7 +33,9 @@ internal class MainActivityContract {
 
         fun onBackPressed(emptyViewVisible: Boolean)
 
-        fun onFabClicked()
+        fun onFabClearClicked()
+
+        fun onVideoCheckedChanged(checked: Boolean)
     }
 
     internal interface Screen {

@@ -3,8 +3,10 @@
     <dimen name="on_boarding_btn_radius">10dp</dimen>
     <dimen name="on_boarding_card_radius">10dp</dimen>
     <dimen name="on_boarding_button_horizontal_margins">34dp</dimen>
+    <dimen name="on_boarding_button_bottom_margins">30dp</dimen>
+    <dimen name="on_boarding_page_height_port">340dp</dimen>
 
-    <integer name="carousel_circle_indicator_orientation">0</integer>
-    <dimen name="carousel_circle_indicator_stroke_width">0dp</dimen>
-    <dimen name="carousel_circle_indicator_radius">3dp</dimen>
+    <integer name="on_boarding_circle_indicator_orientation">0</integer>
+    <dimen name="on_boarding_circle_indicator_stroke_width">0dp</dimen>
+    <dimen name="on_boarding_circle_indicator_radius">3dp</dimen>
 </resources>

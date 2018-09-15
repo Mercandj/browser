@@ -10,13 +10,10 @@ class HashManagerImpl : HashManager {
     private val charsetIso88591 by lazy { charset("iso-8859-1") }
 
     override fun sha256(
-            text: String?,
+            text: String,
             time: Int
     ): String? {
-        if (text == null) {
-            return null
-        }
-        var result = text
+        var result: String? = text
         val messageDigest: MessageDigest
         try {
             messageDigest = MessageDigest.getInstance("SHA-256")
@@ -42,7 +39,6 @@ class HashManagerImpl : HashManager {
         } catch (e: UnsupportedEncodingException) {
             return null
         }
-
         val digest = messageDigest.digest()
         return convertToHex(digest)
     }

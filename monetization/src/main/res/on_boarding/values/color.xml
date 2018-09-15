@@ -5,7 +5,7 @@
     <color name="on_boarding_button_accent">#1565C0</color>
     <color name="on_boarding_button_accent_dark">#0D47A1</color>
 
-    <color name="carousel_circle_indicator_fill_color">#55000000</color>
-    <color name="carousel_circle_indicator_page_color">#22000000</color>
-    <color name="carousel_circle_indicator_stroke_color">#22000000</color>
+    <color name="on_boarding_circle_indicator_fill_color">#55000000</color>
+    <color name="on_boarding_circle_indicator_page_color">#22000000</color>
+    <color name="on_boarding_circle_indicator_stroke_color">#22000000</color>
 </resources>

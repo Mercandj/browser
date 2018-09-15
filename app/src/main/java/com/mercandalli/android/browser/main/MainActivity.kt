@@ -18,11 +18,10 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.annotation.StringRes
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.browser.BrowserView
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
@@ -39,7 +38,8 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     private val progress: ProgressBar by bind(R.id.activity_main_progress)
     private val input: EditText by bind(R.id.activity_main_search)
     private val more: View by bind(R.id.activity_main_more)
-    private val fab: FloatingActionButton by bind(R.id.activity_main_fab_clear)
+    private val fabClear: FloatingActionButton by bind(R.id.activity_main_fab_clear)
+    private val videoCheckBox: CheckBox by bind(R.id.activity_main_video_check_box)
 
     private val browserWebViewListener = createBrowserWebViewListener()
     private val userAction = createUserAction()
@@ -57,13 +57,16 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         more.setOnClickListener { showOverflowPopupMenu(more) }
         webView.browserWebViewListener = browserWebViewListener
         input.setOnEditorActionListener(createOnEditorActionListener())
+        videoCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            userAction.onVideoCheckedChanged(isChecked)
+        }
 
         if (savedInstanceState == null) {
             navigateHome()
         }
 
-        fab.setOnClickListener {
-            userAction.onFabClicked()
+        fabClear.setOnClickListener {
+            userAction.onFabClearClicked()
         }
         userAction.onCreate(savedInstanceState)
     }
@@ -138,7 +141,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
 
     override fun showClearDataMessage() {
-        Toast.makeText(this, "Data cleared", Toast.LENGTH_SHORT).show()
+        showSnackbar(R.string.activity_main_data_clear, Snackbar.LENGTH_SHORT)
     }
 
     override fun showLoader(progressPercent: Int) {
@@ -202,13 +205,13 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
 
     override fun showFab() {
-        if (!fab.isShown) {
-            fab.show()
+        if (!fabClear.isShown) {
+            fabClear.show()
         }
     }
 
     override fun hideFab() {
-        fab.hide()
+        fabClear.hide()
     }
 
     override fun showWebView() {
@@ -221,10 +224,12 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     override fun showEmptyView() {
         emptyView.visibility = View.VISIBLE
+        videoCheckBox.visibility = View.VISIBLE
     }
 
     override fun hideEmptyView() {
         emptyView.visibility = View.GONE
+        videoCheckBox.visibility = View.GONE
     }
 
     override fun showToolbar() {
@@ -235,6 +240,10 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     override fun hideToolbar() {
         toolbar.visibility = View.GONE
         toolbarShadow.visibility = View.GONE
+    }
+
+    private fun showSnackbar(@StringRes text: Int, duration: Int) {
+        Snackbar.make(window.decorView.findViewById(android.R.id.content), text, duration).show()
     }
 
     private fun createBrowserWebViewListener() = object : BrowserView.BrowserWebViewListener {

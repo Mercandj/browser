@@ -18,14 +18,26 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <com.mercandalli.android.libs.monetization.on_boarding.OnBoardingThumbnail
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/on_boarding_2"
-                app:ratio_height="5"
-                app:ratio_width="4"
-                app:ratio_width_reference="false" />
+                android:layout_height="match_parent">
+
+                <com.mercandalli.android.libs.monetization.on_boarding.OnBoardingThumbnail
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/on_boarding_2"
+                    app:ratio_height="5"
+                    app:ratio_width="4"
+                    app:ratio_width_reference="false" />
+
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:background="@drawable/on_boarding_shadow_left" />
+
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,7 +65,6 @@
                     android:textSize="16sp" />
 
             </LinearLayout>
-
 
         </LinearLayout>
 

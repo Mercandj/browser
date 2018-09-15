@@ -11,14 +11,12 @@ data class SearchEngine(
 
         @StringDef(
                 SEARCH_ENGINE_GOOGLE,
-                SEARCH_ENGINE_YOUTUBE,
                 SEARCH_ENGINE_DUCK_DUCK_GO
         )
         @Retention(AnnotationRetention.SOURCE)
         annotation class SearchEngineKey
 
         const val SEARCH_ENGINE_GOOGLE = "search-engine-google"
-        const val SEARCH_ENGINE_YOUTUBE = "search-engine-youtube"
         const val SEARCH_ENGINE_DUCK_DUCK_GO = "search-engine-duck-duck-go"
     }
 }

@@ -71,8 +71,7 @@ class SettingsPresenter(
         screen.showSearchEngineSelection(searchEngineManager.getSearchEngines())
         val searchEngineKey = searchEngineManager.getSearchEngineKey()
         when (searchEngineKey) {
-            SearchEngine.SEARCH_ENGINE_GOOGLE -> searchEngineManager.setSearchEngineKey(SearchEngine.SEARCH_ENGINE_YOUTUBE)
-            SearchEngine.SEARCH_ENGINE_YOUTUBE -> searchEngineManager.setSearchEngineKey(SearchEngine.SEARCH_ENGINE_DUCK_DUCK_GO)
+            SearchEngine.SEARCH_ENGINE_GOOGLE -> searchEngineManager.setSearchEngineKey(SearchEngine.SEARCH_ENGINE_DUCK_DUCK_GO)
             SearchEngine.SEARCH_ENGINE_DUCK_DUCK_GO -> searchEngineManager.setSearchEngineKey(SearchEngine.SEARCH_ENGINE_GOOGLE)
         }
         syncRows()

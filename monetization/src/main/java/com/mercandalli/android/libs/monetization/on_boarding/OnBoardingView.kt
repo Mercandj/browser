@@ -33,7 +33,6 @@ class OnBoardingView @JvmOverloads constructor(
     private var currentLayoutNames = layoutNamesWithoutStore
     private val view = LayoutInflater.from(context).inflate(R.layout.view_on_boarding, this)
     private val viewPager: ViewPager = view.findViewById(R.id.view_on_boarding_view_pager)
-    private val store: View = view.findViewById(R.id.view_on_boarding_store)
     private val storeBuy: View = view.findViewById(R.id.view_on_boarding_store_buy)
     private val storeSkip: View = view.findViewById(R.id.view_on_boarding_store_skip)
     private val next: View = view.findViewById(R.id.view_on_boarding_next)
@@ -100,11 +99,13 @@ class OnBoardingView @JvmOverloads constructor(
     }
 
     override fun showStoreButtons() {
-        store.visibility = VISIBLE
+        storeBuy.visibility = VISIBLE
+        storeSkip.visibility = VISIBLE
     }
 
     override fun hideStoreButtons() {
-        store.visibility = GONE
+        storeBuy.visibility = GONE
+        storeSkip.visibility = GONE
     }
 
     override fun closeOnBoarding() {

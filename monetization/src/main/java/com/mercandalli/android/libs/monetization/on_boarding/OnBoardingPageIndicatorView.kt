@@ -119,12 +119,12 @@ class OnBoardingPageIndicatorView @JvmOverloads constructor(
         } else {
             // Load defaults from resources
             val res = resources
-            val defaultPageColor = ContextCompat.getColor(context, R.color.carousel_circle_indicator_page_color)
-            val defaultFillColor = ContextCompat.getColor(context, R.color.carousel_circle_indicator_fill_color)
-            val defaultOrientation = res.getInteger(R.integer.carousel_circle_indicator_orientation)
-            val defaultStrokeColor = ContextCompat.getColor(context, R.color.carousel_circle_indicator_stroke_color)
-            val defaultStrokeWidth = res.getDimension(R.dimen.carousel_circle_indicator_stroke_width)
-            val defaultRadius = res.getDimension(R.dimen.carousel_circle_indicator_radius)
+            val defaultPageColor = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_page_color)
+            val defaultFillColor = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_fill_color)
+            val defaultOrientation = res.getInteger(R.integer.on_boarding_circle_indicator_orientation)
+            val defaultStrokeColor = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_stroke_color)
+            val defaultStrokeWidth = res.getDimension(R.dimen.on_boarding_circle_indicator_stroke_width)
+            val defaultRadius = res.getDimension(R.dimen.on_boarding_circle_indicator_radius)
 
             // Retrieve styles attributes
             val a = context.obtainStyledAttributes(attrs, R.styleable.OnBoardingPageIndicatorView, 0, 0)
