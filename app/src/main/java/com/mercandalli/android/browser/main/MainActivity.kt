@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     private val webView: BrowserView by bind(R.id.activity_main_web_view)
     private val progress: ProgressBar by bind(R.id.activity_main_progress)
     private val input: EditText by bind(R.id.activity_main_search)
+    private val inputClear: ImageView by bind(R.id.activity_main_clear_input)
     private val more: View by bind(R.id.activity_main_more)
     private val suggestions: RecyclerView by bind(R.id.activity_main_recycler_view)
     private val suggestionsShadow: View by bind(R.id.activity_main_recycler_view_shadow)
@@ -76,6 +77,9 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         }
         fabClear.setOnClickListener {
             userAction.onFabClearClicked()
+        }
+        inputClear.setOnClickListener {
+            userAction.onInputClearClicked()
         }
         suggestions.layoutManager = LinearLayoutManager(this)
         suggestions.adapter = suggestionsAdapter
@@ -267,6 +271,18 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     override fun hideSuggestions() {
         suggestions.visibility = View.GONE
         suggestionsShadow.visibility = View.GONE
+    }
+
+    override fun showClearInput() {
+        inputClear.visibility = View.VISIBLE
+    }
+
+    override fun hideClearInput() {
+        inputClear.visibility = View.GONE
+    }
+
+    override fun setInput(inputString: String) {
+        input.setText(inputString)
     }
 
     private fun showSnackbar(@StringRes text: Int, duration: Int) {

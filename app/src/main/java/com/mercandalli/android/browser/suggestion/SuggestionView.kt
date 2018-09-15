@@ -4,11 +4,12 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.mercandalli.android.browser.common.ViewUtils
 import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 
-class SuggestionTextView @JvmOverloads constructor(
+class SuggestionView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : TextView(context, attrs, defStyleAttr) {
 
@@ -16,6 +17,10 @@ class SuggestionTextView @JvmOverloads constructor(
         ApplicationGraph.getThemeManager()
     }
     private val themeListener = createThemeListener()
+
+    init {
+        background = ViewUtils.getSelectableItemBackground(context)
+    }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()

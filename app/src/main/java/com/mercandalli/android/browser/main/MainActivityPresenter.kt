@@ -28,6 +28,7 @@ internal class MainActivityPresenter(
         val firstActivityLaunch = savedInstanceState == null
         if (firstActivityLaunch) {
             screen.showKeyboard()
+            screen.hideClearInput()
             setWebViewVisible(webViewVisible)
         }
     }
@@ -55,8 +56,10 @@ internal class MainActivityPresenter(
     override fun onSearchInputChanged(search: String) {
         this.search = search
         if (search == "") {
+            screen.hideClearInput()
             screen.hideSuggestions()
         } else {
+            screen.showClearInput()
             suggestionManager.getSuggestion(search)
         }
     }
@@ -108,6 +111,13 @@ internal class MainActivityPresenter(
         screen.clearData()
         screen.showClearDataMessage()
         setWebViewVisible(false)
+    }
+
+    override fun onInputClearClicked() {
+        screen.setInput("")
+        screen.hideSuggestions()
+        screen.hideClearInput()
+        screen.showKeyboard()
     }
 
     override fun onVideoCheckedChanged(checked: Boolean) {

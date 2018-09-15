@@ -37,6 +37,8 @@ internal class MainActivityContract {
 
         fun onFabClearClicked()
 
+        fun onInputClearClicked()
+
         fun onVideoCheckedChanged(checked: Boolean)
 
         fun onQuitClicked()
@@ -103,5 +105,11 @@ internal class MainActivityContract {
         fun showSuggestions(suggestions: List<String>)
 
         fun hideSuggestions()
+
+        fun showClearInput()
+
+        fun hideClearInput()
+
+        fun setInput(inputString: String)
     }
 }

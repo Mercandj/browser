@@ -36,7 +36,7 @@ class SuggestionAdapter(
 
         override fun onCreateViewHolder(viewGroup: ViewGroup): SuggestionViewHolder {
             val context = viewGroup.context
-            val textView = SuggestionTextView(context)
+            val textView = SuggestionView(context)
             val layoutParams = RecyclerView.LayoutParams(
                     RecyclerView.LayoutParams.MATCH_PARENT,
                     RecyclerView.LayoutParams.WRAP_CONTENT
@@ -44,7 +44,7 @@ class SuggestionAdapter(
             val marginHorizontal = context.resources.getDimensionPixelSize(R.dimen.default_space_2)
             val marginTop = context.resources.getDimensionPixelSize(R.dimen.default_space)
             val marginBottom = context.resources.getDimensionPixelSize(R.dimen.default_space)
-            layoutParams.setMargins(marginHorizontal, marginTop, marginHorizontal, marginBottom)
+            textView.setPadding(marginHorizontal, marginTop, marginHorizontal, marginBottom)
             textView.layoutParams = layoutParams
             textView.setTextColor(ContextCompat.getColor(context, R.color.color_text_title_1))
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(R.dimen.text_size_xl))
