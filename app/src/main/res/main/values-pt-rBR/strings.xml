@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="activity_main_input_hint">Pesquisar</string>
+    <string name="activity_main_data_clear">Your browsing history has been erased.</string>
+    <string name="activity_main_empty_view_title">Navegação privativa automática.\nNavegar. Apagar. Repetir.</string>
+    <string name="activity_main_video">Vídeo</string>
+</resources>

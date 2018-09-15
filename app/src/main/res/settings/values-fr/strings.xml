@@ -13,7 +13,8 @@
     <string name="view_settings_search_engine_unlock_label">Search engine</string>
     <string name="view_settings_search_engine_unlock_sublabel">Try other search engine for free</string>
     <string name="view_settings_search_engine_label">Search engine</string>
-    <string name="view_settings_search_engine_sublabel">Set search engine. Current search engine is %1$s</string>
+    <string name="view_settings_search_engine_sublabel_preview">Choisir le moteur de recherche</string>
+    <string name="view_settings_search_engine_sublabel">Choisir le moteur de recherche. Le moteur de recherche actuel est %1$s</string>
 
     <string name="view_settings_theme_section_label">Thème</string>
     <string name="view_settings_theme_label">Thème</string>
@@ -23,5 +24,15 @@
     <string name="view_settings_app_version_name_label">Version name</string>
     <string name="view_settings_app_version_code_label">Version code</string>
     <string name="view_settings_app_long_version_code_label">Long version code</string>
+
+    <string name="view_settings_developer_mode_enabled">Mode developpeur activé</string>
+    <string name="view_settings_developer_mode_disabled">Mode developpeur desactivé</string>
+    <string name="view_settings_developer_activation_message_title">Activer le mode developpeur</string>
+    <string name="view_settings_developer_activation_message">Confirmation to enable this hidden mode. Are you sure you are developer of this app? If you are not, please cancel abort. We are not responsible if you click Yes. This mode is designed for internal testing (that explain hidden activation). This mode may not be compliant with 3rd-party apps because features are in development.</string>
+    <string name="view_settings_developer_activation_message_positive">YES, I\'m developer of this app and I accept all responsibilities</string>
+    <string name="view_settings_developer_activation_message_negative">NO, I\'m NOT developer of this app</string>
+    <string name="view_settings_developer_activation_password">Mot de passe</string>
+    <string name="view_settings_developer_activation_ok">OK</string>
+    <string name="view_settings_developer_activation_cancel">Annuler</string>
 
 </resources>

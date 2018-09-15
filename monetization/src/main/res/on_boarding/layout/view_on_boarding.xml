@@ -41,7 +41,7 @@
             android:id="@+id/view_on_boarding_view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="bottom"
             android:layout_weight="1"
             android:clipToPadding="false"
             android:paddingStart="32dp"
@@ -49,7 +49,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp">
+            android:layout_height="64dp">
 
             <TextView
                 android:id="@+id/view_on_boarding_store_skip"
@@ -58,9 +58,9 @@
                 android:layout_gravity="center_horizontal|top"
                 android:background="?android:selectableItemBackground"
                 android:paddingStart="12dp"
-                android:paddingTop="6dp"
+                android:paddingTop="4dp"
                 android:paddingEnd="12dp"
-                android:paddingBottom="6dp"
+                android:paddingBottom="4dp"
                 android:text="@string/on_boarding_store_skip"
                 android:textSize="14sp" />
 
@@ -71,7 +71,7 @@
                 android:layout_gravity="center_horizontal|bottom"
                 android:layout_marginBottom="16dp"
                 tools:background="#E0E0E0"
-                tools:layout_height="15dp"
+                tools:layout_height="10dp"
                 tools:layout_width="150dp" />
 
         </FrameLayout>
@@ -90,7 +90,8 @@
             android:paddingBottom="14dp"
             android:text="@string/on_boarding_store_buy"
             android:textColor="@color/on_boarding_button_text_color"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="@string/tools_res_folder_dimen" />
 
         <TextView
             android:id="@+id/view_on_boarding_next"

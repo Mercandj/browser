@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="activity_main_input_hint">Recherche</string>
+    <string name="activity_main_data_clear">Données supprimées</string>
+    <string name="activity_main_empty_view_title">Navigation privée.\nRecher. Efface. Recommence</string>
+    <string name="activity_main_video">Video</string>
+
+</resources>

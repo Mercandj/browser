@@ -10,7 +10,7 @@
         android:id="@+id/view_on_boarding_page_card"
         android:layout_width="match_parent"
         android:layout_height="@dimen/on_boarding_page_height_port"
-        android:layout_gravity="center"
+        android:layout_gravity="center_vertical"
         android:layout_margin="4dp"
         app:cardCornerRadius="@dimen/on_boarding_card_radius">
 
