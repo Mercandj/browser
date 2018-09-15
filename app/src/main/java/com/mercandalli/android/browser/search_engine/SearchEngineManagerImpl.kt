@@ -19,10 +19,12 @@ class SearchEngineManagerImpl(
     private val searchEngineVideos = ArrayList<SearchEngineVideo>()
 
     init {
-        searchEngines.add(SearchEngine(SEARCH_ENGINE_GOOGLE, "Google"))
-        searchEngines.add(SearchEngine(SEARCH_ENGINE_DUCK_DUCK_GO, "DuckDuckGo"))
+        searchEngines.add(SearchEngine(SEARCH_ENGINE_GOOGLE, "Google", "https://www.google.com/"))
+        searchEngines.add(SearchEngine(SEARCH_ENGINE_DUCK_DUCK_GO, "DuckDuckGo", "https://www.google.com/"))
         searchEngineVideos.add(SearchEngineVideo(SEARCH_ENGINE_VIDEO_YOUTUBE, "YouTube"))
     }
+
+    override fun getHomeUrl() = getSearchEngine().homeUrl
 
     override fun isFeatureAvailable() = productManager.isFullVersionAvailable()
 

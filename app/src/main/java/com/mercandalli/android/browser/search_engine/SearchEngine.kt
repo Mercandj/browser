@@ -4,7 +4,8 @@ import androidx.annotation.StringDef
 
 data class SearchEngine(
         @SearchEngineKey val searchEngineKey: String,
-        val name: String
+        val name: String,
+        val homeUrl:String
 ) {
 
     companion object {

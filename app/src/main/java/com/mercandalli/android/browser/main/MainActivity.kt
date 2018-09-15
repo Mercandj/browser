@@ -65,11 +65,6 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         emptyQuitTextView.setOnClickListener {
             userAction.onQuitClicked()
         }
-
-        if (savedInstanceState == null) {
-            navigateHome()
-        }
-
         fabClear.setOnClickListener {
             userAction.onFabClearClicked()
         }
@@ -131,10 +126,6 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     override fun quit() {
         finish()
-    }
-
-    override fun navigateHome() {
-        webView.load("https://www.google.com/")
     }
 
     override fun navigateSettings() {
@@ -256,7 +247,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
 
     private fun showSnackbar(@StringRes text: Int, duration: Int) {
-        Snackbar.make(window.decorView.findViewById(android.R.id.content), text, duration).show()
+        Snackbar.make(findViewById(R.id.activity_main_bottom_bar), text, duration).show()
     }
 
     private fun createBrowserWebViewListener() = object : BrowserView.BrowserWebViewListener {

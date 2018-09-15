@@ -4,6 +4,8 @@ interface SearchEngineManager {
 
     fun isFeatureAvailable(): Boolean
 
+    fun getHomeUrl():String
+
     fun createSearchUrl(
             searchInput: String
     ): String

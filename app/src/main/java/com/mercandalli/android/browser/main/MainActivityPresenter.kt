@@ -57,6 +57,7 @@ internal class MainActivityPresenter(
     }
 
     override fun onClearDataClicked() {
+        screen.showUrl(searchEngineManager.getHomeUrl())
         screen.clearData()
         screen.showClearDataMessage()
         setWebViewVisible(false)
@@ -87,6 +88,7 @@ internal class MainActivityPresenter(
     }
 
     override fun onFabClearClicked() {
+        screen.showUrl(searchEngineManager.getHomeUrl())
         screen.clearData()
         screen.showClearDataMessage()
         setWebViewVisible(false)

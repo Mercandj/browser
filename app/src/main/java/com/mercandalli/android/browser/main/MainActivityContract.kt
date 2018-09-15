@@ -50,8 +50,6 @@ internal class MainActivityContract {
 
         fun quit()
 
-        fun navigateHome()
-
         fun navigateSettings()
 
         fun clearData()

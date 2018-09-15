@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -109,17 +109,27 @@
         app:fabCustomSize="52dp"
         app:maxImageSize="24dp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/activity_main_bottom_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:orientation="vertical">
+        app:layout_behavior="com.mercandalli.android.browser.main.MoveUpwardBehavior">
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/activity_main_video_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="@dimen/default_space_2"
+            android:layout_marginEnd="@dimen/default_space_2"
+            android:text="@string/activity_main_video" />
 
         <TextView
             android:id="@+id/activity_main_video_quit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="end|center_vertical"
             android:background="?android:selectableItemBackground"
             android:paddingStart="@dimen/default_space_2"
             android:paddingTop="@dimen/default_space_1_5"
@@ -129,17 +139,7 @@
             android:textAllCaps="true"
             android:textStyle="bold" />
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/activity_main_video_check_box"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginStart="@dimen/default_space_2"
-            android:layout_marginEnd="@dimen/default_space_2"
-            android:layout_marginBottom="@dimen/default_space_2"
-            android:text="@string/activity_main_video" />
-
-    </LinearLayout>
+    </FrameLayout>
 
     <ProgressBar
         android:id="@+id/activity_main_progress"
@@ -150,4 +150,4 @@
         android:max="100"
         android:progress="0" />
 
-</merge>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
