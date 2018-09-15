@@ -2,7 +2,6 @@ package com.mercandalli.android.browser.main
 
 import android.os.Build
 import android.os.Bundle
-import com.mercandalli.android.browser.search_engine.SearchEngine
 import com.mercandalli.android.browser.search_engine.SearchEngineManager
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
@@ -97,6 +96,10 @@ internal class MainActivityPresenter(
         videoRadioButtonChecked = checked
     }
 
+    override fun onQuitClicked() {
+        screen.quit()
+    }
+
     private fun searchToUrl(search: String): String {
         return if (videoRadioButtonChecked) {
             searchEngineManager.createSearchVideoUrl(search)
@@ -125,7 +128,8 @@ internal class MainActivityPresenter(
     }
 
     private fun updateTheme(theme: Theme = themeManager.getTheme()) {
-        screen.setInputTextColorRes(theme.textPrimaryColorRes)
+        screen.setPrimaryTextColorRes(theme.textPrimaryColorRes)
+        screen.setAccentTextColorRes(theme.textAccentColorRes)
         screen.setWindowBackgroundColorRes(theme.windowBackgroundColorRes)
         screen.setToolbarBackgroundColorRes(theme.toolbarBackgroundColorRes)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

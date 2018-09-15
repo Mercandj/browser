@@ -4,4 +4,5 @@
     <string name="activity_main_data_clear">Your browsing history has been erased.</string>
     <string name="activity_main_empty_view_title">Navegação privativa automática.\nNavegar. Apagar. Repetir.</string>
     <string name="activity_main_video">Vídeo</string>
+    <string name="activity_main_quit">Sair</string>
 </resources>

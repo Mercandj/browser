@@ -33,13 +33,15 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     private val toolbar: View by bind(R.id.activity_main_toolbar)
     private val toolbarShadow: View by bind(R.id.activity_main_toolbar_shadow)
     private val webView: BrowserView by bind(R.id.activity_main_web_view)
-    private val emptyView: View by bind(R.id.activity_main_empty_view)
-    private val emptyTextView: TextView by bind(R.id.activity_main_empty_view_text)
     private val progress: ProgressBar by bind(R.id.activity_main_progress)
     private val input: EditText by bind(R.id.activity_main_search)
     private val more: View by bind(R.id.activity_main_more)
     private val fabClear: FloatingActionButton by bind(R.id.activity_main_fab_clear)
-    private val videoCheckBox: CheckBox by bind(R.id.activity_main_video_check_box)
+
+    private val emptyView: View by bind(R.id.activity_main_empty_view)
+    private val emptyTextView: TextView by bind(R.id.activity_main_empty_view_text)
+    private val emptyViewVideoCheckBox: CheckBox by bind(R.id.activity_main_video_check_box)
+    private val emptyQuitTextView: TextView by bind(R.id.activity_main_video_quit)
 
     private val browserWebViewListener = createBrowserWebViewListener()
     private val userAction = createUserAction()
@@ -57,8 +59,11 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         more.setOnClickListener { showOverflowPopupMenu(more) }
         webView.browserWebViewListener = browserWebViewListener
         input.setOnEditorActionListener(createOnEditorActionListener())
-        videoCheckBox.setOnCheckedChangeListener { _, isChecked ->
+        emptyViewVideoCheckBox.setOnCheckedChangeListener { _, isChecked ->
             userAction.onVideoCheckedChanged(isChecked)
+        }
+        emptyQuitTextView.setOnClickListener {
+            userAction.onQuitClicked()
         }
 
         if (savedInstanceState == null) {
@@ -198,10 +203,16 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         toolbar.setBackgroundColor(color)
     }
 
-    override fun setInputTextColorRes(@ColorRes colorRes: Int) {
+    override fun setPrimaryTextColorRes(@ColorRes colorRes: Int) {
         val color = ContextCompat.getColor(this, colorRes)
         input.setTextColor(color)
         emptyTextView.setTextColor(color)
+        emptyViewVideoCheckBox.setTextColor(color)
+    }
+
+    override fun setAccentTextColorRes(@ColorRes colorRes: Int) {
+        val color = ContextCompat.getColor(this, colorRes)
+        emptyQuitTextView.setTextColor(color)
     }
 
     override fun showFab() {
@@ -224,12 +235,14 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     override fun showEmptyView() {
         emptyView.visibility = View.VISIBLE
-        videoCheckBox.visibility = View.VISIBLE
+        emptyViewVideoCheckBox.visibility = View.VISIBLE
+        emptyQuitTextView.visibility = View.VISIBLE
     }
 
     override fun hideEmptyView() {
         emptyView.visibility = View.GONE
-        videoCheckBox.visibility = View.GONE
+        emptyViewVideoCheckBox.visibility = View.GONE
+        emptyQuitTextView.visibility = View.GONE
     }
 
     override fun showToolbar() {

@@ -12,6 +12,7 @@
     <color name="toolbar_background_light">@android:color/white</color>
     <color name="text_primary_color_light">#303030</color>
     <color name="text_secondary_color_light">#808080</color>
+    <color name="text_accent_color_light">@color/color_accent</color>
     <color name="text_dark_color_light">#000000</color>
     <color name="card_background_light">@android:color/white</color>
 
@@ -21,6 +22,7 @@
     <color name="toolbar_background_dark">@android:color/black</color>
     <color name="text_primary_color_dark">#E9E9E9</color>
     <color name="text_secondary_color_dark">#959595</color>
+    <color name="text_accent_color_dark">@color/color_accent</color>
     <color name="text_dark_color_dark">#FFFFFF</color>
     <color name="card_background_dark">#292929</color>
 

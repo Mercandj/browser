@@ -10,6 +10,7 @@ class DarkTheme : Theme(
         R.color.toolbar_background_dark,
         R.color.text_primary_color_dark,
         R.color.text_secondary_color_dark,
+        R.color.text_accent_color_dark,
         R.color.text_dark_color_dark,
         R.color.card_background_dark
 )

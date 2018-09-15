@@ -36,6 +36,8 @@ internal class MainActivityContract {
         fun onFabClearClicked()
 
         fun onVideoCheckedChanged(checked: Boolean)
+
+        fun onQuitClicked()
     }
 
     internal interface Screen {
@@ -76,7 +78,9 @@ internal class MainActivityContract {
 
         fun setToolbarBackgroundColorRes(@ColorRes colorRes: Int)
 
-        fun setInputTextColorRes(@ColorRes colorRes: Int)
+        fun setPrimaryTextColorRes(@ColorRes colorRes: Int)
+
+        fun setAccentTextColorRes(@ColorRes colorRes: Int)
 
         fun showFab()
 
