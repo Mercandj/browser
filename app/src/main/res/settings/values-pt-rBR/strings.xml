@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="activity_settings_title">Configurações</string>
+
+    <string name="view_settings_ad_blocker_section_label">Bloqueador de anúncios</string>
+    <string name="view_settings_ad_blocker_unlock_label">Bloqueador de anúncios</string>
+    <string name="view_settings_ad_blocker_unlock_sublabel">Experimente o bloqueador de anúncios gratuitamente</string>
+    <string name="view_settings_ad_blocker_label">Bloqueador de anúncios</string>
+    <string name="view_settings_ad_blocker_sublabel">Enable ad blocker</string>
+
+    <string name="view_settings_search_engine_section_label">Mecanismo de busca</string>
+    <string name="view_settings_search_engine_unlock_label">Mecanismo de busca</string>
+    <string name="view_settings_search_engine_unlock_sublabel">Tente outro motor de busca de graça</string>
+    <string name="view_settings_search_engine_label">Mecanismo de busca</string>
+    <string name="view_settings_search_engine_sublabel_preview">Modifique o mecanismo de pesquisa.</string>
+    <string name="view_settings_search_engine_sublabel">Modifique o mecanismo de pesquisa. O mecanismo de pesquisa atual é o %1$s</string>
+
+    <string name="view_settings_theme_section_label">Tema</string>
+    <string name="view_settings_theme_label">Tema</string>
+    <string name="view_settings_theme_sublabel">Tema escuro</string>
+
+    <string name="view_settings_about_section_label">Sobre</string>
+    <string name="view_settings_app_version_name_label">Version name</string>
+    <string name="view_settings_app_version_code_label">Version code</string>
+    <string name="view_settings_app_long_version_code_label">Long version code</string>
+
+    <string name="view_settings_developer_mode_enabled">Developer mode enabled</string>
+    <string name="view_settings_developer_mode_disabled">Developer mode disabled</string>
+    <string name="view_settings_developer_activation_message_title">Enable developer mode</string>
+    <string name="view_settings_developer_activation_message">Confirmation to enable this hidden mode. Are you sure you are developer of this app? If you are not, please cancel abort. We are not responsible if you click Yes. This mode is designed for internal testing (that explain hidden activation). This mode may not be compliant with 3rd-party apps because features are in development.</string>
+    <string name="view_settings_developer_activation_message_positive">YES, I\'m developer of this app and I accept all responsibilities</string>
+    <string name="view_settings_developer_activation_message_negative">NO, I\'m NOT developer of this app</string>
+    <string name="view_settings_developer_activation_password">Password</string>
+    <string name="view_settings_developer_activation_ok">OK</string>
+    <string name="view_settings_developer_activation_cancel">Cancel</string>
+
+</resources>

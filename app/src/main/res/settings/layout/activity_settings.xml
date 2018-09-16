@@ -27,7 +27,7 @@
             android:layout_gravity="start"
             android:layout_marginStart="@dimen/toolbar_height"
             android:gravity="center_vertical"
-            android:text="Settings"
+            android:text="@string/activity_settings_title"
             android:textSize="@dimen/text_size_xl"
             tools:textColor="@color/text_dark_color_light" />
 

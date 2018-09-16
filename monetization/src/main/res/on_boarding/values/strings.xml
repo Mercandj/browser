@@ -9,4 +9,6 @@
     <string name="on_boarding_next">NEXT</string>
     <string name="on_boarding_store_buy">START FREE TRIAL</string>
     <string name="on_boarding_store_skip">Use limited version</string>
+
+    <string name="on_boarding_page_1_content">Automatic private browsing.\nBrowse. Erase. Repeat</string>
 </resources>

@@ -86,6 +86,8 @@ internal class MainActivityContract {
 
         fun setPrimaryTextColorRes(@ColorRes colorRes: Int)
 
+        fun setSecondaryTextColorRes(@ColorRes colorRes: Int)
+
         fun setAccentTextColorRes(@ColorRes colorRes: Int)
 
         fun showFab()

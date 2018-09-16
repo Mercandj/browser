@@ -1,4 +1,4 @@
-package com.mercandalli.android.browser.browser
+package com.mercandalli.android.browser.main
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,19 +9,28 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.webkit.*
-import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.browser.ad_blocker.AdBlocker
 
-class BrowserView @JvmOverloads constructor(
+class MainWebView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : WebView(context, attrs, defStyleAttr) {
 
-    private val darkThemeEncoded by lazy {
+    private val googleDarkThemeOnlyCss by lazy(LazyThreadSafetyMode.NONE) {
         val inputStream = context.assets.open("dark-theme-google.css")
-        val buffer = ByteArray(inputStream.available())
-        inputStream.read(buffer)
-        inputStream.close()
-        Base64.encodeToString(buffer, Base64.NO_WRAP)
+        inputStream.bufferedReader().use { it.readText() }
+    }
+
+    private val googleCommonOnlyCss by lazy(LazyThreadSafetyMode.NONE) {
+        val inputStream = context.assets.open("common-google.css")
+        inputStream.bufferedReader().use { it.readText() }
+    }
+
+    private val googleLightThemBase64Css by lazy(LazyThreadSafetyMode.NONE) {
+        Base64.encodeToString(googleCommonOnlyCss.toByteArray(), Base64.NO_WRAP)
+    }
+
+    private val googleDarkThemBase64Css by lazy(LazyThreadSafetyMode.NONE) {
+        Base64.encodeToString("$googleCommonOnlyCss\n$googleDarkThemeOnlyCss".toByteArray(), Base64.NO_WRAP)
     }
 
     var browserWebViewListener: BrowserWebViewListener? = null
@@ -55,9 +64,8 @@ class BrowserView @JvmOverloads constructor(
                 }
 
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                    if (ApplicationGraph.getThemeManager().isDarkEnable() &&
-                            url != null && url.startsWith("https://www.google.")) {
-                        injectCSS()
+                    url?.let {
+                        injectCSS(it)
                     }
                     if (browserWebViewListener != null) {
                         browserWebViewListener!!.onProgressChanged()
@@ -168,14 +176,24 @@ class BrowserView @JvmOverloads constructor(
         }
     }
 
-    private fun injectCSS() {
+    private fun injectCSS(url: String) {
+        if (url.startsWith("https://www.google.")) {
+            if (ApplicationGraph.getThemeManager().isDarkEnable()) {
+                loadCss(googleDarkThemBase64Css)
+            } else {
+                loadCss(googleLightThemBase64Css)
+            }
+        }
+    }
+
+    private fun loadCss(cssContent: String) {
         loadUrl("javascript:(function() {" +
                 "var parent = document.getElementsByTagName('head').item(0);" +
                 "var style = document.createElement('style');" +
                 "style.type = 'text/css';" +
-                // Tell the browser to BASE64-decode the string into your script !!!
-                "style.innerHTML = window.atob('" + darkThemeEncoded + "');" +
+                "style.innerHTML = window.atob('" + cssContent + "');" +
                 "parent.appendChild(style)" +
-                "})()")
+                "})()"
+        )
     }
 }

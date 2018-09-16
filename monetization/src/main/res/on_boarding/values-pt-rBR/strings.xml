@@ -9,4 +9,6 @@
     <string name="on_boarding_next">PRÓXIMO</string>
     <string name="on_boarding_store_buy">COMECE O TESTE GRÁTIS</string>
     <string name="on_boarding_store_skip">Use versão limitada</string>
+
+    <string name="on_boarding_page_1_content">Navegação privativa automática.\nNavegar. Apagar. Repetir.</string>
 </resources>

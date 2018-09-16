@@ -72,7 +72,10 @@ internal class MainActivityPresenter(
     }
 
     override fun onHomeClicked() {
-        setWebViewVisible(false)
+        val url = searchEngineManager.getHomeUrl()
+        screen.showUrl(url)
+        screen.resetSearchInput()
+        setWebViewVisible(true)
     }
 
     override fun onClearDataClicked() {
@@ -174,6 +177,7 @@ internal class MainActivityPresenter(
 
     private fun updateTheme(theme: Theme = themeManager.getTheme()) {
         screen.setPrimaryTextColorRes(theme.textPrimaryColorRes)
+        screen.setSecondaryTextColorRes(theme.textSecondaryColorRes)
         screen.setAccentTextColorRes(theme.textAccentColorRes)
         screen.setWindowBackgroundColorRes(theme.windowBackgroundColorRes)
         screen.setToolbarBackgroundColorRes(theme.toolbarBackgroundColorRes)

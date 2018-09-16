@@ -9,4 +9,6 @@
     <string name="on_boarding_next">SUIVANT</string>
     <string name="on_boarding_store_buy">ESSAYER GRATUITEMENT</string>
     <string name="on_boarding_store_skip">Utiliser la version limitée</string>
+
+    <string name="on_boarding_page_1_content">Navigation privée.\nRecher. Efface. Recommence</string>
 </resources>

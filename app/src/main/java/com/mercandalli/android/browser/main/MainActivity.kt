@@ -27,7 +27,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.mercandalli.android.browser.R
-import com.mercandalli.android.browser.browser.BrowserView
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
 import com.mercandalli.android.browser.settings.SettingsActivity
 import com.mercandalli.android.browser.suggestion.SuggestionAdapter
@@ -37,11 +36,11 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     private val toolbar: View by bind(R.id.activity_main_toolbar)
     private val toolbarShadow: View by bind(R.id.activity_main_toolbar_shadow)
-    private val webView: BrowserView by bind(R.id.activity_main_web_view)
+    private val mainWebView: MainWebView by bind(R.id.activity_main_web_view)
     private val progress: ProgressBar by bind(R.id.activity_main_progress)
     private val input: EditText by bind(R.id.activity_main_search)
     private val inputClear: ImageView by bind(R.id.activity_main_clear_input)
-    private val more: View by bind(R.id.activity_main_more)
+    private val more: ImageView by bind(R.id.activity_main_more)
     private val suggestions: RecyclerView by bind(R.id.activity_main_recycler_view)
     private val suggestionsShadow: View by bind(R.id.activity_main_recycler_view_shadow)
     private val suggestionsAdapter = createSuggestionAdapter()
@@ -66,7 +65,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         }
         setContentView(R.layout.activity_main)
         more.setOnClickListener { showOverflowPopupMenu(more) }
-        webView.browserWebViewListener = browserWebViewListener
+        mainWebView.browserWebViewListener = browserWebViewListener
         input.setOnEditorActionListener(createOnEditorActionListener())
         input.addTextChangedListener(createTextWatcher())
         emptyViewVideoCheckBox.setOnCheckedChangeListener { _, isChecked ->
@@ -91,7 +90,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         if (forceDestroy) {
             return
         }
-        webView.browserWebViewListener = null
+        mainWebView.browserWebViewListener = null
         userAction.onDestroy()
     }
 
@@ -106,13 +105,13 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
             return
         }
         userAction.onSaveInstanceState(outState)
-        webView.saveState(outState)
+        mainWebView.saveState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         userAction.onRestoreInstanceState(savedInstanceState)
-        webView.restoreState(savedInstanceState)
+        mainWebView.restoreState(savedInstanceState)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
@@ -124,16 +123,16 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
 
     override fun showUrl(url: String) {
-        webView.load(url)
+        mainWebView.load(url)
     }
 
     override fun reload() {
-        webView.reload()
+        mainWebView.reload()
     }
 
     override fun back() {
-        if (webView.canGoBack()) {
-            webView.goBack()
+        if (mainWebView.canGoBack()) {
+            mainWebView.goBack()
         } else {
             finish()
         }
@@ -148,7 +147,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
 
     override fun clearData() {
-        webView.clearData()
+        mainWebView.clearData()
     }
 
     override fun showClearDataMessage() {
@@ -217,6 +216,12 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         emptyViewVideoCheckBox.setTextColor(color)
     }
 
+    override fun setSecondaryTextColorRes(@ColorRes colorRes: Int) {
+        val color = ContextCompat.getColor(this, colorRes)
+        more.setColorFilter(color)
+        inputClear.setColorFilter(color)
+    }
+
     override fun setAccentTextColorRes(@ColorRes colorRes: Int) {
         val color = ContextCompat.getColor(this, colorRes)
         emptyQuitTextView.setTextColor(color)
@@ -233,11 +238,11 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
 
     override fun showWebView() {
-        webView.visibility = View.VISIBLE
+        mainWebView.visibility = View.VISIBLE
     }
 
     override fun hideWebView() {
-        webView.visibility = View.GONE
+        mainWebView.visibility = View.GONE
     }
 
     override fun showEmptyView() {
@@ -290,13 +295,13 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         Snackbar.make(findViewById(R.id.activity_main_bottom_bar), text, duration).show()
     }
 
-    private fun createBrowserWebViewListener() = object : BrowserView.BrowserWebViewListener {
+    private fun createBrowserWebViewListener() = object : MainWebView.BrowserWebViewListener {
         override fun onPageFinished() {
             userAction.onPageLoadProgressChanged(100)
         }
 
         override fun onProgressChanged() {
-            userAction.onPageLoadProgressChanged(webView.progress)
+            userAction.onPageLoadProgressChanged(mainWebView.progress)
         }
 
         override fun onPageTouched() {

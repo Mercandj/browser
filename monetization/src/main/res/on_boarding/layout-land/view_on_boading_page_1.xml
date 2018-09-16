@@ -22,14 +22,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
-                <com.mercandalli.android.libs.monetization.on_boarding.OnBoardingThumbnail
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/on_boarding_1"
+                <com.mercandalli.android.libs.monetization.on_boarding.OnBoardingThumbnailFrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F6F6F6"
                     app:ratio_height="5"
                     app:ratio_width="4"
-                    app:ratio_width_reference="false" />
+                    app:ratio_width_reference="false">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/on_boarding_ic_launcher" />
+
+                        <TextView
+                            android:id="@+id/activity_main_empty_view_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:gravity="center"
+                            android:text="@string/on_boarding_page_1_content" />
+
+                    </LinearLayout>
+
+                </com.mercandalli.android.libs.monetization.on_boarding.OnBoardingThumbnailFrameLayout>
 
                 <View
                     android:layout_width="50dp"

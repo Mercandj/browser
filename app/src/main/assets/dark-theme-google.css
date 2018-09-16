@@ -34,8 +34,7 @@ a, .w, a.feGi6e {
     background-color: #222222 !important;
 }
 
-
-// Google bottom cookie
-.FAVrq.RlsRgd {
-    display: none !important;
+/* horizontal cards bg */
+g-inner-card {
+    background-color: #303030 !important;
 }
