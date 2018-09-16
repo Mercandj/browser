@@ -35,11 +35,6 @@ class SuggestionApiImpl(
         val querySearch = search.replace(" ", "+")
         return "https://www.google.fr/complete/search?" +
                 "client=psy-ab&" +
-                "hl=en-FR&" +
-                "gs_rn=64&" +
-                "gs_ri=psy-ab&tok=loie0ostOo0ypItA5c7exA&ei=2HedW-XwAciYabiChhg&" +
-                "cp=4&" +
-                "gs_id=m&" +
                 "q=$querySearch"
     }
 

@@ -2,7 +2,7 @@
 <resources>
 
     <string name="activity_main_input_hint">Search</string>
-    <string name="activity_main_data_clear">Data cleared</string>
+    <string name="activity_main_data_clear">Your browsing history has been erased.</string>
     <string name="activity_main_empty_view_title">Automatic private browsing.\nBrowse. Erase. Repeat</string>
     <string name="activity_main_video">Video</string>
     <string name="activity_main_quit">Quit</string>

@@ -2,7 +2,7 @@
 <resources>
 
     <string name="activity_main_input_hint">Recherche</string>
-    <string name="activity_main_data_clear">Données supprimées</string>
+    <string name="activity_main_data_clear">Votre historique de navigation a été effacé.</string>
     <string name="activity_main_empty_view_title">Navigation privée.\nRecher. Efface. Recommence</string>
     <string name="activity_main_video">Video</string>
     <string name="activity_main_quit">Quitter</string>

@@ -8,7 +8,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/view_on_boarding_page_card"
-        android:layout_width="370dp"
+        android:layout_width="@dimen/on_boarding_page_width_land"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_margin="8dp">

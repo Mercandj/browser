@@ -6,6 +6,7 @@
     <dimen name="on_boarding_button_bottom_margins">28dp</dimen>
     <dimen name="on_boarding_view_pager_container_height_port">340dp</dimen>
     <dimen name="on_boarding_page_height_port">320dp</dimen>
+    <dimen name="on_boarding_page_width_land">370dp</dimen>
 
     <integer name="on_boarding_circle_indicator_orientation">0</integer>
     <dimen name="on_boarding_circle_indicator_stroke_width">0dp</dimen>
