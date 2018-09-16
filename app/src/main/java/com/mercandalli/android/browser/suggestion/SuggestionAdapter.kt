@@ -2,10 +2,7 @@ package com.mercandalli.android.browser.suggestion
 
 import android.os.Build
 import android.text.Html
-import android.util.TypedValue
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates3.AbsListItemAdapterDelegate
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
@@ -41,13 +38,7 @@ class SuggestionAdapter(
                     RecyclerView.LayoutParams.MATCH_PARENT,
                     RecyclerView.LayoutParams.WRAP_CONTENT
             )
-            val marginHorizontal = context.resources.getDimensionPixelSize(R.dimen.default_space_2)
-            val marginTop = context.resources.getDimensionPixelSize(R.dimen.default_space)
-            val marginBottom = context.resources.getDimensionPixelSize(R.dimen.default_space)
-            textView.setPadding(marginHorizontal, marginTop, marginHorizontal, marginBottom)
             textView.layoutParams = layoutParams
-            textView.setTextColor(ContextCompat.getColor(context, R.color.color_text_title_1))
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(R.dimen.text_size_xl))
             return SuggestionViewHolder(textView, listener)
         }
 
@@ -59,32 +50,42 @@ class SuggestionAdapter(
     }
 
     private class SuggestionViewHolder(
-            private val view: TextView,
+            private val view: SuggestionView,
             private val listener: SuggestionClickListener
     ) : RecyclerView.ViewHolder(view) {
 
         private var suggestion: String? = null
 
         init {
-            view.setOnClickListener {
-                if (suggestion != null) {
-                    listener.onSuggestionClicked(suggestion!!)
+            view.setListener(object :SuggestionView.Listener {
+                override fun onSuggestionTestClicked() {
+                    if (suggestion != null) {
+                        listener.onSuggestionClicked(suggestion!!)
+                    }
                 }
-            }
+
+                override fun onSuggestionImageClicked() {
+                    if (suggestion != null) {
+                        listener.onSuggestionImageClicked(suggestion!!)
+                    }
+                }
+            })
         }
 
         fun bind(suggestion: String) {
             this.suggestion = suggestion
-            view.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            val spanned = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 Html.fromHtml(suggestion, Html.FROM_HTML_MODE_COMPACT)
             } else {
                 Html.fromHtml(suggestion)
             }
+            view.setText(spanned)
         }
     }
 
     interface SuggestionClickListener {
         fun onSuggestionClicked(suggestion: String)
+        fun onSuggestionImageClicked(suggestion: String)
     }
     //endregion Suggestion
 }

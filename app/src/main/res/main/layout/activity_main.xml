@@ -102,7 +102,9 @@
                     android:id="@+id/activity_main_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="70dp" />
+                    android:layout_marginBottom="70dp"
+                    android:clipToPadding="false"
+                    android:paddingTop="4dp" />
 
                 <View
                     android:id="@+id/activity_main_recycler_view_shadow"

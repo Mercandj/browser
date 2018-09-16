@@ -136,6 +136,11 @@ internal class MainActivityPresenter(
         setWebViewVisible(true)
     }
 
+    override fun onSuggestionImageClicked(suggestion: String) {
+        val search = suggestion.replace("<b>", "").replace("</b>", "")
+        screen.setInput(search)
+    }
+
     private fun searchToUrl(search: String): String {
         return if (videoRadioButtonChecked) {
             searchEngineManager.createSearchVideoUrl(search)

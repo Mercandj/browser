@@ -72,7 +72,10 @@ class SettingsPresenter(
         val searchEngineKey = searchEngineManager.getSearchEngineKey()
         when (searchEngineKey) {
             SearchEngine.SEARCH_ENGINE_GOOGLE -> searchEngineManager.setSearchEngineKey(SearchEngine.SEARCH_ENGINE_DUCK_DUCK_GO)
-            SearchEngine.SEARCH_ENGINE_DUCK_DUCK_GO -> searchEngineManager.setSearchEngineKey(SearchEngine.SEARCH_ENGINE_GOOGLE)
+            SearchEngine.SEARCH_ENGINE_DUCK_DUCK_GO -> searchEngineManager.setSearchEngineKey(SearchEngine.SEARCH_ENGINE_BING)
+            SearchEngine.SEARCH_ENGINE_BING -> searchEngineManager.setSearchEngineKey(SearchEngine.SEARCH_ENGINE_YAHOO)
+            SearchEngine.SEARCH_ENGINE_YAHOO -> searchEngineManager.setSearchEngineKey(SearchEngine.SEARCH_ENGINE_QWANT)
+            SearchEngine.SEARCH_ENGINE_QWANT -> searchEngineManager.setSearchEngineKey(SearchEngine.SEARCH_ENGINE_GOOGLE)
         }
         syncRows()
     }

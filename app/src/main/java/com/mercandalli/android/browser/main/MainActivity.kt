@@ -283,6 +283,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     override fun setInput(inputString: String) {
         input.setText(inputString)
+        input.setSelection(input.text.length)
     }
 
     private fun showSnackbar(@StringRes text: Int, duration: Int) {
@@ -346,6 +347,10 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     private fun createSuggestionAdapter() = SuggestionAdapter(object : SuggestionAdapter.SuggestionClickListener {
         override fun onSuggestionClicked(suggestion: String) {
             userAction.onSuggestionClicked(suggestion)
+        }
+
+        override fun onSuggestionImageClicked(suggestion: String) {
+            userAction.onSuggestionImageClicked(suggestion)
         }
     })
 

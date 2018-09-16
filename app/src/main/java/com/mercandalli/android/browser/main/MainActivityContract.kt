@@ -44,6 +44,8 @@ internal class MainActivityContract {
         fun onQuitClicked()
 
         fun onSuggestionClicked(suggestion: String)
+
+        fun onSuggestionImageClicked(suggestion: String)
     }
 
     internal interface Screen {

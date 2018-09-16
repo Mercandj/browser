@@ -119,7 +119,8 @@ android {
                     'src/main/res/dialog',
                     'src/main/res/icon',
                     'src/main/res/main',
-                    'src/main/res/settings'
+                    'src/main/res/settings',
+                    'src/main/res/suggestion'
             ]
         }
 

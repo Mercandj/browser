@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <TextView
+        android:id="@+id/view_suggestion_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="start"
+        android:layout_marginEnd="50dp"
+        android:background="?android:selectableItemBackground"
+        android:paddingStart="@dimen/default_space_1_5"
+        android:paddingTop="@dimen/default_space"
+        android:paddingEnd="@dimen/default_space_1_5"
+        android:paddingBottom="@dimen/default_space"
+        android:textSize="@dimen/text_size_xl" />
+
+    <ImageView
+        android:id="@+id/view_suggestion_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end"
+        android:background="?android:selectableItemBackground"
+        android:padding="13dp"
+        android:src="@drawable/ic_call_missed_black_24dp" />
+
+</merge>
