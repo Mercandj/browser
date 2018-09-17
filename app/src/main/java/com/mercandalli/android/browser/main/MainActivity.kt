@@ -214,6 +214,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         input.setTextColor(color)
         emptyTextView.setTextColor(color)
         emptyViewVideoCheckBox.setTextColor(color)
+        emptyViewFloatingCheckBox.setTextColor(color)
     }
 
     override fun setSecondaryTextColorRes(@ColorRes colorRes: Int) {

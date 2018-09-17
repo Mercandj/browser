@@ -144,31 +144,23 @@
         android:layout_gravity="end|bottom"
         app:layout_behavior="com.mercandalli.android.browser.main.MoveUpwardBehavior">
 
-        <LinearLayout
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/activity_main_video_check_box"
             android:layout_width="wrap_content"
-            android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="@dimen/default_space_1_5"
+            android:layout_marginEnd="@dimen/default_space_1_5"
+            android:text="@string/activity_main_video" />
 
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/activity_main_video_check_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:layout_marginStart="@dimen/default_space_2"
-                android:layout_marginEnd="@dimen/default_space"
-                android:text="@string/activity_main_video" />
-
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/activity_main_floating_check_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:layout_marginStart="@dimen/default_space"
-                android:layout_marginEnd="@dimen/default_space"
-                android:text="@string/activity_main_floating_window" />
-
-        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/activity_main_floating_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/default_space"
+            android:layout_marginEnd="@dimen/default_space"
+            android:text="@string/activity_main_floating_window" />
 
         <TextView
             android:id="@+id/activity_main_video_quit"

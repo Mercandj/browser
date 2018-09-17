@@ -7,6 +7,14 @@ class FloatingModule(
 ) {
 
     fun createFloatingManager(): FloatingManager {
-        return FloatingManagerImpl(context.applicationContext)
+        val floatingPermission = createFloatingPermission()
+        return FloatingManagerImpl(
+                context,
+                floatingPermission
+        )
+    }
+
+    private fun createFloatingPermission(): FloatingPermission {
+        return FloatingPermissionImpl(context)
     }
 }
