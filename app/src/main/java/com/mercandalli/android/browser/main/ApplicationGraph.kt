@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import com.mercandalli.android.browser.ad_blocker.AdBlockerModule
 import com.mercandalli.android.browser.dialog.DialogModule
+import com.mercandalli.android.browser.floating.FloatingModule
 import com.mercandalli.android.browser.hash.HashModule
 import com.mercandalli.android.browser.network.NetworkModule
 import com.mercandalli.android.browser.product.ProductModule
@@ -22,6 +23,7 @@ class ApplicationGraph(
 
     private val adBlockerManagerInternal by lazy { AdBlockerModule(context).createAdBlockerManager() }
     private val dialogManagerInternal by lazy { DialogModule(context).createDialogManager() }
+    private val floatingManagerInternal by lazy { FloatingModule(context).createFloatingManager() }
     private val hashManagerInternal by lazy { HashModule(context).createHashManager() }
     private val mainThreadPostInternal by lazy { MainThreadModule().createMainThreadPost() }
     private val okHttpClientLazyInternal by lazy { NetworkModule().createOkHttpClientLazy() }
@@ -52,6 +54,9 @@ class ApplicationGraph(
 
         @JvmStatic
         fun getDialogManager() = graph!!.dialogManagerInternal
+
+        @JvmStatic
+        fun getFloatingManager() = graph!!.floatingManagerInternal
 
         @JvmStatic
         fun getHashManager() = graph!!.hashManagerInternal

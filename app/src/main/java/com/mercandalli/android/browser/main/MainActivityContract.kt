@@ -54,7 +54,9 @@ internal class MainActivityContract {
 
         fun reload()
 
-        fun back()
+        fun webViewCanGoBack(): Boolean
+
+        fun webViewBack()
 
         fun quit()
 
@@ -114,6 +116,12 @@ internal class MainActivityContract {
 
         fun hideClearInput()
 
+        fun isFloatingWindowChecked(): Boolean
+
         fun setInput(inputString: String)
+
+        fun showFloatingWindowCheckbox()
+
+        fun hideFloatingWindowCheckbox()
     }
 }

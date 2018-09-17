@@ -2,6 +2,8 @@ package com.mercandalli.android.browser.main
 
 import android.os.Build
 import android.os.Bundle
+import com.mercandalli.android.browser.floating.FloatingManager
+import com.mercandalli.android.browser.product.ProductManager
 import com.mercandalli.android.browser.search_engine.SearchEngineManager
 import com.mercandalli.android.browser.suggestion.SuggestionManager
 import com.mercandalli.android.browser.suggestion.Suggestions
@@ -12,11 +14,14 @@ internal class MainActivityPresenter(
         private val screen: MainActivityContract.Screen,
         private val themeManager: ThemeManager,
         private val searchEngineManager: SearchEngineManager,
-        private val suggestionManager: SuggestionManager
+        private val suggestionManager: SuggestionManager,
+        private val floatingManager: FloatingManager,
+        private val productManager: ProductManager
 ) : MainActivityContract.UserAction {
 
     private val themeListener = createThemeListener()
     private val suggestionListener = createSuggestionListener()
+    private val productListener = createProductListener()
     private var webViewVisible = false
     private var videoRadioButtonChecked = false
     private var search: String = ""
@@ -24,6 +29,7 @@ internal class MainActivityPresenter(
     override fun onCreate(savedInstanceState: Bundle?) {
         themeManager.registerThemeListener(themeListener)
         suggestionManager.registerSuggestionListener(suggestionListener)
+        productManager.registerListener(productListener)
         updateTheme()
         val firstActivityLaunch = savedInstanceState == null
         if (firstActivityLaunch) {
@@ -31,11 +37,14 @@ internal class MainActivityPresenter(
             screen.hideClearInput()
             setWebViewVisible(webViewVisible)
         }
+        syncWithProduct()
+
     }
 
     override fun onDestroy() {
         themeManager.unregisterThemeListener(themeListener)
         suggestionManager.unregisterSuggestionListener(suggestionListener)
+        productManager.unregisterListener(productListener)
     }
 
     override fun onResume() {
@@ -66,8 +75,12 @@ internal class MainActivityPresenter(
 
     override fun onSearchPerformed(search: String) {
         val url = searchToUrl(search)
-        screen.showUrl(url)
         screen.resetSearchInput()
+        if (screen.isFloatingWindowChecked()) {
+            floatingManager.start(url)
+            return
+        }
+        screen.showUrl(url)
         setWebViewVisible(true)
     }
 
@@ -106,7 +119,11 @@ internal class MainActivityPresenter(
             screen.quit()
             return
         }
-        screen.back()
+        if (screen.webViewCanGoBack()) {
+            screen.webViewBack()
+            return
+        }
+        setWebViewVisible(false)
     }
 
     override fun onFabClearClicked() {
@@ -175,6 +192,14 @@ internal class MainActivityPresenter(
         }
     }
 
+    private fun syncWithProduct(isSubscribed: Boolean = productManager.isSubscribeToFullVersion()) {
+        if (isSubscribed) {
+            screen.showFloatingWindowCheckbox()
+        } else {
+            screen.hideFloatingWindowCheckbox()
+        }
+    }
+
     private fun updateTheme(theme: Theme = themeManager.getTheme()) {
         screen.setPrimaryTextColorRes(theme.textPrimaryColorRes)
         screen.setSecondaryTextColorRes(theme.textSecondaryColorRes)
@@ -202,6 +227,12 @@ internal class MainActivityPresenter(
                 return
             }
             screen.showSuggestions(suggestions.suggestions)
+        }
+    }
+
+    private fun createProductListener() = object : ProductManager.Listener {
+        override fun onSubscribeToFullVersionChanged() {
+            syncWithProduct()
         }
     }
 }

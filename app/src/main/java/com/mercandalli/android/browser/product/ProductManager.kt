@@ -10,9 +10,18 @@ interface ProductManager {
 
     fun setIsAppDeveloperEnabled(enabled: Boolean)
 
+    fun registerListener(listener: Listener)
+
+    fun unregisterListener(listener: Listener)
+
     fun registerAppDeveloperListener(listener: AppDeveloperListener)
 
     fun unregisterAppDeveloperListener(listener: AppDeveloperListener)
+
+    interface Listener {
+
+        fun onSubscribeToFullVersionChanged()
+    }
 
     interface AppDeveloperListener {
 

@@ -116,6 +116,7 @@ android {
             res.srcDirs = [
                     'src/main/res/common',
                     'src/main/res/dialog',
+                    'src/main/res/floating',
                     'src/main/res/icon',
                     'src/main/res/main',
                     'src/main/res/settings',
@@ -174,7 +175,7 @@ dependencies {
     implementation "com.google.firebase:firebase-config:16.0.0"
 
     // Third party - Monitoring
-    implementation('com.crashlytics.sdk.android:crashlytics:2.9.4@aar') {
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {
         transitive = true
     }
 

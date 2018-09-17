@@ -144,14 +144,31 @@
         android:layout_gravity="end|bottom"
         app:layout_behavior="com.mercandalli.android.browser.main.MoveUpwardBehavior">
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/activity_main_video_check_box"
+        <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
-            android:layout_gravity="start|center_vertical"
-            android:layout_marginStart="@dimen/default_space_2"
-            android:layout_marginEnd="@dimen/default_space_2"
-            android:text="@string/activity_main_video" />
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/activity_main_video_check_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginStart="@dimen/default_space_2"
+                android:layout_marginEnd="@dimen/default_space"
+                android:text="@string/activity_main_video" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/activity_main_floating_check_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginStart="@dimen/default_space"
+                android:layout_marginEnd="@dimen/default_space"
+                android:text="@string/activity_main_floating_window" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/activity_main_video_quit"

@@ -1,6 +1,7 @@
 package com.mercandalli.android.browser.product
 
 import android.content.SharedPreferences
+import com.android.billingclient.api.SkuDetails
 import com.mercandalli.android.browser.main.MainApplication
 import com.mercandalli.android.browser.remote_config.RemoteConfig
 import com.mercandalli.android.libs.monetization.in_app.InAppManager
@@ -11,8 +12,14 @@ class ProductManagerImpl(
         private val sharedPreferences: SharedPreferences
 ) : ProductManager {
 
+    private val listeners = ArrayList<ProductManager.Listener>()
     private val appDeveloperListeners = ArrayList<ProductManager.AppDeveloperListener>()
     private var isAppDeveloperEnabled: Boolean = false
+
+    init {
+        inAppManager.registerListener(createInAppListener())
+        isAppDeveloperEnabled = sharedPreferences.getBoolean(PREFERENCE_IS_APP_DEVELOPER_ENABLED, isAppDeveloperEnabled)
+    }
 
     override fun isFullVersionAvailable() = isAppDeveloperEnabled ||
             remoteConfig.isFullVersionAvailable
@@ -31,6 +38,20 @@ class ProductManagerImpl(
         for (listener in appDeveloperListeners) {
             listener.onIsAppDeveloperChanged()
         }
+        for (listener in listeners) {
+            listener.onSubscribeToFullVersionChanged()
+        }
+    }
+
+    override fun registerListener(listener: ProductManager.Listener) {
+        if (listeners.contains(listener)) {
+            return
+        }
+        listeners.add(listener)
+    }
+
+    override fun unregisterListener(listener: ProductManager.Listener) {
+        listeners.remove(listener)
     }
 
     override fun registerAppDeveloperListener(listener: ProductManager.AppDeveloperListener) {
@@ -42,6 +63,16 @@ class ProductManagerImpl(
 
     override fun unregisterAppDeveloperListener(listener: ProductManager.AppDeveloperListener) {
         appDeveloperListeners.remove(listener)
+    }
+
+    private fun createInAppListener() = object : InAppManager.Listener {
+        override fun onPurchasedChanged() {
+            for (listener in listeners) {
+                listener.onSubscribeToFullVersionChanged()
+            }
+        }
+
+        override fun onSkuDetailsChanged(skuDetails: SkuDetails) {}
     }
 
     companion object {

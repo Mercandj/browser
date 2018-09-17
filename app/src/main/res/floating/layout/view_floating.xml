@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="#E0E0E0"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/default_space"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:id="@+id/view_floating_status_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp">
+
+            <ImageView
+                android:id="@+id/view_floating_status_bar_quit"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="?android:selectableItemBackground"
+                android:padding="6dp"
+                android:src="@drawable/ic_add_circle_white_24dp"
+                android:tint="#FF0000" />
+
+            <ImageView
+                android:id="@+id/view_floating_status_bar_minify"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="?android:selectableItemBackground"
+                android:padding="6dp"
+                android:src="@drawable/ic_add_circle_white_24dp"
+                android:tint="#ffb700" />
+
+            <ImageView
+                android:id="@+id/view_floating_status_bar_expand"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="?android:selectableItemBackground"
+                android:padding="6dp"
+                android:src="@drawable/ic_add_circle_white_24dp"
+                android:tint="#63e200" />
+
+        </LinearLayout>
+
+        <com.mercandalli.android.browser.main.MainWebView
+            android:id="@+id/view_floating_main_web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="34dp" />
+
+        <View
+            android:id="@+id/activity_main_toolbar_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_marginTop="34dp"
+            android:background="@drawable/shadow_bottom" />
+
+    </androidx.cardview.widget.CardView>
+
+</merge>

@@ -49,7 +49,9 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     private val emptyView: View by bind(R.id.activity_main_empty_view)
     private val emptyTextView: TextView by bind(R.id.activity_main_empty_view_text)
     private val emptyViewVideoCheckBox: CheckBox by bind(R.id.activity_main_video_check_box)
+    private val emptyViewFloatingCheckBox: CheckBox by bind(R.id.activity_main_floating_check_box)
     private val emptyQuitTextView: TextView by bind(R.id.activity_main_video_quit)
+    private val emptyBottomBar: View by bind(R.id.activity_main_bottom_bar)
 
     private val browserWebViewListener = createBrowserWebViewListener()
     private val userAction = createUserAction()
@@ -116,7 +118,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
-            userAction.onBackPressed(emptyView.visibility == View.VISIBLE)
+            userAction.onBackPressed(emptyView.visibility == VISIBLE)
             return true
         }
         return super.onKeyDown(keyCode, event)
@@ -130,12 +132,10 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         mainWebView.reload()
     }
 
-    override fun back() {
-        if (mainWebView.canGoBack()) {
-            mainWebView.goBack()
-        } else {
-            finish()
-        }
+    override fun webViewCanGoBack() = mainWebView.canGoBack()
+
+    override fun webViewBack() {
+        mainWebView.goBack()
     }
 
     override fun quit() {
@@ -238,57 +238,65 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
 
     override fun showWebView() {
-        mainWebView.visibility = View.VISIBLE
+        mainWebView.visibility = VISIBLE
     }
 
     override fun hideWebView() {
-        mainWebView.visibility = View.GONE
+        mainWebView.visibility = GONE
     }
 
     override fun showEmptyView() {
-        emptyView.visibility = View.VISIBLE
-        emptyViewVideoCheckBox.visibility = View.VISIBLE
-        emptyQuitTextView.visibility = View.VISIBLE
+        emptyView.visibility = VISIBLE
+        emptyBottomBar.visibility = VISIBLE
     }
 
     override fun hideEmptyView() {
-        emptyView.visibility = View.GONE
-        emptyViewVideoCheckBox.visibility = View.GONE
-        emptyQuitTextView.visibility = View.GONE
+        emptyView.visibility = GONE
+        emptyBottomBar.visibility = GONE
     }
 
     override fun showToolbar() {
-        toolbar.visibility = View.VISIBLE
-        toolbarShadow.visibility = View.VISIBLE
+        toolbar.visibility = VISIBLE
+        toolbarShadow.visibility = VISIBLE
     }
 
     override fun hideToolbar() {
-        toolbar.visibility = View.GONE
-        toolbarShadow.visibility = View.GONE
+        toolbar.visibility = GONE
+        toolbarShadow.visibility = GONE
     }
 
     override fun showSuggestions(suggestions: List<String>) {
-        this.suggestions.visibility = View.VISIBLE
-        suggestionsShadow.visibility = View.VISIBLE
+        this.suggestions.visibility = VISIBLE
+        suggestionsShadow.visibility = VISIBLE
         suggestionsAdapter.populate(suggestions)
     }
 
     override fun hideSuggestions() {
-        suggestions.visibility = View.GONE
-        suggestionsShadow.visibility = View.GONE
+        suggestions.visibility = GONE
+        suggestionsShadow.visibility = GONE
     }
 
     override fun showClearInput() {
-        inputClear.visibility = View.VISIBLE
+        inputClear.visibility = VISIBLE
     }
 
     override fun hideClearInput() {
-        inputClear.visibility = View.GONE
+        inputClear.visibility = GONE
     }
+
+    override fun isFloatingWindowChecked() = emptyViewFloatingCheckBox.isChecked
 
     override fun setInput(inputString: String) {
         input.setText(inputString)
         input.setSelection(input.text.length)
+    }
+
+    override fun showFloatingWindowCheckbox() {
+        emptyViewFloatingCheckBox.visibility = VISIBLE
+    }
+
+    override fun hideFloatingWindowCheckbox() {
+        emptyViewFloatingCheckBox.visibility = GONE
     }
 
     private fun showSnackbar(@StringRes text: Int, duration: Int) {
@@ -363,11 +371,15 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         val themeManager = ApplicationGraph.getThemeManager()
         val searchEngineManager = ApplicationGraph.getSearchEngineManager()
         val suggestionManager = ApplicationGraph.getSuggestionManager()
+        val floatingManager = ApplicationGraph.getFloatingManager()
+        val productManager = ApplicationGraph.getProductManager()
         return MainActivityPresenter(
                 this,
                 themeManager,
                 searchEngineManager,
-                suggestionManager
+                suggestionManager,
+                floatingManager,
+                productManager
         )
     }
 
