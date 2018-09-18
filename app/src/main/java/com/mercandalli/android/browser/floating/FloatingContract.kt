@@ -11,6 +11,8 @@ interface FloatingContract {
         fun onDetachedFromWindow()
 
         fun onQuitClicked()
+
+        fun onExpandClicked(url: String)
     }
 
     interface Screen {
@@ -22,5 +24,7 @@ interface FloatingContract {
         fun setPrimaryTextColorRes(@ColorRes colorRes: Int)
 
         fun setStatusBarBackgroundColorRes(@ColorRes colorRes: Int)
+
+        fun navigateToMainActivity(url: String)
     }
 }

@@ -24,6 +24,11 @@ class FloatingPresenter(
         screen.removeFromWindowManager()
     }
 
+    override fun onExpandClicked(url: String) {
+        screen.navigateToMainActivity(url)
+        screen.removeFromWindowManager()
+    }
+
     private fun updateTheme(theme: Theme = themeManager.getTheme()) {
         screen.setPrimaryTextColorRes(theme.textPrimaryColorRes)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

@@ -13,6 +13,8 @@ internal class MainActivityContract {
 
         fun onDestroy()
 
+        fun onNewIntent(url: String?)
+
         fun onResume()
 
         fun onSaveInstanceState(outState: Bundle)

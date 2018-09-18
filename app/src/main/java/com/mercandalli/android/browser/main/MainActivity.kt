@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.mercandalli.android.browser.R
+import com.mercandalli.android.browser.dialog.DialogActivity
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
 import com.mercandalli.android.browser.settings.SettingsActivity
 import com.mercandalli.android.browser.suggestion.SuggestionAdapter
@@ -73,15 +74,9 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         emptyViewVideoCheckBox.setOnCheckedChangeListener { _, isChecked ->
             userAction.onVideoCheckedChanged(isChecked)
         }
-        emptyQuitTextView.setOnClickListener {
-            userAction.onQuitClicked()
-        }
-        fabClear.setOnClickListener {
-            userAction.onFabClearClicked()
-        }
-        inputClear.setOnClickListener {
-            userAction.onInputClearClicked()
-        }
+        emptyQuitTextView.setOnClickListener { userAction.onQuitClicked() }
+        fabClear.setOnClickListener { userAction.onFabClearClicked() }
+        inputClear.setOnClickListener { userAction.onInputClearClicked() }
         suggestions.layoutManager = LinearLayoutManager(this)
         suggestions.adapter = suggestionsAdapter
         userAction.onCreate(savedInstanceState)
@@ -94,6 +89,12 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         }
         mainWebView.browserWebViewListener = null
         userAction.onDestroy()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val url = intent?.extras?.getString(EXTRA_URL)
+        userAction.onNewIntent(url)
     }
 
     override fun onResume() {
@@ -390,6 +391,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     }
 
     companion object {
+        private const val EXTRA_URL = "EXTRA_URL"
 
         @JvmStatic
         fun start(context: Context) {
@@ -398,6 +400,17 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
                         Intent.FLAG_ACTIVITY_CLEAR_TOP
             }
+            context.startActivity(intent)
+        }
+
+        @JvmStatic
+        fun start(context: Context, url: String) {
+            val intent = Intent(context, MainActivity::class.java)
+            if (context !is Activity) {
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
+            intent.putExtra(EXTRA_URL, url)
             context.startActivity(intent)
         }
     }

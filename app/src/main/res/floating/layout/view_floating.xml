@@ -10,9 +10,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/default_space"
+        android:layout_margin="10dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="20dp">
+        app:cardElevation="8dp">
 
         <FrameLayout
             android:id="@+id/view_floating_status_bar"
@@ -29,6 +29,7 @@
                     android:layout_height="34dp"
                     android:background="?android:selectableItemBackground"
                     android:padding="6dp"
+                    android:rotation="45"
                     android:src="@drawable/ic_add_circle_white_24dp"
                     android:tint="#FF0000" />
 
@@ -38,7 +39,7 @@
                     android:layout_height="34dp"
                     android:background="?android:selectableItemBackground"
                     android:padding="6dp"
-                    android:src="@drawable/ic_add_circle_white_24dp"
+                    android:src="@drawable/ic_remove_circle_white_24dp"
                     android:tint="#ffb700" />
 
                 <ImageView
@@ -47,7 +48,8 @@
                     android:layout_height="34dp"
                     android:background="?android:selectableItemBackground"
                     android:padding="6dp"
-                    android:src="@drawable/ic_add_circle_white_24dp"
+                    android:rotation="45"
+                    android:src="@drawable/ic_swap_vertical_circle_white_24dp"
                     android:tint="#63e200" />
 
             </LinearLayout>

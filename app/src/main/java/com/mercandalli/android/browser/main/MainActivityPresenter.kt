@@ -38,13 +38,18 @@ internal class MainActivityPresenter(
             setWebViewVisible(webViewVisible)
         }
         syncWithProduct()
-
     }
 
     override fun onDestroy() {
         themeManager.unregisterThemeListener(themeListener)
         suggestionManager.unregisterSuggestionListener(suggestionListener)
         productManager.unregisterListener(productListener)
+    }
+
+    override fun onNewIntent(url: String?) {
+        if (url != null) {
+            performSearch(url, true)
+        }
     }
 
     override fun onResume() {
@@ -74,14 +79,7 @@ internal class MainActivityPresenter(
     }
 
     override fun onSearchPerformed(search: String) {
-        val url = searchToUrl(search)
-        screen.resetSearchInput()
-        if (screen.isFloatingWindowChecked()) {
-            floatingManager.start(url)
-            return
-        }
-        screen.showUrl(url)
-        setWebViewVisible(true)
+        performSearch(search, false)
     }
 
     override fun onHomeClicked() {
@@ -150,7 +148,7 @@ internal class MainActivityPresenter(
 
     override fun onSuggestionClicked(suggestion: String) {
         val search = suggestion.replace("<b>", "").replace("</b>", "")
-        val url = searchToUrl(search)
+        val url = convertSearchToUrl(search)
         screen.showUrl(url)
         screen.resetSearchInput()
         setWebViewVisible(true)
@@ -161,12 +159,21 @@ internal class MainActivityPresenter(
         screen.setInput(search)
     }
 
-    private fun searchToUrl(search: String): String {
-        return if (videoRadioButtonChecked) {
-            searchEngineManager.createSearchVideoUrl(search)
-        } else {
-            searchEngineManager.createSearchUrl(search)
+    private fun performSearch(search: String, forceNonFloating: Boolean) {
+        val url = convertSearchToUrl(search)
+        screen.resetSearchInput()
+        if (!forceNonFloating && screen.isFloatingWindowChecked()) {
+            floatingManager.start(url)
+            return
         }
+        screen.showUrl(url)
+        setWebViewVisible(true)
+    }
+
+    private fun convertSearchToUrl(search: String) = if (videoRadioButtonChecked) {
+        searchEngineManager.createSearchVideoUrl(search)
+    } else {
+        searchEngineManager.createSearchUrl(search)
     }
 
     private fun setWebViewVisible(visible: Boolean) {
