@@ -4,4 +4,5 @@ interface FloatingManager {
 
     fun start(url:String)
 
+    fun stop()
 }

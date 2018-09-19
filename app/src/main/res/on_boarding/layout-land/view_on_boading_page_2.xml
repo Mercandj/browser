@@ -91,7 +91,7 @@
             android:paddingTop="@dimen/default_space_half"
             android:paddingEnd="@dimen/default_space_2"
             android:paddingBottom="@dimen/default_space_half"
-            android:text="TRY IT"
+            android:text="@string/on_boarding_page_2_try_it"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_size_l"
             android:textStyle="bold" />

@@ -1,5 +1,6 @@
 package com.mercandalli.android.browser.on_boarding
 
+import com.mercandalli.android.browser.floating.FloatingManager
 import com.mercandalli.android.browser.network.NetworkManager
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
@@ -7,7 +8,8 @@ import com.mercandalli.android.browser.theme.ThemeManager
 internal class OnBoardingPagePresenter(
         private val screen: OnBoardingPageContract.Screen,
         private val themeManager: ThemeManager,
-        private val networkManager: NetworkManager
+        private val networkManager: NetworkManager,
+        private val floatingManager: FloatingManager
 ) : OnBoardingPageContract.UserAction {
 
     private val themeListener = createThemeListener()
@@ -34,6 +36,10 @@ internal class OnBoardingPagePresenter(
 
     override fun onLightThemeClicked() {
         themeManager.setDarkEnable(false)
+    }
+
+    override fun onFullVersionTryClicked() {
+        floatingManager.start("https://www.google.com/")
     }
 
     private fun updateTheme(theme: Theme = themeManager.getTheme()) {

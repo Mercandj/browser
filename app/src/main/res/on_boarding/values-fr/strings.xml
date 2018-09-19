@@ -4,9 +4,11 @@
     <string name="on_boarding_page_1_description">• Pas d\'historique\n• Streaming de video\n• Streaming de musique</string>
     <string name="on_boarding_page_2_title">Theme sombre</string>
     <string name="on_boarding_page_2_description">Google en noir</string>
+    <string name="on_boarding_page_2_try_it">ESSAYER</string>
     <string name="on_boarding_page_full_version">Version complète</string>
     <string name="on_boarding_page_3_title">Fonctionnalités</string>
     <string name="on_boarding_page_3_description">• Fenêtre flotante\n• Ad blocker\n• Plusieurs navigateurs internet</string>
+    <string name="on_boarding_page_3_try_it">ESSAYER</string>
     <string name="on_boarding_next">SUIVANT</string>
     <string name="on_boarding_store_buy">ESSAYER GRATUITEMENT</string>
     <string name="on_boarding_store_skip">Utiliser la version limitée</string>

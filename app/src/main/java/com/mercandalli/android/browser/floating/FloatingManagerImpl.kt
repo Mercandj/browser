@@ -15,6 +15,8 @@ class FloatingManagerImpl(
         private val windowManager: WindowManager
 ) : FloatingManager {
 
+    private val floatingViews = ArrayList<FloatingView>()
+
     override fun start(url: String) {
         if (floatingPermission.cannotDrawOverOtherApps()) {
             floatingPermission.launchDrawOverOtherAppPermissionManager()
@@ -43,6 +45,14 @@ class FloatingManagerImpl(
                 floatingView,
                 layoutParams
         )
+        floatingViews.add(floatingView)
+    }
+
+    override fun stop() {
+        for (floatingView in floatingViews) {
+            floatingView.close()
+        }
+        floatingViews.clear()
     }
 
     private fun getScreenMinWidthHeightPx(): Int {

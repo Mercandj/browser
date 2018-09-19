@@ -13,6 +13,8 @@ internal interface OnBoardingPageContract {
         fun onDarkThemeClicked()
 
         fun onLightThemeClicked()
+
+        fun onFullVersionTryClicked()
     }
 
     interface Screen {

@@ -27,6 +27,7 @@ class OnBoardingPageView @JvmOverloads constructor(
     private var gradientView: View? = null
     private var darkTheme: View? = null
     private var lightTheme: View? = null
+    private var fullVersionTry: View? = null
     private var mainWebView: MainWebView? = null
     private var mainWebViewPlaceholder: View? = null
     private val userAction = createUserAction()
@@ -109,6 +110,9 @@ class OnBoardingPageView @JvmOverloads constructor(
         lightTheme?.setOnClickListener {
             userAction.onLightThemeClicked()
         }
+        fullVersionTry?.setOnClickListener {
+            userAction.onFullVersionTryClicked()
+        }
     }
 
     fun applyAlphaToChildren(@FloatRange(from = 0.0, to = 1.0) securedAlpha: Float) {
@@ -128,6 +132,7 @@ class OnBoardingPageView @JvmOverloads constructor(
         gradientView = view.findViewById(R.id.view_on_boarding_page_gradient)
         darkTheme = view.findViewById(R.id.view_on_boarding_page_theme_dark)
         lightTheme = view.findViewById(R.id.view_on_boarding_page_theme_light)
+        fullVersionTry = view.findViewById(R.id.view_on_boarding_page_full_version_try)
     }
 
     private fun createUserAction(): OnBoardingPageContract.UserAction {
@@ -137,14 +142,17 @@ class OnBoardingPageView @JvmOverloads constructor(
                 override fun onDetached() {}
                 override fun onDarkThemeClicked() {}
                 override fun onLightThemeClicked() {}
+                override fun onFullVersionTryClicked() {}
             }
         }
         val themeManager = ApplicationGraph.getThemeManager()
         val networkManager = ApplicationGraph.getNetworkManager()
+        val floatingManager = ApplicationGraph.getFloatingManager()
         return OnBoardingPagePresenter(
                 this,
                 themeManager,
-                networkManager
+                networkManager,
+                floatingManager
         )
     }
 }

@@ -116,6 +116,10 @@ class FloatingView @JvmOverloads constructor(
         mainWebView.load(url)
     }
 
+    fun close() {
+        removeFromWindowManager()
+    }
+
     private fun createOnTouchListener() = object : OnTouchListener {
 
         val lastDownEvent = PointF()

@@ -2,6 +2,7 @@ package com.mercandalli.android.browser.on_boarding
 
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.SkuDetails
+import com.mercandalli.android.browser.floating.FloatingManager
 import com.mercandalli.android.browser.monetization.MonetizationManager
 import com.mercandalli.android.browser.in_app.InAppManager
 import com.mercandalli.android.browser.theme.Theme
@@ -13,6 +14,7 @@ internal class OnBoardingPresenter(
         private val monetizationManager: MonetizationManager,
         private val inAppManager: InAppManager,
         private val themeManager: ThemeManager,
+        private val floatingManager: FloatingManager,
         private val subscriptionSku: String
 ) : OnBoardingContract.UserAction {
 
@@ -59,6 +61,7 @@ internal class OnBoardingPresenter(
         onBoardingRepository.markOnBoardingEnded()
         screen.closeOnBoarding()
         screen.startFistActivity()
+        floatingManager.stop()
     }
 
     private fun syncScreen(

@@ -208,12 +208,14 @@ class OnBoardingView @JvmOverloads constructor(
         val subscriptionSku = MonetizationGraph.getMonetization().subscriptionSku
         val onBoardingRepository = MonetizationGraph.getOnBoardingRepository()
         val themeManager = ApplicationGraph.getThemeManager()
+        val floatingManager = ApplicationGraph.getFloatingManager()
         OnBoardingPresenter(
                 this,
                 onBoardingRepository,
                 monetizationManager,
                 inAppManager,
                 themeManager,
+                floatingManager,
                 subscriptionSku
         )
     }
