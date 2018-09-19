@@ -26,6 +26,7 @@ class FloatingManagerImpl(
         val height = width * 3F / 4F
         val context = ContextThemeWrapper(context, R.style.AppTheme)
         val floatingView = FloatingView(context)
+        floatingView.setListener(createFloatingView())
         floatingView.load(url)
         floatingView.setExpandedSize(width, height)
         floatingView.setCollapsedSize(ViewUtils.dpToPx(160F), ViewUtils.dpToPx(54F))
@@ -59,5 +60,11 @@ class FloatingManagerImpl(
         val point = Point()
         windowManager.defaultDisplay.getSize(point)
         return Math.min(point.x, point.y)
+    }
+
+    private fun createFloatingView() = object : FloatingView.Listener {
+        override fun onRemovedFromWindowManager(floatingView: FloatingView) {
+            floatingViews.remove(floatingView)
+        }
     }
 }

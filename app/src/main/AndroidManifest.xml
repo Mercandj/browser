@@ -39,9 +39,12 @@
 
         <activity
             android:name=".on_boarding.OnBoardingActivity"
+            android:launchMode="singleTop"
             android:theme="@style/OnBoardingTheme" />
 
-        <activity android:name=".store.StoreActivity" />
+        <activity
+            android:name=".store.StoreActivity"
+            android:launchMode="singleTop" />
 
         <activity
             android:name=".dialog.DialogActivity"

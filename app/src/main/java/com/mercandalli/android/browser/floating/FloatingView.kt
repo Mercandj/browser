@@ -33,6 +33,7 @@ class FloatingView @JvmOverloads constructor(
     private val userAction = createUserAction()
     private val visibleDisplayFrame = Rect()
 
+    private var listener: Listener? = null
     private var expandedWidth = 0
     private var expandedHeight = 0
     private var collapsedWidth = 0
@@ -63,6 +64,7 @@ class FloatingView @JvmOverloads constructor(
 
     override fun removeFromWindowManager() {
         windowManager.removeView(this)
+        listener?.onRemovedFromWindowManager(this)
     }
 
     override fun expand() {
@@ -100,6 +102,10 @@ class FloatingView @JvmOverloads constructor(
     override fun isCollapsed(): Boolean {
         val layoutParams = layoutParams as WindowManager.LayoutParams
         return layoutParams.width == collapsedWidth
+    }
+
+    fun setListener(listener: Listener) {
+        this.listener = listener
     }
 
     fun setExpandedSize(width: Float, height: Float) {
@@ -188,5 +194,10 @@ class FloatingView @JvmOverloads constructor(
                 this,
                 themeManager
         )
+    }
+
+    interface Listener {
+
+        fun onRemovedFromWindowManager(floatingView: FloatingView)
     }
 }
