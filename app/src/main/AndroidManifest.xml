@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mercandalli.android.browser">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
 
     <application
         android:name=".main.MainApplication"
@@ -35,6 +36,12 @@
             android:name=".settings.SettingsActivity"
             android:launchMode="singleTop"
             android:theme="@style/SettingsActivityTheme" />
+
+        <activity
+            android:name=".on_boarding.OnBoardingActivity"
+            android:theme="@style/OnBoardingTheme" />
+
+        <activity android:name=".store.StoreActivity" />
 
         <activity
             android:name=".dialog.DialogActivity"

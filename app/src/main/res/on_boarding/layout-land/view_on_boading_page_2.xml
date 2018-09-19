@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/view_on_boarding_page_card"
+        android:layout_width="@dimen/on_boarding_page_width_land"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.mercandalli.android.browser.on_boarding.OnBoardingThumbnailFrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/on_boarding_2"
+                app:ratio_height="5"
+                app:ratio_width="4"
+                app:ratio_width_reference="false">
+
+                <com.mercandalli.android.browser.main.MainWebView
+                    android:id="@+id/view_on_boarding_page_main_web_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:src_url="https://www.google.com/" />
+
+                <ImageView
+                    android:id="@+id/view_on_boarding_page_main_web_view_placeholder"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/on_boarding_2"
+                    android:visibility="gone" />
+
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:background="@drawable/on_boarding_shadow_left" />
+
+            </com.mercandalli.android.browser.on_boarding.OnBoardingThumbnailFrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/view_on_boarding_view_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/on_boarding_page_2_title"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/view_on_boarding_view_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/on_boarding_page_2_description"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/view_on_boarding_page_theme_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/default_space_2"
+            android:background="@drawable/on_boarding_page_btn"
+            android:paddingStart="@dimen/default_space_2"
+            android:paddingTop="@dimen/default_space_half"
+            android:paddingEnd="@dimen/default_space_2"
+            android:paddingBottom="@dimen/default_space_half"
+            android:text="TRY IT"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_l"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/view_on_boarding_page_theme_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/default_space_2"
+            android:background="@drawable/on_boarding_page_btn"
+            android:paddingStart="@dimen/default_space_2"
+            android:paddingTop="@dimen/default_space_half"
+            android:paddingEnd="@dimen/default_space_2"
+            android:paddingBottom="@dimen/default_space_half"
+            android:text="LIGHT THEME"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_l"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+</merge>

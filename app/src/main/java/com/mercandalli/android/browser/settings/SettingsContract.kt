@@ -3,7 +3,7 @@ package com.mercandalli.android.browser.settings
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import com.mercandalli.android.browser.search_engine.SearchEngine
-import com.mercandalli.android.libs.monetization.in_app.InAppManager
+import com.mercandalli.android.browser.in_app.InAppManager
 
 interface SettingsContract {
 

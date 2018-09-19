@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import com.android.billingclient.api.SkuDetails
 import com.mercandalli.android.browser.main.MainApplication
 import com.mercandalli.android.browser.remote_config.RemoteConfig
-import com.mercandalli.android.libs.monetization.in_app.InAppManager
+import com.mercandalli.android.browser.in_app.InAppManager
 
 class ProductManagerImpl(
         private val remoteConfig: RemoteConfig,

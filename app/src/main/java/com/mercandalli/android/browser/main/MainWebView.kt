@@ -10,6 +10,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.webkit.*
 import com.mercandalli.android.browser.ad_blocker.AdBlocker
+import androidx.annotation.AttrRes
+import com.mercandalli.android.browser.R
 
 class MainWebView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -34,9 +36,11 @@ class MainWebView @JvmOverloads constructor(
     }
 
     var browserWebViewListener: BrowserWebViewListener? = null
+    private val attributes = extractAttributes(context, attrs, defStyleAttr)
 
     init {
         if (!isInEditMode) {
+
             isFocusableInTouchMode = true
             isHorizontalScrollBarEnabled = true
             isVerticalScrollBarEnabled = true
@@ -132,6 +136,10 @@ class MainWebView @JvmOverloads constructor(
                     }
                 }
             }
+
+            attributes.sourceUrl?.let {
+                load(it)
+            }
         }
     }
 
@@ -196,4 +204,21 @@ class MainWebView @JvmOverloads constructor(
                 "})()"
         )
     }
+
+    private fun extractAttributes(
+            context: Context,
+            attrs: AttributeSet?,
+            @AttrRes defStyleAttr: Int
+    ): Attributes {
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.MainWebView, defStyleAttr, 0)
+        val sourceUrl = typedArray.getString(R.styleable.MainWebView_src_url)
+        typedArray.recycle()
+        return Attributes(
+                sourceUrl
+        )
+    }
+
+    private inner class Attributes internal constructor(
+            internal val sourceUrl: String?
+    )
 }

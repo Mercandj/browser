@@ -15,7 +15,7 @@ import com.mercandalli.android.browser.search_engine.SearchEngineManager
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 import com.mercandalli.android.browser.version.VersionManager
-import com.mercandalli.android.libs.monetization.in_app.InAppManager
+import com.mercandalli.android.browser.in_app.InAppManager
 
 class SettingsPresenter(
         private val screen: SettingsContract.Screen,

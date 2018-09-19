@@ -1,8 +1,6 @@
 package com.mercandalli.android.browser.floating
 
 import android.content.Context
-import android.content.pm.ActivityInfo
-import android.graphics.Color
 import android.graphics.PointF
 import android.graphics.Rect
 import android.util.AttributeSet
@@ -26,8 +24,8 @@ class FloatingView @JvmOverloads constructor(
     private val statusBar: View = view.findViewById(R.id.view_floating_status_bar)
     private val statusBarTitle: TextView = view.findViewById(R.id.view_floating_status_bar_title)
     private val statusBarQuit: View = view.findViewById(R.id.view_floating_status_bar_quit)
-    private val statusBarMinify: View = view.findViewById(R.id.view_floating_status_bar_minify)
-    private val statusBarExpand: View = view.findViewById(R.id.view_floating_status_bar_expand)
+    private val statusBarCollapse: View = view.findViewById(R.id.view_floating_status_bar_collapse)
+    private val statusBarFullscreen: View = view.findViewById(R.id.view_floating_status_bar_fullscreen)
     private val windowManager by lazy(LazyThreadSafetyMode.NONE) {
         context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     }
@@ -35,9 +33,15 @@ class FloatingView @JvmOverloads constructor(
     private val userAction = createUserAction()
     private val visibleDisplayFrame = Rect()
 
+    private var expandedWidth = 0
+    private var expandedHeight = 0
+    private var collapsedWidth = 0
+    private var collapsedHeight = 0
+
     init {
         statusBarQuit.setOnClickListener { userAction.onQuitClicked() }
-        statusBarExpand.setOnClickListener { userAction.onExpandClicked(mainWebView.url) }
+        statusBarFullscreen.setOnClickListener { userAction.onFullscreenClicked(mainWebView.url) }
+        statusBarCollapse.setOnClickListener { userAction.onCollapseClicked() }
         setOnTouchListener(createOnTouchListener())
 
         if (!isInEditMode && viewTreeObserver.isAlive) {
@@ -61,6 +65,20 @@ class FloatingView @JvmOverloads constructor(
         windowManager.removeView(this)
     }
 
+    override fun expand() {
+        val layoutParams = layoutParams as WindowManager.LayoutParams
+        layoutParams.width = expandedWidth
+        layoutParams.height = expandedHeight
+        windowManager.updateViewLayout(this, layoutParams)
+    }
+
+    override fun collapse() {
+        val layoutParams = layoutParams as WindowManager.LayoutParams
+        layoutParams.width = collapsedWidth
+        layoutParams.height = collapsedHeight
+        windowManager.updateViewLayout(this, layoutParams)
+    }
+
     override fun reload() {
         mainWebView.reload()
     }
@@ -77,6 +95,21 @@ class FloatingView @JvmOverloads constructor(
 
     override fun navigateToMainActivity(url: String) {
         MainActivity.start(context, url)
+    }
+
+    override fun isCollapsed(): Boolean {
+        val layoutParams = layoutParams as WindowManager.LayoutParams
+        return layoutParams.width == collapsedWidth
+    }
+
+    fun setExpandedSize(width: Float, height: Float) {
+        expandedWidth = width.toInt()
+        expandedHeight = height.toInt()
+    }
+
+    fun setCollapsedSize(width: Float, height: Float) {
+        collapsedWidth = width.toInt()
+        collapsedHeight = height.toInt()
     }
 
     fun load(url: String) {
@@ -142,7 +175,8 @@ class FloatingView @JvmOverloads constructor(
                 override fun onAttachedToWindow() {}
                 override fun onDetachedFromWindow() {}
                 override fun onQuitClicked() {}
-                override fun onExpandClicked(url: String) {}
+                override fun onFullscreenClicked(url: String) {}
+                override fun onCollapseClicked() {}
             }
         }
         val themeManager = ApplicationGraph.getThemeManager()

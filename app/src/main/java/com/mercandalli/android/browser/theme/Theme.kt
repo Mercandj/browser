@@ -8,6 +8,8 @@ open class Theme(
         @ColorRes
         val windowSettingsBackgroundColorRes: Int,
         @ColorRes
+        val windowOnBoardingBackgroundColorRes: Int,
+        @ColorRes
         val statusBarBackgroundColorRes: Int,
         val statusBarDark: Boolean,
         @ColorRes

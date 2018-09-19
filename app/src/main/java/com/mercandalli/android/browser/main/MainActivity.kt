@@ -27,11 +27,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.mercandalli.android.browser.R
-import com.mercandalli.android.browser.dialog.DialogActivity
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
 import com.mercandalli.android.browser.settings.SettingsActivity
 import com.mercandalli.android.browser.suggestion.SuggestionAdapter
-import com.mercandalli.android.libs.monetization.MonetizationGraph
+import com.mercandalli.android.browser.monetization.MonetizationGraph
 
 class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 

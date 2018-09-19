@@ -12,12 +12,18 @@ interface FloatingContract {
 
         fun onQuitClicked()
 
-        fun onExpandClicked(url: String)
+        fun onFullscreenClicked(url: String)
+
+        fun onCollapseClicked()
     }
 
     interface Screen {
 
         fun removeFromWindowManager()
+
+        fun expand()
+
+        fun collapse()
 
         fun reload()
 
@@ -26,5 +32,7 @@ interface FloatingContract {
         fun setStatusBarBackgroundColorRes(@ColorRes colorRes: Int)
 
         fun navigateToMainActivity(url: String)
+
+        fun isCollapsed(): Boolean
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="on_boarding_btn_radius">10dp</dimen>
+    <dimen name="on_boarding_page_btn_radius">100dp</dimen>
+    <dimen name="on_boarding_card_radius">10dp</dimen>
+    <dimen name="on_boarding_button_horizontal_margins">34dp</dimen>
+    <dimen name="on_boarding_button_bottom_margins">28dp</dimen>
+    <dimen name="on_boarding_view_pager_container_height_port">340dp</dimen>
+    <dimen name="on_boarding_page_height_port">344dp</dimen>
+    <dimen name="on_boarding_page_width_land">370dp</dimen>
+
+    <integer name="on_boarding_circle_indicator_orientation">0</integer>
+    <dimen name="on_boarding_circle_indicator_stroke_width">0dp</dimen>
+    <dimen name="on_boarding_circle_indicator_radius">3dp</dimen>
+</resources>

@@ -16,8 +16,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.browser.search_engine.SearchEngine
-import com.mercandalli.android.libs.monetization.MonetizationGraph
-import com.mercandalli.android.libs.monetization.in_app.InAppManager
+import com.mercandalli.android.browser.monetization.MonetizationGraph
+import com.mercandalli.android.browser.in_app.InAppManager
 
 class SettingsView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

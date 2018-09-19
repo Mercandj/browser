@@ -10,9 +10,9 @@ import com.crashlytics.android.core.CrashlyticsCore
 import com.mercandalli.android.browser.BuildConfig
 import com.mercandalli.android.browser.ad_blocker.AdBlocker
 import com.mercandalli.android.browser.remote_config.RemoteConfig
-import com.mercandalli.android.libs.monetization.Monetization
-import com.mercandalli.android.libs.monetization.MonetizationGraph
-import com.mercandalli.android.libs.monetization.log.MonetizationLog
+import com.mercandalli.android.browser.monetization.Monetization
+import com.mercandalli.android.browser.monetization.MonetizationGraph
+import com.mercandalli.android.browser.monetization.MonetizationLog
 import io.fabric.sdk.android.Fabric
 
 /**

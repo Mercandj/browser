@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@color/on_boarding_window_light"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="0dp">
+
+                <TextView
+                    android:id="@+id/view_on_boarding_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/on_boarding_button_horizontal_margins"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:drawablePadding="14dp"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:text="@string/on_boarding_title"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/on_boarding_ic_launcher" />
+
+            </LinearLayout>
+
+            <com.mercandalli.android.browser.on_boarding.OnBoardingPageIndicatorView
+                android:id="@+id/view_on_boarding_indicator"
+                android:layout_width="160dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp" />
+
+        </FrameLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_on_boarding_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingStart="54dp"
+            android:paddingEnd="54dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/view_on_boarding_store_skip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="?android:selectableItemBackground"
+                    android:paddingStart="10dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="3dp"
+                    android:text="@string/on_boarding_store_skip"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/view_on_boarding_store_buy"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/on_boarding_btn"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/on_boarding_store_buy"
+                    android:textColor="@color/on_boarding_button_text_color"
+                    android:textSize="18sp" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/view_on_boarding_next"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/on_boarding_btn"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="@string/on_boarding_next"
+                android:textColor="@color/on_boarding_button_text_color"
+                android:textSize="18sp"
+                tools:visibility="gone" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</merge>

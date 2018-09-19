@@ -26,7 +26,8 @@ class ApplicationGraph(
     private val floatingManagerInternal by lazy { FloatingModule(context).createFloatingManager() }
     private val hashManagerInternal by lazy { HashModule(context).createHashManager() }
     private val mainThreadPostInternal by lazy { MainThreadModule().createMainThreadPost() }
-    private val okHttpClientLazyInternal by lazy { NetworkModule().createOkHttpClientLazy() }
+    private val okHttpClientLazyInternal by lazy { NetworkModule(context).createOkHttpClientLazy() }
+    private val networkManagerInternal by lazy { NetworkModule(context).createNetworkManager() }
     private val productManagerInternal by lazy { ProductModule(context).createProductManager() }
     private val remoteConfigInternal by lazy { RemoteConfigModule().createRemoteConfig(mainThreadPostInternal) }
     private val searchEngineManagerInternal by lazy { SearchEngineModule().createSearchEngineManager() }
@@ -66,6 +67,9 @@ class ApplicationGraph(
 
         @JvmStatic
         fun getOkHttpClientLazy() = graph!!.okHttpClientLazyInternal
+
+        @JvmStatic
+        fun getNetworkManager() = graph!!.networkManagerInternal
 
         @JvmStatic
         fun getProductManager() = graph!!.productManagerInternal

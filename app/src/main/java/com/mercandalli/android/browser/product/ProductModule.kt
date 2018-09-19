@@ -2,7 +2,7 @@ package com.mercandalli.android.browser.product
 
 import android.content.Context
 import com.mercandalli.android.browser.main.ApplicationGraph
-import com.mercandalli.android.libs.monetization.MonetizationGraph
+import com.mercandalli.android.browser.monetization.MonetizationGraph
 
 class ProductModule(
         private val context: Context

@@ -1,9 +1,12 @@
 package com.mercandalli.android.browser.network
 
+import android.content.Context
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
-class NetworkModule {
+class NetworkModule(
+        private val context: Context
+) {
 
     private val okHttpClient = lazy {
         val builder = OkHttpClient.Builder()
@@ -17,4 +20,6 @@ class NetworkModule {
     }
 
     fun createOkHttpClientLazy(): Lazy<OkHttpClient> = okHttpClient
+
+    fun createNetworkManager(): NetworkManager = NetworkManagerImpl(context)
 }

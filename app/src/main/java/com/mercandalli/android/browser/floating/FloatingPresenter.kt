@@ -24,9 +24,17 @@ class FloatingPresenter(
         screen.removeFromWindowManager()
     }
 
-    override fun onExpandClicked(url: String) {
+    override fun onFullscreenClicked(url: String) {
         screen.navigateToMainActivity(url)
         screen.removeFromWindowManager()
+    }
+
+    override fun onCollapseClicked() {
+        if (screen.isCollapsed()) {
+            screen.expand()
+        } else {
+            screen.collapse()
+        }
     }
 
     private fun updateTheme(theme: Theme = themeManager.getTheme()) {

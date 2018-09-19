@@ -5,6 +5,7 @@ import com.mercandalli.android.browser.R
 class DarkTheme : Theme(
         R.color.window_background_dark,
         R.color.window_settings_background_dark,
+        R.color.on_boarding_window_dark,
         R.color.status_bar_background_dark,
         true,
         R.color.toolbar_background_dark,

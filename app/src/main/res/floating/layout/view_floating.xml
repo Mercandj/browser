@@ -34,7 +34,7 @@
                     android:tint="#FF0000" />
 
                 <ImageView
-                    android:id="@+id/view_floating_status_bar_minify"
+                    android:id="@+id/view_floating_status_bar_collapse"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:background="?android:selectableItemBackground"
@@ -43,7 +43,7 @@
                     android:tint="#ffb700" />
 
                 <ImageView
-                    android:id="@+id/view_floating_status_bar_expand"
+                    android:id="@+id/view_floating_status_bar_fullscreen"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:background="?android:selectableItemBackground"

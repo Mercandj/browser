@@ -16,7 +16,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
-import com.mercandalli.android.libs.monetization.in_app.InAppManager
+import com.mercandalli.android.browser.in_app.InAppManager
 
 class SettingsActivity : AppCompatActivity(),
         SettingsActivityContract.Screen {
