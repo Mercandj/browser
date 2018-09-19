@@ -12,8 +12,8 @@ class FloatingPermissionImpl(
         private val context: Context
 ) : FloatingPermission {
 
-    override fun cannotDrawOverOtherApps() = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) false
-    else !Settings.canDrawOverlays(context)
+    override fun canDrawOverOtherApps() = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) true
+    else Settings.canDrawOverlays(context)
 
     @SuppressLint("InlinedApi")
     override fun launchDrawOverOtherAppPermissionManager() {

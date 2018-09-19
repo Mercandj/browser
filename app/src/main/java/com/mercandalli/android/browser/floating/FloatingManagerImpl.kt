@@ -18,7 +18,7 @@ class FloatingManagerImpl(
     private val floatingViews = ArrayList<FloatingView>()
 
     override fun start(url: String) {
-        if (floatingPermission.cannotDrawOverOtherApps()) {
+        if (!floatingPermission.canDrawOverOtherApps()) {
             floatingPermission.launchDrawOverOtherAppPermissionManager()
             return
         }
