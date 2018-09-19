@@ -13,30 +13,6 @@ apply plugin: 'io.fabric'
 apply from: '../config/quality/quality.gradle'
 apply from: '../config/signing/signing.gradle'
 
-
-def makeVersionCodeForDensity = { densityName ->
-    // Assign different version code for each output
-
-    // Version code patch:             XX  // [1;2] digits
-    // Version code minor:          XX_00  // [2;3] digits
-    // Version code major:      XXX_00_00  // [3;5] digit
-    // Version code density:  X_000_00_00  // {5} digits
-
-    // Version code: d_MMM_mm_pp with
-    //  - d: density code
-    //  - MMM: major code
-    //  - mm: minor code
-    //  - pp: patch code
-
-    // Min version code:  1_000_00_00
-    // Max version code:  6_999_99_99
-
-    def densityCodes = [all: 1, mdpi: 2, hdpi: 3, xhdpi: 4, xxhdpi: 5, xxxhdpi: 6]
-
-    def key = densityName == null ? "all" : densityName
-    return densityCodes.get(key) * 1_000_00_00 + rootProject.ext.appVersionCode
-}
-
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -49,6 +25,12 @@ android {
         versionName rootProject.ext.appVersionName + "." + new Date().format('yyyyMMdd')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "en", "fr", "pt-rBR", "pt-rPT"
+    }
+
+    bundle {
+        density.enableSplit = true
+        abi.enableSplit = true
+        language.enableSplit = false
     }
 
     dexOptions {
@@ -71,41 +53,6 @@ android {
         }
         debug {
             versionNameSuffix ".dev"
-        }
-    }
-
-    flavorDimensions "density"
-
-    productFlavors {
-        // Dimension flavors
-        universal {
-            dimension "density"
-            versionCode makeVersionCodeForDensity('all')
-        }
-        mdpi {
-            dimension "density"
-            resConfigs "mdpi"
-            versionCode makeVersionCodeForDensity('mdpi')
-        }
-        hdpi {
-            dimension "density"
-            resConfigs "hdpi"
-            versionCode makeVersionCodeForDensity('hdpi')
-        }
-        xhdpi {
-            dimension "density"
-            resConfigs "xhdpi"
-            versionCode makeVersionCodeForDensity('xhdpi')
-        }
-        xxhdpi {
-            dimension "density"
-            resConfigs "xxhdpi"
-            versionCode makeVersionCodeForDensity('xxhdpi')
-        }
-        xxxhdpi {
-            dimension "density"
-            resConfigs "xxxhdpi"
-            versionCode makeVersionCodeForDensity('xxxhdpi')
         }
     }
 

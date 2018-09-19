@@ -54,3 +54,21 @@ Do our future selves a favour and start writing better commit messages now :)
 * ```./gradlew dependencyUpdates -Drevision=release -DoutputFormatter=json``` : Check [dependencies](https://github.com/ben-manes/gradle-versions-plugin): 
 * ```./gradlew :app:assembleDebug :app:testUniversalDebugUnitTest``` : Unit tests
 
+
+## Build Debug
+
+* Run `./gradlew app:assembleDebug`
+
+
+## Build Release Candidate
+
+* Add the jks in the `./config/signing/browser.jks`
+* Complete `./config/signing/signing.gradle`
+* Run `./gradlew app:assembleRelease`
+
+
+##  Build Release
+
+* Add the jks in the `./config/signing/browser.jks`
+* Complete `./config/signing/signing.gradle`
+* Run `./gradlew app:bundleRelease`

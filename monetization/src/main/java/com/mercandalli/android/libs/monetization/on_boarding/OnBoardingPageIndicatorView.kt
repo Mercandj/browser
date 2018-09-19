@@ -317,13 +317,13 @@ class OnBoardingPageIndicatorView @JvmOverloads constructor(
             return
         }
         if (viewPager != null) {
-            viewPager!!.setOnPageChangeListener(null)
+            viewPager!!.removeOnPageChangeListener(this)
         }
         if (view.adapter == null) {
             throw IllegalStateException("ViewPager does not have adapter instance.")
         }
         viewPager = view
-        viewPager!!.setOnPageChangeListener(this)
+        viewPager!!.addOnPageChangeListener(this)
         invalidate()
     }
 

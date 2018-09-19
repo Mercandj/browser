@@ -2,10 +2,10 @@ package com.mercandalli.android.browser.update
 
 import android.content.SharedPreferences
 import com.mercandalli.android.browser.version.VersionManager
-import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.Dispatchers
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.launch
 
-@Suppress("EXPERIMENTAL_FEATURE_WARNING")
 class UpdateManagerImpl(
         private val sharedPreferences: SharedPreferences,
         private val versionManager: VersionManager
@@ -18,7 +18,7 @@ class UpdateManagerImpl(
         if (firstLaunchAfterUpdate == null) {
             val versionName = versionManager.getVersionName()
             firstLaunchAfterUpdate = versionName != lastVersionName
-            launch(CommonPool) {
+            GlobalScope.launch(Dispatchers.Default) {
                 sharedPreferences.edit().putString(KEY_LAST_VERSION_NAME, versionName).apply()
             }
         }
