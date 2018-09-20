@@ -40,6 +40,10 @@ class OnBoardingActivity : AppCompatActivity() {
         })
         themeManager.registerThemeListener(themeListener)
         updateTheme()
+
+        if (savedInstanceState == null) {
+            ApplicationGraph.getAnalyticsManager().sendEventOnBoardingStarted()
+        }
     }
 
     override fun onDestroy() {

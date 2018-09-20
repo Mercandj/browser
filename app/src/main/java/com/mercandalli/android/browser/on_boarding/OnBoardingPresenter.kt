@@ -2,6 +2,7 @@ package com.mercandalli.android.browser.on_boarding
 
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.SkuDetails
+import com.mercandalli.android.browser.analytics.AnalyticsManager
 import com.mercandalli.android.browser.floating.FloatingManager
 import com.mercandalli.android.browser.monetization.MonetizationManager
 import com.mercandalli.android.browser.in_app.InAppManager
@@ -10,12 +11,13 @@ import com.mercandalli.android.browser.theme.ThemeManager
 
 internal class OnBoardingPresenter(
         private val screen: OnBoardingContract.Screen,
-        private val onBoardingRepository: OnBoardingRepository,
-        private val monetizationManager: MonetizationManager,
-        private val inAppManager: InAppManager,
-        private val themeManager: ThemeManager,
+        private val analyticsManager: AnalyticsManager,
         private val floatingManager: FloatingManager,
-        private val subscriptionSku: String
+        private val inAppManager: InAppManager,
+        private val monetizationManager: MonetizationManager,
+        private val onBoardingRepository: OnBoardingRepository,
+        private val subscriptionSku: String,
+        private val themeManager: ThemeManager
 ) : OnBoardingContract.UserAction {
 
     private val monetizationEnabledListener = createMonetizationEnabledListener()
@@ -52,11 +54,13 @@ internal class OnBoardingPresenter(
     }
 
     override fun onStoreBuyClicked(activityContainer: InAppManager.ActivityContainer) {
+        analyticsManager.sendEventOnBoardingSubscriptionClicked()
         inAppManager.registerListener(inAppManagerListener)
         inAppManager.purchase(activityContainer, subscriptionSku, BillingClient.SkuType.SUBS)
     }
 
     override fun onStoreSkipClicked() {
+        analyticsManager.sendEventOnBoardingSkipClicked()
         onBoardingRepository.markOnBoardingStorePageSkipped()
         onBoardingRepository.markOnBoardingEnded()
         screen.closeOnBoarding()

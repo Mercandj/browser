@@ -207,20 +207,22 @@ class OnBoardingView @JvmOverloads constructor(
             override fun onStoreSkipClicked() {}
         }
     } else {
-        val monetizationManager = MonetizationGraph.getMonetizationManager()
-        val inAppManager = MonetizationGraph.getInAppManager()
-        val subscriptionSku = MonetizationGraph.getMonetization().subscriptionSku
-        val onBoardingRepository = MonetizationGraph.getOnBoardingRepository()
-        val themeManager = ApplicationGraph.getThemeManager()
+        val analyticsManager = ApplicationGraph.getAnalyticsManager()
         val floatingManager = ApplicationGraph.getFloatingManager()
+        val inAppManager = MonetizationGraph.getInAppManager()
+        val monetizationManager = MonetizationGraph.getMonetizationManager()
+        val onBoardingRepository = MonetizationGraph.getOnBoardingRepository()
+        val subscriptionSku = MonetizationGraph.getMonetization().subscriptionSku
+        val themeManager = ApplicationGraph.getThemeManager()
         OnBoardingPresenter(
                 this,
-                onBoardingRepository,
-                monetizationManager,
-                inAppManager,
-                themeManager,
+                analyticsManager,
                 floatingManager,
-                subscriptionSku
+                inAppManager,
+                monetizationManager,
+                onBoardingRepository,
+                subscriptionSku,
+                themeManager
         )
     }
 
