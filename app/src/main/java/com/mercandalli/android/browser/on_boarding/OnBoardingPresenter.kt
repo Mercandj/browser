@@ -92,6 +92,7 @@ internal class OnBoardingPresenter(
     private fun updateTheme(theme: Theme = themeManager.getTheme()) {
         screen.setTextPrimaryColorRes(theme.textPrimaryColorRes)
         screen.setTextSecondaryColorRes(theme.textSecondaryColorRes)
+        screen.setPageIndicatorDarkTheme(themeManager.isDarkEnable())
     }
 
     private fun createThemeListener() = object : ThemeManager.ThemeListener {

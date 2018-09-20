@@ -23,30 +23,30 @@
                 android:layout_width="102dp"
                 android:layout_height="34dp">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/view_floating_status_bar_quit"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
-                    android:background="?android:selectableItemBackground"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="6dp"
                     android:rotation="45"
                     android:src="@drawable/ic_add_circle_white_24dp"
                     android:tint="#FF0000" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/view_floating_status_bar_collapse"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
-                    android:background="?android:selectableItemBackground"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="6dp"
                     android:src="@drawable/ic_remove_circle_white_24dp"
                     android:tint="#ffb700" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/view_floating_status_bar_fullscreen"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
-                    android:background="?android:selectableItemBackground"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="6dp"
                     android:rotation="45"
                     android:src="@drawable/ic_swap_vertical_circle_white_24dp"
@@ -65,6 +65,26 @@
                 android:text="@string/app_name"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/view_floating_status_bar_home"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="34dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="6dp"
+                android:src="@drawable/ic_home_white_24dp"
+                android:tint="#808080" />
+
+            <ImageView
+                android:id="@+id/view_floating_status_bar_move"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="end"
+                android:padding="6dp"
+                android:src="@drawable/ic_zoom_out_map_white_24dp"
+                android:tint="#808080" />
 
         </FrameLayout>
 

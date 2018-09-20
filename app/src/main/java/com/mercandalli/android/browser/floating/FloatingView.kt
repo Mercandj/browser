@@ -26,6 +26,7 @@ class FloatingView @JvmOverloads constructor(
     private val statusBarQuit: View = view.findViewById(R.id.view_floating_status_bar_quit)
     private val statusBarCollapse: View = view.findViewById(R.id.view_floating_status_bar_collapse)
     private val statusBarFullscreen: View = view.findViewById(R.id.view_floating_status_bar_fullscreen)
+    private val statusBarHome: View = view.findViewById(R.id.view_floating_status_bar_home)
     private val windowManager by lazy(LazyThreadSafetyMode.NONE) {
         context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     }
@@ -43,6 +44,7 @@ class FloatingView @JvmOverloads constructor(
         statusBarQuit.setOnClickListener { userAction.onQuitClicked() }
         statusBarFullscreen.setOnClickListener { userAction.onFullscreenClicked(mainWebView.url) }
         statusBarCollapse.setOnClickListener { userAction.onCollapseClicked() }
+        statusBarHome.setOnClickListener { userAction.onHomeClicked() }
         setOnTouchListener(createOnTouchListener())
 
         if (!isInEditMode && viewTreeObserver.isAlive) {
@@ -102,6 +104,10 @@ class FloatingView @JvmOverloads constructor(
     override fun isCollapsed(): Boolean {
         val layoutParams = layoutParams as WindowManager.LayoutParams
         return layoutParams.width == collapsedWidth
+    }
+
+    override fun loadUrl(url: String) {
+        mainWebView.load(url)
     }
 
     fun setListener(listener: Listener) {
@@ -187,12 +193,15 @@ class FloatingView @JvmOverloads constructor(
                 override fun onQuitClicked() {}
                 override fun onFullscreenClicked(url: String) {}
                 override fun onCollapseClicked() {}
+                override fun onHomeClicked() {}
             }
         }
         val themeManager = ApplicationGraph.getThemeManager()
+        val searchEngineManager = ApplicationGraph.getSearchEngineManager()
         return FloatingPresenter(
                 this,
-                themeManager
+                themeManager,
+                searchEngineManager
         )
     }
 

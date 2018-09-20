@@ -30,7 +30,7 @@ class FloatingManagerImpl(
         floatingView.setListener(createFloatingView())
         floatingView.load(url)
         floatingView.setExpandedSize(width, height)
-        floatingView.setCollapsedSize(ViewUtils.dpToPx(160F), ViewUtils.dpToPx(54F))
+        floatingView.setCollapsedSize(ViewUtils.dpToPx(190F), ViewUtils.dpToPx(54F))
         val flags = WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED or
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
                 WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR or

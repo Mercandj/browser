@@ -1,5 +1,6 @@
 package com.mercandalli.android.browser.on_boarding
 
+import com.mercandalli.android.browser.analytics.AnalyticsManager
 import com.mercandalli.android.browser.floating.FloatingManager
 import com.mercandalli.android.browser.network.NetworkManager
 import com.mercandalli.android.browser.theme.Theme
@@ -9,7 +10,8 @@ internal class OnBoardingPagePresenter(
         private val screen: OnBoardingPageContract.Screen,
         private val themeManager: ThemeManager,
         private val networkManager: NetworkManager,
-        private val floatingManager: FloatingManager
+        private val floatingManager: FloatingManager,
+        private val analyticsManager: AnalyticsManager
 ) : OnBoardingPageContract.UserAction {
 
     private val themeListener = createThemeListener()
@@ -31,6 +33,7 @@ internal class OnBoardingPagePresenter(
     }
 
     override fun onDarkThemeClicked() {
+        analyticsManager.sendEventOnBoardingTryDarkTheme()
         themeManager.setDarkEnable(true)
     }
 
@@ -39,6 +42,7 @@ internal class OnBoardingPagePresenter(
     }
 
     override fun onFullVersionTryClicked() {
+        analyticsManager.sendEventOnBoardingTryFullVersion()
         floatingManager.start("https://www.google.com/")
     }
 

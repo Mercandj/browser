@@ -1,12 +1,14 @@
 package com.mercandalli.android.browser.floating
 
 import android.os.Build
+import com.mercandalli.android.browser.search_engine.SearchEngineManager
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 
 class FloatingPresenter(
         private val screen: FloatingContract.Screen,
-        private val themeManager: ThemeManager
+        private val themeManager: ThemeManager,
+        private val searchEngineManager: SearchEngineManager
 ) : FloatingContract.UserAction {
 
     private val themeListener = createThemeListener()
@@ -35,6 +37,11 @@ class FloatingPresenter(
         } else {
             screen.collapse()
         }
+    }
+
+    override fun onHomeClicked() {
+        val homeUrl = searchEngineManager.getHomeUrl()
+        screen.loadUrl(homeUrl)
     }
 
     private fun updateTheme(theme: Theme = themeManager.getTheme()) {

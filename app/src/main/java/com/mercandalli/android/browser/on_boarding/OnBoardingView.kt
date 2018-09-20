@@ -131,6 +131,10 @@ class OnBoardingView @JvmOverloads constructor(
         storeSkip.setTextColor(color)
     }
 
+    override fun setPageIndicatorDarkTheme(darkEnabled: Boolean) {
+        indicatorOnBoarding.setDarkTheme(darkEnabled)
+    }
+
     fun setCloseOnBoardingAction(action: CloseOnBoardingAction) {
         closeOnBoardingAction = action
     }

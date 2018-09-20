@@ -49,7 +49,6 @@
 
             </com.mercandalli.android.browser.on_boarding.OnBoardingThumbnailFrameLayout>
 
-
             <TextView
                 android:id="@+id/view_on_boarding_view_title"
                 android:layout_width="wrap_content"
@@ -81,9 +80,9 @@
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/default_space_1_5"
             android:background="@drawable/on_boarding_page_btn"
-            android:paddingStart="@dimen/default_space_1_5"
+            android:paddingStart="@dimen/on_boarding_page_card_buttons_horizontal_padding"
             android:paddingTop="@dimen/default_space_half"
-            android:paddingEnd="@dimen/default_space_1_5"
+            android:paddingEnd="@dimen/on_boarding_page_card_buttons_horizontal_padding"
             android:paddingBottom="@dimen/default_space_half"
             android:text="@string/on_boarding_page_2_try_it"
             android:textColor="@android:color/white"
@@ -97,9 +96,9 @@
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/default_space_1_5"
             android:background="@drawable/on_boarding_page_btn"
-            android:paddingStart="@dimen/default_space_1_5"
+            android:paddingStart="@dimen/on_boarding_page_card_buttons_horizontal_padding"
             android:paddingTop="@dimen/default_space_half"
-            android:paddingEnd="@dimen/default_space_1_5"
+            android:paddingEnd="@dimen/on_boarding_page_card_buttons_horizontal_padding"
             android:paddingBottom="@dimen/default_space_half"
             android:text="LIGHT THEME"
             android:textColor="@android:color/white"

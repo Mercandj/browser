@@ -15,6 +15,8 @@ interface FloatingContract {
         fun onFullscreenClicked(url: String)
 
         fun onCollapseClicked()
+
+        fun onHomeClicked()
     }
 
     interface Screen {
@@ -34,5 +36,7 @@ interface FloatingContract {
         fun navigateToMainActivity(url: String)
 
         fun isCollapsed(): Boolean
+
+        fun loadUrl(url: String)
     }
 }

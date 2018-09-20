@@ -111,41 +111,40 @@ class OnBoardingPageIndicatorView @JvmOverloads constructor(
             invalidate()
         }
 
-
     init {
         if (isInEditMode) {
             touchSlop = 0
         } else {
             // Load defaults from resources
             val res = resources
-            val defaultPageColor = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_page_color)
-            val defaultFillColor = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_fill_color)
+            val defaultPageColor = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_page_color_light)
+            val defaultFillColor = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_fill_color_light)
             val defaultOrientation = res.getInteger(R.integer.on_boarding_circle_indicator_orientation)
-            val defaultStrokeColor = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_stroke_color)
+            val defaultStrokeColor = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_stroke_color_light)
             val defaultStrokeWidth = res.getDimension(R.dimen.on_boarding_circle_indicator_stroke_width)
             val defaultRadius = res.getDimension(R.dimen.on_boarding_circle_indicator_radius)
 
             // Retrieve styles attributes
-            val a = context.obtainStyledAttributes(attrs, R.styleable.OnBoardingPageIndicatorView, 0, 0)
+            val attrs = context.obtainStyledAttributes(attrs, R.styleable.OnBoardingPageIndicatorView, 0, 0)
 
-            mCentered = a.getBoolean(R.styleable.OnBoardingPageIndicatorView_centered, true)
-            mOrientation = a.getInt(R.styleable.OnBoardingPageIndicatorView_android_orientation, defaultOrientation)
+            mCentered = attrs.getBoolean(R.styleable.OnBoardingPageIndicatorView_centered, true)
+            mOrientation = attrs.getInt(R.styleable.OnBoardingPageIndicatorView_android_orientation, defaultOrientation)
             paintPageFill.style = Style.FILL
-            paintPageFill.color = a.getColor(R.styleable.OnBoardingPageIndicatorView_pageColor, defaultPageColor)
+            paintPageFill.color = attrs.getColor(R.styleable.OnBoardingPageIndicatorView_pageColor, defaultPageColor)
             mPaintStroke.style = Style.STROKE
-            mPaintStroke.color = a.getColor(R.styleable.OnBoardingPageIndicatorView_strokeColor, defaultStrokeColor)
-            mPaintStroke.strokeWidth = a.getDimension(R.styleable.OnBoardingPageIndicatorView_strokeWidth, defaultStrokeWidth)
+            mPaintStroke.color = attrs.getColor(R.styleable.OnBoardingPageIndicatorView_strokeColor, defaultStrokeColor)
+            mPaintStroke.strokeWidth = attrs.getDimension(R.styleable.OnBoardingPageIndicatorView_strokeWidth, defaultStrokeWidth)
             mPaintFill.style = Style.FILL
-            mPaintFill.color = a.getColor(R.styleable.OnBoardingPageIndicatorView_fillColor, defaultFillColor)
-            radiusInternal = a.getDimension(R.styleable.OnBoardingPageIndicatorView_radius, defaultRadius)
-            snap = a.getBoolean(R.styleable.OnBoardingPageIndicatorView_snap, false)
+            mPaintFill.color = attrs.getColor(R.styleable.OnBoardingPageIndicatorView_fillColor, defaultFillColor)
+            radiusInternal = attrs.getDimension(R.styleable.OnBoardingPageIndicatorView_radius, defaultRadius)
+            snap = attrs.getBoolean(R.styleable.OnBoardingPageIndicatorView_snap, false)
 
-            val background = a.getDrawable(R.styleable.OnBoardingPageIndicatorView_android_background)
+            val background = attrs.getDrawable(R.styleable.OnBoardingPageIndicatorView_android_background)
             if (background != null) {
-                setBackgroundDrawable(background)
+                setBackground(background)
             }
 
-            a.recycle()
+            attrs.recycle()
 
             val configuration = ViewConfiguration.get(context)
             touchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration)
@@ -154,6 +153,19 @@ class OnBoardingPageIndicatorView @JvmOverloads constructor(
 
     fun setNbItemRemovedTodraw(nbItemRemoved: Int) {
         mNbItemRemovedDraw = nbItemRemoved
+    }
+
+    override fun setDarkTheme(darkEnabled: Boolean) {
+        if (darkEnabled) {
+            paintPageFill.color = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_page_color_dark)
+            mPaintFill.color = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_fill_color_dark)
+            mPaintStroke.color = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_stroke_color_dark)
+        } else {
+            paintPageFill.color = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_page_color_light)
+            mPaintFill.color = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_fill_color_light)
+            mPaintStroke.color = ContextCompat.getColor(context, R.color.on_boarding_circle_indicator_stroke_color_light)
+        }
+        invalidate()
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -234,24 +246,24 @@ class OnBoardingPageIndicatorView @JvmOverloads constructor(
         canvas.drawCircle(dX, dY, radiusInternal, mPaintFill)
     }
 
-    override fun onTouchEvent(ev: MotionEvent): Boolean {
-        if (super.onTouchEvent(ev)) {
+    override fun onTouchEvent(motionEvent: MotionEvent): Boolean {
+        if (super.onTouchEvent(motionEvent)) {
             return true
         }
         if (viewPager == null || viewPager!!.adapter!!.count == 0) {
             return false
         }
 
-        val action = ev.action and MotionEventCompat.ACTION_MASK
+        val action = motionEvent.action and MotionEvent.ACTION_MASK
         when (action) {
             MotionEvent.ACTION_DOWN -> {
-                mActivePointerId = MotionEventCompat.getPointerId(ev, 0)
-                mLastMotionX = ev.x
+                mActivePointerId = motionEvent.getPointerId(0)
+                mLastMotionX = motionEvent.x
             }
 
             MotionEvent.ACTION_MOVE -> {
-                val activePointerIndex = MotionEventCompat.findPointerIndex(ev, mActivePointerId)
-                val x = MotionEventCompat.getX(ev, activePointerIndex)
+                val activePointerIndex = motionEvent.findPointerIndex(mActivePointerId)
+                val x = MotionEventCompat.getX(motionEvent, activePointerIndex)
                 val deltaX = x - mLastMotionX
 
                 if (!mIsDragging && Math.abs(deltaX) > touchSlop) {
@@ -273,12 +285,12 @@ class OnBoardingPageIndicatorView @JvmOverloads constructor(
                     val halfWidth = width / 2f
                     val sixthWidth = width / 6f
 
-                    if (mCurrentPage > 0 && ev.x < halfWidth - sixthWidth) {
+                    if (mCurrentPage > 0 && motionEvent.x < halfWidth - sixthWidth) {
                         if (action != MotionEvent.ACTION_CANCEL) {
                             viewPager!!.currentItem = mCurrentPage - 1
                         }
                         return true
-                    } else if (mCurrentPage < count - 1 && ev.x > halfWidth + sixthWidth) {
+                    } else if (mCurrentPage < count - 1 && motionEvent.x > halfWidth + sixthWidth) {
                         if (action != MotionEvent.ACTION_CANCEL) {
                             viewPager!!.currentItem = mCurrentPage + 1
                         }
@@ -291,20 +303,20 @@ class OnBoardingPageIndicatorView @JvmOverloads constructor(
                 if (viewPager!!.isFakeDragging) viewPager!!.endFakeDrag()
             }
 
-            MotionEventCompat.ACTION_POINTER_DOWN -> {
-                val index = MotionEventCompat.getActionIndex(ev)
-                mLastMotionX = MotionEventCompat.getX(ev, index)
-                mActivePointerId = MotionEventCompat.getPointerId(ev, index)
+            MotionEvent.ACTION_POINTER_DOWN -> {
+                val index = motionEvent.actionIndex
+                mLastMotionX = motionEvent.getX(index)
+                mActivePointerId = motionEvent.getPointerId(index)
             }
 
-            MotionEventCompat.ACTION_POINTER_UP -> {
-                val pointerIndex = MotionEventCompat.getActionIndex(ev)
-                val pointerId = MotionEventCompat.getPointerId(ev, pointerIndex)
+            MotionEvent.ACTION_POINTER_UP -> {
+                val pointerIndex = motionEvent.actionIndex
+                val pointerId = motionEvent.getPointerId(pointerIndex)
                 if (pointerId == mActivePointerId) {
                     val newPointerIndex = if (pointerIndex == 0) 1 else 0
-                    mActivePointerId = MotionEventCompat.getPointerId(ev, newPointerIndex)
+                    mActivePointerId = motionEvent.getPointerId(newPointerIndex)
                 }
-                mLastMotionX = MotionEventCompat.getX(ev, MotionEventCompat.findPointerIndex(ev, mActivePointerId))
+                mLastMotionX = motionEvent.getX(motionEvent.findPointerIndex(mActivePointerId))
             }
         }
 

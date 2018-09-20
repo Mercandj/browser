@@ -50,5 +50,7 @@ internal interface OnBoardingContract {
         fun setTextPrimaryColorRes(@ColorRes colorRes: Int)
 
         fun setTextSecondaryColorRes(@ColorRes colorRes: Int)
+
+        fun setPageIndicatorDarkTheme(darkEnabled: Boolean)
     }
 }

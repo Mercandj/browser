@@ -46,4 +46,6 @@ interface OnBoardingPageIndicator : ViewPager.OnPageChangeListener {
      * Notify the indicator that the fragment list has changed.
      */
     fun notifyDataSetChanged()
+
+    fun setDarkTheme(darkEnabled: Boolean)
 }

@@ -148,11 +148,13 @@ class OnBoardingPageView @JvmOverloads constructor(
         val themeManager = ApplicationGraph.getThemeManager()
         val networkManager = ApplicationGraph.getNetworkManager()
         val floatingManager = ApplicationGraph.getFloatingManager()
+        val analyticsManager = ApplicationGraph.getAnalyticsManager()
         return OnBoardingPagePresenter(
                 this,
                 themeManager,
                 networkManager,
-                floatingManager
+                floatingManager,
+                analyticsManager
         )
     }
 }
