@@ -8,8 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:background="@color/on_boarding_window_light"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:background="@color/on_boarding_window_light">
 
         <LinearLayout
             android:layout_width="wrap_content"

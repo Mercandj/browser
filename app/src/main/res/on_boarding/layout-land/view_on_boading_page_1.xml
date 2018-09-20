@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:layout_height="200dp"
     tools:parentTag="android.widget.FrameLayout">
 
     <androidx.cardview.widget.CardView
@@ -11,7 +12,8 @@
         android:layout_width="@dimen/on_boarding_page_width_land"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        app:cardCornerRadius="@dimen/on_boarding_card_radius">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,8 +28,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#F6F6F6"
-                    app:ratio_height="5"
-                    app:ratio_width="4"
+                    app:ratio_height="1"
+                    app:ratio_width="1"
                     app:ratio_width_reference="false">
 
                     <LinearLayout

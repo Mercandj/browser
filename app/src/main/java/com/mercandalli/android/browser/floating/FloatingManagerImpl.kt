@@ -3,6 +3,7 @@ package com.mercandalli.android.browser.floating
 import android.content.Context
 import android.graphics.PixelFormat
 import android.graphics.Point
+import android.os.Build
 import android.view.ContextThemeWrapper
 import android.view.Gravity
 import android.view.WindowManager
@@ -34,21 +35,19 @@ class FloatingManagerImpl(
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
                 WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR or
                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-        val layoutParams = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            WindowManager.LayoutParams(width.toInt(),
-                    height.toInt(),
-                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                    flags,
-                    PixelFormat.TRANSLUCENT)
+        val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         } else {
             @Suppress("DEPRECATION")
-            WindowManager.LayoutParams(width.toInt(),
-                    height.toInt(),
-                    WindowManager.LayoutParams.TYPE_PRIORITY_PHONE,
-                    flags,
-                    PixelFormat.TRANSLUCENT)
+            WindowManager.LayoutParams.TYPE_PRIORITY_PHONE
         }
-
+        val layoutParams = WindowManager.LayoutParams(
+                width.toInt(),
+                height.toInt(),
+                type,
+                flags,
+                PixelFormat.TRANSLUCENT
+        )
         layoutParams.gravity = Gravity.TOP or Gravity.START
         windowManager.addView(
                 floatingView,
