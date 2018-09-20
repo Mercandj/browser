@@ -34,13 +34,21 @@ class FloatingManagerImpl(
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
                 WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR or
                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-        val layoutParams = WindowManager.LayoutParams(
-                width.toInt(),
-                height.toInt(),
-                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                flags,
-                PixelFormat.TRANSLUCENT
-        )
+        val layoutParams = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            WindowManager.LayoutParams(width.toInt(),
+                    height.toInt(),
+                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                    flags,
+                    PixelFormat.TRANSLUCENT)
+        } else {
+            @Suppress("DEPRECATION")
+            WindowManager.LayoutParams(width.toInt(),
+                    height.toInt(),
+                    WindowManager.LayoutParams.TYPE_PRIORITY_PHONE,
+                    flags,
+                    PixelFormat.TRANSLUCENT)
+        }
+
         layoutParams.gravity = Gravity.TOP or Gravity.START
         windowManager.addView(
                 floatingView,

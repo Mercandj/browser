@@ -14,7 +14,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp">
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="6dp">
 
             <TextView
                 android:id="@+id/view_on_boarding_title"
