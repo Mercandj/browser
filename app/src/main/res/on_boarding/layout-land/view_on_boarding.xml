@@ -8,8 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:background="@color/on_boarding_window_light"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:background="@color/on_boarding_window_light">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -97,8 +97,8 @@
                     android:layout_marginBottom="6dp"
                     android:background="@drawable/on_boarding_btn"
                     android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
+                    android:paddingTop="@dimen/on_boarding_button_vertical_padding"
+                    android:paddingBottom="@dimen/on_boarding_button_vertical_padding"
                     android:text="@string/on_boarding_store_buy"
                     android:textColor="@color/on_boarding_button_text_color"
                     android:textSize="18sp" />
@@ -114,8 +114,8 @@
                 android:layout_marginBottom="6dp"
                 android:background="@drawable/on_boarding_btn"
                 android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="@dimen/on_boarding_button_vertical_padding"
+                android:paddingBottom="@dimen/on_boarding_button_vertical_padding"
                 android:text="@string/on_boarding_next"
                 android:textColor="@color/on_boarding_button_text_color"
                 android:textSize="18sp"

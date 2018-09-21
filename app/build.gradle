@@ -22,7 +22,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.appVersionCode
-        versionName rootProject.ext.appVersionName + "." + new Date().format('yyyyMMdd')
+        versionName rootProject.ext.appVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "en", "fr", "pt-rBR", "pt-rPT"
     }
