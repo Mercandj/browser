@@ -3,23 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:parentTag="android.widget.ScrollView">
+    tools:parentTag="com.mercandalli.android.browser.settings.SettingsView">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/view_settings_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="@dimen/default_space"
-        android:paddingBottom="@dimen/default_space_half">
-
-        <include layout="@layout/view_settings_theme" />
-
-        <include layout="@layout/view_settings_search_engine" />
-
-        <include layout="@layout/view_settings_ad_blocker" />
-
-        <include layout="@layout/view_settings_about" />
-
-    </LinearLayout>
+        android:paddingBottom="@dimen/default_space_half" />
 
 </merge>

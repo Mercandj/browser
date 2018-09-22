@@ -1,6 +1,12 @@
 package com.mercandalli.android.browser.product
 
+import com.mercandalli.android.browser.in_app.InAppManager
+
 interface ProductManager {
+
+    fun purchaseFullVersion(
+            activityContainer: InAppManager.ActivityContainer
+    )
 
     fun isFullVersionAvailable(): Boolean
 

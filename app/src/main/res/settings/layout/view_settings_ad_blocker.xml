@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    tools:orientation="vertical"
+    tools:parentTag="android.widget.LinearLayout">
 
     <TextView
         android:id="@+id/view_settings_ad_blocker_section_label"
@@ -58,8 +60,8 @@
                     android:layout_marginTop="4dp"
                     android:paddingStart="@dimen/default_space_2"
                     android:paddingEnd="@dimen/default_space_2"
-                    android:textColor="@color/text_secondary_color_light"
-                    android:text="@string/view_settings_ad_blocker_unlock_sublabel" />
+                    android:text="@string/view_settings_ad_blocker_unlock_sublabel"
+                    android:textColor="@color/text_secondary_color_light" />
 
             </LinearLayout>
 
@@ -116,4 +118,4 @@
 
     </androidx.cardview.widget.CardView>
 
-</LinearLayout>
+</merge>

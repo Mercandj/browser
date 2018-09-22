@@ -1,6 +1,7 @@
 package com.mercandalli.android.browser.product
 
 import android.content.SharedPreferences
+import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.SkuDetails
 import com.mercandalli.android.browser.main.MainApplication
 import com.mercandalli.android.browser.remote_config.RemoteConfig
@@ -19,6 +20,14 @@ class ProductManagerImpl(
     init {
         inAppManager.registerListener(createInAppListener())
         isAppDeveloperEnabled = sharedPreferences.getBoolean(PREFERENCE_IS_APP_DEVELOPER_ENABLED, isAppDeveloperEnabled)
+    }
+
+    override fun purchaseFullVersion(activityContainer: InAppManager.ActivityContainer) {
+        inAppManager.purchase(
+                activityContainer,
+                MainApplication.SKU_SUBSCRIPTION_FULL_VERSION,
+                BillingClient.SkuType.SUBS
+        )
     }
 
     override fun isFullVersionAvailable() = isAppDeveloperEnabled ||
