@@ -25,4 +25,8 @@ class AnalyticsManagerFirebase(
     override fun sendEventOnBoardingSkipClicked() {
         firebaseAnalytics.logEvent("on_boarding_skip_clicked", null)
     }
+
+    override fun sendEventOnBoardingSubscribed() {
+        firebaseAnalytics.logEvent("on_boarding_subscribed", null)
+    }
 }

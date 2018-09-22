@@ -115,6 +115,7 @@ internal class OnBoardingPresenter(
         override fun onSkuDetailsChanged(skuDetails: SkuDetails) {}
         override fun onPurchasedChanged() {
             if (inAppManager.isPurchased(subscriptionSku)) {
+                analyticsManager.sendEventOnBoardingSubscribed()
                 onBoardingRepository.markOnBoardingEnded()
                 screen.closeOnBoarding()
                 screen.startFistActivity()

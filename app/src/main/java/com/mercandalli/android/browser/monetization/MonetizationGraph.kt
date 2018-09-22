@@ -15,21 +15,11 @@ class MonetizationGraph(
         private val activityAction: ActivityAction
 ) {
 
-    private val inAppModule by lazy {
-        InAppModule(context)
-    }
-
-    private val inAppManagerInternal by lazy {
-        inAppModule.createInAppManager(monetizationLog)
-    }
-
-    private val monetizationManagerInternal by lazy {
-        MonetizationManagerImpl()
-    }
-
-    private val onBoardingRepositoryInternal by lazy {
-        OnBoardingModule(context).createOnBoardingRepository()
-    }
+    private val inAppModule by lazy { InAppModule(context) }
+    private val onBoardingModule by lazy { OnBoardingModule(context) }
+    private val inAppManagerInternal by lazy { inAppModule.createInAppManager(monetizationLog) }
+    private val monetizationManagerInternal by lazy { MonetizationManagerImpl() }
+    private val onBoardingRepositoryInternal by lazy { onBoardingModule.createOnBoardingRepository() }
 
     interface ActivityAction {
         fun startFirstActivity()
