@@ -110,6 +110,14 @@ class FloatingView @JvmOverloads constructor(
         mainWebView.load(url)
     }
 
+    override fun showFullscreenButton() {
+        statusBarFullscreen.visibility = VISIBLE
+    }
+
+    override fun hideFullscreenButton() {
+        statusBarFullscreen.visibility = GONE
+    }
+
     fun setListener(listener: Listener) {
         this.listener = listener
     }
@@ -124,8 +132,8 @@ class FloatingView @JvmOverloads constructor(
         collapsedHeight = height.toInt()
     }
 
-    fun load(url: String) {
-        mainWebView.load(url)
+    fun load(configuration: FloatingManager.Configuration) {
+        userAction.onLoad(configuration)
     }
 
     fun close() {
@@ -194,6 +202,7 @@ class FloatingView @JvmOverloads constructor(
                 override fun onFullscreenClicked(url: String) {}
                 override fun onCollapseClicked() {}
                 override fun onHomeClicked() {}
+                override fun onLoad(configuration: FloatingManager.Configuration) {}
             }
         }
         val themeManager = ApplicationGraph.getThemeManager()

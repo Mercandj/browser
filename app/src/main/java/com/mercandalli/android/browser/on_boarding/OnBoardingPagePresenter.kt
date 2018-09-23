@@ -43,7 +43,9 @@ internal class OnBoardingPagePresenter(
 
     override fun onFullVersionTryClicked() {
         analyticsManager.sendEventOnBoardingTryFullVersion()
-        floatingManager.start("https://www.google.com/")
+        val builder = FloatingManager.Configuration.Builder()
+        builder.setFullscreenButtonVisible(false)
+        floatingManager.start(builder.build("https://www.google.com/"))
     }
 
     private fun updateTheme(theme: Theme = themeManager.getTheme()) {

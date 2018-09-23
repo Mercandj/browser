@@ -20,23 +20,28 @@ interface DialogManager {
             @StringRes negativeStringRes: Int
     )
 
-    fun onDialogPositiveClicked(dialogId: String, userInput: String)
+    fun consumeDialogActionPositiveClicked(): DialogAction?
 
-    fun onDialogNegativeClicked(dialogId: String)
+    fun onDialogPositiveClicked(dialogAction: DialogAction)
+
+    fun onDialogNegativeClicked(dialogAction: DialogAction)
 
     fun registerListener(listener: Listener)
 
     fun unregisterListener(listener: Listener)
 
+    class DialogAction(
+            val dialogId: String,
+            val userInput: String
+    )
+
     interface Listener {
 
-        fun onDialogPositiveClicked(
-                dialogId: String,
-                userInput: String
-        )
+        /**
+         * Return true if consumed
+         */
+        fun onDialogPositiveClicked(dialogAction: DialogAction): Boolean
 
-        fun onDialogNegativeClicked(
-                dialogId: String
-        )
+        fun onDialogNegativeClicked(dialogAction: DialogAction)
     }
 }

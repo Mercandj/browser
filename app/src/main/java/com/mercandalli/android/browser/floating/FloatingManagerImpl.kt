@@ -18,7 +18,7 @@ class FloatingManagerImpl(
 
     private val floatingViews = ArrayList<FloatingView>()
 
-    override fun start(url: String) {
+    override fun start(configuration: FloatingManager.Configuration) {
         if (!floatingPermission.canDrawOverOtherApps()) {
             floatingPermission.launchDrawOverOtherAppPermissionManager()
             return
@@ -28,7 +28,7 @@ class FloatingManagerImpl(
         val context = ContextThemeWrapper(context, R.style.AppTheme)
         val floatingView = FloatingView(context)
         floatingView.setListener(createFloatingView())
-        floatingView.load(url)
+        floatingView.load(configuration)
         floatingView.setExpandedSize(width, height)
         floatingView.setCollapsedSize(ViewUtils.dpToPx(190F), ViewUtils.dpToPx(54F))
         val flags = WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED or

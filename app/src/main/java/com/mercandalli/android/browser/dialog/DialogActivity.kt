@@ -43,14 +43,19 @@ class DialogActivity : AppCompatActivity() {
         positive.setOnClickListener {
             finish()
             dialogManager.onDialogPositiveClicked(
-                    dialogInput.dialogId,
-                    input.text.toString()
+                    DialogManager.DialogAction(
+                            dialogInput.dialogId,
+                            input.text.toString()
+                    )
             )
         }
         negative.setOnClickListener {
             finish()
             dialogManager.onDialogNegativeClicked(
-                    dialogInput.dialogId
+                    DialogManager.DialogAction(
+                            dialogInput.dialogId,
+                            input.text.toString()
+                    )
             )
         }
     }

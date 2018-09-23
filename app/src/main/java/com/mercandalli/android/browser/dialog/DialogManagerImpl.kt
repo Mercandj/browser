@@ -7,6 +7,7 @@ class DialogManagerImpl(
 ) : DialogManager {
 
     private val listeners = ArrayList<DialogManager.Listener>()
+    private var unconsumedDialogActionPositiveClicked: DialogManager.DialogAction? = null
 
     override fun alert(
             dialogId: String,
@@ -50,15 +51,25 @@ class DialogManagerImpl(
         ))
     }
 
-    override fun onDialogPositiveClicked(dialogId: String, userInput: String) {
+    override fun consumeDialogActionPositiveClicked(): DialogManager.DialogAction? {
+        val tmp = unconsumedDialogActionPositiveClicked
+        unconsumedDialogActionPositiveClicked = null
+        return tmp
+    }
+
+    override fun onDialogPositiveClicked(dialogAction: DialogManager.DialogAction) {
+        unconsumedDialogActionPositiveClicked = dialogAction
         for (listener in listeners) {
-            listener.onDialogPositiveClicked(dialogId, userInput)
+            if (listener.onDialogPositiveClicked(dialogAction)) {
+                unconsumedDialogActionPositiveClicked = null
+                return
+            }
         }
     }
 
-    override fun onDialogNegativeClicked(dialogId: String) {
+    override fun onDialogNegativeClicked(dialogAction: DialogManager.DialogAction) {
         for (listener in listeners) {
-            listener.onDialogNegativeClicked(dialogId)
+            listener.onDialogNegativeClicked(dialogAction)
         }
     }
 

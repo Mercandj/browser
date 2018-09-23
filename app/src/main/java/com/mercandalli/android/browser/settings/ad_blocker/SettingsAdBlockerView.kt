@@ -53,8 +53,8 @@ class SettingsAdBlockerView @JvmOverloads constructor(
     }
 
     override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
         userAction.onDetached()
+        super.onDetachedFromWindow()
     }
 
     override fun setSectionColor(@ColorRes sectionColorRes: Int) {

@@ -1,6 +1,7 @@
 package com.mercandalli.android.browser.settings.about
 
 import android.os.Build
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.dialog.DialogManager
@@ -29,6 +30,8 @@ class SettingsAboutPresenter(
         themeManager.registerThemeListener(themeListener)
         updateTheme()
         setVersions()
+        val dialogAction = dialogManager.consumeDialogActionPositiveClicked()
+        consumeDialogActionPositiveClicked(dialogAction)
     }
 
     override fun onDetached() {
@@ -100,6 +103,28 @@ class SettingsAboutPresenter(
         return currentTimestamp < timestamps[timestamps.size - nbClick] + duration
     }
 
+    private fun consumeDialogActionPositiveClicked(dialogAction: DialogManager.DialogAction?) {
+        if (dialogAction == null) {
+            return
+        }
+        when (dialogAction.dialogId) {
+            DIALOG_ID_VERSION_NAME -> {
+                dialogManager.prompt(
+                        DIALOG_ID_PROMPT_PASS,
+                        R.string.view_settings_developer_activation_message_title,
+                        R.string.view_settings_developer_activation_password,
+                        R.string.view_settings_developer_activation_ok,
+                        R.string.view_settings_developer_activation_cancel
+                )
+            }
+            DIALOG_ID_PROMPT_PASS -> {
+                val isAppDeveloperModeEnabled = hashManager.sha256(dialogAction.userInput, 32) ==
+                        "4fa93ff20105d1bd93f79c2db51aa1169265130ca810e72e85b3277e92f53820"
+                setIsAppDeveloperEnabled(isAppDeveloperModeEnabled)
+            }
+        }
+    }
+
     private fun createThemeListener() = object : ThemeManager.ThemeListener {
         override fun onThemeChanged() {
             updateTheme()
@@ -107,26 +132,12 @@ class SettingsAboutPresenter(
     }
 
     private fun createDialogListener() = object : DialogManager.Listener {
-        override fun onDialogPositiveClicked(dialogId: String, userInput: String) {
-            when (dialogId) {
-                DIALOG_ID_VERSION_NAME -> {
-                    dialogManager.prompt(
-                            DIALOG_ID_PROMPT_PASS,
-                            R.string.view_settings_developer_activation_message_title,
-                            R.string.view_settings_developer_activation_password,
-                            R.string.view_settings_developer_activation_ok,
-                            R.string.view_settings_developer_activation_cancel
-                    )
-                }
-                DIALOG_ID_PROMPT_PASS -> {
-                    val isAppDeveloperModeEnabled = hashManager.sha256(userInput, 32) ==
-                            "4fa93ff20105d1bd93f79c2db51aa1169265130ca810e72e85b3277e92f53820"
-                    setIsAppDeveloperEnabled(isAppDeveloperModeEnabled)
-                }
-            }
+        override fun onDialogPositiveClicked(dialogAction: DialogManager.DialogAction): Boolean {
+            consumeDialogActionPositiveClicked(dialogAction)
+            return true
         }
 
-        override fun onDialogNegativeClicked(dialogId: String) {
+        override fun onDialogNegativeClicked(dialogAction: DialogManager.DialogAction) {
 
         }
     }

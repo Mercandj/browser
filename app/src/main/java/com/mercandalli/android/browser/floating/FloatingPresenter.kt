@@ -44,6 +44,15 @@ class FloatingPresenter(
         screen.loadUrl(homeUrl)
     }
 
+    override fun onLoad(configuration: FloatingManager.Configuration) {
+        screen.loadUrl(configuration.url)
+        if (configuration.fullscreenButtonVisible) {
+            screen.showFullscreenButton()
+        } else {
+            screen.hideFullscreenButton()
+        }
+    }
+
     private fun updateTheme(theme: Theme = themeManager.getTheme()) {
         screen.setPrimaryTextColorRes(theme.textPrimaryColorRes)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

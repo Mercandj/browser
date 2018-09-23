@@ -17,6 +17,8 @@ interface FloatingContract {
         fun onCollapseClicked()
 
         fun onHomeClicked()
+
+        fun onLoad(configuration: FloatingManager.Configuration)
     }
 
     interface Screen {
@@ -38,5 +40,9 @@ interface FloatingContract {
         fun isCollapsed(): Boolean
 
         fun loadUrl(url: String)
+
+        fun showFullscreenButton()
+
+        fun hideFullscreenButton()
     }
 }

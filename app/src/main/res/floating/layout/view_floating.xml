@@ -71,19 +71,9 @@
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:layout_gravity="end"
-                android:layout_marginEnd="34dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="6dp"
                 android:src="@drawable/ic_home_white_24dp"
-                android:tint="#808080" />
-
-            <ImageView
-                android:id="@+id/view_floating_status_bar_move"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_gravity="end"
-                android:padding="6dp"
-                android:src="@drawable/ic_zoom_out_map_white_24dp"
                 android:tint="#808080" />
 
         </FrameLayout>

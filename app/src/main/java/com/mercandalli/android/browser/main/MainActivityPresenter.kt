@@ -163,7 +163,7 @@ internal class MainActivityPresenter(
         val url = convertSearchToUrl(search)
         screen.resetSearchInput()
         if (!forceNonFloating && screen.isFloatingWindowChecked()) {
-            floatingManager.start(url)
+            floatingManager.start(FloatingManager.Configuration.default(url))
             return
         }
         screen.showUrl(url)
