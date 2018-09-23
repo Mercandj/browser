@@ -159,43 +159,9 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:2.22.0'
 }
 
-// Spoon
-if (rootProject.ext.spoonEnable) {
-
-    // Test - take screenshot, output tests...
-    // https://github.com/square/spoon
-    apply plugin: 'spoon'
-
-    // Test - take screenshot, output tests...
-    // https://github.com/square/spoon
-    spoon {
-        // Enable debug output
-        debug = true
-
-        // Disable gif
-        noAnimations = true
-
-        // Set custom test reports directory (defaults to "spoon")
-        baseOutputDir = file("$buildDir/spoon-custom-report-dir")
-
-        // Enable setting test class/method-to-be-run from command line. E.g.:
-        // $> ../gradlew spoonFreeDebugTest -PspoonClassName=com.stanfy.spoon.example.test.MainActivityTest -PspoonMethodName=testSetText
-        if (project.hasProperty('spoonClassName')) {
-            className = project.spoonClassName
-
-            if (project.hasProperty('spoonMethodName')) {
-                methodName = project.spoonMethodName
-            }
-        }
-
-        // You can pass instrumentation arguments. Tests in this example assert this pair is passed.
-        instrumentationArgs = ["foo=bar"]
-
-        // It's also possible to configure tests sharding using convenient properties:
-        // numShards = 2
-        // shardIndex = 0
-        adbTimeout = 30
-    }
+task publish(type: Exec) {
+    group "play-store"
+    commandLine "sh", "../config/play-store/publish.sh"
 }
 
 apply plugin: 'com.google.gms.google-services'

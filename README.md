@@ -60,15 +60,23 @@ Do our future selves a favour and start writing better commit messages now :)
 * Run `./gradlew app:assembleDebug`
 
 
-## Build Release Candidate
+## Build release candidate (RC)
 
 * Add the jks in the `./config/signing/browser.jks`
 * Complete `./config/signing/signing.gradle`
 * Run `./gradlew app:assembleRelease`
 
 
-##  Build Release
+## Build release
 
 * Add the jks in the `./config/signing/browser.jks`
 * Complete `./config/signing/signing.gradle`
 * Run `./gradlew app:bundleRelease`
+
+
+## Build and publish alpha release on the Play Store
+
+* Add the jks in the `./config/signing/browser.jks`
+* Complete `./config/signing/signing.gradle`
+* Remove .template and replace TO_FILL in files inside `./config/play-store/` folder.
+* Run `./gradlew app:publish`

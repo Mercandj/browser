@@ -1,0 +1,8 @@
+{
+  "application_name": "browser",
+  "application_package": "com.mercandalli.android.browser",
+  "channel": "alpha",
+  "rollout_percentage": "0.1",
+  "app_bundle_path": "app.aab",
+  "client_secret_path": "play-store-authentication.json"
+}

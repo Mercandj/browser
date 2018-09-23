@@ -1,0 +1,9 @@
+{
+  "installed": {
+    "client_id": "TO_FILL",
+    "client_secret": "TO_FILL",
+    "redirect_uris": [],
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token"
+  }
+}
