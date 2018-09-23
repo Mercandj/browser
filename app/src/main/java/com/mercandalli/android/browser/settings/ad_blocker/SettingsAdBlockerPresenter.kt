@@ -1,6 +1,5 @@
 package com.mercandalli.android.browser.settings.ad_blocker
 
-import android.util.Log
 import com.mercandalli.android.browser.ad_blocker.AdBlockerManager
 import com.mercandalli.android.browser.product.ProductManager
 import com.mercandalli.android.browser.theme.Theme
@@ -18,7 +17,6 @@ class SettingsAdBlockerPresenter(
     private val productManagerListener = createProductManagerListener()
 
     override fun onAttached() {
-        Log.d("jm/debug", "onAttached")
         themeManager.registerThemeListener(themeListener)
         productManager.registerListener(productManagerListener)
         updateTheme()
@@ -26,7 +24,6 @@ class SettingsAdBlockerPresenter(
     }
 
     override fun onDetached() {
-        Log.d("jm/debug", "onAttached")
         productManager.unregisterListener(productManagerListener)
         themeManager.unregisterThemeListener(themeListener)
     }
@@ -51,7 +48,6 @@ class SettingsAdBlockerPresenter(
             isSubscribeToFullVersion: Boolean = productManager.isSubscribeToFullVersion(),
             isEnabled: Boolean = adBlockerManager.isEnabled()
     ) {
-        Log.d("jm/debug", "isSubscribeToFullVersion: $isSubscribeToFullVersion")
         if (isSubscribeToFullVersion) {
             screen.showAdBlockSection()
             screen.showAdBlockSectionLabel()
