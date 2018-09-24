@@ -84,15 +84,15 @@ class MainApplication : Application() {
         fun onOnBoardingStarted() {
             val remoteConfig = ApplicationGraph.getRemoteConfig()
             updateOnBoardingStorePageAvailable(remoteConfig)
-            remoteConfig.registerListener(object : RemoteConfig.RemoteConfigListener {
-                override fun onInitialized() {
+            remoteConfig.registerListener(object : RemoteConfig.Listener {
+                override fun onRemoteConfigChanged() {
                     updateOnBoardingStorePageAvailable(remoteConfig)
                 }
             })
         }
 
         private fun updateOnBoardingStorePageAvailable(remoteConfig: RemoteConfig) {
-            MonetizationGraph.setOnBoardingStorePageAvailable(remoteConfig.isOnBoardingStoreAvailable)
+            MonetizationGraph.setOnBoardingStorePageAvailable(remoteConfig.isOnBoardingStoreAvailable())
         }
     }
 }

@@ -2,24 +2,19 @@ package com.mercandalli.android.browser.remote_config
 
 interface RemoteConfig {
 
-    /**
-     * @return true if the [RemoteConfig] is initialized, false otherwise
-     */
-    val isInitialized: Boolean
+    fun isFullVersionAvailable(): Boolean
 
-    val isFullVersionAvailable: Boolean
+    fun isOnBoardingStoreAvailable(): Boolean
 
-    val isOnBoardingStoreAvailable: Boolean
+    fun registerListener(listener: Listener)
 
-    fun registerListener(listener: RemoteConfigListener)
+    fun unregisterListener(listener: Listener)
 
-    fun unregisterListener(listener: RemoteConfigListener)
-
-    interface RemoteConfigListener {
+    interface Listener {
 
         /***
-         * is triggered when the [RemoteConfig] is initialized
+         * Called when values of getters values changed.
          */
-        fun onInitialized()
+        fun onRemoteConfigChanged()
     }
 }

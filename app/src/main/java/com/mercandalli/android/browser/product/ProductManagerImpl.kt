@@ -31,7 +31,7 @@ class ProductManagerImpl(
     }
 
     override fun isFullVersionAvailable() = isAppDeveloperEnabled ||
-            remoteConfig.isFullVersionAvailable
+            remoteConfig.isFullVersionAvailable()
 
     override fun isSubscribeToFullVersion() = isAppDeveloperEnabled ||
             inAppManager.isPurchased(MainApplication.SKU_SUBSCRIPTION_FULL_VERSION)
