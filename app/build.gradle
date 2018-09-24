@@ -112,11 +112,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
 
     // Android - Support
-    implementation "androidx.annotation:annotation:1.0.0-rc02"
-    implementation "androidx.appcompat:appcompat:1.0.0-rc02"
-    implementation "com.google.android.material:material:1.0.0-rc02"
-    implementation "androidx.cardview:cardview:1.0.0-rc02"
-    implementation "androidx.recyclerview:recyclerview:1.0.0-rc02"
+    implementation "androidx.annotation:annotation:1.0.0"
+    implementation "androidx.appcompat:appcompat:1.0.0"
+    implementation "com.google.android.material:material:1.0.0"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
 
     // Google
     implementation 'com.google.firebase:firebase-core:16.0.3'
@@ -139,7 +139,7 @@ dependencies {
     implementation 'com.android.billingclient:billing:1.1'
 
     // Testing-only dependencies
-    androidTestImplementation "androidx.annotation:annotation:1.0.0-rc02"
+    androidTestImplementation "androidx.annotation:annotation:1.0.0"
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test:rules:1.1.0-alpha4'
     // Test - take screenshot, output tests...

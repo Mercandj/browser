@@ -5,7 +5,7 @@
 apply plugin: 'com.github.ben-manes.versions'
 
 buildscript {
-    ext.kotlin_version = '1.2.70'
+    ext.kotlin_version = '1.2.71'
     ext.kotlin_coroutines_version = '0.26.1'
     repositories {
         google()
@@ -19,11 +19,6 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.0.1'
 
-        // Test - take screenshot, output tests...
-        // https://github.com/square/spoon
-        // https://github.com/stanfy/spoon-gradle-plugin
-        classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
-
         // Check dependencies.
         // https://github.com/ben-manes/gradle-versions-plugin
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
@@ -31,7 +26,7 @@ buildscript {
         // Fabric
         // We recommend changing it to the latest version from our changelog:
         // https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
-        classpath 'io.fabric.tools:gradle:1.25.4'
+        classpath 'io.fabric.tools:gradle:1.26.0'
     }
 }
 
