@@ -157,6 +157,7 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.22.0'
+    testImplementation 'org.json:json:20180813'
 }
 
 task publish(type: Exec) {

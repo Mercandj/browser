@@ -9,6 +9,7 @@
         android:id="@+id/view_settings_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clipToPadding="false"
         android:orientation="vertical"
         android:paddingTop="@dimen/default_space"
         android:paddingBottom="@dimen/default_space_half" />

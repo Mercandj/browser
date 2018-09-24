@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates3.AbsListItemAdapterDelegate
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter
-import com.mercandalli.android.browser.R
 
 class SuggestionAdapter(
         listener: SuggestionClickListener
