@@ -17,4 +17,18 @@ class ThemeManagerImplTest {
         // Then
         Assert.assertFalse(darkEnable)
     }
+
+    @Test
+    fun setDarkEnablePersisted() {
+        // Given
+        val sharedPreferences = HashMapSharedPreferences()
+        val themeManager = ThemeManagerImpl(sharedPreferences)
+
+        // When
+        themeManager.setDarkEnable(true)
+        val darkEnable = ThemeManagerImpl(sharedPreferences).isDarkEnable()
+
+        // Then
+        Assert.assertTrue(darkEnable)
+    }
 }

@@ -142,9 +142,6 @@ dependencies {
     androidTestImplementation "androidx.annotation:annotation:1.0.0"
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test:rules:1.1.0-alpha4'
-    // Test - take screenshot, output tests...
-    // https://github.com/square/spoon
-    androidTestImplementation 'com.squareup.spoon:spoon-client:1.7.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0-alpha4'
     androidTestImplementation('androidx.test.espresso:espresso-contrib:3.1.0-alpha4') {
