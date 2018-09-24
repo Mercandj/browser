@@ -1,5 +1,7 @@
 # Android browser
 
+[![Build Status](https://travis-ci.com/Mercandj/browser.svg?branch=master)](https://travis-ci.com/Mercandj/browser)
+
 ----
 
 <p align="center">
