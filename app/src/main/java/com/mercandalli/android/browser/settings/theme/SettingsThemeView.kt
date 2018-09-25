@@ -36,6 +36,9 @@ class SettingsThemeView @JvmOverloads constructor(
             themeCheckBox.isChecked = isChecked
             userAction.onDarkThemeCheckBoxCheckedChanged(isChecked)
         }
+        themeCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            userAction.onDarkThemeCheckBoxCheckedChanged(isChecked)
+        }
     }
 
     override fun onAttachedToWindow() {
