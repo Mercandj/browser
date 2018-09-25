@@ -9,8 +9,13 @@ class AnalyticsModule(
 
     fun createAnalyticsManager(): AnalyticsManager {
         val firebaseAnalytics = FirebaseAnalytics.getInstance(context)
-        return AnalyticsManagerFirebase(
-                firebaseAnalytics
+        val addOn = object : AnalyticsManagerImpl.AddOn {
+            override fun logEvent(eventKey: String) {
+                firebaseAnalytics.logEvent(eventKey, null)
+            }
+        }
+        return AnalyticsManagerImpl(
+                addOn
         )
     }
 }
