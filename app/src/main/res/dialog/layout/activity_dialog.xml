@@ -15,10 +15,12 @@
         <TextView
             android:id="@+id/activity_dialog_message"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="@dimen/default_space_2"
             android:layout_marginEnd="24dp"
+            android:layout_weight="1"
+            android:scrollbars="vertical"
             android:textSize="@dimen/text_size_xl"
             tools:text="Message" />
 
@@ -43,7 +45,7 @@
             <TextView
                 android:id="@+id/activity_dialog_negative"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="?android:selectableItemBackground"
                 android:gravity="center"
@@ -58,7 +60,7 @@
             <TextView
                 android:id="@+id/activity_dialog_positive"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="?android:selectableItemBackground"
                 android:gravity="center"

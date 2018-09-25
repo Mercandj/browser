@@ -13,6 +13,7 @@ import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.keyboard.KeyboardUtils
 import com.mercandalli.android.browser.main.ApplicationGraph
 import org.json.JSONObject
+import android.text.method.ScrollingMovementMethod
 
 class DialogActivity : AppCompatActivity() {
 
@@ -28,6 +29,7 @@ class DialogActivity : AppCompatActivity() {
         val dialogInput = DialogInput.fromJson(intent.extras.getString(EXTRA_DIALOG_INPUT))
         title = dialogInput.title
         message.text = dialogInput.message
+        message.movementMethod = ScrollingMovementMethod()
         positive.text = dialogInput.positive
         negative.text = dialogInput.negative
         input.visibility = if (dialogInput.alertFalsePromptTrue) {
@@ -58,6 +60,7 @@ class DialogActivity : AppCompatActivity() {
                     )
             )
         }
+        setFinishOnTouchOutside(false)
     }
 
     private fun <T : View> bind(@IdRes res: Int): Lazy<T> {
