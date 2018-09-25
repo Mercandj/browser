@@ -6,9 +6,6 @@ language: android
 sudo: required
 jdk: oraclejdk8
 
-before_install:
-- yes | sdkmanager "platforms;android-28"
-
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -21,28 +18,60 @@ cache:
 env:
   global:
   - ANDROID_API=28
-  - EMULATOR_API=28
+  - EMULATOR_API=18
   - ANDROID_BUILD_TOOLS=28.0.3
-  - ADB_INSTALL_TIMEOUT=5 # minutes
+  - ANDROID_ABI=armeabi-v7a
+  - ANDROID_TAG=google_apis
+  - ADB_INSTALL_TIMEOUT=20 # minutes
+  - QEMU_AUDIO_DRV=none
 
 android:
   components:
+  - tools
+  - platform-tools
+  - tools # again to get latest tools
   - build-tools-$ANDROID_BUILD_TOOLS
   - android-$ANDROID_API
+  - android-$EMULATOR_API
+  - extra-android-support
   - extra-google-google_play_services
   - extra-google-m2repository
   - extra-android-m2repository
   - addon-google_apis-google-$ANDROID_API
+  - addon-google_apis-google-$EMULATOR_API
   - extra
-  - tools
-  - platform-tools
-  - tools
-  - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
-  - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
-  licenses:
-  - android-sdk-preview-license-.+
-  - android-sdk-license-.+
-  - google-gdk-license-.+
+  - sys-img-$ANDROID_ABI-addon-google_apis-google-$ANDROID_API
+  - sys-img-$ANDROID_ABI-addon-google_apis-google-$EMULATOR_API
+  - sys-img-$ANDROID_ABI-google_apis-$EMULATOR_API
+
+licenses:
+- android-sdk-preview-license-.+
+- android-sdk-license-.+
+- google-gdk-license-.+
+
+before_install:
+- yes | sdkmanager "platforms;android-28"
+- yes | sdkmanager "platforms;android-23"
+- mkdir "$ANDROID_HOME/licenses" || true
+- echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+- echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+- chmod +x gradlew
+- ./gradlew dependencies || true # DON'T ADD unless you are getting "Install missing components using SDK manager"
+
+before_script:
+- android list targets
+- echo no | android create avd --force -n test -t "android-"$EMULATOR_API --abi $ANDROID_ABI --tag $ANDROID_TAG
+- emulator -avd test -no-skin -no-audio -no-window -engine classic &
+- mkdir -p build/reports
+- android-wait-for-emulator
 
 script:
-- "./gradlew clean test"
+- echo "jm/debug Start clean check"
+- "./gradlew clean check"
+- echo "jm/debug Unlock the device"
+- adb shell input keyevent 82 & # Unlock the device
+- echo "jm/debug Start connectedCheck"
+- "./gradlew connectedCheck"
+
+after_failure:
+- cat $TRAVIS_BUILD_DIR/app/build/reports/lint-results.xml
