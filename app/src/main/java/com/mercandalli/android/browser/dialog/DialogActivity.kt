@@ -14,6 +14,7 @@ import com.mercandalli.android.browser.keyboard.KeyboardUtils
 import com.mercandalli.android.browser.main.ApplicationGraph
 import org.json.JSONObject
 import android.text.method.ScrollingMovementMethod
+import androidx.annotation.StringDef
 
 class DialogActivity : AppCompatActivity() {
 
@@ -32,7 +33,7 @@ class DialogActivity : AppCompatActivity() {
         message.movementMethod = ScrollingMovementMethod()
         positive.text = dialogInput.positive
         negative.text = dialogInput.negative
-        input.visibility = if (dialogInput.alertFalsePromptTrue) {
+        input.visibility = if (dialogInput.type == DialogInput.DIALOG_TYPE_PROMPT) {
             input.postDelayed({
                 input.isFocusableInTouchMode = true
                 input.requestFocus()
@@ -74,9 +75,20 @@ class DialogActivity : AppCompatActivity() {
             val message: String,
             val positive: String,
             val negative: String,
-            val alertFalsePromptTrue: Boolean
+            @DialogType
+            val type: String
     ) {
         companion object {
+
+            @StringDef(
+                    DIALOG_TYPE_ALERT,
+                    DIALOG_TYPE_PROMPT
+            )
+            @Retention(AnnotationRetention.SOURCE)
+            annotation class DialogType
+
+            const val DIALOG_TYPE_ALERT = "DIALOG_TYPE_ALERT"
+            const val DIALOG_TYPE_PROMPT = "DIALOG_TYPE_PROMPT"
 
             fun toJson(dialogInput: DialogInput): String {
                 val json = JSONObject()
@@ -85,7 +97,7 @@ class DialogActivity : AppCompatActivity() {
                 json.put("message", dialogInput.message)
                 json.put("positive", dialogInput.positive)
                 json.put("negative", dialogInput.negative)
-                json.put("alertFalsePromptTrue", dialogInput.alertFalsePromptTrue)
+                json.put("type", dialogInput.type)
                 return json.toString()
             }
 
@@ -96,20 +108,22 @@ class DialogActivity : AppCompatActivity() {
                 val message = json.getString("message")
                 val positive = json.getString("positive")
                 val negative = json.getString("negative")
-                val alertTruePromptFalse = json.getBoolean("alertFalsePromptTrue")
+                val type = json.getString("type")
                 return DialogInput(
                         dialogId,
                         title,
                         message,
                         positive,
                         negative,
-                        alertTruePromptFalse
+                        type
                 )
             }
+
         }
     }
 
     companion object {
+
         private const val EXTRA_DIALOG_INPUT = "EXTRA_DIALOG_INPUT"
 
         @JvmStatic

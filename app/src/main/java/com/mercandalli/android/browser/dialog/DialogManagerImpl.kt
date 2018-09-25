@@ -26,7 +26,7 @@ class DialogManagerImpl(
                 message,
                 positive,
                 negative,
-                false
+                DialogActivity.DialogInput.DIALOG_TYPE_ALERT
         ))
     }
 
@@ -47,7 +47,7 @@ class DialogManagerImpl(
                 message,
                 positive,
                 negative,
-                true
+                DialogActivity.DialogInput.DIALOG_TYPE_PROMPT
         ))
     }
 
