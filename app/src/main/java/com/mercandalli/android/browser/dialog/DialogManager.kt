@@ -4,6 +4,11 @@ import androidx.annotation.StringRes
 
 interface DialogManager {
 
+    /**
+     * Start an alert dialog.
+     *
+     * @see [DialogManager.registerListener] and [DialogManager.unregisterListener]
+     */
     fun alert(
             dialogId: String,
             @StringRes titleStringRes: Int,
@@ -12,6 +17,11 @@ interface DialogManager {
             @StringRes negativeStringRes: Int
     )
 
+    /**
+     * Start a prompt dialog.
+     *
+     * @see [DialogManager.registerListener] and [DialogManager.unregisterListener]
+     */
     fun prompt(
             dialogId: String,
             @StringRes titleStringRes: Int,
@@ -20,10 +30,19 @@ interface DialogManager {
             @StringRes negativeStringRes: Int
     )
 
+    /**
+     * Check if a dialog action hasn't be consumed by listener, return and consume.
+     */
     fun consumeDialogActionPositiveClicked(): DialogAction?
 
+    /**
+     * /!\ Internal to the feature.
+     */
     fun onDialogPositiveClicked(dialogAction: DialogAction)
 
+    /**
+     * /!\ Internal to the feature.
+     */
     fun onDialogNegativeClicked(dialogAction: DialogAction)
 
     fun registerListener(listener: Listener)
@@ -38,7 +57,7 @@ interface DialogManager {
     interface Listener {
 
         /**
-         * Return true if consumed
+         * Return true if consumed.
          */
         fun onDialogPositiveClicked(dialogAction: DialogAction): Boolean
 
