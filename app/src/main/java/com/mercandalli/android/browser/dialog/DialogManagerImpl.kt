@@ -2,7 +2,7 @@ package com.mercandalli.android.browser.dialog
 
 import androidx.annotation.StringRes
 
-class DialogManagerImpl(
+internal class DialogManagerImpl(
         private val addOn: AddOn
 ) : DialogManager {
 

@@ -16,57 +16,77 @@ import org.json.JSONObject
 import android.text.method.ScrollingMovementMethod
 import androidx.annotation.StringDef
 
-class DialogActivity : AppCompatActivity() {
+class DialogActivity : AppCompatActivity(),
+        DialogContract.Screen {
 
     private val input by bind<EditText>(R.id.activity_dialog_input)
     private val message by bind<TextView>(R.id.activity_dialog_message)
     private val positive by bind<TextView>(R.id.activity_dialog_positive)
     private val negative by bind<TextView>(R.id.activity_dialog_negative)
+    private val userAction = createUserAction()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dialog)
-        val dialogManager = ApplicationGraph.getDialogManager()
-        val dialogInput = DialogInput.fromJson(intent.extras.getString(EXTRA_DIALOG_INPUT))
-        title = dialogInput.title
-        message.text = dialogInput.message
+        setFinishOnTouchOutside(false)
         message.movementMethod = ScrollingMovementMethod()
-        positive.text = dialogInput.positive
-        negative.text = dialogInput.negative
-        input.visibility = if (dialogInput.type == DialogInput.DIALOG_TYPE_PROMPT) {
-            input.postDelayed({
-                input.isFocusableInTouchMode = true
-                input.requestFocus()
-                KeyboardUtils.showSoftInput(input)
-            }, 200)
-            View.VISIBLE
-        } else {
-            View.GONE
-        }
         positive.setOnClickListener {
-            finish()
-            dialogManager.onDialogPositiveClicked(
-                    DialogManager.DialogAction(
-                            dialogInput.dialogId,
-                            input.text.toString()
-                    )
-            )
+            userAction.onPositiveClicked(input.text.toString())
         }
         negative.setOnClickListener {
-            finish()
-            dialogManager.onDialogNegativeClicked(
-                    DialogManager.DialogAction(
-                            dialogInput.dialogId,
-                            input.text.toString()
-                    )
-            )
+            userAction.onNegativeClicked(input.text.toString())
         }
-        setFinishOnTouchOutside(false)
+        val dialogInput = DialogInput.fromJson(intent.extras.getString(EXTRA_DIALOG_INPUT))
+        userAction.onCreate(dialogInput)
+    }
+
+    override fun setTitle(text: String) {
+        title = text
+    }
+
+    override fun setMessage(text: String) {
+        message.text = text
+    }
+
+    override fun setPositive(text: String) {
+        positive.text = text
+    }
+
+    override fun setNegative(text: String) {
+        negative.text = text
+    }
+
+    override fun showInput() {
+        input.visibility = View.VISIBLE
+    }
+
+    override fun hideInput() {
+        input.visibility = View.GONE
+    }
+
+    override fun showSoftInput() {
+        input.postDelayed({
+            input.isFocusableInTouchMode = true
+            input.requestFocus()
+            KeyboardUtils.showSoftInput(input)
+        }, 200)
+    }
+
+    override fun quit() {
+        finish()
     }
 
     private fun <T : View> bind(@IdRes res: Int): Lazy<T> {
         @Suppress("UNCHECKED_CAST")
         return lazy(LazyThreadSafetyMode.NONE) { findViewById<T>(res) }
+    }
+
+    private fun createUserAction(): DialogContract.UserAction {
+        val dialogManager = ApplicationGraph.getDialogManager()
+        return DialogPresenter(
+                this,
+                dialogManager
+        )
     }
 
     data class DialogInput(
