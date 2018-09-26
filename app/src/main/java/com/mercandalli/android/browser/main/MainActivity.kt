@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
     private val emptyTextView: TextView by bind(R.id.activity_main_empty_view_text)
     private val emptyViewVideoCheckBox: CheckBox by bind(R.id.activity_main_video_check_box)
     private val emptyViewFloatingCheckBox: CheckBox by bind(R.id.activity_main_floating_check_box)
-    private val emptyQuitTextView: TextView by bind(R.id.activity_main_video_quit)
+    private val emptyQuitTextView: TextView by bind(R.id.activity_main_quit)
     private val emptyBottomBar: View by bind(R.id.activity_main_bottom_bar)
 
     private val browserWebViewListener = createBrowserWebViewListener()

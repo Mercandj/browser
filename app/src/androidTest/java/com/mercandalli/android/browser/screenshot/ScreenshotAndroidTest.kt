@@ -16,6 +16,7 @@ import com.mercandalli.android.browser.view_action.ClearFocus
 import org.junit.*
 import org.junit.runner.RunWith
 import android.content.Context.MODE_PRIVATE
+import android.os.SystemClock
 import androidx.test.InstrumentationRegistry
 import androidx.test.espresso.Espresso
 import com.mercandalli.android.browser.main.ApplicationGraph
@@ -23,7 +24,6 @@ import com.mercandalli.android.browser.monetization.MonetizationGraph
 import com.mercandalli.android.browser.on_boarding.OnBoardingRepositoryImpl
 import java.io.File
 import androidx.test.espresso.action.ViewActions.*
-
 
 @RunWith(AndroidJUnit4::class)
 class ScreenshotAndroidTest {
@@ -52,6 +52,7 @@ class ScreenshotAndroidTest {
         val theme = if (darkTheme) "dark" else "light"
         val localeCode = LocaleUtils.getLocaleCode()
         val screenshotSuffix = "${theme}_$localeCode"
+        val screenShooter = ScreenShooter(screenshotSuffix)
         onView(withId(R.id.view_on_boarding_next)).check(matches(isDisplayed()))
         onView(withId(R.id.view_on_boarding_view_pager)).perform(ClearFocus())
         if (darkTheme) {
@@ -60,23 +61,33 @@ class ScreenshotAndroidTest {
             onView(withId(R.id.view_on_boarding_view_pager)).perform(swipeRight())
         }
         onView(withId(R.id.view_on_boarding_view_pager)).perform(ClearFocus())
-        Screengrab.screenshot("01_on_boarding_$screenshotSuffix")
+        screenShooter.shoot("on_boarding_page_1")
         onView(withId(R.id.view_on_boarding_next)).perform(click())
-        Screengrab.screenshot("02_on_boarding_$screenshotSuffix")
+        screenShooter.shoot("on_boarding_page_2")
         onView(withId(R.id.view_on_boarding_next)).perform(click())
-        Screengrab.screenshot("03_on_boarding_$screenshotSuffix")
+        screenShooter.shoot("on_boarding_page_3")
         ApplicationGraph.getProductManager().setIsAppDeveloperEnabled(true)
         onView(withId(R.id.view_on_boarding_store_skip)).perform(click())
-        Screengrab.screenshot("04_main_$screenshotSuffix")
-        onView(withText(R.string.home)).perform(click())
-        Screengrab.screenshot("05_main_home_$screenshotSuffix")
-        Espresso.pressBack()
-        onView(withId(R.id.view_on_boarding_store_skip)).perform(replaceText("Android"))
-        Screengrab.screenshot("06_main_suggestion_$screenshotSuffix")
+        screenShooter.shoot("main")
         onView(withId(R.id.activity_main_more)).perform(click())
-        Screengrab.screenshot("07_main_overflow_$screenshotSuffix")
+        screenShooter.shoot("main_more")
+        onView(withText(R.string.home)).perform(click())
+        SystemClock.sleep(900)
+        screenShooter.shoot("main_home")
+        Espresso.pressBack()
+        onView(withId(R.id.activity_main_search)).perform(typeText("Android"))
+        SystemClock.sleep(600)
+        screenShooter.shoot("main_suggestion")
+        onView(withId(R.id.activity_main_more)).perform(click())
         onView(withText(R.string.settings)).perform(click())
-        Screengrab.screenshot("08_settings_top_$screenshotSuffix")
+        screenShooter.shoot("settings")
+        Espresso.pressBack()
+        onView(withId(R.id.activity_main_floating_check_box)).perform(click())
+        onView(withId(R.id.activity_main_more)).perform(click())
+        onView(withText(R.string.home)).perform(click())
+        SystemClock.sleep(600)
+        screenShooter.shoot("floating_home")
+        ApplicationGraph.getFloatingManager().stop()
         clearSharedPreferences()
         activityRule.finishActivity()
     }

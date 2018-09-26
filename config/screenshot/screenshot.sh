@@ -18,7 +18,6 @@ popd
 
 pushd "$BASEDIR/../../"
 ./gradlew assembleDebug assembleAndroidTest
-rm -r /Users/jonathan/Documents/browser/fastlane/metadata/android/
 adb -s ${device} install -t -r /Users/jonathan/Documents/browser/app/build/outputs/apk/debug/app-debug.apk
 adb -s ${device} install -t -r /Users/jonathan/Documents/browser/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
 adb -s ${device} shell rm -r /sdcard/com.mercandalli.android.browser/screengrab

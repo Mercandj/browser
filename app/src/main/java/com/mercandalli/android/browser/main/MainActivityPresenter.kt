@@ -84,9 +84,7 @@ internal class MainActivityPresenter(
 
     override fun onHomeClicked() {
         val url = searchEngineManager.getHomeUrl()
-        screen.showUrl(url)
-        screen.resetSearchInput()
-        setWebViewVisible(true)
+        performSearch(url, false)
     }
 
     override fun onClearDataClicked() {

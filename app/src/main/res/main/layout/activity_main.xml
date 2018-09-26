@@ -163,7 +163,7 @@
             android:text="@string/activity_main_floating_window" />
 
         <TextView
-            android:id="@+id/activity_main_video_quit"
+            android:id="@+id/activity_main_quit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
