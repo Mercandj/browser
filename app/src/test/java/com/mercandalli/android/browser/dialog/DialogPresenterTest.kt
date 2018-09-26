@@ -9,9 +9,9 @@ import org.mockito.MockitoAnnotations
 class DialogPresenterTest {
 
     @Mock
-    private val screen: DialogContract.Screen? = null
+    private lateinit var screen: DialogContract.Screen
     @Mock
-    private val dialogManager: DialogManager? = null
+    private lateinit var dialogManager: DialogManager
 
     @Before
     fun setup() {
@@ -34,13 +34,13 @@ class DialogPresenterTest {
         ))
 
         // Then
-        Mockito.verify(screen)!!.setTitle("title")
+        Mockito.verify(screen).setTitle("title")
     }
 
     private fun createInstanceToTest(): DialogPresenter {
         return DialogPresenter(
-                screen!!,
-                dialogManager!!
+                screen,
+                dialogManager
         )
     }
 }

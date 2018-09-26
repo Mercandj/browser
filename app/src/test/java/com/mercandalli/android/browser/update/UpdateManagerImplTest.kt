@@ -13,7 +13,7 @@ import org.mockito.MockitoAnnotations
 class UpdateManagerImplTest {
 
     @Mock
-    private val versionManager: VersionManager? = null
+    private lateinit var versionManager: VersionManager
 
     @Before
     fun setup() {
@@ -23,7 +23,7 @@ class UpdateManagerImplTest {
     @Test
     fun initialIsFirstLaunchAfterUpdateIsTrue() {
         // Given
-        Mockito.`when`(versionManager!!.getVersionName()).thenReturn("1.00.01")
+        Mockito.`when`(versionManager.getVersionName()).thenReturn("1.00.01")
         val updateManager = createInstanceToTest()
 
         // When
@@ -38,7 +38,7 @@ class UpdateManagerImplTest {
     ): UpdateManager {
         return UpdateManagerImpl(
                 sharedPreferences,
-                versionManager!!
+                versionManager
         )
     }
 }
