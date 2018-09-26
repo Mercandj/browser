@@ -3,14 +3,14 @@
 
     <item
         android:id="@+id/menu_browser_home"
-        android:title="Home" />
+        android:title="@string/home" />
 
     <item
         android:id="@+id/menu_browser_clear_data"
-        android:title="Clear data" />
+        android:title="@string/clear_data" />
 
     <item
         android:id="@+id/menu_browser_settings"
-        android:title="Settings" />
+        android:title="@string/settings" />
 
 </menu>

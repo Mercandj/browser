@@ -9,4 +9,6 @@ interface OnBoardingRepository {
     fun isOnBoardingStorePageSkipped(): Boolean
 
     fun markOnBoardingStorePageSkipped()
+
+    fun clear()
 }

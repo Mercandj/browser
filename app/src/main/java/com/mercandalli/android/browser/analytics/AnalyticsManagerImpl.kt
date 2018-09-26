@@ -4,28 +4,40 @@ class AnalyticsManagerImpl(
         private val addOn: AddOn
 ) : AnalyticsManager {
 
+    private var enabled = true
+
+    override fun disable() {
+        enabled = false
+    }
+
     override fun sendEventOnBoardingStarted() {
-        addOn.logEvent("on_boarding_started")
+        logEvent("on_boarding_started")
     }
 
     override fun sendEventOnBoardingTryDarkTheme() {
-        addOn.logEvent("on_boarding_try_dark_theme")
+        logEvent("on_boarding_try_dark_theme")
     }
 
     override fun sendEventOnBoardingTryFullVersion() {
-        addOn.logEvent("on_boarding_try_full_version")
+        logEvent("on_boarding_try_full_version")
     }
 
     override fun sendEventOnBoardingSubscriptionClicked() {
-        addOn.logEvent("on_boarding_subscription_clicked")
+        logEvent("on_boarding_subscription_clicked")
     }
 
     override fun sendEventOnBoardingSkipClicked() {
-        addOn.logEvent("on_boarding_skip_clicked")
+        logEvent("on_boarding_skip_clicked")
     }
 
     override fun sendEventOnBoardingSubscribed() {
-        addOn.logEvent("on_boarding_subscribed")
+        logEvent("on_boarding_subscribed")
+    }
+
+    private fun logEvent(eventKey: String) {
+        if (enabled) {
+            addOn.logEvent(eventKey)
+        }
     }
 
     interface AddOn {

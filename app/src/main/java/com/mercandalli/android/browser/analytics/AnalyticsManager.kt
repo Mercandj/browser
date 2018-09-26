@@ -2,6 +2,8 @@ package com.mercandalli.android.browser.analytics
 
 interface AnalyticsManager {
 
+    fun disable()
+
     fun sendEventOnBoardingStarted()
 
     fun sendEventOnBoardingTryDarkTheme()

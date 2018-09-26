@@ -33,6 +33,14 @@ class OnBoardingRepositoryImpl(
         sharedPreferences.edit().putBoolean(KEY_ON_BOARDING_STORE_SKIPPED, onBoardingStoreSkipped).apply()
     }
 
+    override fun clear() {
+        onBoardingEnded = false
+        onBoardingEndedLoaded = false
+        onBoardingStoreSkipped = false
+        onBoardingStoreSkippedLoaded = false
+        sharedPreferences.edit().putBoolean(KEY_ON_BOARDING_ENDED, onBoardingEnded).apply()
+    }
+
     private fun loadSeen() {
         if (onBoardingEndedLoaded) {
             return

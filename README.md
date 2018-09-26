@@ -82,3 +82,10 @@ Do our future selves a favour and start writing better commit messages now :)
 * Complete `./config/signing/signing.gradle`
 * Remove .template and replace TO_FILL in files inside `./config/play-store/` folder.
 * Run `./gradlew app:publish`
+
+
+## Take screenshots
+
+* Read /config/screenshot/README.md
+* `cd config/screenshot`
+* `./screenshot.sh`
