@@ -24,7 +24,11 @@ import com.mercandalli.android.browser.monetization.MonetizationGraph
 import com.mercandalli.android.browser.on_boarding.OnBoardingRepositoryImpl
 import java.io.File
 import androidx.test.espresso.action.ViewActions.*
+import androidx.test.filters.FlakyTest
+import androidx.test.filters.LargeTest
 
+@FlakyTest
+@LargeTest
 @RunWith(AndroidJUnit4::class)
 class ScreenshotAndroidTest {
 

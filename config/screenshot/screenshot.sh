@@ -32,6 +32,7 @@ do
     adb -s ${device} shell am instrument --no-window-animation -w \
         -e testLocale ${i} \
         -e endingLocale en_US \
+        -e size large \
         com.mercandalli.android.browser.test/androidx.test.runner.AndroidJUnitRunner
 done
 pwd
