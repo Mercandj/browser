@@ -21,6 +21,12 @@ pushd "$BASEDIR/../../"
 adb -s ${device} install -t -r /Users/jonathan/Documents/browser/app/build/outputs/apk/debug/app-debug.apk
 adb -s ${device} install -t -r /Users/jonathan/Documents/browser/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
 adb -s ${device} shell rm -r /sdcard/com.mercandalli.android.browser/screengrab
+
+# Turn off animations
+adb -s ${device} shell settings put global window_animation_scale 0 &
+adb -s ${device} shell settings put global transition_animation_scale 0 &
+adb -s ${device} shell settings put global animator_duration_scale 0 &
+
 for i in "${locales[@]}"
 do
     adb -s ${device} shell pm clear com.mercandalli.android.browser

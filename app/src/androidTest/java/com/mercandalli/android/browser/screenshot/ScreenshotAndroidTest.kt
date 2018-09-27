@@ -1,8 +1,8 @@
 package com.mercandalli.android.browser.screenshot
 
+import android.app.Activity
 import android.content.Context
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
@@ -12,12 +12,14 @@ import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy
 import tools.fastlane.screengrab.locale.LocaleTestRule
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.locale.LocaleUtils
-import com.mercandalli.android.browser.view_action.ClearFocus
 import org.junit.*
 import org.junit.runner.RunWith
 import android.content.Context.MODE_PRIVATE
 import android.os.SystemClock
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 import androidx.test.InstrumentationRegistry
+import androidx.test.InstrumentationRegistry.getInstrumentation
 import androidx.test.espresso.Espresso
 import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.browser.monetization.MonetizationGraph
@@ -26,6 +28,10 @@ import java.io.File
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.filters.FlakyTest
 import androidx.test.filters.LargeTest
+import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
+import androidx.test.runner.lifecycle.Stage
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiSelector
 
 @FlakyTest
 @LargeTest
@@ -50,46 +56,45 @@ class ScreenshotAndroidTest {
     }
 
     private fun screenshot(darkTheme: Boolean) {
+        val instrumentation = InstrumentationRegistry.getInstrumentation()
         clearSharedPreferences()
-        disableAnalytics()
-        activityRule.launchActivity(null)
         val theme = if (darkTheme) "dark" else "light"
         val localeCode = LocaleUtils.getLocaleCode()
         val screenshotSuffix = "${theme}_$localeCode"
         val screenShooter = ScreenShooter(screenshotSuffix)
-        onView(withId(R.id.view_on_boarding_next)).check(matches(isDisplayed()))
-        onView(withId(R.id.view_on_boarding_view_pager)).perform(ClearFocus())
-        if (darkTheme) {
-            onView(withId(R.id.view_on_boarding_next)).perform(click())
-            onView(withId(R.id.view_on_boarding_page_theme_dark)).perform(click())
-            onView(withId(R.id.view_on_boarding_view_pager)).perform(swipeRight())
+        instrumentation.runOnMainSync {
+            ApplicationGraph.getAnalyticsManager().disable()
+            ApplicationGraph.getProductManager().setIsAppDeveloperEnabled(true)
+            MonetizationGraph.setOnBoardingStorePageAvailable(true)
+            if (darkTheme) {
+                ApplicationGraph.getThemeManager().setDarkEnable(true)
+            }
         }
-        onView(withId(R.id.view_on_boarding_view_pager)).perform(ClearFocus())
+        activityRule.launchActivity(null)
         screenShooter.shoot("on_boarding_page_1")
-        onView(withId(R.id.view_on_boarding_next)).perform(click())
+        click(R.id.view_on_boarding_next)
         screenShooter.shoot("on_boarding_page_2")
-        onView(withId(R.id.view_on_boarding_next)).perform(click())
+        click(R.id.view_on_boarding_next)
         screenShooter.shoot("on_boarding_page_3")
-        ApplicationGraph.getProductManager().setIsAppDeveloperEnabled(true)
-        onView(withId(R.id.view_on_boarding_store_skip)).perform(click())
+        click(R.id.view_on_boarding_store_skip)
         screenShooter.shoot("main")
-        onView(withId(R.id.activity_main_more)).perform(click())
+        click(R.id.activity_main_more)
         screenShooter.shoot("main_more")
-        onView(withText(R.string.home)).perform(click())
-        SystemClock.sleep(900)
+        clickWithText(R.string.home)
+        SystemClock.sleep(400)
         screenShooter.shoot("main_home")
-        Espresso.pressBack()
+        back()
         onView(withId(R.id.activity_main_search)).perform(typeText("Android"))
-        SystemClock.sleep(600)
+        SystemClock.sleep(200)
         screenShooter.shoot("main_suggestion")
-        onView(withId(R.id.activity_main_more)).perform(click())
+        click(R.id.activity_main_more)
         onView(withText(R.string.settings)).perform(click())
         screenShooter.shoot("settings")
-        Espresso.pressBack()
-        onView(withId(R.id.activity_main_floating_check_box)).perform(click())
-        onView(withId(R.id.activity_main_more)).perform(click())
-        onView(withText(R.string.home)).perform(click())
-        SystemClock.sleep(600)
+        back()
+        click(R.id.activity_main_floating_check_box)
+        click(R.id.activity_main_more)
+        clickWithText(R.string.home)
+        SystemClock.sleep(200)
         screenShooter.shoot("floating_home")
         ApplicationGraph.getFloatingManager().stop()
         clearSharedPreferences()
@@ -114,8 +119,57 @@ class ScreenshotAndroidTest {
         MonetizationGraph.getOnBoardingRepository().clear()
     }
 
-    private fun disableAnalytics() {
-        ApplicationGraph.getAnalyticsManager().disable()
+    private fun getResources() = InstrumentationRegistry.getTargetContext().resources
+
+    private fun click(@IdRes id: Int) {
+        uiAutomatorClick(id)
+    }
+
+    private fun clickWithText(@StringRes id: Int) {
+        uiAutomatorClickWithText(id)
+    }
+
+    private fun back() {
+        uiAutomatorBack()
+    }
+
+    private fun espressoClick(@IdRes id: Int) {
+        onView(withId(id)).perform(click())
+    }
+
+    private fun espressoClickWithText(@StringRes id: Int) {
+        onView(withText(id)).perform(click())
+    }
+
+    private fun espressoBack() {
+        Espresso.pressBack()
+    }
+
+    private fun uiAutomatorClick(@IdRes id: Int) {
+        val device = UiDevice.getInstance(getInstrumentation())
+        val resourceName = getResources().getResourceName(id)
+        device.findObject(UiSelector().resourceId(resourceName)).click()
+    }
+
+    private fun uiAutomatorClickWithText(@IdRes id: Int) {
+        val device = UiDevice.getInstance(getInstrumentation())
+        val string = getResources().getString(id)
+        device.findObject(UiSelector().text(string)).click()
+    }
+
+    private fun uiAutomatorBack() {
+        val device = UiDevice.getInstance(getInstrumentation())
+        device.pressBack()
+    }
+
+    private fun getCurrentActivity(): Activity {
+        var activity: Activity? = null
+        getInstrumentation().runOnMainSync {
+            val resumedActivity = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
+            val it = resumedActivity.iterator()
+            activity = it.next()
+        }
+        return activity!!
     }
 
     companion object {
