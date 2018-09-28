@@ -1,6 +1,7 @@
 package com.mercandalli.android.browser.on_boarding
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.util.SparseArray
 import android.view.LayoutInflater
@@ -37,9 +38,9 @@ class OnBoardingView @JvmOverloads constructor(
     private var currentLayoutNames = layoutNamesWithoutStore
     private val view = LayoutInflater.from(context).inflate(R.layout.view_on_boarding, this)
     private val viewPager: ViewPager = view.findViewById(R.id.view_on_boarding_view_pager)
-    private val storeBuy: View = view.findViewById(R.id.view_on_boarding_store_buy)
+    private val storeBuy: TextView = view.findViewById(R.id.view_on_boarding_store_buy)
     private val storeSkip: TextView = view.findViewById(R.id.view_on_boarding_store_skip)
-    private val next: View = view.findViewById(R.id.view_on_boarding_next)
+    private val next: TextView = view.findViewById(R.id.view_on_boarding_next)
     private val title: TextView = view.findViewById(R.id.view_on_boarding_title)
     private val indicatorOnBoarding: OnBoardingPageIndicator = view.findViewById<OnBoardingPageIndicatorView>(R.id.view_on_boarding_indicator)
     private val onPageChangeListener = createOnPageChangeListener()

@@ -87,12 +87,14 @@
             android:layout_marginEnd="@dimen/on_boarding_button_horizontal_margins"
             android:layout_marginBottom="@dimen/on_boarding_button_bottom_margins"
             android:background="@drawable/on_boarding_btn"
+            android:elevation="6dp"
             android:gravity="center"
             android:paddingTop="@dimen/on_boarding_button_vertical_padding"
             android:paddingBottom="@dimen/on_boarding_button_vertical_padding"
             android:text="@string/on_boarding_store_buy"
             android:textColor="@color/on_boarding_button_text_color"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:targetApi="lollipop" />
 
         <TextView
             android:id="@+id/view_on_boarding_next"
@@ -102,12 +104,14 @@
             android:layout_marginEnd="@dimen/on_boarding_button_horizontal_margins"
             android:layout_marginBottom="@dimen/on_boarding_button_bottom_margins"
             android:background="@drawable/on_boarding_btn"
+            android:elevation="6dp"
             android:gravity="center"
             android:paddingTop="@dimen/on_boarding_button_vertical_padding"
             android:paddingBottom="@dimen/on_boarding_button_vertical_padding"
             android:text="@string/on_boarding_next"
             android:textColor="@color/on_boarding_button_text_color"
             android:textSize="18sp"
+            tools:targetApi="lollipop"
             tools:visibility="gone" />
 
     </LinearLayout>

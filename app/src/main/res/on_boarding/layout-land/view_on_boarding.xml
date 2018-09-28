@@ -96,12 +96,14 @@
                     android:layout_marginTop="6dp"
                     android:layout_marginBottom="6dp"
                     android:background="@drawable/on_boarding_btn"
+                    android:elevation="6dp"
                     android:gravity="center"
                     android:paddingTop="@dimen/on_boarding_button_vertical_padding"
                     android:paddingBottom="@dimen/on_boarding_button_vertical_padding"
                     android:text="@string/on_boarding_store_buy"
                     android:textColor="@color/on_boarding_button_text_color"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:targetApi="lollipop" />
 
             </FrameLayout>
 
@@ -113,12 +115,14 @@
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
                 android:background="@drawable/on_boarding_btn"
+                android:elevation="6dp"
                 android:gravity="center"
                 android:paddingTop="@dimen/on_boarding_button_vertical_padding"
                 android:paddingBottom="@dimen/on_boarding_button_vertical_padding"
                 android:text="@string/on_boarding_next"
                 android:textColor="@color/on_boarding_button_text_color"
                 android:textSize="18sp"
+                tools:targetApi="lollipop"
                 tools:visibility="gone" />
 
         </FrameLayout>
