@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_primary">@android:color/white</color>
+    <color name="color_primary_dark">#DDDDDD</color>
+    <color name="color_primary_darker">#AAAAAA</color>
+    <color name="color_accent">#0abfd6</color>
+    <color name="color_accent_dark">#065d68</color>
+
+    <color name="window_background_light">#F6F6F6</color>
+    <color name="window_settings_background_light">#F9F9F9</color>
+    <color name="status_bar_background_light">@android:color/white</color>
+    <color name="toolbar_background_light">@android:color/white</color>
+    <color name="text_primary_color_light">#303030</color>
+    <color name="text_secondary_color_light">#808080</color>
+    <color name="text_accent_color_light">@color/color_accent</color>
+    <color name="text_dark_color_light">#000000</color>
+    <color name="card_background_light">@android:color/white</color>
+
+    <color name="window_background_dark">#181818</color>
+    <color name="window_settings_background_dark">#181818</color>
+    <color name="status_bar_background_dark">#000000</color>
+    <color name="toolbar_background_dark">#000000</color>
+    <color name="text_primary_color_dark">#F2F2F2</color>
+    <color name="text_secondary_color_dark">#B0B0B0</color>
+    <color name="text_accent_color_dark">@color/color_accent</color>
+    <color name="text_dark_color_dark">#FFFFFF</color>
+    <color name="card_background_dark">#292929</color>
+
+    <color name="color_text_title_1">#444444</color>
+</resources>

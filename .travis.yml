@@ -25,6 +25,18 @@ env:
 before_install:
 - yes | sdkmanager "platforms;android-28"
 
+matrix:
+  include:
+  - name: "Android App"
+    env: GRADLE_MODULE=app
+  - name: "Android Wear"
+    env: GRADLE_MODULE=wear
+  - name: "Android TV"
+    env: GRADLE_MODULE=tv
+  allow_failures:
+  - env: GRADLE_MODULE=wear
+  - env: GRADLE_MODULE=tv
+
 android:
   components:
   - tools
@@ -40,12 +52,12 @@ android:
   - extra
 
 script:
-- echo "jm/debug [Gradle] clean"
-- "./gradlew clean"
-- echo "jm/debug [Gradle] assembleDebug"
-- "./gradlew assembleDebug"
-- echo "jm/debug [Gradle] Check"
-- "./gradlew check"
+- echo "jm/debug [Gradle][$GRADLE_MODULE] clean"
+- "./gradlew $GRADLE_MODULE:clean"
+- echo "jm/debug [Gradle][$GRADLE_MODULE] assembleDebug"
+- "./gradlew $GRADLE_MODULE:assembleDebug"
+- echo "jm/debug [Gradle][$GRADLE_MODULE] Check"
+- "./gradlew $GRADLE_MODULE:check"
 
 after_failure:
 - echo "jm/debug ERROR - lint"

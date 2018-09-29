@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar_height">60dp</dimen>
+    <dimen name="toolbar_height_2">128dp</dimen>
+
+    <!-- Default values -->
+    <dimen name="default_space_quart">2dp</dimen>
+    <dimen name="default_space_half">4dp</dimen>
+    <dimen name="default_space">8dp</dimen>
+    <dimen name="default_space_1_5">16dp</dimen>
+    <dimen name="default_space_2">24dp</dimen>
+    <dimen name="default_space_3">32dp</dimen>
+    <dimen name="default_space_4">40dp</dimen>
+    <dimen name="default_space_5">48dp</dimen>
+    <dimen name="default_radius">2dp</dimen>
+    <dimen name="default_radius_2">4dp</dimen>
+
+    <dimen name="text_size_s">11sp</dimen>
+    <dimen name="text_size_m">12sp</dimen>
+    <dimen name="text_size_l">14sp</dimen>
+    <dimen name="text_size_l_5">16sp</dimen>
+    <dimen name="text_size_xl">18sp</dimen>
+    <dimen name="text_size_xxl">22sp</dimen>
+    <dimen name="text_size_xxxl">26sp</dimen>
+</resources>

@@ -1,0 +1,76 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.mercandalli.android.wear.browser"
+        minSdkVersion 24
+        targetSdkVersion 28
+        versionCode rootProject.ext.appVersionCode
+        versionName rootProject.ext.appVersionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            // Split resources.
+            // https://medium.com/google-developer-experts/android-project-structure-alternative-way-29ce766682f0#.sjnhetuhb
+            res.srcDirs = [
+                    'src/main/res/common',
+                    'src/main/res/dialog',
+                    'src/main/res/floating',
+                    'src/main/res/icon',
+                    'src/main/res/main',
+                    'src/main/res/on_boarding',
+                    'src/main/res/settings',
+                    'src/main/res/store',
+                    'src/main/res/suggestion'
+            ]
+        }
+
+        // Everything related to connected test live in src/androidTest/core/java
+        androidTest.java.srcDir 'src/androidTest/core/java'
+
+        // Instrumented unit tests live in src/androidTest/unit
+        androidTest.java.srcDir 'src/androidTest/unit/java'
+
+        // Instrumented integration tests live in src/androidTest/integration
+        androidTest.java.srcDir 'src/androidTest/integration/java'
+
+        // Instrumented use cases tests live in src/androidTest/usecases
+        androidTest.java.srcDir 'src/androidTest/usecases/java'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.android.support:wearable:2.3.0'
+    implementation 'com.google.android.gms:play-services-wearable:16.0.0'
+    implementation 'androidx.percentlayout:percentlayout:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.wear:wear:1.0.0'
+
+    // Third party - UI
+    implementation 'com.hannesdorfmann:adapterdelegates3:3.0.1'
+
+    // Third party - Network
+    implementation "com.squareup.okhttp3:okhttp:3.11.0"
+
+    compileOnly 'com.google.android.wearable:wearable:2.3.0'
+}
