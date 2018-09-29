@@ -102,7 +102,16 @@ pushd "$BASEDIR"
     popd
 
     log_d "Publish app bundle to the PlayStore\n\n"
-    java -jar ./build/play-store.jar --force
+#    java -jar ./build/play-store.jar --force
     log_jump
+
+    log_line
+    log_d "Script ended."
+    log_d "If all succeeded, AppBundle should have been uploaded in the internal chanel."
+    log_d "If all succeeded, mapping.txt should be in the ./build folder."
+    log_d "If all succeeded, app-release.apk should be in the ./build folder."
+    log_d "Please create a GitHub release with the apk rename browser-app-release-<version>.apk"
+    log_d "Please upload the mapping to the PlayStore"
+    log_line
 
 popd
