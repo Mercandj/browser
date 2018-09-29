@@ -26,7 +26,7 @@ buildscript {
         // Fabric
         // We recommend changing it to the latest version from our changelog:
         // https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
-        classpath 'io.fabric.tools:gradle:1.26.0'
+        classpath 'io.fabric.tools:gradle:1.26.1'
     }
 }
 
@@ -43,8 +43,8 @@ task clean(type: Delete) {
 
 ext {
     // Why 6_XXX_XX_XX? -> Previous support of density split
-    appVersionCode = 6_001_00_22
-    appVersionName = "1.00.22"
+    appVersionCode = 6_001_00_23
+    appVersionName = "1.00.23"
 
     compileSdkVersion = 28
     buildToolsVersion = "28.0.3"

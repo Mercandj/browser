@@ -102,7 +102,7 @@ pushd "$BASEDIR"
     popd
 
     log_d "Publish app bundle to the PlayStore\n\n"
-#    java -jar ./build/play-store.jar --force
+    java -jar ./build/play-store.jar --force
     log_jump
 
     log_line
