@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    tools:context=".main.MainActivity"
+    tools:deviceIds="wear">
+
+    <androidx.wear.widget.BoxInsetLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="0dp"
+        app:boxedEdges="all"
+        tools:deviceIds="wear">
+
+        <EditText
+            android:id="@+id/activity_main_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="@dimen/default_space_1_5"
+            android:layout_marginTop="@dimen/default_space_half"
+            android:layout_marginEnd="@dimen/default_space_1_5"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:imeOptions="actionSearch|flagNoExtractUi"
+            android:inputType="textNoSuggestions" />
+
+    </androidx.wear.widget.BoxInsetLayout>
+
+</merge>
