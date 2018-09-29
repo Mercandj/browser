@@ -14,7 +14,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="4dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -66,9 +66,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:layout_gravity="bottom|end">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -93,8 +91,8 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
                     android:background="@drawable/on_boarding_btn"
                     android:elevation="6dp"
                     android:gravity="center"
@@ -112,8 +110,8 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="6dp"
-                android:layout_marginBottom="6dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/on_boarding_btn"
                 android:elevation="6dp"
                 android:gravity="center"
