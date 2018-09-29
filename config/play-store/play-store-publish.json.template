@@ -3,6 +3,6 @@
   "application_package": "com.mercandalli.android.browser",
   "channel": "internal",
   "rollout_percentage": "0.1",
-  "app_bundle_path": "app.aab",
+  "app_bundle_path": "build/app.aab",
   "client_secret_path": "play-store-authentication.json"
 }

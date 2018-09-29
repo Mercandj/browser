@@ -1,3 +1,6 @@
 *.aab
 *.json
 *.jks
+*.jar
+
+build/
