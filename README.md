@@ -1,31 +1,54 @@
-# Android browser
-
 [![Build Status](https://travis-ci.com/Mercandj/browser.svg?branch=master)](https://travis-ci.com/Mercandj/browser)
 
-----
+# G - Browser - Android web browser
+**Android web browser app focused on easy search and clear history**
 
-<p align="center">
-	<a margin="20px 0" href="https://play.google.com/store/apps/details?id=com.mercandalli.android.browser">
-		<img src="https://raw.github.com/Mercandj/browser/master/config/screenshot/android_web_browser_mercandalli.png" width="300" />
-	</a>
-</p>
+Light web browser app. Browse the web and stay incognito.
+
+<a href='https://play.google.com/store/apps/details?id=com.mercandalli.android.browser'>
+    <img 
+        src="app/src/main/res/icon/mipmap-xxxhdpi/ic_launcher.png"
+        align="left"
+        width="190"
+        hspace="10"
+        vspace="10" />
+</a>
+
+* Light / Dark theme
+* Floating window
+* Clear all cache / history
+* Ad blocker
+* Multiple search engines supported as Google, DuckDuckGo, Yahoo, Qwant...
 
 <a href='https://play.google.com/store/apps/details?id=com.mercandalli.android.browser&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
     <img 
-    alt='Get it on Google Play' 
-    src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'
-    width="220" />
+        alt='Get it on Google Play' 
+        src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'
+        height="80" />
 </a>
 
-----
+<br/>
+
+<a margin="20px 0 20px 40px" href="https://play.google.com/store/apps/details?id=com.mercandalli.android.browser">
+	<img 
+	    src="https://raw.github.com/Mercandj/browser/master/config/screenshot/android_web_browser_mercandalli.png" 
+	    align="right"
+	    width="250" />
+</a>
+
 
 ## Description
 
-Android web browser in Kotlin <3
+G Browser is an app focused on quick search.
+This application is open source on github !!!
+Do not hesitate to submit merge request, open issue...
 
-Try the app via the [Play Store](https://play.google.com/store/apps/details?id=com.mercandalli.android.browser)
+Developed in kotlin with <3 by Team Mercan.
+Try the app via the [Play Store](https://play.google.com/store/apps/details?id=com.mercandalli.android.browser).
 
-----
+Enjoy G Browser =)
+
+<br/>
 
 ## Project structure
 
@@ -70,7 +93,7 @@ This module development is not ready to be used.
 Module of the Android Wear app for Wear OS.
 This module development is not ready to be used.
 
-----
+<br/>
 
 ## Build or Publish
 
@@ -93,7 +116,7 @@ This module development is not ready to be used.
     - Read ./config/screenshot/README.md
     - `./config/screenshot/screenshot.sh`
 
-----
+<br/>
 
 ## Check
 
@@ -103,7 +126,7 @@ This module development is not ready to be used.
 - Check unit tests
     - ```./gradlew :app:assembleDebug :app:testUniversalDebugUnitTest``` : Unit tests
 
-----
+<br/>
 
 ## Dev rules
 
