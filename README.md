@@ -1,4 +1,7 @@
 [![Build Status](https://travis-ci.com/Mercandj/browser.svg?branch=master)](https://travis-ci.com/Mercandj/browser)
+[![Version](https://img.shields.io/badge/download-1.00.23-607D8B.svg?style=flat-square&label=version)](https://github.com/Mercandj/browser/releases/tag/1.00.23)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.2.71-f5801e.svg?style=flat-square)](http://kotlinlang.org) 
+[![PlayStore URL](https://img.shields.io/badge/play%20store-team%20mercan-1DA1F2.svg?style=flat-square&logo=android)](https://play.google.com/store/apps/details?id=com.mercandalli.android.browser)
 
 # G - Browser - Android web browser
 **Android web browser app focused on easy search and clear history**
