@@ -3,9 +3,9 @@ package com.mercandalli.android.browser.settings
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.hannesdorfmann.adapterdelegates3.AbsListItemAdapterDelegate
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
-import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter
+import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
+import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.mercandalli.android.browser.in_app.InAppManager
 import com.mercandalli.android.browser.settings.about.SettingsAboutView
 import com.mercandalli.android.browser.settings.ad_blocker.SettingsAdBlockerView
