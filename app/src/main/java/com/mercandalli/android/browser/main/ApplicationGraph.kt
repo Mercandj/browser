@@ -45,59 +45,28 @@ class ApplicationGraph(
         @SuppressLint("StaticFieldLeak")
         private var graph: ApplicationGraph? = null
 
+        fun getAdBlockerManager() = graph!!.adBlockerManagerInternal
+        fun getAnalyticsManager() = graph!!.analyticsManagerInternal
+        fun getDialogManager() = graph!!.dialogManagerInternal
+        fun getFloatingManager() = graph!!.floatingManagerInternal
+        fun getHashManager() = graph!!.hashManagerInternal
+        fun getMainThreadPost() = graph!!.mainThreadPostInternal
+        fun getOkHttpClientLazy() = graph!!.okHttpClientLazyInternal
+        fun getNetworkManager() = graph!!.networkManagerInternal
+        fun getProductManager() = graph!!.productManagerInternal
+        fun getRemoteConfig() = graph!!.remoteConfigInternal
+        fun getSearchEngineManager() = graph!!.searchEngineManagerInternal
+        fun getSuggestionManager() = graph!!.suggestionManagerInternal
+        fun getThemeManager() = graph!!.themeManagerInternal
+        fun getToastManager() = graph!!.toastManagerInternal
+        fun getUpdateManager() = graph!!.updateManagerInternal
+        fun getVersionManager() = graph!!.versionManagerInternal
+
         @JvmStatic
         fun init(context: Context) {
             if (graph == null) {
                 graph = ApplicationGraph(context.applicationContext)
             }
         }
-
-        @JvmStatic
-        fun getAdBlockerManager() = graph!!.adBlockerManagerInternal
-
-        @JvmStatic
-        fun getAnalyticsManager() = graph!!.analyticsManagerInternal
-
-        @JvmStatic
-        fun getDialogManager() = graph!!.dialogManagerInternal
-
-        @JvmStatic
-        fun getFloatingManager() = graph!!.floatingManagerInternal
-
-        @JvmStatic
-        fun getHashManager() = graph!!.hashManagerInternal
-
-        @JvmStatic
-        fun getMainThreadPost() = graph!!.mainThreadPostInternal
-
-        @JvmStatic
-        fun getOkHttpClientLazy() = graph!!.okHttpClientLazyInternal
-
-        @JvmStatic
-        fun getNetworkManager() = graph!!.networkManagerInternal
-
-        @JvmStatic
-        fun getProductManager() = graph!!.productManagerInternal
-
-        @JvmStatic
-        fun getRemoteConfig() = graph!!.remoteConfigInternal
-
-        @JvmStatic
-        fun getSearchEngineManager() = graph!!.searchEngineManagerInternal
-
-        @JvmStatic
-        fun getSuggestionManager() = graph!!.suggestionManagerInternal
-
-        @JvmStatic
-        fun getThemeManager() = graph!!.themeManagerInternal
-
-        @JvmStatic
-        fun getToastManager() = graph!!.toastManagerInternal
-
-        @JvmStatic
-        fun getUpdateManager() = graph!!.updateManagerInternal
-
-        @JvmStatic
-        fun getVersionManager() = graph!!.versionManagerInternal
     }
 }

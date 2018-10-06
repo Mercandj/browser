@@ -83,12 +83,15 @@ class SettingsAboutView @JvmOverloads constructor(
         this.longVersionCode.text = longVersionCode
     }
 
-    override fun showSnackbar(@StringRes text: Int, duration: Int) {
-        Snackbar.make((context as Activity).window.decorView.findViewById(android.R.id.content), text, duration).show()
+    override fun showSnackbar(@StringRes messageStringRes: Int, duration: Int) {
+        val activity = context as Activity
+        val view = activity.window.decorView.findViewById<View>(android.R.id.content)
+        Snackbar.make(view, messageStringRes, duration).show()
     }
 
     override fun showSnackbar(text: String, duration: Int) {
-        Snackbar.make((context as Activity).window.decorView.findViewById(android.R.id.content), text, duration).show()
+        val activity = context as Activity
+        Snackbar.make(activity.window.decorView.findViewById(android.R.id.content), text, duration).show()
     }
 
     private fun createUserAction(): SettingsAboutContract.UserAction = if (isInEditMode) {

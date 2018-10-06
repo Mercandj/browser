@@ -39,7 +39,7 @@ log_jump
 log_jump
 
 
-BASEDIR=$(dirname "$0")
+BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 log_d "Script base directory: $BASEDIR"
 log_jump
 
