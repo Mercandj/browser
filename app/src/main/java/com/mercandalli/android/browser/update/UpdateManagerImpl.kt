@@ -2,9 +2,9 @@ package com.mercandalli.android.browser.update
 
 import android.content.SharedPreferences
 import com.mercandalli.android.browser.version.VersionManager
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class UpdateManagerImpl(
         private val sharedPreferences: SharedPreferences,

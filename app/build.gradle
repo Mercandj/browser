@@ -101,12 +101,6 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
-kotlin {
-    experimental {
-        coroutines 'enable'
-    }
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -124,7 +118,7 @@ dependencies {
 
     // Google
     implementation 'com.google.firebase:firebase-core:16.0.4'
-    implementation "com.google.firebase:firebase-config:16.0.1"
+    implementation "com.google.firebase:firebase-config:16.1.0"
 
     // Third party - Monitoring
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {
@@ -140,15 +134,15 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:3.11.0"
 
     // InApp
-    implementation 'com.android.billingclient:billing:1.1'
+    implementation 'com.android.billingclient:billing:1.2'
 
     // Testing-only dependencies
     androidTestImplementation "androidx.annotation:annotation:1.0.0"
-    androidTestImplementation 'androidx.test:runner:1.1.0-beta01'
-    androidTestImplementation 'androidx.test:rules:1.1.0-beta01'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta01'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0-beta01'
-    androidTestImplementation('androidx.test.espresso:espresso-contrib:3.1.0-alpha4') {
+    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
+    androidTestImplementation 'androidx.test:rules:1.1.0-beta02'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0-beta02'
+    androidTestImplementation('androidx.test.espresso:espresso-contrib:3.1.0-beta02') {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'design'
