@@ -119,7 +119,7 @@ class SettingsAboutPresenter(
             }
             DIALOG_ID_PROMPT_PASS -> {
                 val isAppDeveloperModeEnabled = hashManager.sha256(dialogAction.userInput, 32) ==
-                        "4fa93ff20105d1bd93f79c2db51aa1169265130ca810e72e85b3277e92f53820"
+                        "1753549de2d885325195f6ab9e3f86174f7f2626ccd3d4eccae82398b48de19d"
                 setIsAppDeveloperEnabled(isAppDeveloperModeEnabled)
             }
         }

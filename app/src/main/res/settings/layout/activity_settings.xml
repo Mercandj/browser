@@ -26,6 +26,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:layout_marginStart="@dimen/toolbar_height"
+            android:fontFamily="@font/google_sans_regular"
             android:gravity="center_vertical"
             android:text="@string/activity_settings_title"
             android:textSize="@dimen/text_size_xl"

@@ -12,6 +12,7 @@
         android:layout_gravity="start"
         android:layout_marginEnd="50dp"
         android:background="?android:selectableItemBackground"
+        android:fontFamily="@font/google_sans_regular"
         android:paddingStart="@dimen/default_space_1_5"
         android:paddingTop="@dimen/default_space"
         android:paddingEnd="@dimen/default_space_1_5"

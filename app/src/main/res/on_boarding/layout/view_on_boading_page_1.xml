@@ -48,6 +48,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
+                            android:fontFamily="@font/google_sans_regular"
                             android:gravity="center"
                             android:text="@string/on_boarding_page_1_content" />
 
@@ -70,6 +71,7 @@
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="18dp"
+                android:fontFamily="@font/google_sans_regular"
                 android:text="@string/on_boarding_page_1_title"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -82,6 +84,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="18dp"
                 android:layout_marginBottom="12dp"
+                android:fontFamily="@font/google_sans_regular"
                 android:text="@string/on_boarding_page_1_description"
                 android:textSize="16sp" />
 

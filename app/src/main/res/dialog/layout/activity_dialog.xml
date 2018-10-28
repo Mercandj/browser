@@ -20,6 +20,7 @@
             android:layout_marginTop="@dimen/default_space_2"
             android:layout_marginEnd="24dp"
             android:layout_weight="1"
+            android:fontFamily="@font/google_sans_regular"
             android:scrollbars="vertical"
             android:textSize="@dimen/text_size_xl"
             tools:text="Message" />
@@ -32,6 +33,7 @@
             android:layout_marginTop="@dimen/default_space_2"
             android:layout_marginEnd="24dp"
             android:background="@null"
+            android:fontFamily="@font/google_sans_regular"
             android:imeOptions="flagNoExtractUi"
             android:maxLines="6" />
 
@@ -48,6 +50,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="?android:selectableItemBackground"
+                android:fontFamily="@font/google_sans_regular"
                 android:gravity="center"
                 android:paddingStart="@dimen/default_space_3"
                 android:paddingTop="@dimen/default_space_2"
@@ -63,6 +66,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="?android:selectableItemBackground"
+                android:fontFamily="@font/google_sans_regular"
                 android:gravity="center"
                 android:paddingStart="@dimen/default_space_3"
                 android:paddingTop="@dimen/default_space_2"
