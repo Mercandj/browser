@@ -12,7 +12,7 @@ internal class SuggestionManagerImpl(
     override fun getSuggestion(searchInput: String) {
         suggestionApi.getSuggestionsJson(searchInput) { json ->
             run {
-                val suggestions = Suggestions.createFromGoogle(json)
+                val suggestions = Suggestions.createFromGoogle(searchInput, json)
                 notify(suggestions)
             }
         }

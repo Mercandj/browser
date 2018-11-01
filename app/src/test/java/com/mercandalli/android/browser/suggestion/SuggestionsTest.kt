@@ -15,7 +15,7 @@ class SuggestionsTest {
         val json = File(resource.path).readText()
 
         // When
-        val suggestions = Suggestions.createFromGoogle(json)
+        val suggestions = Suggestions.createFromGoogle("roland garros", json)
 
         // Then
         Assert.assertEquals("roland garros", suggestions.searchInput)
