@@ -72,7 +72,6 @@ android {
                     'src/main/res/main',
                     'src/main/res/on_boarding',
                     'src/main/res/settings',
-                    'src/main/res/store',
                     'src/main/res/suggestion'
             ]
         }

@@ -212,8 +212,12 @@ class OnBoardingView @JvmOverloads constructor(
         val inAppManager = MonetizationGraph.getInAppManager()
         val monetizationManager = MonetizationGraph.getMonetizationManager()
         val onBoardingRepository = MonetizationGraph.getOnBoardingRepository()
-        val subscriptionSku = MonetizationGraph.getMonetization().subscriptionSku
+        val remoteConfig = ApplicationGraph.getRemoteConfig()
         val themeManager = ApplicationGraph.getThemeManager()
+        val addOn = object : OnBoardingPresenter.AddOn {
+            override fun getSubscriptionFullVersionSku() =
+                    remoteConfig.getSubscriptionFullVersionSku()
+        }
         OnBoardingPresenter(
                 this,
                 analyticsManager,
@@ -221,8 +225,8 @@ class OnBoardingView @JvmOverloads constructor(
                 inAppManager,
                 monetizationManager,
                 onBoardingRepository,
-                subscriptionSku,
-                themeManager
+                themeManager,
+                addOn
         )
     }
 

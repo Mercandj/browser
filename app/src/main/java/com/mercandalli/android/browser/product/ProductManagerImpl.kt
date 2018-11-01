@@ -3,7 +3,6 @@ package com.mercandalli.android.browser.product
 import android.content.SharedPreferences
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.SkuDetails
-import com.mercandalli.android.browser.main.MainApplication
 import com.mercandalli.android.browser.remote_config.RemoteConfig
 import com.mercandalli.android.browser.in_app.InAppManager
 
@@ -23,9 +22,10 @@ class ProductManagerImpl(
     }
 
     override fun purchaseFullVersion(activityContainer: InAppManager.ActivityContainer) {
+        val subscriptionFullVersionSku = remoteConfig.getSubscriptionFullVersionSku()
         inAppManager.purchase(
                 activityContainer,
-                MainApplication.SKU_SUBSCRIPTION_FULL_VERSION,
+                subscriptionFullVersionSku,
                 BillingClient.SkuType.SUBS
         )
     }
@@ -34,7 +34,9 @@ class ProductManagerImpl(
             remoteConfig.isFullVersionAvailable()
 
     override fun isSubscribeToFullVersion() = isAppDeveloperEnabled ||
-            inAppManager.isPurchased(MainApplication.SKU_SUBSCRIPTION_FULL_VERSION)
+            inAppManager.isPurchased(
+                    remoteConfig.getSubscriptionFullVersionSku()
+            )
 
     override fun isAppDeveloperEnabled() = isAppDeveloperEnabled
 

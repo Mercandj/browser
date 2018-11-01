@@ -10,7 +10,6 @@ import com.crashlytics.android.core.CrashlyticsCore
 import com.mercandalli.android.browser.BuildConfig
 import com.mercandalli.android.browser.ad_blocker.AdBlocker
 import com.mercandalli.android.browser.remote_config.RemoteConfig
-import com.mercandalli.android.browser.monetization.Monetization
 import com.mercandalli.android.browser.monetization.MonetizationGraph
 import com.mercandalli.android.browser.monetization.MonetizationLog
 import io.fabric.sdk.android.Fabric
@@ -53,9 +52,6 @@ class MainApplication : Application() {
         }
         MonetizationGraph.init(
                 this,
-                Monetization.create(
-                        SKU_SUBSCRIPTION_FULL_VERSION
-                ),
                 monetizationLog,
                 activityAction
         )
@@ -78,21 +74,22 @@ class MainApplication : Application() {
     }
 
     companion object {
-        const val SKU_SUBSCRIPTION_FULL_VERSION = "googleplay.com.mercandalli.android.browser.subscription.1"
 
         @JvmStatic
         fun onOnBoardingStarted() {
             val remoteConfig = ApplicationGraph.getRemoteConfig()
             updateOnBoardingStorePageAvailable(remoteConfig)
-            remoteConfig.registerListener(object : RemoteConfig.Listener {
+            val listener = object : RemoteConfig.Listener {
                 override fun onRemoteConfigChanged() {
                     updateOnBoardingStorePageAvailable(remoteConfig)
                 }
-            })
+            }
+            remoteConfig.registerListener(listener)
         }
 
         private fun updateOnBoardingStorePageAvailable(remoteConfig: RemoteConfig) {
-            MonetizationGraph.setOnBoardingStorePageAvailable(remoteConfig.isOnBoardingStoreAvailable())
+            val available = remoteConfig.isOnBoardingStoreAvailable()
+            MonetizationGraph.setOnBoardingStorePageAvailable(available)
         }
     }
 }

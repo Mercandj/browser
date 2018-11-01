@@ -6,6 +6,8 @@ interface RemoteConfig {
 
     fun isOnBoardingStoreAvailable(): Boolean
 
+    fun getSubscriptionFullVersionSku(): String
+
     fun registerListener(listener: Listener)
 
     fun unregisterListener(listener: Listener)

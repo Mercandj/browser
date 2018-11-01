@@ -51,6 +51,10 @@ internal class RemoteConfigImpl(
             randomOnBoardingStorePageAvailablePercent <=
                     firebaseRemoteConfig.getDouble(FIREBASE_KEY_ON_BOARDING_STORE_PAGE_AVAILABLE_PERCENT)
 
+    override fun getSubscriptionFullVersionSku() =
+            firebaseRemoteConfig.getString(FIREBASE_KEY_SUBSCRIPTION_FULL_VERSION_SKU)
+                    ?: DEFAULT_SUBSCRIPTION_FULL_VERSION_SKU
+
     override fun registerListener(listener: RemoteConfig.Listener) {
         if (!listeners.contains(listener)) {
             listeners.add(listener)
@@ -76,10 +80,14 @@ internal class RemoteConfigImpl(
         private val defaultMap = HashMap<String, Any>()
         private const val FIREBASE_KEY_FULL_VERSION_AVAILABLE_PERCENT = "full_version_available_percent"
         private const val FIREBASE_KEY_ON_BOARDING_STORE_PAGE_AVAILABLE_PERCENT = "on_boarding_store_page_available_percent"
+        private const val FIREBASE_KEY_SUBSCRIPTION_FULL_VERSION_SKU = "subscription_full_version_sku"
+
+        private const val DEFAULT_SUBSCRIPTION_FULL_VERSION_SKU = "googleplay.com.mercandalli.android.browser.subscription.1"
 
         init {
             defaultMap[FIREBASE_KEY_FULL_VERSION_AVAILABLE_PERCENT] = 0
             defaultMap[FIREBASE_KEY_ON_BOARDING_STORE_PAGE_AVAILABLE_PERCENT] = 0
+            defaultMap[FIREBASE_KEY_SUBSCRIPTION_FULL_VERSION_SKU] = DEFAULT_SUBSCRIPTION_FULL_VERSION_SKU
         }
     }
 }

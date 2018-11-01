@@ -16,8 +16,8 @@ internal class OnBoardingPresenter(
         private val inAppManager: InAppManager,
         private val monetizationManager: MonetizationManager,
         private val onBoardingRepository: OnBoardingRepository,
-        private val subscriptionSku: String,
-        private val themeManager: ThemeManager
+        private val themeManager: ThemeManager,
+        private val addOn: AddOn
 ) : OnBoardingContract.UserAction {
 
     private val monetizationEnabledListener = createMonetizationEnabledListener()
@@ -56,7 +56,12 @@ internal class OnBoardingPresenter(
     override fun onStoreBuyClicked(activityContainer: InAppManager.ActivityContainer) {
         analyticsManager.sendEventOnBoardingSubscriptionClicked()
         inAppManager.registerListener(inAppManagerListener)
-        inAppManager.purchase(activityContainer, subscriptionSku, BillingClient.SkuType.SUBS)
+        val subscriptionFullVersionSku = addOn.getSubscriptionFullVersionSku()
+        inAppManager.purchase(
+                activityContainer,
+                subscriptionFullVersionSku,
+                BillingClient.SkuType.SUBS
+        )
     }
 
     override fun onStoreSkipClicked() {
@@ -114,12 +119,18 @@ internal class OnBoardingPresenter(
     private fun createInAppManagerListener() = object : InAppManager.Listener {
         override fun onSkuDetailsChanged(skuDetails: SkuDetails) {}
         override fun onPurchasedChanged() {
-            if (inAppManager.isPurchased(subscriptionSku)) {
+            val subscriptionFullVersionSku = addOn.getSubscriptionFullVersionSku()
+            if (inAppManager.isPurchased(subscriptionFullVersionSku)) {
                 analyticsManager.sendEventOnBoardingSubscribed()
                 onBoardingRepository.markOnBoardingEnded()
                 screen.closeOnBoarding()
                 screen.startFistActivity()
             }
         }
+    }
+
+    interface AddOn {
+
+        fun getSubscriptionFullVersionSku(): String
     }
 }
