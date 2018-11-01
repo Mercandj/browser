@@ -43,8 +43,8 @@ task clean(type: Delete) {
 
 ext {
     // Why 6_XXX_XX_XX? -> Previous support of density split
-    appVersionCode = 6_001_00_23
-    appVersionName = "1.00.23"
+    appVersionCode = 6_001_00_24
+    appVersionName = "1.00.24"
 
     compileSdkVersion = 28
     buildToolsVersion = "28.0.3"
