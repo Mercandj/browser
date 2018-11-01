@@ -34,8 +34,10 @@ class FloatingPresenter(
     override fun onCollapseClicked() {
         if (screen.isCollapsed()) {
             screen.expand()
+            screen.showStatusBarTitle()
         } else {
             screen.collapse()
+            screen.hideStatusBarTitle()
         }
     }
 

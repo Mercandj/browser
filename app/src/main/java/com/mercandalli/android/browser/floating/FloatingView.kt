@@ -87,6 +87,14 @@ class FloatingView @JvmOverloads constructor(
         mainWebView.reload()
     }
 
+    override fun showStatusBarTitle() {
+        statusBarTitle.visibility = VISIBLE
+    }
+
+    override fun hideStatusBarTitle() {
+        statusBarTitle.visibility = GONE
+    }
+
     override fun setPrimaryTextColorRes(@ColorRes colorRes: Int) {
         val color = ContextCompat.getColor(context, colorRes)
         statusBarTitle.setTextColor(color)

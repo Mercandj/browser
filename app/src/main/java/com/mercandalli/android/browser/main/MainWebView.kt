@@ -40,7 +40,6 @@ class MainWebView @JvmOverloads constructor(
 
     init {
         if (!isInEditMode) {
-
             isFocusableInTouchMode = true
             isHorizontalScrollBarEnabled = true
             isVerticalScrollBarEnabled = true

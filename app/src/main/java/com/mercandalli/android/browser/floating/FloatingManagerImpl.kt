@@ -23,8 +23,8 @@ class FloatingManagerImpl(
             floatingPermission.launchDrawOverOtherAppPermissionManager()
             return
         }
-        val width = getScreenMinWidthHeightPx() * 0.8F
-        val height = width * 3F / 4F
+        val width = getScreenMinWidthHeightPx() * 0.84F
+        val height = width * 4F / 5F
         val context = ContextThemeWrapper(context, R.style.AppTheme)
         val floatingView = FloatingView(context)
         floatingView.setListener(createFloatingView())

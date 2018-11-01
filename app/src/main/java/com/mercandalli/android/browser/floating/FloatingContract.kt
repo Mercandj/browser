@@ -31,6 +31,10 @@ interface FloatingContract {
 
         fun reload()
 
+        fun showStatusBarTitle()
+
+        fun hideStatusBarTitle()
+
         fun setPrimaryTextColorRes(@ColorRes colorRes: Int)
 
         fun setStatusBarBackgroundColorRes(@ColorRes colorRes: Int)
