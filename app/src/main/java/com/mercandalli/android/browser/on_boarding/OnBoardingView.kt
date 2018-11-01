@@ -1,7 +1,6 @@
 package com.mercandalli.android.browser.on_boarding
 
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import android.util.SparseArray
 import android.view.LayoutInflater

@@ -3,7 +3,6 @@ package com.mercandalli.android.browser.on_boarding
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
@@ -90,19 +89,21 @@ class OnBoardingActivity : AppCompatActivity() {
     @RequiresApi(api = Build.VERSION_CODES.M)
     private fun setStatusBarDark(statusBarDark: Boolean) {
         val flags = window.decorView.systemUiVisibility
-        window.decorView.systemUiVisibility = if (statusBarDark)
+        window.decorView.systemUiVisibility = if (statusBarDark) {
             flags and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
-        else
+        } else {
             flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private fun setNavigationBarBarDark(statusBarDark: Boolean) {
         val flags = window.decorView.systemUiVisibility
-        window.decorView.systemUiVisibility = if (statusBarDark)
+        window.decorView.systemUiVisibility = if (statusBarDark) {
             flags and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
-        else
+        } else {
             flags or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+        }
     }
 
     private fun createThemeListener() = object : ThemeManager.ThemeListener {
