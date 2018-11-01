@@ -19,6 +19,8 @@ internal interface OnBoardingContract {
         fun onStoreBuyClicked(activityContainer: InAppManager.ActivityContainer)
 
         fun onStoreSkipClicked()
+
+        fun onSwipeOutAtEnd(activityContainer: InAppManager.ActivityContainer)
     }
 
     interface Screen {

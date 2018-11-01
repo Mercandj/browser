@@ -26,6 +26,10 @@ class AnalyticsManagerImpl(
         logEvent("on_boarding_subscription_clicked")
     }
 
+    override fun sendEventOnBoardingSubscriptionSwiped() {
+        logEvent("on_boarding_subscription_swiped")
+    }
+
     override fun sendEventOnBoardingSkipClicked() {
         logEvent("on_boarding_skip_clicked")
     }

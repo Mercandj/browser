@@ -73,6 +73,21 @@ internal class OnBoardingPresenter(
         floatingManager.stop()
     }
 
+    override fun onSwipeOutAtEnd(activityContainer: InAppManager.ActivityContainer) {
+        val onBoardingStorePageAvailable = monetizationManager.isOnBoardingStorePageAvailable()
+        val lastPage = isLastPage()
+        if (lastPage && onBoardingStorePageAvailable) {
+            analyticsManager.sendEventOnBoardingSubscriptionSwiped()
+            inAppManager.registerListener(inAppManagerListener)
+            val subscriptionFullVersionSku = addOn.getSubscriptionFullVersionSku()
+            inAppManager.purchase(
+                    activityContainer,
+                    subscriptionFullVersionSku,
+                    BillingClient.SkuType.SUBS
+            )
+        }
+    }
+
     private fun syncScreen(
             onBoardingStorePageAvailable: Boolean = monetizationManager.isOnBoardingStorePageAvailable()
     ) {

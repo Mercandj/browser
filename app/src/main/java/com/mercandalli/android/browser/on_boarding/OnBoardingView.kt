@@ -36,7 +36,7 @@ class OnBoardingView @JvmOverloads constructor(
     )
     private var currentLayoutNames = layoutNamesWithoutStore
     private val view = LayoutInflater.from(context).inflate(R.layout.view_on_boarding, this)
-    private val viewPager: ViewPager = view.findViewById(R.id.view_on_boarding_view_pager)
+    private val viewPager: OnBoardingViewPager = view.findViewById(R.id.view_on_boarding_view_pager)
     private val storeBuy: TextView = view.findViewById(R.id.view_on_boarding_store_buy)
     private val storeSkip: TextView = view.findViewById(R.id.view_on_boarding_store_skip)
     private val next: TextView = view.findViewById(R.id.view_on_boarding_next)
@@ -53,6 +53,11 @@ class OnBoardingView @JvmOverloads constructor(
     init {
         viewPager.adapter = adapter
         viewPager.addOnPageChangeListener(onPageChangeListener)
+        viewPager.setSwipeOutAtEndListener(object : OnBoardingViewPager.SwipeOutAtEndListener {
+            override fun onSwipeOutAtEnd() {
+                userAction.onSwipeOutAtEnd(activityContainer!!)
+            }
+        })
         next.setOnClickListener {
             userAction.onNextClicked()
         }
@@ -205,6 +210,7 @@ class OnBoardingView @JvmOverloads constructor(
             override fun onNextClicked() {}
             override fun onStoreBuyClicked(activityContainer: InAppManager.ActivityContainer) {}
             override fun onStoreSkipClicked() {}
+            override fun onSwipeOutAtEnd(activityContainer: InAppManager.ActivityContainer) {}
         }
     } else {
         val analyticsManager = ApplicationGraph.getAnalyticsManager()

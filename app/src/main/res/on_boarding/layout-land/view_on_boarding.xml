@@ -54,7 +54,7 @@
 
         </FrameLayout>
 
-        <androidx.viewpager.widget.ViewPager
+        <com.mercandalli.android.browser.on_boarding.OnBoardingViewPager
             android:id="@+id/view_on_boarding_view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"

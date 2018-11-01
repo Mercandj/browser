@@ -12,6 +12,8 @@ interface AnalyticsManager {
 
     fun sendEventOnBoardingSubscriptionClicked()
 
+    fun sendEventOnBoardingSubscriptionSwiped()
+
     fun sendEventOnBoardingSkipClicked()
 
     fun sendEventOnBoardingSubscribed()
