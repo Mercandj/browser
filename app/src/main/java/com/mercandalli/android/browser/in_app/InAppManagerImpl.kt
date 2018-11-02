@@ -1,12 +1,20 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.in_app
 
-import com.android.billingclient.api.*
+import com.android.billingclient.api.SkuDetails
+import com.android.billingclient.api.SkuDetailsResponseListener
+import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.BillingFlowParams
+import com.android.billingclient.api.Purchase
+import com.android.billingclient.api.SkuDetailsParams
 import com.mercandalli.android.browser.monetization.MonetizationLog
 
 internal class InAppManagerImpl(
-        private val playBillingManager: PlayBillingManager,
-        private val inAppRepository: InAppRepository,
-        private val monetizationLog: MonetizationLog
+    private val playBillingManager: PlayBillingManager,
+    private val inAppRepository: InAppRepository,
+    private val monetizationLog: MonetizationLog
 ) : InAppManager {
 
     private var initializeCalled = false
@@ -24,15 +32,15 @@ internal class InAppManagerImpl(
     }
 
     override fun purchase(
-            activityContainer: InAppManager.ActivityContainer,
-            sku: String,
-            @BillingClient.SkuType skuType: String
+        activityContainer: InAppManager.ActivityContainer,
+        sku: String,
+        @BillingClient.SkuType skuType: String
     ) {
         playBillingManager.executeServiceRequest {
             val builder = BillingFlowParams
-                    .newBuilder()
-                    .setSku(sku)
-                    .setType(skuType)
+                .newBuilder()
+                .setSku(sku)
+                .setType(skuType)
             val responseCode = playBillingManager.launchBillingFlow(activityContainer.get(), builder.build())
             if (responseCode == BillingClient.BillingResponse.OK) {
                 monetizationLog.d(TAG, "responseCode: $responseCode")
@@ -47,20 +55,20 @@ internal class InAppManagerImpl(
     }
 
     override fun requestSkuDetails(
-            activityContainer: InAppManager.ActivityContainer,
-            sku: String,
-            @BillingClient.SkuType skuType: String
+        activityContainer: InAppManager.ActivityContainer,
+        sku: String,
+        @BillingClient.SkuType skuType: String
     ) {
         playBillingManager.executeServiceRequest {
             val subsSkuDetailsParams = SkuDetailsParams.newBuilder()
-                    .setSkusList(listOf(
-                            sku
-                    ))
-                    .setType(skuType)
-                    .build()
+                .setSkusList(listOf(
+                    sku
+                ))
+                .setType(skuType)
+                .build()
             playBillingManager.querySkuDetailsAsync(
-                    subsSkuDetailsParams,
-                    skuDetailsResponseListener
+                subsSkuDetailsParams,
+                skuDetailsResponseListener
             )
 
             val inAppPurchasesResult = playBillingManager.queryPurchases(BillingClient.SkuType.INAPP)

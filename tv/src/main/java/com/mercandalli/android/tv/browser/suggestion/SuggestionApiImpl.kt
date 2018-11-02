@@ -1,17 +1,22 @@
 package com.mercandalli.android.tv.browser.suggestion
 
-import okhttp3.*
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import okhttp3.ResponseBody
+import okhttp3.Callback
+import okhttp3.Call
 import java.io.Closeable
 import java.io.IOException
 
 class SuggestionApiImpl(
-        private val okHttpClientLazy: Lazy<OkHttpClient>
+    private val okHttpClientLazy: Lazy<OkHttpClient>
 ) : SuggestionApi {
 
     override fun getSuggestionsJson(search: String): String? {
         return requestSync(
-                createUrl(search),
-                userAgent
+            createUrl(search),
+            userAgent
         )
     }
 
@@ -26,7 +31,6 @@ class SuggestionApiImpl(
             }
 
             override fun onFailure(call: Call, e: IOException) {
-
             }
         })
     }
@@ -34,8 +38,8 @@ class SuggestionApiImpl(
     private fun createUrl(search: String): String {
         val querySearch = search.replace(" ", "+")
         return "https://www.google.fr/complete/search?" +
-                "client=psy-ab&" +
-                "q=$querySearch"
+            "client=psy-ab&" +
+            "q=$querySearch"
     }
 
     private fun requestSync(url: String, userAgent: String): String? {
@@ -60,12 +64,11 @@ class SuggestionApiImpl(
                     x.close()
                 } catch (ignored: Throwable) {
                 }
-
             }
         }
     }
 
     companion object {
-        val userAgent = "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13"
+        const val userAgent = "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13"
     }
 }

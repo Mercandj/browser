@@ -58,6 +58,8 @@ script:
 - "./gradlew $GRADLE_MODULE:assembleDebug"
 - echo "jm/debug [Gradle][$GRADLE_MODULE] Check"
 - "./gradlew $GRADLE_MODULE:check"
+- echo "jm/debug [Gradle][$GRADLE_MODULE] Ktlint"
+- "./gradlew $GRADLE_MODULE:ktlint"
 
 after_failure:
 - echo "jm/debug ERROR - lint"

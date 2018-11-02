@@ -19,7 +19,7 @@ import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.browser.in_app.InAppManager
 
 class SettingsActivity : AppCompatActivity(),
-        SettingsActivityContract.Screen {
+    SettingsActivityContract.Screen {
 
     private val userAction = createUserAction()
     private val toolbar: View by bind(R.id.activity_settings_toolbar)
@@ -82,8 +82,8 @@ class SettingsActivity : AppCompatActivity(),
     private fun createUserAction(): SettingsActivityContract.UserAction {
         val themeManager = ApplicationGraph.getThemeManager()
         return SettingsActivityPresenter(
-                this,
-                themeManager
+            this,
+            themeManager
         )
     }
 

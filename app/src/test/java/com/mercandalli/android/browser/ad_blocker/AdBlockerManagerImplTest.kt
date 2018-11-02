@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.ad_blocker
 
 import android.content.SharedPreferences
@@ -47,11 +50,11 @@ class AdBlockerManagerImplTest {
     }
 
     private fun createInstanceToTest(
-            sharedPreferences: SharedPreferences = HashMapSharedPreferences()
+        sharedPreferences: SharedPreferences = HashMapSharedPreferences()
     ): AdBlockerManager {
         return AdBlockerManagerImpl(
-                sharedPreferences,
-                productManager!!
+            sharedPreferences,
+            productManager!!
         )
     }
 }

@@ -4,7 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 
 class NetworkManagerImpl(
-        private val context: Context
+    private val context: Context
 ) : NetworkManager {
 
     private val connectivityManager: ConnectivityManager by lazy(LazyThreadSafetyMode.NONE) {
@@ -12,5 +12,5 @@ class NetworkManagerImpl(
     }
 
     override fun isNetworkAvailable() = connectivityManager.activeNetworkInfo != null &&
-            connectivityManager.activeNetworkInfo.isConnected
+        connectivityManager.activeNetworkInfo.isConnected
 }

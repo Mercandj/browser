@@ -7,9 +7,9 @@ import com.mercandalli.android.browser.remote_config.RemoteConfig
 import com.mercandalli.android.browser.in_app.InAppManager
 
 class ProductManagerImpl(
-        private val remoteConfig: RemoteConfig,
-        private val inAppManager: InAppManager,
-        private val sharedPreferences: SharedPreferences
+    private val remoteConfig: RemoteConfig,
+    private val inAppManager: InAppManager,
+    private val sharedPreferences: SharedPreferences
 ) : ProductManager {
 
     private val listeners = ArrayList<ProductManager.Listener>()
@@ -24,27 +24,27 @@ class ProductManagerImpl(
     override fun purchaseFullVersion(activityContainer: InAppManager.ActivityContainer) {
         val subscriptionFullVersionSku = remoteConfig.getSubscriptionFullVersionSku()
         inAppManager.purchase(
-                activityContainer,
-                subscriptionFullVersionSku,
-                BillingClient.SkuType.SUBS
+            activityContainer,
+            subscriptionFullVersionSku,
+            BillingClient.SkuType.SUBS
         )
     }
 
     override fun isFullVersionAvailable() = isAppDeveloperEnabled ||
-            remoteConfig.isFullVersionAvailable()
+        remoteConfig.isFullVersionAvailable()
 
     override fun isSubscribeToFullVersion() = isAppDeveloperEnabled ||
-            inAppManager.isPurchased(
-                    remoteConfig.getSubscriptionFullVersionSku()
-            )
+        inAppManager.isPurchased(
+            remoteConfig.getSubscriptionFullVersionSku()
+        )
 
     override fun isAppDeveloperEnabled() = isAppDeveloperEnabled
 
     override fun setIsAppDeveloperEnabled(enabled: Boolean) {
         isAppDeveloperEnabled = enabled
         sharedPreferences.edit().putBoolean(
-                PREFERENCE_IS_APP_DEVELOPER_ENABLED,
-                enabled
+            PREFERENCE_IS_APP_DEVELOPER_ENABLED,
+            enabled
         ).apply()
         for (listener in appDeveloperListeners) {
             listener.onIsAppDeveloperChanged()

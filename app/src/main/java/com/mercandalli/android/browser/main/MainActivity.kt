@@ -20,7 +20,11 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
-import android.widget.*
+import android.widget.ProgressBar
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.CheckBox
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -320,8 +324,8 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     private fun createOnEditorActionListener() = TextView.OnEditorActionListener { v, actionId, event ->
         if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                event.action == KeyEvent.ACTION_DOWN &&
-                event.keyCode == KeyEvent.KEYCODE_ENTER) {
+            event.action == KeyEvent.ACTION_DOWN &&
+            event.keyCode == KeyEvent.KEYCODE_ENTER) {
             userAction.onSearchPerformed(v!!.text.toString())
             return@OnEditorActionListener true
         }
@@ -346,11 +350,9 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 
     private fun createTextWatcher() = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
-
         }
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -375,12 +377,12 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         val floatingManager = ApplicationGraph.getFloatingManager()
         val productManager = ApplicationGraph.getProductManager()
         return MainActivityPresenter(
-                this,
-                themeManager,
-                searchEngineManager,
-                suggestionManager,
-                floatingManager,
-                productManager
+            this,
+            themeManager,
+            searchEngineManager,
+            suggestionManager,
+            floatingManager,
+            productManager
         )
     }
 
@@ -397,7 +399,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
             val intent = Intent(context, MainActivity::class.java)
             if (context !is Activity) {
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                        Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP
             }
             context.startActivity(intent)
         }
@@ -407,7 +409,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
             val intent = Intent(context, MainActivity::class.java)
             if (context !is Activity) {
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                        Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP
             }
             intent.putExtra(EXTRA_URL, url)
             context.startActivity(intent)

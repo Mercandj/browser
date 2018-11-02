@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.on_boarding
 
 import com.mercandalli.android.browser.analytics.AnalyticsManager
@@ -7,11 +10,11 @@ import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 
 internal class OnBoardingPagePresenter(
-        private val screen: OnBoardingPageContract.Screen,
-        private val themeManager: ThemeManager,
-        private val networkManager: NetworkManager,
-        private val floatingManager: FloatingManager,
-        private val analyticsManager: AnalyticsManager
+    private val screen: OnBoardingPageContract.Screen,
+    private val themeManager: ThemeManager,
+    private val networkManager: NetworkManager,
+    private val floatingManager: FloatingManager,
+    private val analyticsManager: AnalyticsManager
 ) : OnBoardingPageContract.UserAction {
 
     private val themeListener = createThemeListener()

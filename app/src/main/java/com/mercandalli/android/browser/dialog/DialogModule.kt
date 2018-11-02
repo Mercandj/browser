@@ -5,7 +5,7 @@ import android.view.ContextThemeWrapper
 import com.mercandalli.android.browser.R
 
 class DialogModule(
-        private val context: Context
+    private val context: Context
 ) {
 
     fun createDialogManager(): DialogManager {
@@ -18,7 +18,7 @@ class DialogModule(
             override fun getString(stringRes: Int) = context.getString(stringRes)
         }
         return DialogManagerImpl(
-                addOn
+            addOn
         )
     }
 }

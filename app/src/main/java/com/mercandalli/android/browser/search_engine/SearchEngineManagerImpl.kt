@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.search_engine
 
 import com.mercandalli.android.browser.product.ProductManager
@@ -9,7 +12,7 @@ import com.mercandalli.android.browser.search_engine.SearchEngine.Companion.SEAR
 import com.mercandalli.android.browser.search_engine.SearchEngineVideo.Companion.SEARCH_ENGINE_VIDEO_YOUTUBE
 
 class SearchEngineManagerImpl(
-        private val productManager: ProductManager
+    private val productManager: ProductManager
 ) : SearchEngineManager {
 
     @SearchEngine.Companion.SearchEngineKey
@@ -35,7 +38,7 @@ class SearchEngineManagerImpl(
     override fun isFeatureAvailable() = productManager.isFullVersionAvailable()
 
     override fun createSearchUrl(
-            searchInput: String
+        searchInput: String
     ): String {
         if (searchInput.startsWith("https://") || searchInput.startsWith("http://")) {
             return searchInput
@@ -98,20 +101,20 @@ class SearchEngineManagerImpl(
     override fun getSearchEngineVideos() = ArrayList<SearchEngineVideo>(searchEngineVideos)
 
     private fun searchYouTube(searchInput: String) =
-            "https://www.youtube.com/results?utm_source=opensearch&search_query=" + searchInput.replace(" ", "+")
+        "https://www.youtube.com/results?utm_source=opensearch&search_query=" + searchInput.replace(" ", "+")
 
     private fun searchGoogle(searchInput: String) =
-            "https://www.google.fr/search?q=" + searchInput.replace(" ", "+")
+        "https://www.google.fr/search?q=" + searchInput.replace(" ", "+")
 
     private fun searchDuckDuckGo(searchInput: String) =
-            "https://duckduckgo.com/?q=" + searchInput.replace(" ", "+")
+        "https://duckduckgo.com/?q=" + searchInput.replace(" ", "+")
 
     private fun searchBing(searchInput: String) =
-            "https://www.bing.com/search?q=" + searchInput.replace(" ", "+")
+        "https://www.bing.com/search?q=" + searchInput.replace(" ", "+")
 
     private fun searchYahoo(searchInput: String) =
-            "https://search.yahoo.com/search?p=" + searchInput.replace(" ", "+")
+        "https://search.yahoo.com/search?p=" + searchInput.replace(" ", "+")
 
     private fun searchQwant(searchInput: String) =
-            "https://www.qwant.com/?q=" + searchInput.replace(" ", "+")
+        "https://www.qwant.com/?q=" + searchInput.replace(" ", "+")
 }

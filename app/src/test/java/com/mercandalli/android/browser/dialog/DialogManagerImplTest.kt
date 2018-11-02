@@ -3,7 +3,11 @@ package com.mercandalli.android.browser.dialog
 import androidx.annotation.StringRes
 import org.junit.Before
 import org.junit.Test
-import org.mockito.*
+import org.mockito.Captor
+import org.mockito.ArgumentCaptor
+import org.mockito.MockitoAnnotations
+import org.mockito.Mock
+import org.mockito.Mockito
 
 class DialogManagerImplTest {
 
@@ -36,21 +40,21 @@ class DialogManagerImplTest {
         // Given
         val dialogManager = createInstanceToTest()
         val referenceDialogInput = DialogActivity.DialogInput(
-                dialogId,
-                titleString,
-                messageString,
-                positiveString,
-                negativeString,
-                DialogActivity.DialogInput.DIALOG_TYPE_ALERT
+            dialogId,
+            titleString,
+            messageString,
+            positiveString,
+            negativeString,
+            DialogActivity.DialogInput.DIALOG_TYPE_ALERT
         )
 
         // When
         dialogManager.alert(
-                dialogId,
-                titleStringRes,
-                messageStringRes,
-                positiveStringRes,
-                negativeStringRes
+            dialogId,
+            titleStringRes,
+            messageStringRes,
+            positiveStringRes,
+            negativeStringRes
         )
 
         // Then
@@ -64,21 +68,21 @@ class DialogManagerImplTest {
         // Given
         val dialogManager = createInstanceToTest()
         val referenceDialogInput = DialogActivity.DialogInput(
-                dialogId,
-                titleString,
-                messageString,
-                positiveString,
-                negativeString,
-                DialogActivity.DialogInput.DIALOG_TYPE_PROMPT
+            dialogId,
+            titleString,
+            messageString,
+            positiveString,
+            negativeString,
+            DialogActivity.DialogInput.DIALOG_TYPE_PROMPT
         )
 
         // When
         dialogManager.prompt(
-                dialogId,
-                titleStringRes,
-                messageStringRes,
-                positiveStringRes,
-                negativeStringRes
+            dialogId,
+            titleStringRes,
+            messageStringRes,
+            positiveStringRes,
+            negativeStringRes
         )
 
         // Then
@@ -93,7 +97,7 @@ class DialogManagerImplTest {
         Mockito.`when`(addOn.getString(positiveStringRes)).thenReturn(positiveString)
         Mockito.`when`(addOn.getString(negativeStringRes)).thenReturn(negativeString)
         return DialogManagerImpl(
-                addOn
+            addOn
         )
     }
 

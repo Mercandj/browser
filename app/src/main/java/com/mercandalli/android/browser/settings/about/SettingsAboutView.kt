@@ -16,9 +16,11 @@ import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
 
 class SettingsAboutView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr),
-        SettingsAboutContract.Screen {
+    SettingsAboutContract.Screen {
 
     private val view = LayoutInflater.from(context).inflate(R.layout.view_settings_about, this)
 
@@ -110,13 +112,13 @@ class SettingsAboutView @JvmOverloads constructor(
             override fun getCurrentTimeMillis() = System.currentTimeMillis()
         }
         SettingsAboutPresenter(
-                this,
-                themeManager,
-                versionManager,
-                productManager,
-                dialogManager,
-                hashManager,
-                addOn
+            this,
+            themeManager,
+            versionManager,
+            productManager,
+            dialogManager,
+            hashManager,
+            addOn
         )
     }
 }

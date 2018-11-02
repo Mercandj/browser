@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.settings.search_engine
 
 import androidx.annotation.ColorRes

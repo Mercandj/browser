@@ -13,7 +13,7 @@ import com.mercandalli.android.browser.settings.search_engine.SettingsSearchEngi
 import com.mercandalli.android.browser.settings.theme.SettingsThemeView
 
 class SettingsAdapter(
-        activityContainer: InAppManager.ActivityContainer
+    activityContainer: InAppManager.ActivityContainer
 ) : ListDelegationAdapter<List<Any>>() {
 
     init {
@@ -22,10 +22,10 @@ class SettingsAdapter(
         delegatesManager.addDelegate(SettingsAdBlockerAdapterDelegate(activityContainer) as AdapterDelegate<List<Any>>)
         delegatesManager.addDelegate(SettingsAboutAdapterDelegate() as AdapterDelegate<List<Any>>)
         populate(listOf(
-                SettingsTheme(),
-                SettingsSearchEngine(),
-                SettingsAdBlocker(),
-                SettingsAbout()
+            SettingsTheme(),
+            SettingsSearchEngine(),
+            SettingsAdBlocker(),
+            SettingsAbout()
         ))
     }
 
@@ -38,31 +38,31 @@ class SettingsAdapter(
     class SettingsTheme
 
     private class SettingsThemeAdapterDelegate :
-            AbsListItemAdapterDelegate<Any, Any, SettingsThemeViewHolder>() {
+        AbsListItemAdapterDelegate<Any, Any, SettingsThemeViewHolder>() {
 
-        override fun isForViewType(o: Any, list: List<Any>, i: Int): Boolean {
-            return o is SettingsTheme
-        }
+        override fun isForViewType(o: Any, list: List<Any>, i: Int) = o is SettingsTheme
 
         override fun onCreateViewHolder(viewGroup: ViewGroup): SettingsThemeViewHolder {
             val context = viewGroup.context
             val view = SettingsThemeView(context)
             val layoutParams = RecyclerView.LayoutParams(
-                    RecyclerView.LayoutParams.MATCH_PARENT,
-                    RecyclerView.LayoutParams.WRAP_CONTENT
+                RecyclerView.LayoutParams.MATCH_PARENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT
             )
             view.layoutParams = layoutParams
             return SettingsThemeViewHolder(view)
         }
 
         override fun onBindViewHolder(
-                model: Any, titleViewHolder: SettingsThemeViewHolder, list: List<Any>
+            model: Any,
+            titleViewHolder: SettingsThemeViewHolder,
+            list: List<Any>
         ) {
         }
     }
 
     private class SettingsThemeViewHolder(
-            view: View
+        view: View
     ) : RecyclerView.ViewHolder(view)
     //endregion SettingsTheme
 
@@ -70,19 +70,17 @@ class SettingsAdapter(
     class SettingsSearchEngine
 
     private class SettingsSearchEngineAdapterDelegate(
-            private val activityContainer: InAppManager.ActivityContainer
+        private val activityContainer: InAppManager.ActivityContainer
     ) : AbsListItemAdapterDelegate<Any, Any, SettingsSearchEngineViewHolder>() {
 
-        override fun isForViewType(o: Any, list: List<Any>, i: Int): Boolean {
-            return o is SettingsSearchEngine
-        }
+        override fun isForViewType(o: Any, list: List<Any>, i: Int) = o is SettingsSearchEngine
 
         override fun onCreateViewHolder(viewGroup: ViewGroup): SettingsSearchEngineViewHolder {
             val context = viewGroup.context
             val view = SettingsSearchEngineView(context)
             val layoutParams = RecyclerView.LayoutParams(
-                    RecyclerView.LayoutParams.MATCH_PARENT,
-                    RecyclerView.LayoutParams.WRAP_CONTENT
+                RecyclerView.LayoutParams.MATCH_PARENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT
             )
             view.setActivityContainer(activityContainer)
             view.layoutParams = layoutParams
@@ -90,13 +88,15 @@ class SettingsAdapter(
         }
 
         override fun onBindViewHolder(
-                model: Any, titleViewHolder: SettingsSearchEngineViewHolder, list: List<Any>
+            model: Any,
+            titleViewHolder: SettingsSearchEngineViewHolder,
+            list: List<Any>
         ) {
         }
     }
 
     private class SettingsSearchEngineViewHolder(
-            view: View
+        view: View
     ) : RecyclerView.ViewHolder(view)
     //endregion SettingsSearchEngine
 
@@ -104,19 +104,17 @@ class SettingsAdapter(
     class SettingsAdBlocker
 
     private class SettingsAdBlockerAdapterDelegate(
-            private val activityContainer: InAppManager.ActivityContainer
+        private val activityContainer: InAppManager.ActivityContainer
     ) : AbsListItemAdapterDelegate<Any, Any, SettingsAdBlockerViewHolder>() {
 
-        override fun isForViewType(o: Any, list: List<Any>, i: Int): Boolean {
-            return o is SettingsAdBlocker
-        }
+        override fun isForViewType(o: Any, list: List<Any>, i: Int) = o is SettingsAdBlocker
 
         override fun onCreateViewHolder(viewGroup: ViewGroup): SettingsAdBlockerViewHolder {
             val context = viewGroup.context
             val view = SettingsAdBlockerView(context)
             val layoutParams = RecyclerView.LayoutParams(
-                    RecyclerView.LayoutParams.MATCH_PARENT,
-                    RecyclerView.LayoutParams.WRAP_CONTENT
+                RecyclerView.LayoutParams.MATCH_PARENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT
             )
             view.setActivityContainer(activityContainer)
             view.layoutParams = layoutParams
@@ -124,13 +122,15 @@ class SettingsAdapter(
         }
 
         override fun onBindViewHolder(
-                model: Any, titleViewHolder: SettingsAdBlockerViewHolder, list: List<Any>
+            model: Any,
+            titleViewHolder: SettingsAdBlockerViewHolder,
+            list: List<Any>
         ) {
         }
     }
 
     private class SettingsAdBlockerViewHolder(
-            view: View
+        view: View
     ) : RecyclerView.ViewHolder(view)
     //endregion SettingsAdBlocker
 
@@ -138,32 +138,31 @@ class SettingsAdapter(
     class SettingsAbout
 
     private class SettingsAboutAdapterDelegate :
-            AbsListItemAdapterDelegate<Any, Any, SettingsAboutViewHolder>() {
+        AbsListItemAdapterDelegate<Any, Any, SettingsAboutViewHolder>() {
 
-        override fun isForViewType(o: Any, list: List<Any>, i: Int): Boolean {
-            return o is SettingsAbout
-        }
+        override fun isForViewType(o: Any, list: List<Any>, i: Int) = o is SettingsAbout
 
         override fun onCreateViewHolder(viewGroup: ViewGroup): SettingsAboutViewHolder {
             val context = viewGroup.context
             val view = SettingsAboutView(context)
             val layoutParams = RecyclerView.LayoutParams(
-                    RecyclerView.LayoutParams.MATCH_PARENT,
-                    RecyclerView.LayoutParams.WRAP_CONTENT
+                RecyclerView.LayoutParams.MATCH_PARENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT
             )
             view.layoutParams = layoutParams
             return SettingsAboutViewHolder(view)
         }
 
         override fun onBindViewHolder(
-                model: Any, titleViewHolder: SettingsAboutViewHolder, list: List<Any>
+            model: Any,
+            titleViewHolder: SettingsAboutViewHolder,
+            list: List<Any>
         ) {
         }
     }
 
     private class SettingsAboutViewHolder(
-            view: View
+        view: View
     ) : RecyclerView.ViewHolder(view)
     //endregion SettingsAbout
-
 }

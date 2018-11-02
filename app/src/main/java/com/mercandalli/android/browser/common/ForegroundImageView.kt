@@ -15,16 +15,17 @@ import com.mercandalli.android.browser.R
  * https://gist.github.com/JakeWharton/0a251d67649305d84e8a
  */
 class ForegroundImageView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null
+    context: Context,
+    attrs: AttributeSet? = null
 ) : AppCompatImageView(context, attrs) {
 
     private var innerForeground: Drawable? = null
 
     init {
         val typedArray = context.obtainStyledAttributes(attrs,
-                R.styleable.ForegroundImageView)
+            R.styleable.ForegroundImageView)
         val foreground = typedArray
-                .getDrawable(R.styleable.ForegroundImageView_android_foreground)
+            .getDrawable(R.styleable.ForegroundImageView_android_foreground)
         if (foreground != null) {
             setForeground(foreground)
         }
@@ -110,4 +111,3 @@ class ForegroundImageView @JvmOverloads constructor(
         invalidate()
     }
 }
-

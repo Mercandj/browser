@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.on_boarding
 
 import com.android.billingclient.api.BillingClient
@@ -10,14 +13,14 @@ import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 
 internal class OnBoardingPresenter(
-        private val screen: OnBoardingContract.Screen,
-        private val analyticsManager: AnalyticsManager,
-        private val floatingManager: FloatingManager,
-        private val inAppManager: InAppManager,
-        private val monetizationManager: MonetizationManager,
-        private val onBoardingRepository: OnBoardingRepository,
-        private val themeManager: ThemeManager,
-        private val addOn: AddOn
+    private val screen: OnBoardingContract.Screen,
+    private val analyticsManager: AnalyticsManager,
+    private val floatingManager: FloatingManager,
+    private val inAppManager: InAppManager,
+    private val monetizationManager: MonetizationManager,
+    private val onBoardingRepository: OnBoardingRepository,
+    private val themeManager: ThemeManager,
+    private val addOn: AddOn
 ) : OnBoardingContract.UserAction {
 
     private val monetizationEnabledListener = createMonetizationEnabledListener()
@@ -58,9 +61,9 @@ internal class OnBoardingPresenter(
         inAppManager.registerListener(inAppManagerListener)
         val subscriptionFullVersionSku = addOn.getSubscriptionFullVersionSku()
         inAppManager.purchase(
-                activityContainer,
-                subscriptionFullVersionSku,
-                BillingClient.SkuType.SUBS
+            activityContainer,
+            subscriptionFullVersionSku,
+            BillingClient.SkuType.SUBS
         )
     }
 
@@ -81,15 +84,15 @@ internal class OnBoardingPresenter(
             inAppManager.registerListener(inAppManagerListener)
             val subscriptionFullVersionSku = addOn.getSubscriptionFullVersionSku()
             inAppManager.purchase(
-                    activityContainer,
-                    subscriptionFullVersionSku,
-                    BillingClient.SkuType.SUBS
+                activityContainer,
+                subscriptionFullVersionSku,
+                BillingClient.SkuType.SUBS
             )
         }
     }
 
     private fun syncScreen(
-            onBoardingStorePageAvailable: Boolean = monetizationManager.isOnBoardingStorePageAvailable()
+        onBoardingStorePageAvailable: Boolean = monetizationManager.isOnBoardingStorePageAvailable()
     ) {
         if (onBoardingStorePageAvailable) {
             screen.enableStorePage()

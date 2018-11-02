@@ -7,8 +7,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class UpdateManagerImpl(
-        private val sharedPreferences: SharedPreferences,
-        private val versionManager: VersionManager
+    private val sharedPreferences: SharedPreferences,
+    private val versionManager: VersionManager
 ) : UpdateManager {
 
     private val lastVersionName: String by lazy { sharedPreferences.getString(KEY_LAST_VERSION_NAME, "1.00.00") }

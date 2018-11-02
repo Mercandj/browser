@@ -8,9 +8,9 @@ import com.mercandalli.android.browser.on_boarding.OnBoardingActivity
 import com.mercandalli.android.browser.on_boarding.OnBoardingModule
 
 class MonetizationGraph(
-        private val context: Context,
-        private val monetizationLog: MonetizationLog,
-        private val activityAction: ActivityAction
+    private val context: Context,
+    private val monetizationLog: MonetizationLog,
+    private val activityAction: ActivityAction
 ) {
 
     private val inAppModule by lazy { InAppModule(context) }
@@ -31,15 +31,15 @@ class MonetizationGraph(
 
         @JvmStatic
         fun init(
-                context: Context,
-                monetizationLog: MonetizationLog,
-                activityAction: ActivityAction
+            context: Context,
+            monetizationLog: MonetizationLog,
+            activityAction: ActivityAction
         ) {
             if (graph == null) {
                 graph = MonetizationGraph(
-                        context.applicationContext,
-                        monetizationLog,
-                        activityAction
+                    context.applicationContext,
+                    monetizationLog,
+                    activityAction
                 )
             }
         }

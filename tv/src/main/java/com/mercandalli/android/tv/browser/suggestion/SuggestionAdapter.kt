@@ -9,7 +9,7 @@ import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 
 class SuggestionAdapter(
-        listener: SuggestionClickListener
+    listener: SuggestionClickListener
 ) : ListDelegationAdapter<List<Any>>() {
 
     init {
@@ -23,7 +23,7 @@ class SuggestionAdapter(
 
     //region Suggestion
     private class SuggestionAdapterDelegate(
-            private val listener: SuggestionClickListener
+        private val listener: SuggestionClickListener
     ) : AbsListItemAdapterDelegate<Any, Any, SuggestionViewHolder>() {
 
         override fun isForViewType(o: Any, list: List<Any>, i: Int): Boolean {
@@ -34,23 +34,25 @@ class SuggestionAdapter(
             val context = viewGroup.context
             val textView = SuggestionView(context)
             val layoutParams = RecyclerView.LayoutParams(
-                    RecyclerView.LayoutParams.MATCH_PARENT,
-                    RecyclerView.LayoutParams.WRAP_CONTENT
+                RecyclerView.LayoutParams.MATCH_PARENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT
             )
             textView.layoutParams = layoutParams
             return SuggestionViewHolder(textView, listener)
         }
 
         override fun onBindViewHolder(
-                model: Any, titleViewHolder: SuggestionViewHolder, list: List<Any>
+            model: Any,
+            titleViewHolder: SuggestionViewHolder,
+            list: List<Any>
         ) {
             titleViewHolder.bind(model as String)
         }
     }
 
     private class SuggestionViewHolder(
-            private val view: SuggestionView,
-            private val listener: SuggestionClickListener
+        private val view: SuggestionView,
+        private val listener: SuggestionClickListener
     ) : RecyclerView.ViewHolder(view) {
 
         private var suggestion: String? = null

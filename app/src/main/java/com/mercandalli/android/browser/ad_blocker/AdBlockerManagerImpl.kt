@@ -1,11 +1,14 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.ad_blocker
 
 import android.content.SharedPreferences
 import com.mercandalli.android.browser.product.ProductManager
 
 class AdBlockerManagerImpl(
-        private val sharedPreferences: SharedPreferences,
-        private val productManager: ProductManager
+    private val sharedPreferences: SharedPreferences,
+    private val productManager: ProductManager
 ) : AdBlockerManager {
 
     private var enabled = false

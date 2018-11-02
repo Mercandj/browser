@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.on_boarding
 
 import android.content.Context
@@ -26,9 +29,11 @@ import com.mercandalli.android.browser.R
  * others are only stroked.
  */
 class OnBoardingPageIndicatorView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr),
-        OnBoardingPageIndicator {
+    OnBoardingPageIndicator {
 
     private var radiusInternal: Float = 0F
     private val paintPageFill = Paint(ANTI_ALIAS_FLAG)
@@ -210,7 +215,7 @@ class OnBoardingPageIndicatorView @JvmOverloads constructor(
             pageFillRadius -= mPaintStroke.strokeWidth / 2.0f
         }
 
-        //Draw stroked circles
+        // Draw stroked circles
         for (iLoop in 0 until count) {
             val drawLong = longOffset + iLoop * fiveRadius
             if (mOrientation == HORIZONTAL) {
@@ -410,14 +415,14 @@ class OnBoardingPageIndicatorView @JvmOverloads constructor(
         val specSize = View.MeasureSpec.getSize(measureSpec)
 
         if (specMode == View.MeasureSpec.EXACTLY || viewPager == null) {
-            //We were told how big to be
+            // We were told how big to be
             result = specSize
         } else {
-            //Calculate the width according the views count
+            // Calculate the width according the views count
             val count = viewPager!!.adapter!!.count
-            result = (paddingLeft.toFloat() + paddingRight.toFloat()
-                    + count.toFloat() * 2f * radiusInternal + (count - 1) * radiusInternal + 1f).toInt()
-            //Respect AT_MOST value if that was what is called for by measureSpec
+            result = (paddingLeft.toFloat() + paddingRight.toFloat() +
+                count.toFloat() * 2f * radiusInternal + (count - 1) * radiusInternal + 1f).toInt()
+            // Respect AT_MOST value if that was what is called for by measureSpec
             if (specMode == View.MeasureSpec.AT_MOST) {
                 result = Math.min(result, specSize)
             }
@@ -437,12 +442,12 @@ class OnBoardingPageIndicatorView @JvmOverloads constructor(
         val specSize = View.MeasureSpec.getSize(measureSpec)
 
         if (specMode == View.MeasureSpec.EXACTLY) {
-            //We were told how big to be
+            // We were told how big to be
             result = specSize
         } else {
-            //Measure the height
+            // Measure the height
             result = (2 * radiusInternal + paddingTop.toFloat() + paddingBottom.toFloat() + 1f).toInt()
-            //Respect AT_MOST value if that was what is called for by measureSpec
+            // Respect AT_MOST value if that was what is called for by measureSpec
             if (specMode == View.MeasureSpec.AT_MOST) {
                 result = Math.min(result, specSize)
             }

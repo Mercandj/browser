@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.settings.ad_blocker
 
 import com.mercandalli.android.browser.ad_blocker.AdBlockerManager
@@ -7,10 +10,10 @@ import com.mercandalli.android.browser.theme.ThemeManager
 import com.mercandalli.android.browser.in_app.InAppManager
 
 class SettingsAdBlockerPresenter(
-        private val screen: SettingsAdBlockerContract.Screen,
-        private val themeManager: ThemeManager,
-        private val adBlockerManager: AdBlockerManager,
-        private val productManager: ProductManager
+    private val screen: SettingsAdBlockerContract.Screen,
+    private val themeManager: ThemeManager,
+    private val adBlockerManager: AdBlockerManager,
+    private val productManager: ProductManager
 ) : SettingsAdBlockerContract.UserAction {
 
     private val themeListener = createThemeListener()
@@ -44,9 +47,9 @@ class SettingsAdBlockerPresenter(
     }
 
     private fun syncRows(
-            isAdBlockAvailable: Boolean = adBlockerManager.isFeatureAvailable(),
-            isSubscribeToFullVersion: Boolean = productManager.isSubscribeToFullVersion(),
-            isEnabled: Boolean = adBlockerManager.isEnabled()
+        isAdBlockAvailable: Boolean = adBlockerManager.isFeatureAvailable(),
+        isSubscribeToFullVersion: Boolean = productManager.isSubscribeToFullVersion(),
+        isEnabled: Boolean = adBlockerManager.isEnabled()
     ) {
         if (isSubscribeToFullVersion) {
             screen.showAdBlockSection()

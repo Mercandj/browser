@@ -34,11 +34,11 @@ class UpdateManagerImplTest {
     }
 
     private fun createInstanceToTest(
-            sharedPreferences: SharedPreferences = HashMapSharedPreferences()
+        sharedPreferences: SharedPreferences = HashMapSharedPreferences()
     ): UpdateManager {
         return UpdateManagerImpl(
-                sharedPreferences,
-                versionManager
+            sharedPreferences,
+            versionManager
         )
     }
 }

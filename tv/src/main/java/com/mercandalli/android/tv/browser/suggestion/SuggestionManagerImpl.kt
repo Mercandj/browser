@@ -1,11 +1,10 @@
-package com.mercandalli.android.wear.browser.suggestion
+package com.mercandalli.android.tv.browser.suggestion
 
 import com.mercandalli.android.tv.browser.main_thread.MainThreadPost
-import com.mercandalli.android.tv.browser.suggestion.SuggestionApi
 
 internal class SuggestionManagerImpl(
-        private val suggestionApi: SuggestionApi,
-        private val mainThreadPost: MainThreadPost
+    private val suggestionApi: SuggestionApi,
+    private val mainThreadPost: MainThreadPost
 ) : SuggestionManager {
 
     private val listeners = ArrayList<SuggestionManager.SuggestionListener>()

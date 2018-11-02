@@ -5,8 +5,8 @@ import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 
 class SettingsActivityPresenter(
-        private val screen: SettingsActivityContract.Screen,
-        private val themeManager: ThemeManager
+    private val screen: SettingsActivityContract.Screen,
+    private val themeManager: ThemeManager
 ) : SettingsActivityContract.UserAction {
 
     private val themeListener = createThemeListener()

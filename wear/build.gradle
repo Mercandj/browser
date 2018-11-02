@@ -56,10 +56,16 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    // KtLint - Static code analysis
+    // https://proandroiddev.com/kotlin-static-analysis-why-and-how-a12042e34a98
+    ktlint
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.google.android.support:wearable:2.3.0'
+    implementation 'com.google.android.support:wearable:2.4.0'
     implementation 'com.google.android.gms:play-services-wearable:16.0.1'
     implementation 'androidx.percentlayout:percentlayout:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -72,5 +78,19 @@ dependencies {
     // Third party - Network
     implementation "com.squareup.okhttp3:okhttp:3.11.0"
 
-    compileOnly 'com.google.android.wearable:wearable:2.3.0'
+    compileOnly 'com.google.android.wearable:wearable:2.4.0'
+
+    // KtLint - Static code analysis
+    // https://proandroiddev.com/kotlin-static-analysis-why-and-how-a12042e34a98
+    ktlint "com.github.shyiko:ktlint:0.29.0"
+}
+
+// KtLint - Static code analysis
+// https://proandroiddev.com/kotlin-static-analysis-why-and-how-a12042e34a98
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.github.shyiko.ktlint.Main"
+    args "src/**/*.kt"
+    // args "--reporter=checkstyle, output=${buildDir}/ktlint.xml
 }

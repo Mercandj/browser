@@ -3,7 +3,6 @@ package com.mercandalli.android.browser.screenshot
 import android.app.Activity
 import android.content.Context
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import com.mercandalli.android.browser.main.MainActivity
@@ -12,7 +11,6 @@ import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy
 import tools.fastlane.screengrab.locale.LocaleTestRule
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.locale.LocaleUtils
-import org.junit.*
 import org.junit.runner.RunWith
 import android.content.Context.MODE_PRIVATE
 import android.os.SystemClock
@@ -21,17 +19,24 @@ import androidx.annotation.StringRes
 import androidx.test.InstrumentationRegistry
 import androidx.test.InstrumentationRegistry.getInstrumentation
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.action.ViewActions.typeText
 import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.browser.monetization.MonetizationGraph
 import com.mercandalli.android.browser.on_boarding.OnBoardingRepositoryImpl
 import java.io.File
-import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.filters.FlakyTest
 import androidx.test.filters.LargeTest
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiSelector
+import org.junit.BeforeClass
+import org.junit.ClassRule
+import org.junit.Rule
+import org.junit.Test
 
 @FlakyTest
 @LargeTest
@@ -40,9 +45,9 @@ class ScreenshotAndroidTest {
 
     @get:Rule
     val activityRule = ActivityTestRule(
-            MainActivity::class.java,
-            false,
-            false
+        MainActivity::class.java,
+        false,
+        false
     )
 
     @Test
@@ -108,13 +113,13 @@ class ScreenshotAndroidTest {
         for (fileName in sharedPreferencesFileNames) {
             val fileNameWithoutExt = fileName.replace(".xml", "")
             val sharedPreferences = targetContext.getSharedPreferences(
-                    fileNameWithoutExt, MODE_PRIVATE
+                fileNameWithoutExt, MODE_PRIVATE
             )
             sharedPreferences.edit().clear().commit()
         }
         targetContext.getSharedPreferences(
-                OnBoardingRepositoryImpl.PREFERENCE_NAME,
-                Context.MODE_PRIVATE
+            OnBoardingRepositoryImpl.PREFERENCE_NAME,
+            Context.MODE_PRIVATE
         ).edit().clear().commit()
         MonetizationGraph.getOnBoardingRepository().clear()
     }
@@ -165,7 +170,7 @@ class ScreenshotAndroidTest {
     private fun getCurrentActivity(): Activity {
         var activity: Activity? = null
         getInstrumentation().runOnMainSync {
-            val resumedActivity = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
+            val resumedActivity = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED)
             val it = resumedActivity.iterator()
             activity = it.next()
         }

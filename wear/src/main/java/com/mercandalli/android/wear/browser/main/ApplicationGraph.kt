@@ -8,7 +8,7 @@ import com.mercandalli.android.wear.browser.suggestion.SuggestionModule
 import com.mercandalli.android.wear.browser.theme.ThemeModule
 
 class ApplicationGraph(
-        private val context: Context
+    private val context: Context
 ) {
 
     private val mainThreadPostInternal by lazy { MainThreadModule().createMainThreadPost() }

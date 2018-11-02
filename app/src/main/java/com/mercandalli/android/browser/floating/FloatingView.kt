@@ -4,7 +4,10 @@ import android.content.Context
 import android.graphics.PointF
 import android.graphics.Rect
 import android.util.AttributeSet
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.ColorRes
@@ -15,9 +18,11 @@ import com.mercandalli.android.browser.main.MainActivity
 import com.mercandalli.android.browser.main.MainWebView
 
 class FloatingView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr),
-        FloatingContract.Screen {
+    FloatingContract.Screen {
 
     private val view = LayoutInflater.from(context).inflate(R.layout.view_floating, this)
     private val mainWebView: MainWebView = view.findViewById(R.id.view_floating_main_web_view)
@@ -216,9 +221,9 @@ class FloatingView @JvmOverloads constructor(
         val themeManager = ApplicationGraph.getThemeManager()
         val searchEngineManager = ApplicationGraph.getSearchEngineManager()
         return FloatingPresenter(
-                this,
-                themeManager,
-                searchEngineManager
+            this,
+            themeManager,
+            searchEngineManager
         )
     }
 

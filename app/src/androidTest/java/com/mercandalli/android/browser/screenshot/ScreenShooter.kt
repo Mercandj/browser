@@ -3,7 +3,7 @@ package com.mercandalli.android.browser.screenshot
 import tools.fastlane.screengrab.Screengrab
 
 class ScreenShooter(
-        private val prefixFileName: String
+    private val prefixFileName: String
 ) {
     private var index = 1
 

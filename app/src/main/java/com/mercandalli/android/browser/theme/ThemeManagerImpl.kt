@@ -3,7 +3,7 @@ package com.mercandalli.android.browser.theme
 import android.content.SharedPreferences
 
 internal class ThemeManagerImpl(
-        private val sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences
 ) : ThemeManager {
 
     private val lightTheme: Theme = LightTheme()

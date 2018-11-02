@@ -1,8 +1,8 @@
 package com.mercandalli.android.browser.dialog
 
 internal class DialogPresenter(
-        private val screen: DialogContract.Screen,
-        private val dialogManager: DialogManager
+    private val screen: DialogContract.Screen,
+    private val dialogManager: DialogManager
 ) : DialogContract.UserAction {
 
     private lateinit var dialogInput: DialogActivity.DialogInput
@@ -24,20 +24,20 @@ internal class DialogPresenter(
     override fun onPositiveClicked(input: String) {
         screen.quit()
         dialogManager.onDialogPositiveClicked(
-                DialogManager.DialogAction(
-                        dialogInput.dialogId,
-                        input
-                )
+            DialogManager.DialogAction(
+                dialogInput.dialogId,
+                input
+            )
         )
     }
 
     override fun onNegativeClicked(input: String) {
         screen.quit()
         dialogManager.onDialogNegativeClicked(
-                DialogManager.DialogAction(
-                        dialogInput.dialogId,
-                        input
-                )
+            DialogManager.DialogAction(
+                dialogInput.dialogId,
+                input
+            )
         )
     }
 }

@@ -53,15 +53,13 @@ class HashMapSharedPreferences : SharedPreferences {
     }
 
     override fun registerOnSharedPreferenceChangeListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
-
     }
 
     override fun unregisterOnSharedPreferenceChangeListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
-
     }
 
     private class MapEditor constructor(
-            private val map: MutableMap<String, Any>
+        private val map: MutableMap<String, Any>
     ) : SharedPreferences.Editor {
 
         override fun putString(key: String, value: String?): SharedPreferences.Editor {
@@ -109,7 +107,6 @@ class HashMapSharedPreferences : SharedPreferences {
         }
 
         override fun apply() {
-
         }
     }
 

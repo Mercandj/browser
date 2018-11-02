@@ -10,7 +10,9 @@ import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.in_app.InAppManager
 
 class SettingsView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val view = LayoutInflater.from(context).inflate(R.layout.view_settings, this)

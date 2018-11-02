@@ -14,9 +14,11 @@ import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
 
 class SettingsThemeView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr),
-        SettingsThemeContract.Screen {
+    SettingsThemeContract.Screen {
 
     private val view = LayoutInflater.from(context).inflate(R.layout.view_settings_theme, this)
 
@@ -82,8 +84,8 @@ class SettingsThemeView @JvmOverloads constructor(
     } else {
         val themeManager = ApplicationGraph.getThemeManager()
         SettingsThemePresenter(
-                this,
-                themeManager
+            this,
+            themeManager
         )
     }
 }

@@ -1,9 +1,12 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.on_boarding
 
 import android.content.SharedPreferences
 
 class OnBoardingRepositoryImpl(
-        private val sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences
 ) : OnBoardingRepository {
 
     private var onBoardingEnded = false

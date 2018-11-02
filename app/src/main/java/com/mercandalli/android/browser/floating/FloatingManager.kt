@@ -7,8 +7,8 @@ interface FloatingManager {
     fun stop()
 
     class Configuration private constructor(
-            val url: String,
-            val fullscreenButtonVisible: Boolean
+        val url: String,
+        val fullscreenButtonVisible: Boolean
     ) {
 
         companion object {
@@ -28,8 +28,8 @@ interface FloatingManager {
 
             fun build(url: String): Configuration {
                 return Configuration(
-                        url,
-                        fullscreenButtonVisible
+                    url,
+                    fullscreenButtonVisible
                 )
             }
         }

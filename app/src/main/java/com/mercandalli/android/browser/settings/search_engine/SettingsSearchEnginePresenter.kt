@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.settings.search_engine
 
 import com.mercandalli.android.browser.product.ProductManager
@@ -8,10 +11,10 @@ import com.mercandalli.android.browser.theme.ThemeManager
 import com.mercandalli.android.browser.in_app.InAppManager
 
 class SettingsSearchEnginePresenter(
-        private val screen: SettingsSearchEngineContract.Screen,
-        private val themeManager: ThemeManager,
-        private val productManager: ProductManager,
-        private val searchEngineManager: SearchEngineManager
+    private val screen: SettingsSearchEngineContract.Screen,
+    private val themeManager: ThemeManager,
+    private val productManager: ProductManager,
+    private val searchEngineManager: SearchEngineManager
 ) : SettingsSearchEngineContract.UserAction {
 
     private val themeListener = createThemeListener()
@@ -53,8 +56,8 @@ class SettingsSearchEnginePresenter(
     }
 
     private fun syncRows(
-            isSearchEngineAvailable: Boolean = searchEngineManager.isFeatureAvailable(),
-            isSubscribeToFullVersion: Boolean = productManager.isSubscribeToFullVersion()
+        isSearchEngineAvailable: Boolean = searchEngineManager.isFeatureAvailable(),
+        isSubscribeToFullVersion: Boolean = productManager.isSubscribeToFullVersion()
     ) {
         if (isSubscribeToFullVersion) {
             screen.showSearchEngineSection()

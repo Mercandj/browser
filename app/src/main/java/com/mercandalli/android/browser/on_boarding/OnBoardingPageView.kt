@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.on_boarding
 
 import android.content.Context
@@ -17,9 +20,11 @@ import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.browser.main.MainWebView
 
 class OnBoardingPageView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr),
-        OnBoardingPageContract.Screen {
+    OnBoardingPageContract.Screen {
 
     private var card: CardView? = null
     private var title: TextView? = null
@@ -150,11 +155,11 @@ class OnBoardingPageView @JvmOverloads constructor(
         val floatingManager = ApplicationGraph.getFloatingManager()
         val analyticsManager = ApplicationGraph.getAnalyticsManager()
         return OnBoardingPagePresenter(
-                this,
-                themeManager,
-                networkManager,
-                floatingManager,
-                analyticsManager
+            this,
+            themeManager,
+            networkManager,
+            floatingManager,
+            analyticsManager
         )
     }
 }

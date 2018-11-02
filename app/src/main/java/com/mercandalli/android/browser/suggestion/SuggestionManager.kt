@@ -3,7 +3,7 @@ package com.mercandalli.android.browser.suggestion
 interface SuggestionManager {
 
     fun getSuggestion(
-            searchInput: String
+        searchInput: String
     )
 
     fun registerSuggestionListener(listener: SuggestionListener)

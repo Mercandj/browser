@@ -10,8 +10,8 @@ class HashManagerImpl : HashManager {
     private val charsetIso88591 by lazy { charset("iso-8859-1") }
 
     override fun sha256(
-            text: String,
-            time: Int
+        text: String,
+        time: Int
     ): String? {
         var result: String? = text
         val messageDigest: MessageDigest
@@ -28,8 +28,8 @@ class HashManagerImpl : HashManager {
     }
 
     private fun hash(
-            messageDigest: MessageDigest,
-            text: String?
+        messageDigest: MessageDigest,
+        text: String?
     ): String? {
         if (text == null) {
             return null

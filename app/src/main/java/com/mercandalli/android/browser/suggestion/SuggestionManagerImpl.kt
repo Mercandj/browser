@@ -3,8 +3,8 @@ package com.mercandalli.android.browser.suggestion
 import com.mercandalli.android.browser.main_thread.MainThreadPost
 
 internal class SuggestionManagerImpl(
-        private val suggestionApi: SuggestionApi,
-        private val mainThreadPost: MainThreadPost
+    private val suggestionApi: SuggestionApi,
+    private val mainThreadPost: MainThreadPost
 ) : SuggestionManager {
 
     private val listeners = ArrayList<SuggestionManager.SuggestionListener>()

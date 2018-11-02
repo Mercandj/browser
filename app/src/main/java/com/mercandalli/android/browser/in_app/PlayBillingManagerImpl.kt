@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.in_app
 
 import android.app.Activity
@@ -12,8 +15,8 @@ import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.SkuDetailsParams
 import com.android.billingclient.api.SkuDetailsResponseListener
 
-/* package */ internal class PlayBillingManagerImpl(
-       private val context: Context
+internal class PlayBillingManagerImpl(
+    private val context: Context
 ) : PlayBillingManager {
 
     /**
@@ -28,9 +31,7 @@ import com.android.billingclient.api.SkuDetailsResponseListener
 
     private var listener: PlayBillingManager.Listener? = null
 
-
     private val purchasesUpdatedListener: PurchasesUpdatedListener
-
     private val consumeResponseListener: ConsumeResponseListener
 
     init {
@@ -41,8 +42,8 @@ import com.android.billingclient.api.SkuDetailsResponseListener
 
     override fun setUpPlayBilling() {
         billingClient = BillingClient.newBuilder(context)
-                .setListener(purchasesUpdatedListener)
-                .build()
+            .setListener(purchasesUpdatedListener)
+            .build()
     }
 
     override fun release() {
@@ -66,8 +67,9 @@ import com.android.billingclient.api.SkuDetailsResponseListener
     }
 
     override fun querySkuDetailsAsync(
-            build: SkuDetailsParams,
-            skuDetailsResponseListener: SkuDetailsResponseListener) {
+        build: SkuDetailsParams,
+        skuDetailsResponseListener: SkuDetailsResponseListener
+    ) {
         checkBillingClientSetUp()
         billingClient!!.querySkuDetailsAsync(build, skuDetailsResponseListener)
     }
@@ -90,7 +92,8 @@ import com.android.billingclient.api.SkuDetailsResponseListener
         checkBillingClientSetUp()
         billingClient!!.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(
-                    @BillingClient.BillingResponse billingResponseCode: Int) {
+                @BillingClient.BillingResponse billingResponseCode: Int
+            ) {
                 if (billingResponseCode == BillingClient.BillingResponse.OK) {
                     isServiceConnected = true
                     executeOnSuccess?.run()
@@ -110,7 +113,7 @@ import com.android.billingclient.api.SkuDetailsResponseListener
     private fun checkBillingClientSetUp() {
         if (billingClient == null) {
             throw IllegalStateException(
-                    "You should set up PlayBillingManager before calling this method")
+                "You should set up PlayBillingManager before calling this method")
         }
     }
 
@@ -125,16 +128,13 @@ import com.android.billingclient.api.SkuDetailsResponseListener
         }
     }
 
-    private fun createPurchaseUpdatedListener(): PurchasesUpdatedListener {
-        return PurchasesUpdatedListener { responseCode, purchases ->
-            if (listener == null) {
-                return@PurchasesUpdatedListener
-            }
+    private fun createPurchaseUpdatedListener() = PurchasesUpdatedListener { responseCode, purchases ->
+        if (listener == null) {
+            return@PurchasesUpdatedListener
+        }
 
-            if (responseCode == BillingClient.BillingResponse.OK) {
-                listener!!.onPurchasesUpdated(purchases)
-            }
+        if (responseCode == BillingClient.BillingResponse.OK) {
+            listener!!.onPurchasesUpdated(purchases)
         }
     }
 }
-

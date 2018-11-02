@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.main_thread
 
 import android.os.Handler
@@ -8,8 +11,8 @@ class MainThreadModule {
     fun createMainThreadPost(): MainThreadPost {
         val mainLooper = Looper.getMainLooper()
         return MainThreadPostImpl(
-                mainLooper.thread,
-                Handler(mainLooper)
+            mainLooper.thread,
+            Handler(mainLooper)
         )
     }
 }

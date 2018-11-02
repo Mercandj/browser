@@ -5,7 +5,7 @@ import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
 class NetworkModule(
-        private val context: Context
+    private val context: Context
 ) {
 
     private val okHttpClient = lazy {

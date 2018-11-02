@@ -6,9 +6,9 @@ import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 
 class FloatingPresenter(
-        private val screen: FloatingContract.Screen,
-        private val themeManager: ThemeManager,
-        private val searchEngineManager: SearchEngineManager
+    private val screen: FloatingContract.Screen,
+    private val themeManager: ThemeManager,
+    private val searchEngineManager: SearchEngineManager
 ) : FloatingContract.UserAction {
 
     private val themeListener = createThemeListener()

@@ -5,7 +5,7 @@ import androidx.annotation.RequiresApi
 import com.mercandalli.android.browser.BuildConfig
 
 class VersionManagerImpl(
-        private val delegate: Delegate
+    private val delegate: Delegate
 ) : VersionManager {
 
     private lateinit var packageInfo: PackageInfo

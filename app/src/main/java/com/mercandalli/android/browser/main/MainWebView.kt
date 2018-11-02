@@ -8,13 +8,24 @@ import android.util.Base64
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.webkit.*
+import android.webkit.WebStorage
+import android.webkit.CookieManager
+import android.webkit.CookieSyncManager
+import android.webkit.WebView
+import android.webkit.WebChromeClient
+import android.webkit.ConsoleMessage
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebViewClient
+import android.webkit.WebResourceResponse
 import com.mercandalli.android.browser.ad_blocker.AdBlocker
 import androidx.annotation.AttrRes
 import com.mercandalli.android.browser.R
 
 class MainWebView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : WebView(context, attrs, defStyleAttr) {
 
     private val googleDarkThemeOnlyCss by lazy(LazyThreadSafetyMode.NONE) {
@@ -195,29 +206,29 @@ class MainWebView @JvmOverloads constructor(
 
     private fun loadCss(cssContent: String) {
         loadUrl("javascript:(function() {" +
-                "var parent = document.getElementsByTagName('head').item(0);" +
-                "var style = document.createElement('style');" +
-                "style.type = 'text/css';" +
-                "style.innerHTML = window.atob('" + cssContent + "');" +
-                "parent.appendChild(style)" +
-                "})()"
+            "var parent = document.getElementsByTagName('head').item(0);" +
+            "var style = document.createElement('style');" +
+            "style.type = 'text/css';" +
+            "style.innerHTML = window.atob('" + cssContent + "');" +
+            "parent.appendChild(style)" +
+            "})()"
         )
     }
 
     private fun extractAttributes(
-            context: Context,
-            attrs: AttributeSet?,
-            @AttrRes defStyleAttr: Int
+        context: Context,
+        attrs: AttributeSet?,
+        @AttrRes defStyleAttr: Int
     ): Attributes {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.MainWebView, defStyleAttr, 0)
         val sourceUrl = typedArray.getString(R.styleable.MainWebView_src_url)
         typedArray.recycle()
         return Attributes(
-                sourceUrl
+            sourceUrl
         )
     }
 
     private inner class Attributes internal constructor(
-            internal val sourceUrl: String?
+        internal val sourceUrl: String?
     )
 }

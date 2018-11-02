@@ -17,7 +17,7 @@ import android.text.method.ScrollingMovementMethod
 import androidx.annotation.StringDef
 
 class DialogActivity : AppCompatActivity(),
-        DialogContract.Screen {
+    DialogContract.Screen {
 
     private val input by bind<EditText>(R.id.activity_dialog_input)
     private val message by bind<TextView>(R.id.activity_dialog_message)
@@ -84,25 +84,25 @@ class DialogActivity : AppCompatActivity(),
     private fun createUserAction(): DialogContract.UserAction {
         val dialogManager = ApplicationGraph.getDialogManager()
         return DialogPresenter(
-                this,
-                dialogManager
+            this,
+            dialogManager
         )
     }
 
     data class DialogInput(
-            val dialogId: String,
-            val title: String,
-            val message: String,
-            val positive: String,
-            val negative: String,
-            @DialogType
-            val type: String
+        val dialogId: String,
+        val title: String,
+        val message: String,
+        val positive: String,
+        val negative: String,
+        @DialogType
+        val type: String
     ) {
         companion object {
 
             @StringDef(
-                    DIALOG_TYPE_ALERT,
-                    DIALOG_TYPE_PROMPT
+                DIALOG_TYPE_ALERT,
+                DIALOG_TYPE_PROMPT
             )
             @Retention(AnnotationRetention.SOURCE)
             annotation class DialogType
@@ -130,15 +130,14 @@ class DialogActivity : AppCompatActivity(),
                 val negative = json.getString("negative")
                 val type = json.getString("type")
                 return DialogInput(
-                        dialogId,
-                        title,
-                        message,
-                        positive,
-                        negative,
-                        type
+                    dialogId,
+                    title,
+                    message,
+                    positive,
+                    negative,
+                    type
                 )
             }
-
         }
     }
 

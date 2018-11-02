@@ -100,6 +100,12 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
+configurations {
+    // KtLint - Static code analysis
+    // https://proandroiddev.com/kotlin-static-analysis-why-and-how-a12042e34a98
+    ktlint
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -134,6 +140,10 @@ dependencies {
     // InApp
     implementation 'com.android.billingclient:billing:1.2'
 
+    // KtLint - Static code analysis
+    // https://proandroiddev.com/kotlin-static-analysis-why-and-how-a12042e34a98
+    ktlint "com.github.shyiko:ktlint:0.29.0"
+
     // Testing-only dependencies
     androidTestImplementation "androidx.annotation:annotation:1.0.0"
     androidTestImplementation 'androidx.test:runner:1.1.0'
@@ -157,6 +167,16 @@ dependencies {
 task publish(type: Exec) {
     group "play-store"
     commandLine "sh", "../config/play-store/publish.sh"
+}
+
+// KtLint - Static code analysis
+// https://proandroiddev.com/kotlin-static-analysis-why-and-how-a12042e34a98
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.github.shyiko.ktlint.Main"
+    args "src/**/*.kt"
+    // args "--reporter=checkstyle, output=${buildDir}/ktlint.xml
 }
 
 apply plugin: 'com.google.gms.google-services'

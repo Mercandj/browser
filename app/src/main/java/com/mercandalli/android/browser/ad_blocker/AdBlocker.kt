@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.ad_blocker
 
 import android.content.Context
@@ -6,10 +9,8 @@ import android.text.TextUtils
 import android.util.Log
 import android.webkit.WebResourceResponse
 
-import java.io.BufferedReader
 import java.io.ByteArrayInputStream
 import java.io.IOException
-import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.MalformedURLException
 import java.util.HashSet
@@ -57,9 +58,9 @@ object AdBlocker {
     }
 
     fun createEmptyResource() = WebResourceResponse(
-            "text/plain",
-            "utf-8",
-            ByteArrayInputStream("".toByteArray())
+        "text/plain",
+        "utf-8",
+        ByteArrayInputStream("".toByteArray())
     )
 
     private fun isAdHost(host: String): Boolean {

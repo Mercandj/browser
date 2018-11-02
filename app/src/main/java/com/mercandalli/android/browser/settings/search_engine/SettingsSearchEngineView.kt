@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.settings.search_engine
 
 import android.content.Context
@@ -15,9 +18,11 @@ import com.mercandalli.android.browser.search_engine.SearchEngine
 import com.mercandalli.android.browser.in_app.InAppManager
 
 class SettingsSearchEngineView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr),
-        SettingsSearchEngineContract.Screen {
+    SettingsSearchEngineContract.Screen {
 
     private val view = LayoutInflater.from(context).inflate(R.layout.view_settings_search_engine, this)
 
@@ -128,10 +133,10 @@ class SettingsSearchEngineView @JvmOverloads constructor(
         val productManager = ApplicationGraph.getProductManager()
         val searchEngineManager = ApplicationGraph.getSearchEngineManager()
         SettingsSearchEnginePresenter(
-                this,
-                themeManager,
-                productManager,
-                searchEngineManager
+            this,
+            themeManager,
+            productManager,
+            searchEngineManager
         )
     }
 }

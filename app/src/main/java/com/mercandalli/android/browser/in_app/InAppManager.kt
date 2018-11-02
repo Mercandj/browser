@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.in_app
 
 import android.app.Activity
@@ -9,15 +12,15 @@ interface InAppManager {
     fun initialize()
 
     fun purchase(
-            activityContainer: ActivityContainer,
-            sku: String,
-            @BillingClient.SkuType skuType: String
+        activityContainer: ActivityContainer,
+        sku: String,
+        @BillingClient.SkuType skuType: String
     )
 
     fun requestSkuDetails(
-            activityContainer: ActivityContainer,
-            sku: String,
-            @BillingClient.SkuType skuType: String
+        activityContainer: ActivityContainer,
+        sku: String,
+        @BillingClient.SkuType skuType: String
     )
 
     fun isPurchased(sku: String): Boolean

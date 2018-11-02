@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.remote_config
 
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
@@ -15,12 +18,12 @@ import androidx.annotation.FloatRange
  * This class is used to get the remote configuration from firebase
  */
 internal class RemoteConfigImpl(
-        updateManager: UpdateManager,
-        private val mainThreadPost: MainThreadPost,
-        @param:FloatRange(from = 0.0, to = 1.0) @field:FloatRange(from = 0.0, to = 1.0)
-        private val randomFullVersionAvailablePercent: Float,
-        @param:FloatRange(from = 0.0, to = 1.0) @field:FloatRange(from = 0.0, to = 1.0)
-        private val randomOnBoardingStorePageAvailablePercent: Float
+    updateManager: UpdateManager,
+    private val mainThreadPost: MainThreadPost,
+    @param:FloatRange(from = 0.0, to = 1.0) @field:FloatRange(from = 0.0, to = 1.0)
+    private val randomFullVersionAvailablePercent: Float,
+    @param:FloatRange(from = 0.0, to = 1.0) @field:FloatRange(from = 0.0, to = 1.0)
+    private val randomOnBoardingStorePageAvailablePercent: Float
 ) : RemoteConfig {
 
     private val firebaseRemoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
@@ -28,8 +31,8 @@ internal class RemoteConfigImpl(
 
     init {
         val configSettings = FirebaseRemoteConfigSettings.Builder()
-                .setDeveloperModeEnabled(BuildConfig.DEBUG)
-                .build()
+            .setDeveloperModeEnabled(BuildConfig.DEBUG)
+            .build()
         firebaseRemoteConfig.setConfigSettings(configSettings)
         firebaseRemoteConfig.setDefaults(defaultMap)
         val firstLaunchAfterUpdate = updateManager.isFirstLaunchAfterUpdate()
@@ -44,16 +47,16 @@ internal class RemoteConfigImpl(
     }
 
     override fun isFullVersionAvailable() =
-            randomFullVersionAvailablePercent <=
-                    firebaseRemoteConfig.getDouble(FIREBASE_KEY_FULL_VERSION_AVAILABLE_PERCENT)
+        randomFullVersionAvailablePercent <=
+            firebaseRemoteConfig.getDouble(FIREBASE_KEY_FULL_VERSION_AVAILABLE_PERCENT)
 
     override fun isOnBoardingStoreAvailable() =
-            randomOnBoardingStorePageAvailablePercent <=
-                    firebaseRemoteConfig.getDouble(FIREBASE_KEY_ON_BOARDING_STORE_PAGE_AVAILABLE_PERCENT)
+        randomOnBoardingStorePageAvailablePercent <=
+            firebaseRemoteConfig.getDouble(FIREBASE_KEY_ON_BOARDING_STORE_PAGE_AVAILABLE_PERCENT)
 
     override fun getSubscriptionFullVersionSku() =
-            firebaseRemoteConfig.getString(FIREBASE_KEY_SUBSCRIPTION_FULL_VERSION_SKU)
-                    ?: DEFAULT_SUBSCRIPTION_FULL_VERSION_SKU
+        firebaseRemoteConfig.getString(FIREBASE_KEY_SUBSCRIPTION_FULL_VERSION_SKU)
+            ?: DEFAULT_SUBSCRIPTION_FULL_VERSION_SKU
 
     override fun registerListener(listener: RemoteConfig.Listener) {
         if (!listeners.contains(listener)) {

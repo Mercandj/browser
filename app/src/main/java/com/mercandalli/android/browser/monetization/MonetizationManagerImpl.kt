@@ -15,7 +15,7 @@ internal class MonetizationManagerImpl : MonetizationManager {
     }
 
     override fun registerMonetizationListener(
-            listener: MonetizationManager.MonetizationListener
+        listener: MonetizationManager.MonetizationListener
     ) {
         if (monetizationEnabledListeners.contains(listener)) {
             return
@@ -24,7 +24,7 @@ internal class MonetizationManagerImpl : MonetizationManager {
     }
 
     override fun unregisterMonetizationListener(
-            listener: MonetizationManager.MonetizationListener
+        listener: MonetizationManager.MonetizationListener
     ) {
         monetizationEnabledListeners.remove(listener)
     }

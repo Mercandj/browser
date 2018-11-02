@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.firebase.analytics.FirebaseAnalytics
 
 class AnalyticsModule(
-        private val context: Context
+    private val context: Context
 ) {
 
     fun createAnalyticsManager(): AnalyticsManager {
@@ -15,7 +15,7 @@ class AnalyticsModule(
             }
         }
         return AnalyticsManagerImpl(
-                addOn
+            addOn
         )
     }
 }

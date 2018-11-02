@@ -19,7 +19,7 @@ import com.mercandalli.android.browser.update.UpdateModule
 import com.mercandalli.android.browser.version.VersionModule
 
 class ApplicationGraph(
-        private val context: Context
+    private val context: Context
 ) {
 
     private val adBlockerManagerInternal by lazy { AdBlockerModule(context).createAdBlockerManager() }

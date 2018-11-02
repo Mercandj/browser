@@ -9,8 +9,8 @@ class SuggestionModule {
         val mainThreadPost = ApplicationGraph.getMainThreadPost()
         val suggestionApi = SuggestionApiImpl(okHttpClientLazy)
         return SuggestionManagerImpl(
-                suggestionApi,
-                mainThreadPost
+            suggestionApi,
+            mainThreadPost
         )
     }
 }

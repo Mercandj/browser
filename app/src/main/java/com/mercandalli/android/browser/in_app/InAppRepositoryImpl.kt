@@ -1,10 +1,13 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.in_app
 
 import android.content.SharedPreferences
 import org.json.JSONArray
 
 internal class InAppRepositoryImpl(
-        private val sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences
 ) : InAppRepository {
 
     private val purchasedSkus = HashSet<String>()

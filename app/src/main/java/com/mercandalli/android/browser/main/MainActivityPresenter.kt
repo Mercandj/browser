@@ -11,12 +11,12 @@ import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 
 internal class MainActivityPresenter(
-        private val screen: MainActivityContract.Screen,
-        private val themeManager: ThemeManager,
-        private val searchEngineManager: SearchEngineManager,
-        private val suggestionManager: SuggestionManager,
-        private val floatingManager: FloatingManager,
-        private val productManager: ProductManager
+    private val screen: MainActivityContract.Screen,
+    private val themeManager: ThemeManager,
+    private val searchEngineManager: SearchEngineManager,
+    private val suggestionManager: SuggestionManager,
+    private val floatingManager: FloatingManager,
+    private val productManager: ProductManager
 ) : MainActivityContract.UserAction {
 
     private val themeListener = createThemeListener()

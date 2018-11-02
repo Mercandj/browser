@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.WindowManager
 
 class FloatingModule(
-        private val context: Context
+    private val context: Context
 ) {
 
     private var windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -12,9 +12,9 @@ class FloatingModule(
     fun createFloatingManager(): FloatingManager {
         val floatingPermission = createFloatingPermission()
         return FloatingManagerImpl(
-                context,
-                floatingPermission,
-                windowManager
+            context,
+            floatingPermission,
+            windowManager
         )
     }
 

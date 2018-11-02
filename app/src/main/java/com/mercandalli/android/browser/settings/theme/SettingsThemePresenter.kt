@@ -4,8 +4,8 @@ import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
 
 class SettingsThemePresenter(
-        private val screen: SettingsThemeContract.Screen,
-        private val themeManager: ThemeManager
+    private val screen: SettingsThemeContract.Screen,
+    private val themeManager: ThemeManager
 ) : SettingsThemeContract.UserAction {
 
     private val themeListener = createThemeListener()
@@ -29,6 +29,7 @@ class SettingsThemePresenter(
         screen.setTextSecondaryColorRes(theme.textSecondaryColorRes)
         screen.setSectionColor(theme.cardBackgroundColorRes)
     }
+
     private fun createThemeListener() = object : ThemeManager.ThemeListener {
         override fun onThemeChanged() {
             updateTheme()

@@ -7,8 +7,8 @@ class DialogActivityTest {
     companion object {
 
         fun assertDialogInputEquals(
-                reference: DialogActivity.DialogInput,
-                toCompare: DialogActivity.DialogInput
+            reference: DialogActivity.DialogInput,
+            toCompare: DialogActivity.DialogInput
         ) {
             Assert.assertEquals(reference.dialogId, toCompare.dialogId)
             Assert.assertEquals(reference.title, toCompare.title)

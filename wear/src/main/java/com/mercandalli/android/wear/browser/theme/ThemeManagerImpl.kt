@@ -1,13 +1,9 @@
 package com.mercandalli.android.wear.browser.theme
 
 import android.content.SharedPreferences
-import com.mercandalli.android.wear.browser.theme.DarkTheme
-import com.mercandalli.android.wear.browser.theme.LightTheme
-import com.mercandalli.android.wear.browser.theme.Theme
-import com.mercandalli.android.wear.browser.theme.ThemeManager
 
 internal class ThemeManagerImpl(
-        private val sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences
 ) : ThemeManager {
 
     private val lightTheme: Theme = LightTheme()

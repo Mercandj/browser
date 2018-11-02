@@ -10,11 +10,11 @@ interface DialogManager {
      * @see [DialogManager.registerListener] and [DialogManager.unregisterListener]
      */
     fun alert(
-            dialogId: String,
-            @StringRes titleStringRes: Int,
-            @StringRes messageStringRes: Int,
-            @StringRes positiveStringRes: Int,
-            @StringRes negativeStringRes: Int
+        dialogId: String,
+        @StringRes titleStringRes: Int,
+        @StringRes messageStringRes: Int,
+        @StringRes positiveStringRes: Int,
+        @StringRes negativeStringRes: Int
     )
 
     /**
@@ -23,11 +23,11 @@ interface DialogManager {
      * @see [DialogManager.registerListener] and [DialogManager.unregisterListener]
      */
     fun prompt(
-            dialogId: String,
-            @StringRes titleStringRes: Int,
-            @StringRes messageStringRes: Int,
-            @StringRes positiveStringRes: Int,
-            @StringRes negativeStringRes: Int
+        dialogId: String,
+        @StringRes titleStringRes: Int,
+        @StringRes messageStringRes: Int,
+        @StringRes positiveStringRes: Int,
+        @StringRes negativeStringRes: Int
     )
 
     /**
@@ -50,8 +50,8 @@ interface DialogManager {
     fun unregisterListener(listener: Listener)
 
     class DialogAction(
-            val dialogId: String,
-            val userInput: String
+        val dialogId: String,
+        val userInput: String
     )
 
     interface Listener {

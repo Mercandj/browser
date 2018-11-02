@@ -11,9 +11,9 @@ import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.view.ViewUtils
 
 class FloatingManagerImpl(
-        private val context: Context,
-        private val floatingPermission: FloatingPermission,
-        private val windowManager: WindowManager
+    private val context: Context,
+    private val floatingPermission: FloatingPermission,
+    private val windowManager: WindowManager
 ) : FloatingManager {
 
     private val floatingViews = ArrayList<FloatingView>()
@@ -32,9 +32,9 @@ class FloatingManagerImpl(
         floatingView.setExpandedSize(width, height)
         floatingView.setCollapsedSize(ViewUtils.dpToPx(190F), ViewUtils.dpToPx(54F))
         val flags = WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED or
-                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
-                WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR or
-                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
+            WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR or
+            WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
         val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         } else {
@@ -42,16 +42,16 @@ class FloatingManagerImpl(
             WindowManager.LayoutParams.TYPE_PRIORITY_PHONE
         }
         val layoutParams = WindowManager.LayoutParams(
-                width.toInt(),
-                height.toInt(),
-                type,
-                flags,
-                PixelFormat.TRANSLUCENT
+            width.toInt(),
+            height.toInt(),
+            type,
+            flags,
+            PixelFormat.TRANSLUCENT
         )
         layoutParams.gravity = Gravity.TOP or Gravity.START
         windowManager.addView(
-                floatingView,
-                layoutParams
+            floatingView,
+            layoutParams
         )
         floatingViews.add(floatingView)
     }

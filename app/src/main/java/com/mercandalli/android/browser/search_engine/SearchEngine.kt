@@ -1,21 +1,24 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.search_engine
 
 import androidx.annotation.StringDef
 
 data class SearchEngine(
-        @SearchEngineKey val searchEngineKey: String,
-        val name: String,
-        val homeUrl:String
+    @SearchEngineKey val searchEngineKey: String,
+    val name: String,
+    val homeUrl: String
 ) {
 
     companion object {
 
         @StringDef(
-                SEARCH_ENGINE_GOOGLE,
-                SEARCH_ENGINE_DUCK_DUCK_GO,
-                SEARCH_ENGINE_BING,
-                SEARCH_ENGINE_YAHOO,
-                SEARCH_ENGINE_QWANT
+            SEARCH_ENGINE_GOOGLE,
+            SEARCH_ENGINE_DUCK_DUCK_GO,
+            SEARCH_ENGINE_BING,
+            SEARCH_ENGINE_YAHOO,
+            SEARCH_ENGINE_QWANT
         )
         @Retention(AnnotationRetention.SOURCE)
         annotation class SearchEngineKey

@@ -1,9 +1,9 @@
-package com.mercandalli.android.wear.browser.suggestion
+package com.mercandalli.android.tv.browser.suggestion
 
 interface SuggestionManager {
 
     fun getSuggestion(
-            searchInput: String
+        searchInput: String
     )
 
     fun registerSuggestionListener(listener: SuggestionListener)

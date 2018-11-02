@@ -8,7 +8,7 @@ import com.mercandalli.android.tv.browser.network.NetworkModule
 import com.mercandalli.android.tv.browser.theme.ThemeModule
 
 class ApplicationGraph(
-        private val context: Context
+    private val context: Context
 ) {
 
     private val mainThreadPostInternal by lazy { MainThreadModule().createMainThreadPost() }

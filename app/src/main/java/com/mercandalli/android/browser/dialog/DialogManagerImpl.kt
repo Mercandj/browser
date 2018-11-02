@@ -3,51 +3,51 @@ package com.mercandalli.android.browser.dialog
 import androidx.annotation.StringRes
 
 internal class DialogManagerImpl(
-        private val addOn: AddOn
+    private val addOn: AddOn
 ) : DialogManager {
 
     private val listeners = ArrayList<DialogManager.Listener>()
     private var unconsumedDialogActionPositiveClicked: DialogManager.DialogAction? = null
 
     override fun alert(
-            dialogId: String,
-            @StringRes titleStringRes: Int,
-            @StringRes messageStringRes: Int,
-            @StringRes positiveStringRes: Int,
-            @StringRes negativeStringRes: Int
+        dialogId: String,
+        @StringRes titleStringRes: Int,
+        @StringRes messageStringRes: Int,
+        @StringRes positiveStringRes: Int,
+        @StringRes negativeStringRes: Int
     ) {
         val title = addOn.getString(titleStringRes)
         val message = addOn.getString(messageStringRes)
         val positive = addOn.getString(positiveStringRes)
         val negative = addOn.getString(negativeStringRes)
         addOn.startDialogActivity(DialogActivity.DialogInput(
-                dialogId,
-                title,
-                message,
-                positive,
-                negative,
-                DialogActivity.DialogInput.DIALOG_TYPE_ALERT
+            dialogId,
+            title,
+            message,
+            positive,
+            negative,
+            DialogActivity.DialogInput.DIALOG_TYPE_ALERT
         ))
     }
 
     override fun prompt(
-            dialogId: String,
-            @StringRes titleStringRes: Int,
-            @StringRes messageStringRes: Int,
-            @StringRes positiveStringRes: Int,
-            @StringRes negativeStringRes: Int
+        dialogId: String,
+        @StringRes titleStringRes: Int,
+        @StringRes messageStringRes: Int,
+        @StringRes positiveStringRes: Int,
+        @StringRes negativeStringRes: Int
     ) {
         val title = addOn.getString(titleStringRes)
         val message = addOn.getString(messageStringRes)
         val positive = addOn.getString(positiveStringRes)
         val negative = addOn.getString(negativeStringRes)
         addOn.startDialogActivity(DialogActivity.DialogInput(
-                dialogId,
-                title,
-                message,
-                positive,
-                negative,
-                DialogActivity.DialogInput.DIALOG_TYPE_PROMPT
+            dialogId,
+            title,
+            message,
+            positive,
+            negative,
+            DialogActivity.DialogInput.DIALOG_TYPE_PROMPT
         ))
     }
 

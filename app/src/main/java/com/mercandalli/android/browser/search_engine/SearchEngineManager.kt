@@ -1,13 +1,16 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.search_engine
 
 interface SearchEngineManager {
 
     fun isFeatureAvailable(): Boolean
 
-    fun getHomeUrl():String
+    fun getHomeUrl(): String
 
     fun createSearchUrl(
-            searchInput: String
+        searchInput: String
     ): String
 
     @SearchEngine.Companion.SearchEngineKey
@@ -20,7 +23,7 @@ interface SearchEngineManager {
     fun getSearchEngines(): List<SearchEngine>
 
     fun createSearchVideoUrl(
-            searchInput: String
+        searchInput: String
     ): String
 
     @SearchEngineVideo.Companion.SearchEngineVideoKey

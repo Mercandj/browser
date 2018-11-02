@@ -6,8 +6,8 @@ import org.json.JSONException
 import java.lang.IllegalStateException
 
 data class Suggestions(
-        val searchInput: String,
-        val suggestions: List<String>
+    val searchInput: String,
+    val suggestions: List<String>
 ) {
 
     companion object {
@@ -18,24 +18,24 @@ data class Suggestions(
                 JSONArray(jsonStr)
             } catch (jsonException: JSONException) {
                 val illegalStateException = IllegalStateException(
-                        "jsonStr: $jsonStr",
-                        jsonException
+                    "jsonStr: $jsonStr",
+                    jsonException
                 )
                 Crashlytics.logException(illegalStateException)
                 return Suggestions(
-                        searchInput,
-                        suggestions
+                    searchInput,
+                    suggestions
                 )
             }
             val suggestionsJsonArray = json.getJSONArray(1)
             for (i in 0 until suggestionsJsonArray.length()) {
                 suggestions.add(
-                        suggestionsJsonArray.getJSONArray(i).getString(0)
+                    suggestionsJsonArray.getJSONArray(i).getString(0)
                 )
             }
             return Suggestions(
-                    json.getString(0),
-                    suggestions
+                json.getString(0),
+                suggestions
 
             )
         }

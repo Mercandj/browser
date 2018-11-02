@@ -82,6 +82,7 @@ pushd "$PROJECT_DIR"
     gradle_task "app" "clean"
     gradle_task "app" "assembleDebug"
     gradle_task "app" "check"
+    gradle_task "app" "ktlint"
 
     log_delimiter
     log_d "TV"
@@ -90,6 +91,7 @@ pushd "$PROJECT_DIR"
     gradle_task "tv" "clean"
     gradle_task "tv" "assembleDebug"
     gradle_task "tv" "check"
+    gradle_task "tv" "ktlint"
 
     log_delimiter
     log_d "WEAR"
@@ -98,5 +100,6 @@ pushd "$PROJECT_DIR"
     gradle_task "wear" "clean"
     gradle_task "wear" "assembleDebug"
     gradle_task "wear" "check"
+    gradle_task "wear" "ktlint"
 
 popd

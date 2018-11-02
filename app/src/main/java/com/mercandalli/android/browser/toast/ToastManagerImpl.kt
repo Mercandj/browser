@@ -5,8 +5,8 @@ import android.widget.Toast
 import com.mercandalli.android.browser.main_thread.MainThreadPost
 
 class ToastManagerImpl(
-        private val context: Context,
-        private val mainThreadPost: MainThreadPost
+    private val context: Context,
+    private val mainThreadPost: MainThreadPost
 ) : ToastManager {
 
     override fun toast(message: Int) {

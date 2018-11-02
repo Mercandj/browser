@@ -14,7 +14,9 @@ import com.mercandalli.android.wear.browser.theme.ThemeManager
 import com.mercandalli.android.wear.browser.R
 
 class SuggestionView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val view = LayoutInflater.from(context).inflate(R.layout.view_suggestion, this)

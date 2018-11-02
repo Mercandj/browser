@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.settings.ad_blocker
 
 import android.content.Context
@@ -15,9 +18,11 @@ import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.browser.in_app.InAppManager
 
 class SettingsAdBlockerView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr),
-        SettingsAdBlockerContract.Screen {
+    SettingsAdBlockerContract.Screen {
 
     private val view = LayoutInflater.from(context).inflate(R.layout.view_settings_ad_blocker, this)
 
@@ -128,10 +133,10 @@ class SettingsAdBlockerView @JvmOverloads constructor(
         val adBlockerManager = ApplicationGraph.getAdBlockerManager()
         val productManager = ApplicationGraph.getProductManager()
         SettingsAdBlockerPresenter(
-                this,
-                themeManager,
-                adBlockerManager,
-                productManager
+            this,
+            themeManager,
+            adBlockerManager,
+            productManager
         )
     }
 }

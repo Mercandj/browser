@@ -1,3 +1,6 @@
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
 package com.mercandalli.android.browser.on_boarding
 
 import android.content.Context
@@ -21,18 +24,20 @@ import com.mercandalli.android.browser.in_app.InAppManager
 import com.mercandalli.android.browser.main.ApplicationGraph
 
 class OnBoardingView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr),
-        OnBoardingContract.Screen {
+    OnBoardingContract.Screen {
 
     private val layoutNamesWithoutStore = listOf(
-            R.layout.view_on_boading_page_1,
-            R.layout.view_on_boading_page_2
+        R.layout.view_on_boading_page_1,
+        R.layout.view_on_boading_page_2
     )
     private val layoutNamesWithStore = listOf(
-            R.layout.view_on_boading_page_1,
-            R.layout.view_on_boading_page_2,
-            R.layout.view_on_boading_page_3
+        R.layout.view_on_boading_page_1,
+        R.layout.view_on_boading_page_2,
+        R.layout.view_on_boading_page_3
     )
     private var currentLayoutNames = layoutNamesWithoutStore
     private val view = LayoutInflater.from(context).inflate(R.layout.view_on_boarding, this)
@@ -198,7 +203,6 @@ class OnBoardingView @JvmOverloads constructor(
         }
 
         override fun onPageScrollStateChanged(state: Int) {
-
         }
     }
 
@@ -222,17 +226,17 @@ class OnBoardingView @JvmOverloads constructor(
         val themeManager = ApplicationGraph.getThemeManager()
         val addOn = object : OnBoardingPresenter.AddOn {
             override fun getSubscriptionFullVersionSku() =
-                    remoteConfig.getSubscriptionFullVersionSku()
+                remoteConfig.getSubscriptionFullVersionSku()
         }
         OnBoardingPresenter(
-                this,
-                analyticsManager,
-                floatingManager,
-                inAppManager,
-                monetizationManager,
-                onBoardingRepository,
-                themeManager,
-                addOn
+            this,
+            analyticsManager,
+            floatingManager,
+            inAppManager,
+            monetizationManager,
+            onBoardingRepository,
+            themeManager,
+            addOn
         )
     }
 

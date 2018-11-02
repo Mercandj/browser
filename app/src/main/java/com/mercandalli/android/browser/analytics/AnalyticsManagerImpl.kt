@@ -1,7 +1,7 @@
 package com.mercandalli.android.browser.analytics
 
 class AnalyticsManagerImpl(
-        private val addOn: AddOn
+    private val addOn: AddOn
 ) : AnalyticsManager {
 
     private var enabled = true
