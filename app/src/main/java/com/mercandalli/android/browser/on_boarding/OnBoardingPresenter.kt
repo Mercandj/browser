@@ -49,7 +49,7 @@ internal class OnBoardingPresenter(
         if (lastPage) {
             onBoardingRepository.markOnBoardingEnded()
             screen.closeOnBoarding()
-            screen.startFistActivity()
+            screen.startFirstActivity()
             return
         }
         val page = screen.getPage()
@@ -72,7 +72,7 @@ internal class OnBoardingPresenter(
         onBoardingRepository.markOnBoardingStorePageSkipped()
         onBoardingRepository.markOnBoardingEnded()
         screen.closeOnBoarding()
-        screen.startFistActivity()
+        screen.startFirstActivity()
         floatingManager.stop()
     }
 
@@ -142,7 +142,7 @@ internal class OnBoardingPresenter(
                 analyticsManager.sendEventOnBoardingSubscribed()
                 onBoardingRepository.markOnBoardingEnded()
                 screen.closeOnBoarding()
-                screen.startFistActivity()
+                screen.startFirstActivity()
             }
         }
     }

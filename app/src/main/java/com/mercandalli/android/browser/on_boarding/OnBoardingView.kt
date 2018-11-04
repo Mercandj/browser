@@ -127,7 +127,7 @@ class OnBoardingView @JvmOverloads constructor(
         closeOnBoardingAction!!.closeOnBoarding()
     }
 
-    override fun startFistActivity() {
+    override fun startFirstActivity() {
         MonetizationGraph.startFirstActivity()
     }
 

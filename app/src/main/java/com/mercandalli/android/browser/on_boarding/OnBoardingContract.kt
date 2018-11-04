@@ -50,7 +50,7 @@ internal interface OnBoardingContract {
 
         fun closeOnBoarding()
 
-        fun startFistActivity()
+        fun startFirstActivity()
 
         fun setTextPrimaryColorRes(@ColorRes colorRes: Int)
 
