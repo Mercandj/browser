@@ -36,7 +36,7 @@ internal class InAppManagerImpl(
         sku: String,
         @BillingClient.SkuType skuType: String
     ) {
-        playBillingManager.executeServiceRequest {
+        playBillingManager.executeServiceRequest(Runnable {
             val builder = BillingFlowParams
                 .newBuilder()
                 .setSku(sku)
@@ -44,14 +44,14 @@ internal class InAppManagerImpl(
             val responseCode = playBillingManager.launchBillingFlow(activityContainer.get(), builder.build())
             if (responseCode == BillingClient.BillingResponse.OK) {
                 monetizationLog.d(TAG, "responseCode: $responseCode")
-                return@executeServiceRequest
+                return@Runnable
             }
             if (responseCode == BillingClient.BillingResponse.ITEM_ALREADY_OWNED) {
                 monetizationLog.d(TAG, "User already owns this in-app: $sku")
             } else {
                 monetizationLog.d(TAG, "An error occurred during purchase, error code: $responseCode")
             }
-        }
+        })
     }
 
     override fun requestSkuDetails(
@@ -59,7 +59,7 @@ internal class InAppManagerImpl(
         sku: String,
         @BillingClient.SkuType skuType: String
     ) {
-        playBillingManager.executeServiceRequest {
+        playBillingManager.executeServiceRequest(Runnable {
             val subsSkuDetailsParams = SkuDetailsParams.newBuilder()
                 .setSkusList(listOf(
                     sku
@@ -76,7 +76,7 @@ internal class InAppManagerImpl(
 
             val subsPurchasesResult = playBillingManager.queryPurchases(BillingClient.SkuType.SUBS)
             subsPurchasesResult.purchasesList
-        }
+        })
     }
 
     override fun isPurchased(sku: String) = inAppRepository.isPurchased(sku)

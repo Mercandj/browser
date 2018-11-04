@@ -31,14 +31,8 @@ internal class PlayBillingManagerImpl(
 
     private var listener: PlayBillingManager.Listener? = null
 
-    private val purchasesUpdatedListener: PurchasesUpdatedListener
-    private val consumeResponseListener: ConsumeResponseListener
-
-    init {
-        purchasesUpdatedListener = createPurchaseUpdatedListener()
-        consumeResponseListener = createConsumeResponseListener()
-        isServiceConnected = false
-    }
+    private val purchasesUpdatedListener = createPurchaseUpdatedListener()
+    private val consumeResponseListener = createConsumeResponseListener()
 
     override fun setUpPlayBilling() {
         billingClient = BillingClient.newBuilder(context)
