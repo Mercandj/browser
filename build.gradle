@@ -15,9 +15,9 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0-alpha02'
+        classpath 'com.android.tools.build:gradle:3.4.0-alpha03'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.gms:google-services:4.0.1'
+        classpath 'com.google.gms:google-services:4.2.0'
 
         // Check dependencies.
         // https://github.com/ben-manes/gradle-versions-plugin
