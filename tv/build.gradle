@@ -62,14 +62,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.leanback:leanback:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
 
     // Third party - UI
     implementation 'com.hannesdorfmann:adapterdelegates4:4.0.0'
 
     // Third party - Network
-    implementation "com.squareup.okhttp3:okhttp:3.11.0"
+    implementation "com.squareup.okhttp3:okhttp:3.12.0"
 
     // KtLint - Static code analysis
     // https://proandroiddev.com/kotlin-static-analysis-why-and-how-a12042e34a98

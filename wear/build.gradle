@@ -76,7 +76,7 @@ dependencies {
     implementation 'com.hannesdorfmann:adapterdelegates4:4.0.0'
 
     // Third party - Network
-    implementation "com.squareup.okhttp3:okhttp:3.11.0"
+    implementation "com.squareup.okhttp3:okhttp:3.12.0"
 
     compileOnly 'com.google.android.wearable:wearable:2.4.0'
 

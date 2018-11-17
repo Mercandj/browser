@@ -1,7 +1,7 @@
 package com.mercandalli.android.browser.screenshot
 
 import android.os.ParcelFileDescriptor
-import androidx.test.InstrumentationRegistry.getInstrumentation
+import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
