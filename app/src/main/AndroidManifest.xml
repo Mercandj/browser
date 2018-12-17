@@ -43,10 +43,6 @@
             android:theme="@style/OnBoardingTheme" />
 
         <activity
-            android:name=".store.StoreActivity"
-            android:launchMode="singleTop" />
-
-        <activity
             android:name=".dialog.DialogActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
