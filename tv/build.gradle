@@ -69,7 +69,7 @@ dependencies {
     implementation 'com.hannesdorfmann:adapterdelegates4:4.0.0'
 
     // Third party - Network
-    implementation "com.squareup.okhttp3:okhttp:3.12.0"
+    implementation "com.squareup.okhttp3:okhttp:3.12.1"
 
     // KtLint - Static code analysis
     // https://proandroiddev.com/kotlin-static-analysis-why-and-how-a12042e34a98
