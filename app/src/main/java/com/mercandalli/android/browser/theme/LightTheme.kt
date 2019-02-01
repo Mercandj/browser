@@ -4,8 +4,8 @@ import com.mercandalli.android.browser.R
 
 class LightTheme : Theme(
     R.color.window_background_light,
-    R.color.on_boarding_window_light,
     R.color.window_settings_background_light,
+    R.color.on_boarding_window_light,
     R.color.status_bar_background_light,
     false,
     R.color.toolbar_background_light,
