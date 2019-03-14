@@ -1,4 +1,7 @@
-package com.mercandalli.android.browser.settings.about
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
+package com.mercandalli.android.browser.settings_about
 
 import android.app.Activity
 import android.content.Context

@@ -1,7 +1,7 @@
 @file:Suppress("PackageName")
 
 /* ktlint-disable package-name */
-package com.mercandalli.android.browser.settings.search_engine
+package com.mercandalli.android.browser.settings_search_engine
 
 import com.mercandalli.android.browser.product.ProductManager
 import com.mercandalli.android.browser.search_engine.SearchEngine

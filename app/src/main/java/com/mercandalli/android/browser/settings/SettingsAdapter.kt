@@ -7,10 +7,10 @@ import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.mercandalli.android.browser.in_app.InAppManager
-import com.mercandalli.android.browser.settings.about.SettingsAboutView
-import com.mercandalli.android.browser.settings.ad_blocker.SettingsAdBlockerView
-import com.mercandalli.android.browser.settings.search_engine.SettingsSearchEngineView
-import com.mercandalli.android.browser.settings.theme.SettingsThemeView
+import com.mercandalli.android.browser.settings_about.SettingsAboutView
+import com.mercandalli.android.browser.settings_ad_blocker.SettingsAdBlockerView
+import com.mercandalli.android.browser.settings_search_engine.SettingsSearchEngineView
+import com.mercandalli.android.browser.settings_theme.SettingsThemeView
 
 class SettingsAdapter(
     activityContainer: InAppManager.ActivityContainer

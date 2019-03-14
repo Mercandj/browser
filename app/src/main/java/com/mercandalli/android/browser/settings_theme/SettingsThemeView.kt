@@ -1,4 +1,7 @@
-package com.mercandalli.android.browser.settings.theme
+@file:Suppress("PackageName")
+
+/* ktlint-disable package-name */
+package com.mercandalli.android.browser.settings_theme
 
 import android.content.Context
 import android.util.AttributeSet

@@ -1,7 +1,7 @@
 @file:Suppress("PackageName")
 
 /* ktlint-disable package-name */
-package com.mercandalli.android.browser.settings.ad_blocker
+package com.mercandalli.android.browser.settings_ad_blocker
 
 import android.content.Context
 import androidx.annotation.ColorRes
