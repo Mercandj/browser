@@ -16,7 +16,7 @@ class ProductManagerImpl(
     private var isAppDeveloperEnabled: Boolean = false
 
     init {
-        purchaseManager.registerListener(createInAppListener())
+        purchaseManager.registerListener(createPurchaseManagerListener())
         isAppDeveloperEnabled = sharedPreferences.getBoolean(
             PREFERENCE_IS_APP_DEVELOPER_ENABLED,
             isAppDeveloperEnabled
@@ -78,7 +78,7 @@ class ProductManagerImpl(
         appDeveloperListeners.remove(listener)
     }
 
-    private fun createInAppListener() = object : PurchaseManager.Listener {
+    private fun createPurchaseManagerListener() = object : PurchaseManager.Listener {
 
         override fun onPurchasedChanged() {
             for (listener in listeners) {

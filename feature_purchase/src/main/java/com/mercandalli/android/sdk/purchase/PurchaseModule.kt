@@ -13,17 +13,17 @@ class PurchaseModule(
         purchaseAnalyticsManager: PurchaseAnalyticsManager? = null
     ): PurchaseManager {
         val playBillingManager = createPlayBillingManager()
-        val inAppRepository = createInAppRepository()
+        val purchaseRepository = createPurchaseRepository()
         return PurchaseManagerImpl(
             playBillingManager,
-            inAppRepository,
+            purchaseRepository,
             purchaseAnalyticsManager
         )
     }
 
     private fun createPlayBillingManager() = PlayBillingManagerImpl(context.applicationContext)
 
-    private fun createInAppRepository(): PurchaseRepository {
+    private fun createPurchaseRepository(): PurchaseRepository {
         val sharedPreferences = context.getSharedPreferences(
             PurchaseRepositoryImpl.PREFERENCE_NAME, Context.MODE_PRIVATE
         )
