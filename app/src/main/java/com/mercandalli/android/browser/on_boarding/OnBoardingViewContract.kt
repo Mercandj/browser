@@ -7,7 +7,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.IntRange
 import com.mercandalli.android.sdk.purchase.PurchaseManager
 
-internal interface OnBoardingContract {
+internal interface OnBoardingViewContract {
 
     interface UserAction {
 
@@ -61,7 +61,5 @@ internal interface OnBoardingContract {
         fun setTextSecondaryColorRes(@ColorRes colorRes: Int)
 
         fun setPageIndicatorDarkTheme(darkEnabled: Boolean)
-
-        fun setBuyButtonText(text: String)
     }
 }

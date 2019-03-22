@@ -143,7 +143,7 @@ class OnBoardingView @JvmOverloads constructor(
         }
     }
 
-    private fun createScreen() = object : OnBoardingContract.Screen {
+    private fun createScreen() = object : OnBoardingViewContract.Screen {
 
         @IntRange(from = 0)
         override fun getPage() = viewPager.currentItem
@@ -204,14 +204,10 @@ class OnBoardingView @JvmOverloads constructor(
         override fun setPageIndicatorDarkTheme(darkEnabled: Boolean) {
             indicatorOnBoarding.setDarkTheme(darkEnabled)
         }
-
-        override fun setBuyButtonText(text: String) {
-            storeBuy.text = text
-        }
     }
 
     private fun createUserAction() = if (isInEditMode) {
-        object : OnBoardingContract.UserAction {
+        object : OnBoardingViewContract.UserAction {
             override fun onAttached() {}
             override fun onDetached() {}
             override fun onPageChanged() {}
@@ -224,23 +220,25 @@ class OnBoardingView @JvmOverloads constructor(
         val screen = createScreen()
         val analyticsManager = ApplicationGraph.getAnalyticsManager()
         val floatingManager = ApplicationGraph.getFloatingManager()
-        val purchaseManager = MonetizationGraph.getPurchaseManager()
         val monetizationManager = MonetizationGraph.getMonetizationManager()
         val onBoardingRepository = MonetizationGraph.getOnBoardingRepository()
+        val purchaseManager = MonetizationGraph.getPurchaseManager()
         val remoteConfig = ApplicationGraph.getRemoteConfig()
         val themeManager = ApplicationGraph.getThemeManager()
-        val addOn = object : OnBoardingPresenter.AddOn {
+        val toastManager = ApplicationGraph.getToastManager()
+        val addOn = object : OnBoardingViewPresenter.AddOn {
             override fun getSubscriptionFullVersionSku() =
                 remoteConfig.getSubscriptionFullVersionSku()
         }
-        OnBoardingPresenter(
+        OnBoardingViewPresenter(
             screen,
             analyticsManager,
             floatingManager,
-            purchaseManager,
             monetizationManager,
             onBoardingRepository,
+            purchaseManager,
             themeManager,
+            toastManager,
             addOn
         )
     }
