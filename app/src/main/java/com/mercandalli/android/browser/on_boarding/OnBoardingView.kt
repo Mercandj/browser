@@ -26,8 +26,7 @@ class OnBoardingView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr),
-    OnBoardingContract.Screen {
+) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val layoutNamesWithoutStore = listOf(
         R.layout.view_on_boading_page_1,
@@ -45,7 +44,7 @@ class OnBoardingView @JvmOverloads constructor(
     private val storeSkip: TextView = view.findViewById(R.id.view_on_boarding_store_skip)
     private val next: TextView = view.findViewById(R.id.view_on_boarding_next)
     private val title: TextView = view.findViewById(R.id.view_on_boarding_title)
-    private val indicatorOnBoarding: OnBoardingPageIndicator = view.findViewById<OnBoardingPageIndicatorView>(R.id.view_on_boarding_indicator)
+    private val indicatorOnBoarding: OnBoardingPageIndicatorView = view.findViewById(R.id.view_on_boarding_indicator)
     private val onPageChangeListener = createOnPageChangeListener()
     private val pages = SparseArray<OnBoardingPageView>()
     private val adapter = createPagerAdapter()
@@ -84,70 +83,6 @@ class OnBoardingView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    @IntRange(from = 0)
-    override fun getPage() = viewPager.currentItem
-
-    override fun setPage(@IntRange(from = 0) page: Int) {
-        viewPager.currentItem = page
-    }
-
-    @IntRange(from = 0)
-    override fun getPageCount() = currentLayoutNames.size
-
-    override fun enableStorePage() {
-        currentLayoutNames = layoutNamesWithStore
-        adapter.notifyDataSetChanged()
-    }
-
-    override fun disableStorePage() {
-        currentLayoutNames = layoutNamesWithoutStore
-        adapter.notifyDataSetChanged()
-    }
-
-    override fun showNextButton() {
-        next.visibility = VISIBLE
-    }
-
-    override fun hideNextButton() {
-        next.visibility = GONE
-    }
-
-    override fun showStoreButtons() {
-        storeBuy.visibility = VISIBLE
-        storeSkip.visibility = VISIBLE
-    }
-
-    override fun hideStoreButtons() {
-        storeBuy.visibility = GONE
-        storeSkip.visibility = GONE
-    }
-
-    override fun closeOnBoarding() {
-        closeOnBoardingAction!!.closeOnBoarding()
-    }
-
-    override fun startFirstActivity() {
-        MonetizationGraph.startFirstActivity()
-    }
-
-    override fun setTextPrimaryColorRes(@ColorRes colorRes: Int) {
-        val color = ContextCompat.getColor(context, colorRes)
-        title.setTextColor(color)
-    }
-
-    override fun setTextSecondaryColorRes(@ColorRes colorRes: Int) {
-        val color = ContextCompat.getColor(context, colorRes)
-        storeSkip.setTextColor(color)
-    }
-
-    override fun setPageIndicatorDarkTheme(darkEnabled: Boolean) {
-        indicatorOnBoarding.setDarkTheme(darkEnabled)
-    }
-
-    override fun setBuyButtonText(text: String) {
-        storeBuy.text = text
-    }
-
     fun setCloseOnBoardingAction(action: CloseOnBoardingAction) {
         closeOnBoardingAction = action
     }
@@ -156,9 +91,12 @@ class OnBoardingView @JvmOverloads constructor(
         this.activityContainer = activityContainer
     }
 
+    @IntRange(from = 0)
+    private fun getPageCountInternal() = currentLayoutNames.size
+
     private fun createPagerAdapter() = object : PagerAdapter() {
 
-        override fun getCount() = getPageCount()
+        override fun getCount() = getPageCountInternal()
 
         override fun isViewFromObject(@NonNull view: View, @NonNull item: Any): Boolean {
             return view == item
@@ -205,6 +143,73 @@ class OnBoardingView @JvmOverloads constructor(
         }
     }
 
+    private fun createScreen() = object : OnBoardingContract.Screen {
+
+        @IntRange(from = 0)
+        override fun getPage() = viewPager.currentItem
+
+        override fun setPage(@IntRange(from = 0) page: Int) {
+            viewPager.currentItem = page
+        }
+
+        @IntRange(from = 0)
+        override fun getPageCount() = getPageCountInternal()
+
+        override fun enableStorePage() {
+            currentLayoutNames = layoutNamesWithStore
+            adapter.notifyDataSetChanged()
+        }
+
+        override fun disableStorePage() {
+            currentLayoutNames = layoutNamesWithoutStore
+            adapter.notifyDataSetChanged()
+        }
+
+        override fun showNextButton() {
+            next.visibility = VISIBLE
+        }
+
+        override fun hideNextButton() {
+            next.visibility = GONE
+        }
+
+        override fun showStoreButtons() {
+            storeBuy.visibility = VISIBLE
+            storeSkip.visibility = VISIBLE
+        }
+
+        override fun hideStoreButtons() {
+            storeBuy.visibility = GONE
+            storeSkip.visibility = GONE
+        }
+
+        override fun closeOnBoarding() {
+            closeOnBoardingAction!!.closeOnBoarding()
+        }
+
+        override fun startFirstActivity() {
+            MonetizationGraph.startFirstActivity()
+        }
+
+        override fun setTextPrimaryColorRes(@ColorRes colorRes: Int) {
+            val color = ContextCompat.getColor(context, colorRes)
+            title.setTextColor(color)
+        }
+
+        override fun setTextSecondaryColorRes(@ColorRes colorRes: Int) {
+            val color = ContextCompat.getColor(context, colorRes)
+            storeSkip.setTextColor(color)
+        }
+
+        override fun setPageIndicatorDarkTheme(darkEnabled: Boolean) {
+            indicatorOnBoarding.setDarkTheme(darkEnabled)
+        }
+
+        override fun setBuyButtonText(text: String) {
+            storeBuy.text = text
+        }
+    }
+
     private fun createUserAction() = if (isInEditMode) {
         object : OnBoardingContract.UserAction {
             override fun onAttached() {}
@@ -216,6 +221,7 @@ class OnBoardingView @JvmOverloads constructor(
             override fun onSwipeOutAtEnd(activityContainer: PurchaseManager.ActivityContainer) {}
         }
     } else {
+        val screen = createScreen()
         val analyticsManager = ApplicationGraph.getAnalyticsManager()
         val floatingManager = ApplicationGraph.getFloatingManager()
         val purchaseManager = MonetizationGraph.getPurchaseManager()
@@ -228,7 +234,7 @@ class OnBoardingView @JvmOverloads constructor(
                 remoteConfig.getSubscriptionFullVersionSku()
         }
         OnBoardingPresenter(
-            this,
+            screen,
             analyticsManager,
             floatingManager,
             purchaseManager,
