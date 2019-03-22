@@ -2,10 +2,10 @@ package com.mercandalli.android.browser.monetization
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.mercandalli.android.browser.in_app.InAppManager
-import com.mercandalli.android.browser.in_app.InAppModule
 import com.mercandalli.android.browser.on_boarding.OnBoardingActivity
 import com.mercandalli.android.browser.on_boarding.OnBoardingModule
+import com.mercandalli.android.sdk.purchase.PurchaseManager
+import com.mercandalli.android.sdk.purchase.PurchaseModule
 
 class MonetizationGraph(
     private val context: Context,
@@ -13,9 +13,9 @@ class MonetizationGraph(
     private val activityAction: ActivityAction
 ) {
 
-    private val inAppModule by lazy { InAppModule(context) }
+    private val purchaseModule by lazy { PurchaseModule(context) }
     private val onBoardingModule by lazy { OnBoardingModule(context) }
-    private val inAppManagerInternal by lazy { inAppModule.createInAppManager(monetizationLog) }
+    private val purchaseManagerInternal by lazy { purchaseModule.createPurchaseManager() }
     private val monetizationManagerInternal by lazy { MonetizationManagerImpl() }
     private val onBoardingRepositoryInternal by lazy { onBoardingModule.createOnBoardingRepository() }
 
@@ -64,7 +64,7 @@ class MonetizationGraph(
         fun isOnBoardingStorePageSkipped() = getOnBoardingRepository().isOnBoardingStorePageSkipped()
 
         @JvmStatic
-        fun getInAppManager(): InAppManager = graph!!.inAppManagerInternal
+        fun getPurchaseManager(): PurchaseManager = graph!!.purchaseManagerInternal
 
         @JvmStatic
         internal fun getMonetizationManager(): MonetizationManager = graph!!.monetizationManagerInternal

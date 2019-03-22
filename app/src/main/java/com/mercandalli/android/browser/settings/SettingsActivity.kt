@@ -16,7 +16,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
-import com.mercandalli.android.browser.in_app.InAppManager
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 class SettingsActivity : AppCompatActivity(),
     SettingsActivityContract.Screen {
@@ -33,7 +33,7 @@ class SettingsActivity : AppCompatActivity(),
         back.setOnClickListener {
             userAction.onToolbarBackClicked()
         }
-        settingsView.setActivityContainer(object : InAppManager.ActivityContainer {
+        settingsView.setActivityContainer(object : PurchaseManager.ActivityContainer {
             override fun get() = this@SettingsActivity
         })
         userAction.onCreate()

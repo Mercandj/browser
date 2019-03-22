@@ -3,20 +3,19 @@
 /* ktlint-disable package-name */
 package com.mercandalli.android.browser.on_boarding
 
-import com.android.billingclient.api.BillingClient
-import com.android.billingclient.api.SkuDetails
 import com.mercandalli.android.browser.analytics.AnalyticsManager
 import com.mercandalli.android.browser.floating.FloatingManager
 import com.mercandalli.android.browser.monetization.MonetizationManager
-import com.mercandalli.android.browser.in_app.InAppManager
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
+import com.mercandalli.android.sdk.purchase.PurchaseDetails
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 internal class OnBoardingPresenter(
     private val screen: OnBoardingContract.Screen,
     private val analyticsManager: AnalyticsManager,
     private val floatingManager: FloatingManager,
-    private val inAppManager: InAppManager,
+    private val purchaseManager: PurchaseManager,
     private val monetizationManager: MonetizationManager,
     private val onBoardingRepository: OnBoardingRepository,
     private val themeManager: ThemeManager,
@@ -24,24 +23,24 @@ internal class OnBoardingPresenter(
 ) : OnBoardingContract.UserAction {
 
     private val monetizationEnabledListener = createMonetizationEnabledListener()
-    private val inAppManagerListener = createInAppManagerListener()
+    private val purchaseManagerListener = createPurchaseManagerListener()
     private val themeListener = createThemeListener()
 
     override fun onAttached() {
         monetizationManager.registerMonetizationListener(monetizationEnabledListener)
-        syncScreen()
+        updateScreen()
         themeManager.registerThemeListener(themeListener)
         updateTheme()
     }
 
     override fun onDetached() {
         monetizationManager.unregisterMonetizationListener(monetizationEnabledListener)
-        inAppManager.unregisterListener(inAppManagerListener)
+        purchaseManager.unregisterListener(purchaseManagerListener)
         themeManager.unregisterThemeListener(themeListener)
     }
 
     override fun onPageChanged() {
-        syncScreen()
+        updateScreen()
     }
 
     override fun onNextClicked() {
@@ -56,14 +55,16 @@ internal class OnBoardingPresenter(
         screen.setPage(page + 1)
     }
 
-    override fun onStoreBuyClicked(activityContainer: InAppManager.ActivityContainer) {
+    override fun onStoreBuyClicked(
+        activityContainer: PurchaseManager.ActivityContainer
+    ) {
         analyticsManager.sendEventOnBoardingSubscriptionClicked()
-        inAppManager.registerListener(inAppManagerListener)
+        purchaseManager.registerListener(purchaseManagerListener)
         val subscriptionFullVersionSku = addOn.getSubscriptionFullVersionSku()
-        inAppManager.purchase(
+        purchaseManager.purchase(
             activityContainer,
             subscriptionFullVersionSku,
-            BillingClient.SkuType.SUBS
+            PurchaseManager.SUBS
         )
     }
 
@@ -76,32 +77,39 @@ internal class OnBoardingPresenter(
         floatingManager.stop()
     }
 
-    override fun onSwipeOutAtEnd(activityContainer: InAppManager.ActivityContainer) {
+    override fun onSwipeOutAtEnd(activityContainer: PurchaseManager.ActivityContainer) {
         val onBoardingStorePageAvailable = monetizationManager.isOnBoardingStorePageAvailable()
         val lastPage = isLastPage()
         if (lastPage && onBoardingStorePageAvailable) {
             analyticsManager.sendEventOnBoardingSubscriptionSwiped()
-            inAppManager.registerListener(inAppManagerListener)
+            purchaseManager.registerListener(purchaseManagerListener)
             val subscriptionFullVersionSku = addOn.getSubscriptionFullVersionSku()
-            inAppManager.purchase(
+            purchaseManager.purchase(
                 activityContainer,
                 subscriptionFullVersionSku,
-                BillingClient.SkuType.SUBS
+                PurchaseManager.SUBS
             )
         }
     }
 
-    private fun syncScreen(
+    private fun updateScreen(
         onBoardingStorePageAvailable: Boolean = monetizationManager.isOnBoardingStorePageAvailable()
     ) {
         if (onBoardingStorePageAvailable) {
             screen.enableStorePage()
+            val subscriptionFullVersionSku = addOn.getSubscriptionFullVersionSku()
+            val purchased = purchaseManager.isPurchased(subscriptionFullVersionSku)
+            if (purchased) {
+                screen.setBuyButtonText(
+                    "RESTORE"
+                )
+            }
         } else {
             screen.disableStorePage()
         }
         val lastPage = isLastPage()
         if (lastPage && onBoardingStorePageAvailable) {
-            inAppManager.initialize()
+            purchaseManager.initialize()
             screen.hideNextButton()
             screen.showStoreButtons()
         } else {
@@ -130,15 +138,15 @@ internal class OnBoardingPresenter(
 
     private fun createMonetizationEnabledListener() = object : MonetizationManager.MonetizationListener {
         override fun onOnBoardingStorePageAvailableChanged() {
-            syncScreen()
+            updateScreen()
         }
     }
 
-    private fun createInAppManagerListener() = object : InAppManager.Listener {
-        override fun onSkuDetailsChanged(skuDetails: SkuDetails) {}
+    private fun createPurchaseManagerListener() = object : PurchaseManager.Listener {
+        override fun onSkuDetailsChanged(purchaseDetails: PurchaseDetails) {}
         override fun onPurchasedChanged() {
             val subscriptionFullVersionSku = addOn.getSubscriptionFullVersionSku()
-            if (inAppManager.isPurchased(subscriptionFullVersionSku)) {
+            if (purchaseManager.isPurchased(subscriptionFullVersionSku)) {
                 analyticsManager.sendEventOnBoardingSubscribed()
                 onBoardingRepository.markOnBoardingEnded()
                 screen.closeOnBoarding()

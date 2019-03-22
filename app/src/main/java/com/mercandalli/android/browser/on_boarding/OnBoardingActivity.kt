@@ -15,10 +15,10 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.mercandalli.android.browser.R
-import com.mercandalli.android.browser.in_app.InAppManager
 import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 class OnBoardingActivity : AppCompatActivity() {
 
@@ -37,7 +37,7 @@ class OnBoardingActivity : AppCompatActivity() {
                 finish()
             }
         })
-        onBoardingView.setCloseOnBoardingAction(object : InAppManager.ActivityContainer {
+        onBoardingView.setCloseOnBoardingAction(object : PurchaseManager.ActivityContainer {
             override fun get() = this@OnBoardingActivity
         })
         themeManager.registerThemeListener(themeListener)

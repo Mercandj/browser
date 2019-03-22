@@ -1,1 +1,4 @@
-include ':app', ':wear', ':tv'
+include ':app',
+        ':feature_purchase',
+        ':tv',
+        ':wear'

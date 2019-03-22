@@ -15,7 +15,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
-import com.mercandalli.android.browser.in_app.InAppManager
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 class SettingsAdBlockerView @JvmOverloads constructor(
     context: Context,
@@ -38,7 +38,7 @@ class SettingsAdBlockerView @JvmOverloads constructor(
 
     private val userAction = createUserAction()
 
-    private var activityContainer: InAppManager.ActivityContainer? = null
+    private var activityContainer: PurchaseManager.ActivityContainer? = null
 
     init {
         orientation = LinearLayout.VERTICAL
@@ -117,7 +117,7 @@ class SettingsAdBlockerView @JvmOverloads constructor(
         adBlockerSectionLabel.visibility = GONE
     }
 
-    fun setActivityContainer(activityContainer: InAppManager.ActivityContainer) {
+    fun setActivityContainer(activityContainer: PurchaseManager.ActivityContainer) {
         this.activityContainer = activityContainer
     }
 
@@ -126,7 +126,7 @@ class SettingsAdBlockerView @JvmOverloads constructor(
             override fun onAttached() {}
             override fun onDetached() {}
             override fun onAdBlockerCheckBoxCheckedChanged(isChecked: Boolean) {}
-            override fun onAdBlockerUnlockRowClicked(activityContainer: InAppManager.ActivityContainer) {}
+            override fun onAdBlockerUnlockRowClicked(activityContainer: PurchaseManager.ActivityContainer) {}
         }
     } else {
         val themeManager = ApplicationGraph.getThemeManager()

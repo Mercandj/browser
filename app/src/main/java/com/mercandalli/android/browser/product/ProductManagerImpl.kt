@@ -1,14 +1,13 @@
 package com.mercandalli.android.browser.product
 
 import android.content.SharedPreferences
-import com.android.billingclient.api.BillingClient
-import com.android.billingclient.api.SkuDetails
 import com.mercandalli.android.browser.remote_config.RemoteConfig
-import com.mercandalli.android.browser.in_app.InAppManager
+import com.mercandalli.android.sdk.purchase.PurchaseDetails
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 class ProductManagerImpl(
     private val remoteConfig: RemoteConfig,
-    private val inAppManager: InAppManager,
+    private val purchaseManager: PurchaseManager,
     private val sharedPreferences: SharedPreferences
 ) : ProductManager {
 
@@ -17,16 +16,19 @@ class ProductManagerImpl(
     private var isAppDeveloperEnabled: Boolean = false
 
     init {
-        inAppManager.registerListener(createInAppListener())
-        isAppDeveloperEnabled = sharedPreferences.getBoolean(PREFERENCE_IS_APP_DEVELOPER_ENABLED, isAppDeveloperEnabled)
+        purchaseManager.registerListener(createInAppListener())
+        isAppDeveloperEnabled = sharedPreferences.getBoolean(
+            PREFERENCE_IS_APP_DEVELOPER_ENABLED,
+            isAppDeveloperEnabled
+        )
     }
 
-    override fun purchaseFullVersion(activityContainer: InAppManager.ActivityContainer) {
+    override fun purchaseFullVersion(activityContainer: PurchaseManager.ActivityContainer) {
         val subscriptionFullVersionSku = remoteConfig.getSubscriptionFullVersionSku()
-        inAppManager.purchase(
+        purchaseManager.purchase(
             activityContainer,
             subscriptionFullVersionSku,
-            BillingClient.SkuType.SUBS
+            PurchaseManager.SUBS
         )
     }
 
@@ -34,7 +36,7 @@ class ProductManagerImpl(
         remoteConfig.isFullVersionAvailable()
 
     override fun isSubscribeToFullVersion() = isAppDeveloperEnabled ||
-        inAppManager.isPurchased(
+        purchaseManager.isPurchased(
             remoteConfig.getSubscriptionFullVersionSku()
         )
 
@@ -76,14 +78,15 @@ class ProductManagerImpl(
         appDeveloperListeners.remove(listener)
     }
 
-    private fun createInAppListener() = object : InAppManager.Listener {
+    private fun createInAppListener() = object : PurchaseManager.Listener {
+
         override fun onPurchasedChanged() {
             for (listener in listeners) {
                 listener.onSubscribeToFullVersionChanged()
             }
         }
 
-        override fun onSkuDetailsChanged(skuDetails: SkuDetails) {}
+        override fun onSkuDetailsChanged(purchaseDetails: PurchaseDetails) {}
     }
 
     companion object {

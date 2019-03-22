@@ -1,7 +1,7 @@
 @file:Suppress("PackageName")
 
 /* ktlint-disable package-name */
-package com.mercandalli.android.browser.in_app
+package com.mercandalli.android.sdk.purchase
 
 import android.app.Activity
 import android.content.Context
@@ -92,9 +92,7 @@ internal class PlayBillingManagerImpl(
                     isServiceConnected = true
                     executeOnSuccess?.run()
                 } else {
-                    if (listener != null) {
-                        listener!!.connectionToServiceFailed()
-                    }
+                    listener?.connectionToServiceFailed()
                 }
             }
 
@@ -107,7 +105,8 @@ internal class PlayBillingManagerImpl(
     private fun checkBillingClientSetUp() {
         if (billingClient == null) {
             throw IllegalStateException(
-                "You should set up PlayBillingManager before calling this method")
+                "You should set up PlayBillingManager before calling this method"
+            )
         }
     }
 

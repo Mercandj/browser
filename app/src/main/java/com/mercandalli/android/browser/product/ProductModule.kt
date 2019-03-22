@@ -10,14 +10,14 @@ class ProductModule(
 
     fun createProductManager(): ProductManager {
         val remoteConfig = ApplicationGraph.getRemoteConfig()
-        val inAppManager = MonetizationGraph.getInAppManager()
+        val purchaseManager = MonetizationGraph.getPurchaseManager()
         val sharedPreferences = context.getSharedPreferences(
             ProductManagerImpl.PREFERENCE_NAME,
             Context.MODE_PRIVATE
         )
         return ProductManagerImpl(
             remoteConfig,
-            inAppManager,
+            purchaseManager,
             sharedPreferences
         )
     }

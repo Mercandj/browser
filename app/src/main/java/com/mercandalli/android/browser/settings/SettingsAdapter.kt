@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
-import com.mercandalli.android.browser.in_app.InAppManager
 import com.mercandalli.android.browser.settings_about.SettingsAboutView
 import com.mercandalli.android.browser.settings_ad_blocker.SettingsAdBlockerView
 import com.mercandalli.android.browser.settings_search_engine.SettingsSearchEngineView
 import com.mercandalli.android.browser.settings_theme.SettingsThemeView
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 class SettingsAdapter(
-    activityContainer: InAppManager.ActivityContainer
+    activityContainer: PurchaseManager.ActivityContainer
 ) : ListDelegationAdapter<List<Any>>() {
 
     init {
@@ -70,7 +70,7 @@ class SettingsAdapter(
     class SettingsSearchEngine
 
     private class SettingsSearchEngineAdapterDelegate(
-        private val activityContainer: InAppManager.ActivityContainer
+        private val activityContainer: PurchaseManager.ActivityContainer
     ) : AbsListItemAdapterDelegate<Any, Any, SettingsSearchEngineViewHolder>() {
 
         override fun isForViewType(o: Any, list: List<Any>, i: Int) = o is SettingsSearchEngine
@@ -104,7 +104,7 @@ class SettingsAdapter(
     class SettingsAdBlocker
 
     private class SettingsAdBlockerAdapterDelegate(
-        private val activityContainer: InAppManager.ActivityContainer
+        private val activityContainer: PurchaseManager.ActivityContainer
     ) : AbsListItemAdapterDelegate<Any, Any, SettingsAdBlockerViewHolder>() {
 
         override fun isForViewType(o: Any, list: List<Any>, i: Int) = o is SettingsAdBlocker

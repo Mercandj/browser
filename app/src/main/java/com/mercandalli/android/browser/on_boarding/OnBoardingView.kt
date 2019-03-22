@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.ColorRes
-import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
 import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
@@ -20,8 +19,8 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.monetization.MonetizationGraph
-import com.mercandalli.android.browser.in_app.InAppManager
 import com.mercandalli.android.browser.main.ApplicationGraph
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 class OnBoardingView @JvmOverloads constructor(
     context: Context,
@@ -53,7 +52,7 @@ class OnBoardingView @JvmOverloads constructor(
     private val userAction = createUserAction()
 
     private var closeOnBoardingAction: CloseOnBoardingAction? = null
-    private var activityContainer: InAppManager.ActivityContainer? = null
+    private var activityContainer: PurchaseManager.ActivityContainer? = null
 
     init {
         viewPager.adapter = adapter
@@ -145,11 +144,15 @@ class OnBoardingView @JvmOverloads constructor(
         indicatorOnBoarding.setDarkTheme(darkEnabled)
     }
 
+    override fun setBuyButtonText(text: String) {
+        storeBuy.text = text
+    }
+
     fun setCloseOnBoardingAction(action: CloseOnBoardingAction) {
         closeOnBoardingAction = action
     }
 
-    fun setCloseOnBoardingAction(activityContainer: InAppManager.ActivityContainer) {
+    fun setCloseOnBoardingAction(activityContainer: PurchaseManager.ActivityContainer) {
         this.activityContainer = activityContainer
     }
 
@@ -183,16 +186,12 @@ class OnBoardingView @JvmOverloads constructor(
             val onBoardingPageViewLeft = pages.get(position)
             val onBoardingPageViewRight = pages.get(position + 1)
             if (onBoardingPageViewLeft != null) {
-                @FloatRange(from = -1.0, to = 1.0)
                 val alpha = (1 - positionOffset) * 2 - 1
-                @FloatRange(from = 0.0, to = 1.0)
                 val securedAlpha = Math.max(alpha, 0f)
                 onBoardingPageViewLeft.applyAlphaToChildren(securedAlpha)
             }
             if (onBoardingPageViewRight != null) {
-                @FloatRange(from = -1.0, to = 1.0)
                 val alpha = positionOffset * 2 - 1f
-                @FloatRange(from = 0.0, to = 1.0)
                 val securedAlpha = Math.max(alpha, 0f)
                 onBoardingPageViewRight.applyAlphaToChildren(securedAlpha)
             }
@@ -212,14 +211,14 @@ class OnBoardingView @JvmOverloads constructor(
             override fun onDetached() {}
             override fun onPageChanged() {}
             override fun onNextClicked() {}
-            override fun onStoreBuyClicked(activityContainer: InAppManager.ActivityContainer) {}
+            override fun onStoreBuyClicked(activityContainer: PurchaseManager.ActivityContainer) {}
             override fun onStoreSkipClicked() {}
-            override fun onSwipeOutAtEnd(activityContainer: InAppManager.ActivityContainer) {}
+            override fun onSwipeOutAtEnd(activityContainer: PurchaseManager.ActivityContainer) {}
         }
     } else {
         val analyticsManager = ApplicationGraph.getAnalyticsManager()
         val floatingManager = ApplicationGraph.getFloatingManager()
-        val inAppManager = MonetizationGraph.getInAppManager()
+        val purchaseManager = MonetizationGraph.getPurchaseManager()
         val monetizationManager = MonetizationGraph.getMonetizationManager()
         val onBoardingRepository = MonetizationGraph.getOnBoardingRepository()
         val remoteConfig = ApplicationGraph.getRemoteConfig()
@@ -232,7 +231,7 @@ class OnBoardingView @JvmOverloads constructor(
             this,
             analyticsManager,
             floatingManager,
-            inAppManager,
+            purchaseManager,
             monetizationManager,
             onBoardingRepository,
             themeManager,

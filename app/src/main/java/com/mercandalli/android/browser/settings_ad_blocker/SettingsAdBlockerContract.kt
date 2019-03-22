@@ -4,7 +4,7 @@
 package com.mercandalli.android.browser.settings_ad_blocker
 
 import androidx.annotation.ColorRes
-import com.mercandalli.android.browser.in_app.InAppManager
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 interface SettingsAdBlockerContract {
 
@@ -43,6 +43,6 @@ interface SettingsAdBlockerContract {
 
         fun onAdBlockerCheckBoxCheckedChanged(isChecked: Boolean)
 
-        fun onAdBlockerUnlockRowClicked(activityContainer: InAppManager.ActivityContainer)
+        fun onAdBlockerUnlockRowClicked(activityContainer: PurchaseManager.ActivityContainer)
     }
 }

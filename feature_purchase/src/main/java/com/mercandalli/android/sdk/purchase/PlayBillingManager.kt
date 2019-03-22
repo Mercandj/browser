@@ -1,15 +1,14 @@
 @file:Suppress("PackageName")
 
 /* ktlint-disable package-name */
-package com.mercandalli.android.browser.in_app
+package com.mercandalli.android.sdk.purchase
 
 import android.app.Activity
-
-import com.android.billingclient.api.BillingClient
-import com.android.billingclient.api.BillingFlowParams
-import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.SkuDetailsParams
 import com.android.billingclient.api.SkuDetailsResponseListener
+import com.android.billingclient.api.BillingFlowParams
+import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.Purchase
 
 internal interface PlayBillingManager {
 

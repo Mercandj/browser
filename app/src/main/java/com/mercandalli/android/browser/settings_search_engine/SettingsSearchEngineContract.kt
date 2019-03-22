@@ -5,7 +5,7 @@ package com.mercandalli.android.browser.settings_search_engine
 
 import androidx.annotation.ColorRes
 import com.mercandalli.android.browser.search_engine.SearchEngine
-import com.mercandalli.android.browser.in_app.InAppManager
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 interface SettingsSearchEngineContract {
 
@@ -46,6 +46,6 @@ interface SettingsSearchEngineContract {
 
         fun onSearchEngineRowClicked()
 
-        fun onSearchEngineUnlockRowClicked(activityContainer: InAppManager.ActivityContainer)
+        fun onSearchEngineUnlockRowClicked(activityContainer: PurchaseManager.ActivityContainer)
     }
 }

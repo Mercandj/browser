@@ -1,32 +1,38 @@
 @file:Suppress("PackageName")
 
 /* ktlint-disable package-name */
-package com.mercandalli.android.browser.in_app
+package com.mercandalli.android.sdk.purchase
 
 import android.content.SharedPreferences
 import org.json.JSONArray
 
-internal class InAppRepositoryImpl(
+internal class PurchaseRepositoryImpl(
     private val sharedPreferences: SharedPreferences
-) : InAppRepository {
+) : PurchaseRepository {
 
     private val purchasedSkus = HashSet<String>()
     private var initialized = false
 
-    override fun addPurchased(sku: String) {
+    override fun addPurchased(sku: String): Boolean {
         initializeIfNeeded()
-        purchasedSkus.add(sku)
+        val added = purchasedSkus.add(sku)
+        if (!added) {
+            return false
+        }
         val jsonArray = JSONArray()
         for (purchasedSku in purchasedSkus) {
             jsonArray.put(purchasedSku)
         }
         sharedPreferences.edit().putString(KEY_PURCHASED_SKU, jsonArray.toString()).apply()
+        return true
     }
 
     override fun isPurchased(sku: String): Boolean {
         initializeIfNeeded()
         return purchasedSkus.contains(sku)
     }
+
+    override fun isEmpty() = purchasedSkus.isEmpty()
 
     private fun initializeIfNeeded() {
         if (initialized) {

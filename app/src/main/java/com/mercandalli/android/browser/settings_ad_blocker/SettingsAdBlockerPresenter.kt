@@ -7,7 +7,7 @@ import com.mercandalli.android.browser.ad_blocker.AdBlockerManager
 import com.mercandalli.android.browser.product.ProductManager
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
-import com.mercandalli.android.browser.in_app.InAppManager
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 class SettingsAdBlockerPresenter(
     private val screen: SettingsAdBlockerContract.Screen,
@@ -36,7 +36,7 @@ class SettingsAdBlockerPresenter(
         syncRows()
     }
 
-    override fun onAdBlockerUnlockRowClicked(activityContainer: InAppManager.ActivityContainer) {
+    override fun onAdBlockerUnlockRowClicked(activityContainer: PurchaseManager.ActivityContainer) {
         productManager.purchaseFullVersion(activityContainer)
     }
 

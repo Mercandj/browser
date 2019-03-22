@@ -8,7 +8,7 @@ import com.mercandalli.android.browser.search_engine.SearchEngine
 import com.mercandalli.android.browser.search_engine.SearchEngineManager
 import com.mercandalli.android.browser.theme.Theme
 import com.mercandalli.android.browser.theme.ThemeManager
-import com.mercandalli.android.browser.in_app.InAppManager
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 class SettingsSearchEnginePresenter(
     private val screen: SettingsSearchEngineContract.Screen,
@@ -45,7 +45,7 @@ class SettingsSearchEnginePresenter(
         syncRows()
     }
 
-    override fun onSearchEngineUnlockRowClicked(activityContainer: InAppManager.ActivityContainer) {
+    override fun onSearchEngineUnlockRowClicked(activityContainer: PurchaseManager.ActivityContainer) {
         productManager.purchaseFullVersion(activityContainer)
     }
 

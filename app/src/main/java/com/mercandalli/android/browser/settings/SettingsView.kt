@@ -7,7 +7,7 @@ import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mercandalli.android.browser.R
-import com.mercandalli.android.browser.in_app.InAppManager
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 class SettingsView @JvmOverloads constructor(
     context: Context,
@@ -22,7 +22,7 @@ class SettingsView @JvmOverloads constructor(
         recyclerView.layoutManager = LinearLayoutManager(context)
     }
 
-    fun setActivityContainer(activityContainer: InAppManager.ActivityContainer) {
+    fun setActivityContainer(activityContainer: PurchaseManager.ActivityContainer) {
         recyclerView.adapter = SettingsAdapter(activityContainer)
     }
 }

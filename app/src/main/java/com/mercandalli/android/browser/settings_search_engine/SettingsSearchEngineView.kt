@@ -15,7 +15,7 @@ import androidx.cardview.widget.CardView
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.browser.search_engine.SearchEngine
-import com.mercandalli.android.browser.in_app.InAppManager
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 class SettingsSearchEngineView @JvmOverloads constructor(
     context: Context,
@@ -37,7 +37,7 @@ class SettingsSearchEngineView @JvmOverloads constructor(
 
     private val userAction = createUserAction()
 
-    private var activityContainer: InAppManager.ActivityContainer? = null
+    private var activityContainer: PurchaseManager.ActivityContainer? = null
 
     init {
         orientation = LinearLayout.VERTICAL
@@ -117,7 +117,7 @@ class SettingsSearchEngineView @JvmOverloads constructor(
         searchEngineSubLabel.text = context.resources.getString(R.string.view_settings_search_engine_sublabel, searchEngineName)
     }
 
-    fun setActivityContainer(activityContainer: InAppManager.ActivityContainer) {
+    fun setActivityContainer(activityContainer: PurchaseManager.ActivityContainer) {
         this.activityContainer = activityContainer
     }
 
@@ -126,7 +126,7 @@ class SettingsSearchEngineView @JvmOverloads constructor(
             override fun onAttached() {}
             override fun onDetached() {}
             override fun onSearchEngineRowClicked() {}
-            override fun onSearchEngineUnlockRowClicked(activityContainer: InAppManager.ActivityContainer) {}
+            override fun onSearchEngineUnlockRowClicked(activityContainer: PurchaseManager.ActivityContainer) {}
         }
     } else {
         val themeManager = ApplicationGraph.getThemeManager()

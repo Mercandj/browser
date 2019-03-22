@@ -55,7 +55,7 @@ class MainApplication : Application() {
                 monetizationLog,
                 activityAction
         )
-        MonetizationGraph.getInAppManager().initialize()
+        MonetizationGraph.getPurchaseManager().initialize()
     }
 
     private fun setupCrashlytics() {

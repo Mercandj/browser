@@ -5,7 +5,7 @@ package com.mercandalli.android.browser.on_boarding
 
 import androidx.annotation.ColorRes
 import androidx.annotation.IntRange
-import com.mercandalli.android.browser.in_app.InAppManager
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 
 internal interface OnBoardingContract {
 
@@ -19,11 +19,15 @@ internal interface OnBoardingContract {
 
         fun onNextClicked()
 
-        fun onStoreBuyClicked(activityContainer: InAppManager.ActivityContainer)
+        fun onStoreBuyClicked(
+            activityContainer: PurchaseManager.ActivityContainer
+        )
 
         fun onStoreSkipClicked()
 
-        fun onSwipeOutAtEnd(activityContainer: InAppManager.ActivityContainer)
+        fun onSwipeOutAtEnd(
+            activityContainer: PurchaseManager.ActivityContainer
+        )
     }
 
     interface Screen {
@@ -57,5 +61,7 @@ internal interface OnBoardingContract {
         fun setTextSecondaryColorRes(@ColorRes colorRes: Int)
 
         fun setPageIndicatorDarkTheme(darkEnabled: Boolean)
+
+        fun setBuyButtonText(text: String)
     }
 }

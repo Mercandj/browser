@@ -1,31 +1,33 @@
 @file:Suppress("PackageName")
 
 /* ktlint-disable package-name */
-package com.mercandalli.android.browser.in_app
+package com.mercandalli.android.sdk.purchase
 
 import android.content.Context
-import com.mercandalli.android.browser.monetization.MonetizationLog
 
-class InAppModule(
+class PurchaseModule(
     private val context: Context
 ) {
 
-    fun createInAppManager(monetizationLog: MonetizationLog): InAppManager {
+    fun createPurchaseManager(
+        purchaseAnalyticsManager: PurchaseAnalyticsManager? = null
+    ): PurchaseManager {
         val playBillingManager = createPlayBillingManager()
         val inAppRepository = createInAppRepository()
-        return InAppManagerImpl(
+        return PurchaseManagerImpl(
             playBillingManager,
             inAppRepository,
-            monetizationLog
+            purchaseAnalyticsManager
         )
     }
 
     private fun createPlayBillingManager() = PlayBillingManagerImpl(context.applicationContext)
 
-    private fun createInAppRepository(): InAppRepository {
+    private fun createInAppRepository(): PurchaseRepository {
         val sharedPreferences = context.getSharedPreferences(
-            InAppRepositoryImpl.PREFERENCE_NAME, Context.MODE_PRIVATE)
-        return InAppRepositoryImpl(
+            PurchaseRepositoryImpl.PREFERENCE_NAME, Context.MODE_PRIVATE
+        )
+        return PurchaseRepositoryImpl(
             sharedPreferences
         )
     }
