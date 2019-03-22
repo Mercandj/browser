@@ -3,6 +3,7 @@ package com.mercandalli.android.browser.main
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
         setContentView(R.layout.activity_main)
         more.setOnClickListener { showOverflowPopupMenu(more) }
         mainWebView.browserWebViewListener = browserWebViewListener
+        mainWebView.setBackgroundColor(Color.TRANSPARENT)
         input.setOnEditorActionListener(createOnEditorActionListener())
         input.addTextChangedListener(createTextWatcher())
         emptyViewVideoCheckBox.setOnCheckedChangeListener { _, isChecked ->
