@@ -66,7 +66,7 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <com.mercandalli.android.browser.main.MainWebView
+            <com.mercandalli.android.browser.web.MainWebView
                 android:id="@+id/activity_main_web_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

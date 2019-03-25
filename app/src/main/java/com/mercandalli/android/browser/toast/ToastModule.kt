@@ -1,14 +1,14 @@
 package com.mercandalli.android.browser.toast
 
 import android.content.Context
-import com.mercandalli.android.browser.main_thread.MainThreadPost
+import com.mercandalli.android.browser.main.ApplicationGraph
 
-class ToastModule {
+class ToastModule(
+    private val context: Context
+) {
 
-    fun createToastManager(
-        context: Context,
-        mainThreadPost: MainThreadPost
-    ): ToastManager {
+    fun createToastManager(): ToastManager {
+        val mainThreadPost = ApplicationGraph.getMainThreadPost()
         return ToastManagerImpl(
             context.applicationContext,
             mainThreadPost

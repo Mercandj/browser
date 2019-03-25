@@ -77,7 +77,7 @@
 
         </FrameLayout>
 
-        <com.mercandalli.android.browser.main.MainWebView
+        <com.mercandalli.android.browser.web.MainWebView
             android:id="@+id/view_floating_main_web_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

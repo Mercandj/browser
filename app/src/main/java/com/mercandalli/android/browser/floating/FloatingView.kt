@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
 import com.mercandalli.android.browser.main.MainActivity
-import com.mercandalli.android.browser.main.MainWebView
+import com.mercandalli.android.browser.web.MainWebView
 
 class FloatingView @JvmOverloads constructor(
     context: Context,

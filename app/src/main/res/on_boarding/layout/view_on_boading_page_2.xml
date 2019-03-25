@@ -27,7 +27,7 @@
                 app:ratio_width="5"
                 app:ratio_width_reference="true">
 
-                <com.mercandalli.android.browser.main.MainWebView
+                <com.mercandalli.android.browser.web.MainWebView
                     android:id="@+id/view_on_boarding_page_main_web_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

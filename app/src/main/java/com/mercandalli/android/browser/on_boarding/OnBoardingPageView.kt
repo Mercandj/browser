@@ -17,7 +17,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.mercandalli.android.browser.R
 import com.mercandalli.android.browser.main.ApplicationGraph
-import com.mercandalli.android.browser.main.MainWebView
+import com.mercandalli.android.browser.web.MainWebView
 
 class OnBoardingPageView @JvmOverloads constructor(
     context: Context,

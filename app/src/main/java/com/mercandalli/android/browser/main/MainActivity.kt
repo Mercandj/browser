@@ -36,6 +36,7 @@ import com.mercandalli.android.browser.keyboard.KeyboardUtils
 import com.mercandalli.android.browser.settings.SettingsActivity
 import com.mercandalli.android.browser.suggestion.SuggestionAdapter
 import com.mercandalli.android.browser.monetization.MonetizationGraph
+import com.mercandalli.android.browser.web.MainWebView
 
 class MainActivity : AppCompatActivity(), MainActivityContract.Screen {
 

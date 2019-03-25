@@ -17,6 +17,7 @@ import com.mercandalli.android.browser.main_thread.MainThreadModule
 import com.mercandalli.android.browser.toast.ToastModule
 import com.mercandalli.android.browser.update.UpdateModule
 import com.mercandalli.android.browser.version.VersionModule
+import com.mercandalli.android.browser.web_css.WebCssModule
 
 class ApplicationGraph(
     private val context: Context
@@ -31,13 +32,14 @@ class ApplicationGraph(
     private val okHttpClientLazyInternal by lazy { NetworkModule(context).createOkHttpClientLazy() }
     private val networkManagerInternal by lazy { NetworkModule(context).createNetworkManager() }
     private val productManagerInternal by lazy { ProductModule(context).createProductManager() }
-    private val remoteConfigInternal by lazy { RemoteConfigModule().createRemoteConfig(mainThreadPostInternal) }
+    private val remoteConfigInternal by lazy { RemoteConfigModule().createRemoteConfig() }
     private val searchEngineManagerInternal by lazy { SearchEngineModule().createSearchEngineManager() }
     private val suggestionManagerInternal by lazy { SuggestionModule().createSuggestionManager() }
     private val themeManagerInternal by lazy { ThemeModule(context).createThemeManager() }
-    private val toastManagerInternal by lazy { ToastModule().createToastManager(context, mainThreadPostInternal) }
-    private val updateManagerInternal by lazy { UpdateModule().createUpdateManager(context, versionManagerInternal) }
-    private val versionManagerInternal by lazy { VersionModule().createVersionManager(context) }
+    private val toastManagerInternal by lazy { ToastModule(context).createToastManager() }
+    private val updateManagerInternal by lazy { UpdateModule(context).createUpdateManager() }
+    private val versionManagerInternal by lazy { VersionModule(context).createVersionManager() }
+    private val webCssManagerInternal by lazy { WebCssModule(context).createWebCssManager() }
 
     companion object {
 
@@ -61,6 +63,7 @@ class ApplicationGraph(
         fun getToastManager() = graph!!.toastManagerInternal
         fun getUpdateManager() = graph!!.updateManagerInternal
         fun getVersionManager() = graph!!.versionManagerInternal
+        fun getWebCssManager() = graph!!.webCssManagerInternal
 
         @JvmStatic
         fun init(context: Context) {

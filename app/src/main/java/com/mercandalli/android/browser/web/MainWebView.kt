@@ -1,10 +1,9 @@
-package com.mercandalli.android.browser.main
+package com.mercandalli.android.browser.web
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
-import android.util.Base64
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -21,30 +20,13 @@ import android.webkit.WebResourceResponse
 import com.mercandalli.android.browser.ad_blocker.AdBlocker
 import androidx.annotation.AttrRes
 import com.mercandalli.android.browser.R
+import com.mercandalli.android.browser.main.ApplicationGraph
 
 class MainWebView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : WebView(context, attrs, defStyleAttr) {
-
-    private val googleDarkThemeOnlyCss by lazy(LazyThreadSafetyMode.NONE) {
-        val inputStream = context.assets.open("dark-theme-google.css")
-        inputStream.bufferedReader().use { it.readText() }
-    }
-
-    private val googleCommonOnlyCss by lazy(LazyThreadSafetyMode.NONE) {
-        val inputStream = context.assets.open("common-google.css")
-        inputStream.bufferedReader().use { it.readText() }
-    }
-
-    private val googleLightThemBase64Css by lazy(LazyThreadSafetyMode.NONE) {
-        Base64.encodeToString(googleCommonOnlyCss.toByteArray(), Base64.NO_WRAP)
-    }
-
-    private val googleDarkThemBase64Css by lazy(LazyThreadSafetyMode.NONE) {
-        Base64.encodeToString("$googleCommonOnlyCss\n$googleDarkThemeOnlyCss".toByteArray(), Base64.NO_WRAP)
-    }
 
     var browserWebViewListener: BrowserWebViewListener? = null
     private val attributes = extractAttributes(context, attrs, defStyleAttr)
@@ -195,13 +177,9 @@ class MainWebView @JvmOverloads constructor(
     }
 
     private fun injectCSS(url: String) {
-        if (url.startsWith("https://www.google.")) {
-            if (ApplicationGraph.getThemeManager().isDarkEnable()) {
-                loadCss(googleDarkThemBase64Css)
-            } else {
-                loadCss(googleLightThemBase64Css)
-            }
-        }
+        val webCssManager = ApplicationGraph.getWebCssManager()
+        val css = webCssManager.getCss(url) ?: return
+        loadCss(css)
     }
 
     private fun loadCss(cssContent: String) {
