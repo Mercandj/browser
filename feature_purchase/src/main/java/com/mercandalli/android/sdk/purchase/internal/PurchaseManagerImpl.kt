@@ -1,7 +1,7 @@
 @file:Suppress("PackageName")
 
 /* ktlint-disable package-name */
-package com.mercandalli.android.sdk.purchase
+package com.mercandalli.android.sdk.purchase.internal
 
 import androidx.annotation.Nullable
 import com.android.billingclient.api.SkuDetails
@@ -10,6 +10,9 @@ import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.SkuDetailsParams
+import com.mercandalli.android.sdk.purchase.PurchaseAnalyticsManager
+import com.mercandalli.android.sdk.purchase.PurchaseDetails
+import com.mercandalli.android.sdk.purchase.PurchaseManager
 import java.lang.IllegalStateException
 
 internal class PurchaseManagerImpl(
@@ -111,34 +114,48 @@ internal class PurchaseManagerImpl(
         playBillingManager.executeServiceRequest(runnable)
     }
 
-    override fun isPurchased(sku: String) = purchaseRepository.isPurchased(sku)
+    override fun isPurchased(
+        sku: String
+    ) = purchaseRepository.isPurchased(sku)
 
     override fun isPurchasedEmpty() = purchaseRepository.isEmpty()
 
-    override fun registerListener(listener: PurchaseManager.Listener) {
+    override fun registerListener(
+        listener: PurchaseManager.Listener
+    ) {
         if (listeners.contains(listener)) {
             return
         }
         listeners.add(listener)
     }
 
-    override fun unregisterListener(listener: PurchaseManager.Listener) {
+    override fun unregisterListener(
+        listener: PurchaseManager.Listener
+    ) {
         listeners.remove(listener)
     }
 
     private fun restore() {
         val runnable = Runnable {
-            val inAppPurchasesResult = playBillingManager.queryPurchases(BillingClient.SkuType.INAPP)
             var purchaseAdded = false
-            for (purchase in inAppPurchasesResult.purchasesList) {
-                if (purchaseRepository.addPurchased(purchase.sku)) {
-                    purchaseAdded = true
+            val inAppPurchasesResult = playBillingManager.queryPurchases(
+                BillingClient.SkuType.INAPP
+            )
+            inAppPurchasesResult.purchasesList?.let {
+                for (purchase in it) {
+                    if (purchaseRepository.addPurchased(purchase.sku)) {
+                        purchaseAdded = true
+                    }
                 }
             }
-            val subsPurchasesResult = playBillingManager.queryPurchases(BillingClient.SkuType.SUBS)
-            for (purchase in subsPurchasesResult.purchasesList) {
-                if (purchaseRepository.addPurchased(purchase.sku)) {
-                    purchaseAdded = true
+            val subsPurchasesResult = playBillingManager.queryPurchases(
+                BillingClient.SkuType.SUBS
+            )
+            subsPurchasesResult.purchasesList?.let {
+                for (purchase in it) {
+                    if (purchaseRepository.addPurchased(purchase.sku)) {
+                        purchaseAdded = true
+                    }
                 }
             }
             if (purchaseAdded) {

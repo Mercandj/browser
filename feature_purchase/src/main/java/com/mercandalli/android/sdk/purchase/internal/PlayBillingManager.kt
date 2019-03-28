@@ -1,7 +1,7 @@
 @file:Suppress("PackageName")
 
 /* ktlint-disable package-name */
-package com.mercandalli.android.sdk.purchase
+package com.mercandalli.android.sdk.purchase.internal
 
 import android.app.Activity
 import com.android.billingclient.api.SkuDetailsParams

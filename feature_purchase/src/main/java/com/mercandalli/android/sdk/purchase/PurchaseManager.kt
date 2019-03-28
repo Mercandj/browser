@@ -22,13 +22,19 @@ interface PurchaseManager {
         @SkuType skuType: String
     )
 
-    fun isPurchased(sku: String): Boolean
+    fun isPurchased(
+        sku: String
+    ): Boolean
 
     fun isPurchasedEmpty(): Boolean
 
-    fun registerListener(listener: Listener)
+    fun registerListener(
+        listener: Listener
+    )
 
-    fun unregisterListener(listener: Listener)
+    fun unregisterListener(
+        listener: Listener
+    )
 
     interface Listener {
 
