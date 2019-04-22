@@ -1,0 +1,16 @@
+../.gitignore|126ae64f5b4735fbf744089a994e97c30d4cf1fb
+../build.gradle|17e90f596d2057f8c1eb57ac4fab45ca43badaba
+check-compliance.sh|6aab87d7ff433cf8f2348eedbb1a5fc6dd6d86bb
+compliance-signature.txt|35e91a240d5785361d357d1ea17038490078029f
+create-compliance-signature.sh|c4da7db018b060a7ff5986fefefa6f1d9e910441
+../proguard-rules.pro|4b5fc1cf3d858552d0c007f6b9653d9d1a3bb00f
+../src/main/AndroidManifest.xml|a92d4505d349e7dc460f32101a3a3d6cc6a1644f
+../src/main/java/com/mercandalli/android/sdk/purchase/PurchaseAnalyticsManager.kt|ec046aa23f8eb07bf1f92a09d3f3c09d8e823517
+../src/main/java/com/mercandalli/android/sdk/purchase/PurchaseDetails.kt|89a450bc3b23718222f0edc6032114f82cba7f19
+../src/main/java/com/mercandalli/android/sdk/purchase/PurchaseManager.kt|576b099ce340dd22c70ad1b1758b48b1277b3be7
+../src/main/java/com/mercandalli/android/sdk/purchase/PurchaseModule.kt|f9e3952963bfca4137aee5b8db41a57de7f25379
+../src/main/java/com/mercandalli/android/sdk/purchase/internal/PlayBillingManager.kt|aaf638499c92dacbd5d8938f7e6494d1b9c4c37a
+../src/main/java/com/mercandalli/android/sdk/purchase/internal/PlayBillingManagerImpl.kt|d93145871689e5bc3f1cab66c79be1f549ec2de9
+../src/main/java/com/mercandalli/android/sdk/purchase/internal/PurchaseManagerImpl.kt|44b0040e7b16050de498fbf81579bea80779232c
+../src/main/java/com/mercandalli/android/sdk/purchase/internal/PurchaseRepository.kt|ed8523855155bdbcf367eb350fb024d81aa6431a
+../src/main/java/com/mercandalli/android/sdk/purchase/internal/PurchaseRepositoryImpl.kt|855e3dccd751752ef983fa320e95cc3b658df713
