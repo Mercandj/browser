@@ -127,7 +127,7 @@ dependencies {
 
     // Google
     implementation 'com.google.firebase:firebase-core:16.0.8'
-    implementation "com.google.firebase:firebase-config:16.4.1"
+    implementation "com.google.firebase:firebase-config:16.5.0"
 
     // Third party - Monitoring
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
@@ -164,7 +164,7 @@ dependencies {
     androidTestImplementation 'tools.fastlane:screengrab:1.2.0'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.25.1'
+    testImplementation 'org.mockito:mockito-core:2.27.0'
     testImplementation 'org.json:json:20180813'
 }
 
