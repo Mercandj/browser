@@ -36,7 +36,9 @@ class DialogActivity : AppCompatActivity(),
         negative.setOnClickListener {
             userAction.onNegativeClicked(input.text.toString())
         }
-        val dialogInput = DialogInput.fromJson(intent.extras.getString(EXTRA_DIALOG_INPUT))
+        val extras = intent.extras
+        val jsonString = extras!!.getString(EXTRA_DIALOG_INPUT)!!
+        val dialogInput = DialogInput.fromJson(jsonString)
         userAction.onCreate(dialogInput)
     }
 
