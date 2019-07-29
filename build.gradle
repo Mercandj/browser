@@ -5,7 +5,7 @@
 apply plugin: 'com.github.ben-manes.versions'
 
 buildscript {
-    ext.kotlin_version = '1.3.31'
+    ext.kotlin_version = '1.3.41'
     ext.kotlin_coroutines_version = '1.1.1'
     repositories {
         google()
@@ -15,9 +15,9 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0-beta04'
+        classpath 'com.android.tools.build:gradle:3.5.0-rc01'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.gms:google-services:4.2.0'
+        classpath 'com.google.gms:google-services:4.3.0'
 
         // Check dependencies.
         // https://github.com/ben-manes/gradle-versions-plugin
@@ -46,8 +46,7 @@ ext {
     appVersionCode = 6_001_00_26
     appVersionName = "1.00.26"
 
-    compileSdkVersion = 28
-    buildToolsVersion = "28.0.3"
-    targetSdkVersion = 28
+    compileSdkVersion = 29
+    targetSdkVersion = 29
     minSdkVersion = 17
 }

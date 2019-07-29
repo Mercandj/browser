@@ -11,7 +11,7 @@ class UpdateManagerImpl(
     private val versionManager: VersionManager
 ) : UpdateManager {
 
-    private val lastVersionName: String by lazy { sharedPreferences.getString(KEY_LAST_VERSION_NAME, "1.00.00") }
+    private val lastVersionName: String by lazy { sharedPreferences.getString(KEY_LAST_VERSION_NAME, "1.00.00")!! }
     private var firstLaunchAfterUpdate: Boolean? = null
 
     override fun isFirstLaunchAfterUpdate(): Boolean {
