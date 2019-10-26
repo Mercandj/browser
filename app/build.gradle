@@ -119,14 +119,14 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
 
     // AndroidX
-    implementation "androidx.appcompat:appcompat:1.0.2"
+    implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.recyclerview:recyclerview:1.0.0"
     implementation "com.google.android.material:material:1.0.0"
 
     // Google
-    implementation 'com.google.firebase:firebase-core:17.0.1'
-    implementation "com.google.firebase:firebase-config:18.0.0"
+    implementation "com.google.firebase:firebase-core:17.2.0"
+    implementation "com.google.firebase:firebase-config:19.0.3"
 
     // Third party - Monitoring
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
@@ -134,9 +134,9 @@ dependencies {
     }
 
     // Third party - UI
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    kapt 'com.github.bumptech.glide:compiler:4.9.0'
-    implementation 'com.hannesdorfmann:adapterdelegates4:4.1.1'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    kapt 'com.github.bumptech.glide:compiler:4.10.0'
+    implementation 'com.hannesdorfmann:adapterdelegates4:4.2.0'
 
     // Third party - Network
     // noinspection GradleDependency
@@ -163,8 +163,8 @@ dependencies {
     androidTestImplementation 'tools.fastlane:screengrab:1.2.0'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.27.0'
-    testImplementation 'org.json:json:20180813'
+    testImplementation 'org.mockito:mockito-core:3.1.0'
+    testImplementation 'org.json:json:20190722'
 }
 
 task publish(type: Exec) {
