@@ -61,11 +61,11 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.leanback:leanback:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
 
     // Third party - UI
-    implementation 'com.hannesdorfmann:adapterdelegates4:4.0.0'
+    implementation 'com.hannesdorfmann:adapterdelegates4:4.2.0'
 
     // Third party - Network
     // noinspection GradleDependency

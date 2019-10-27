@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.mercandalli.android.wear.browser"
         minSdkVersion 24
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode rootProject.ext.appVersionCode
         versionName rootProject.ext.appVersionName
     }
